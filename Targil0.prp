@@ -1,0 +1,155 @@
+Version: 1.4
+MainModule
+	Name:	Targil0
+	Dir:	{Project}
+	DclOpen:	False
+	Icl
+		WindowPosition
+			X:	342
+			Y:	-26
+			SizeX:	772
+			SizeY:	685
+	IclOpen:	True
+OtherModules
+	Module
+		Name:	FileManipulation
+		Dir:	{Project}
+		Dcl
+			WindowPosition
+				X:	0
+				Y:	713
+				SizeX:	48
+				SizeY:	0
+		DclOpen:	True
+		Icl
+			WindowPosition
+				X:	65
+				Y:	21
+				SizeX:	724
+				SizeY:	641
+		IclOpen:	True
+	Module
+		Name:	Directory
+		Dir:	{Application}*Libraries*Directory
+		DclOpen:	False
+		IclOpen:	False
+	Module
+		Name:	StdArray
+		Dir:	{Application}*Libraries*StdEnv
+		DclOpen:	False
+		IclOpen:	False
+	Module
+		Name:	StdBool
+		Dir:	{Application}*Libraries*StdEnv
+		DclOpen:	False
+		IclOpen:	False
+	Module
+		Name:	StdChar
+		Dir:	{Application}*Libraries*StdEnv
+		DclOpen:	False
+		IclOpen:	False
+	Module
+		Name:	StdCharList
+		Dir:	{Application}*Libraries*StdEnv
+		DclOpen:	False
+		IclOpen:	False
+	Module
+		Name:	StdClass
+		Dir:	{Application}*Libraries*StdEnv
+		DclOpen:	False
+		IclOpen:	False
+	Module
+		Name:	StdEnum
+		Dir:	{Application}*Libraries*StdEnv
+		DclOpen:	False
+		IclOpen:	False
+	Module
+		Name:	StdEnv
+		Dir:	{Application}*Libraries*StdEnv
+		DclOpen:	False
+		IclOpen:	False
+	Module
+		Name:	StdFile
+		Dir:	{Application}*Libraries*StdEnv
+		DclOpen:	False
+		IclOpen:	False
+	Module
+		Name:	StdFunctions
+		Dir:	{Application}*Libraries*StdEnv
+		DclOpen:	False
+		IclOpen:	False
+	Module
+		Name:	StdInt
+		Dir:	{Application}*Libraries*StdEnv
+		DclOpen:	False
+		IclOpen:	False
+	Module
+		Name:	StdList
+		Dir:	{Application}*Libraries*StdEnv
+		DclOpen:	False
+		IclOpen:	False
+	Module
+		Name:	StdMaybe
+		Dir:	{Application}*Libraries*StdEnv
+		DclOpen:	False
+		IclOpen:	False
+	Module
+		Name:	StdMisc
+		Dir:	{Application}*Libraries*StdEnv
+		DclOpen:	False
+		IclOpen:	False
+	Module
+		Name:	StdOrdList
+		Dir:	{Application}*Libraries*StdEnv
+		DclOpen:	False
+		IclOpen:	False
+	Module
+		Name:	StdOverloaded
+		Dir:	{Application}*Libraries*StdEnv
+		DclOpen:	False
+		IclOpen:	False
+	Module
+		Name:	StdReal
+		Dir:	{Application}*Libraries*StdEnv
+		DclOpen:	False
+		IclOpen:	False
+	Module
+		Name:	StdStrictLists
+		Dir:	{Application}*Libraries*StdEnv
+		DclOpen:	False
+		IclOpen:	False
+	Module
+		Name:	StdString
+		Dir:	{Application}*Libraries*StdEnv
+		DclOpen:	False
+		IclOpen:	False
+	Module
+		Name:	StdTuple
+		Dir:	{Application}*Libraries*StdEnv
+		DclOpen:	False
+		IclOpen:	False
+	Module
+		Name:	_SystemArray
+		Dir:	{Application}*Libraries*StdEnv
+		DclOpen:	False
+		IclOpen:	False
+	Module
+		Name:	_SystemEnum
+		Dir:	{Application}*Libraries*StdEnv
+		DclOpen:	False
+		IclOpen:	False
+	Module
+		Name:	_SystemEnumStrict
+		Dir:	{Application}*Libraries*StdEnv
+		DclOpen:	False
+		IclOpen:	False
+	Module
+		Name:	_SystemStrictLists
+		Dir:	{Application}*Libraries*StdEnv
+		DclOpen:	False
+		IclOpen:	False
+	Module
+		Name:	StdLibMisc
+		Dir:	{Application}*Libraries*StdLib
+		DclOpen:	False
+		IclOpen:	False
