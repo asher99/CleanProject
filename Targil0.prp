@@ -5,10 +5,10 @@ MainModule
 	DclOpen:	False
 	Icl
 		WindowPosition
-			X:	342
-			Y:	-26
-			SizeX:	772
-			SizeY:	685
+			X:	150
+			Y:	3
+			SizeX:	1350
+			SizeY:	730
 	IclOpen:	True
 OtherModules
 	Module
@@ -16,22 +16,33 @@ OtherModules
 		Dir:	{Project}
 		Dcl
 			WindowPosition
-				X:	0
-				Y:	713
-				SizeX:	48
-				SizeY:	0
-		DclOpen:	True
+				X:	115
+				Y:	294
+				SizeX:	1350
+				SizeY:	419
+		DclOpen:	False
 		Icl
 			WindowPosition
-				X:	65
-				Y:	21
-				SizeX:	724
-				SizeY:	641
+				X:	0
+				Y:	713
+				SizeX:	0
+				SizeY:	0
 		IclOpen:	True
 	Module
 		Name:	Directory
 		Dir:	{Application}*Libraries*Directory
 		DclOpen:	False
+		IclOpen:	False
+	Module
+		Name:	_SystemDynamic
+		Dir:	{Application}*Libraries*Dynamics*implementation
+		DclOpen:	False
+		Icl
+			WindowPosition
+				X:	10
+				Y:	10
+				SizeX:	800
+				SizeY:	640
 		IclOpen:	False
 	Module
 		Name:	StdArray
