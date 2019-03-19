@@ -1,6 +1,30 @@
 .comp 920 000111010
 .start __VMParser_Start
-.module m_VMParser "VMParser" "20190319123552"
+.depend "StdLibMisc" "20180913114337"
+.depend "Directory" "20180913114337"
+.depend "_SystemEnumStrict" "20180913114337"
+.depend "_SystemStrictLists" "20180913114337"
+.depend "StdStrictLists" "20180913114337"
+.depend "_SystemEnum" "20180913114337"
+.depend "StdEnum" "20180913114337"
+.depend "StdMisc" "20180913114337"
+.depend "StdFunctions" "20180913114337"
+.depend "StdCharList" "20180913114337"
+.depend "StdTuple" "20180913114337"
+.depend "StdOrdList" "20180913114337"
+.depend "StdList" "20180913114337"
+.depend "StdClass" "20180913114337"
+.depend "StdFile" "20180913114337"
+.depend "StdString" "20180913114337"
+.depend "_SystemArray" "20180913114337"
+.depend "StdArray" "20180913114337"
+.depend "StdChar" "20180913114337"
+.depend "StdReal" "20180913114337"
+.depend "StdInt" "20180913114337"
+.depend "StdOverloaded" "20180913114337"
+.depend "StdBool" "20180913114337"
+.depend "StdEnv" "20180913114337"
+.module m_VMParser "VMParser" "20190319142540"
 .endinfo
 .impmod _system
 .implab _cycle_in_spine
@@ -37,26 +61,309 @@
 .impdesc d_S.6
 .implab n_S.6 ea_S.6
 .implab _driver
+.impmod Directory
+.implab e_Directory_sgetDirectoryContents
+.impdesc e_Directory_dRelativePath
+.impmod StdMisc
+.implab e_StdMisc_sabort
+.impmod StdList
+.implab e_StdList_sdrop
+.implab e_StdList_slength;47
+.implab e_StdList_stoString;79
+.impmod StdFile
+.implab e_StdFile_sfwrites
+.impdesc e_StdFile_dfclose;30
+.implab e_StdFile_sfclose;30
+.impdesc e_StdFile_dfopen;31
+.implab e_StdFile_sfopen;31
+.impdesc e_StdFile_dsfopen;32
+.impdesc e_StdFile_dstdio;33
+.impdesc e_StdFile_rFileSystem;
+.impmod StdString
+.implab e_StdString_s+++;11
+.impmod _SystemArray
+.impmod StdInt
+.implab e_StdInt_s+;6
+.implab e_StdInt_s-;7
+.implab e_StdInt_sone;11
+.implab e_StdInt_s<;17
+.impmod StdBool
+.implab e_StdBool_snot
 .export __VMParser_Start
 .o 0 0
 __VMParser_Start
-	build _ 0 n1
+	buildI 65536
+	build _ 1 n2
 .d 1 0
 	jmp _driver
-.n 0 _
+.n 1 _
 .o 1 0
-n1
-	push_node _cycle_in_spine 0
-.d 0 0
-	jsr ea1
-.o 1 0
-	fillh ARRAY 1 1
+n2
+	push_node _cycle_in_spine 1
+.d 1 0
+	jsr ea2
+.o 0 1 b
+	fillB_b 0 0
+	pop_b 1
 .d 1 0
 	rtn
+.o 1 0
+ea2
+	jsr_eval 0
+.o 1 0
+s2
+	buildh _Nil 0
+	buildh e_Directory_dRelativePath 1
+	buildh e_StdFile_dstdio;33 0
+	buildh e_StdFile_dsfopen;32 0
+	buildh e_StdFile_dfopen;31 0
+	buildh e_StdFile_dfclose;30 0
+	push_a 5
+	push_a 5
+	update_a 1 6
+	update_a 2 1
+	update_a 3 2
+	update_a 4 3
+	update_a 5 4
+	update_a 0 5
+	pop_a 1
+	update_a 5 6
+	update_a 4 5
+	update_a 3 4
+	update_a 2 3
+	update_a 1 2
+	updatepop_a 0 1
+.d 6 0
+	jsr e_Directory_sgetDirectoryContents
+.o 3 0
+	pop_a 2
+	buildAC "push constant 256"
+.d 2 0
+	jmp s7
+.o 2 0
+s7
+	push_a 1
+	pushI 2
+	buildAC "out.asm"
+	update_a 2 3
+	update_a 1 2
+	updatepop_a 0 1
+.d 2 1 i
+	jsr e_StdFile_sfopen;31
+.o 1 3 bf
+	push_b 0
+	notB
+	jmp_false else.1
+	buildAC "failed to open file"
+	updatepop_a 0 2
+	pop_b 3
+.d 1 0
+	jsr print_string_
 .o 0 0
-ea1
+	halt
+	pushB_a 0
+	pop_a 1
+.d 0 1 b
+	rtn
+else.1
+	buildAC "push constant "
+	pop_b 1
+	push_a 0
+	push_arraysize CHAR 0 1
+	push_a 2
+	buildh _Nil 0
+	update_a 0 4
+	pop_a 1
+	push_a 0
+	push_arraysize CHAR 0 1
+	pushI 1
+	push_b 1
+	subI
+	create
+	push_a 1
+	buildh ARRAY 1
+	pushI 0
+	update_b 1 2
+	updatepop_b 0 1
+	update_a 1 2
+	updatepop_a 0 1
+.d 2 2 ii
+	jsr s6
+.o 1 0
+	pushI 1
+	push_b 1
+	subI
+	create
+	push_a 2
+	buildh ARRAY 1
+	pushI 0
+	update_b 1 2
+	updatepop_b 0 1
+	buildh _Nil 0
+	update_a 0 4
+	pop_a 1
+.d 2 2 ii
+	jsr s5
+.o 1 0
+.d 1 0
+	jsr e_StdList_slength;47
+.o 0 1 i
+	create
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	update_a 3 4
+	update_a 1 3
+	updatepop_a 0 2
+.d 2 1 i
+	jsr e_StdList_sdrop
+.o 1 0
+.d 1 0
+	jsr e_StdList_stoString;79
+.o 1 0
+	buildAC "\nD=A\n@0\nM=M+1\nA=M\nM=D\n"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.d 2 0
+	jsr catAC
+.o 1 0
+	buildAC "@"
+.d 2 0
+	jsr catAC
+.o 1 0
+	push_b 1
+	push_b 1
+	update_b 1 3
+	updatepop_b 0 2
+.d 1 2 f
+	jsr writeFS
+.o 0 2 f
+	push_a 0
+	updatepop_a 0 1
+.d 1 2 f
+	jsr e_StdFile_sfclose;30
+.o 1 1 b
+	pop_a 1
+	push_b 0
+	notB
+	jmp_false else.2
+	buildAC "failed to close"
+	pop_b 1
+.d 1 0
+	jsr print_string_
 .o 0 0
-s1
-	buildAC "Welcome to the VM Parser"
+	halt
+	pushB_a 0
+	pop_a 1
+.d 0 1 b
+	rtn
+else.2
+.d 0 1 b
+	rtn
+.o 2 2 ii
+s5
+	push_b 0
+	push_b 2
+	ltI
+	notB
+	jmp_false else.3
+	push_b 0
+	push_array 0
+	updatepop_a 0 1
+	push_a 0
+	select CHAR 0 1
+	push_a 0
+	buildh ARRAY 1
+	push_a 0
+	push_b 2
+	push_b 2
+	build_u _ 1 2 n11
+	buildC_b 0
+	fillh _Cons 2 4
+	pop_a 2
+	pop_b 3
 .d 1 0
 	rtn
+else.3
+	fillh _Nil 0 1
+	pop_a 1
+	pop_b 2
+.d 1 0
+	rtn
+.nu 1 2 _ _
+.o 1 0
+n11
+	push_node_u _cycle_in_spine 1 2
+.o 2 2 ii
+ea11
+.o 2 2 ii
+s11
+	pushI 1
+	push_b 1
+	addI
+	push_a 0
+	push_b 2
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	updatepop_a 0 1
+	update_b 1 3
+	updatepop_b 0 2
+.d 2 2 ii
+	jmp s5
+.o 2 2 ii
+s6
+	push_b 0
+	push_b 2
+	ltI
+	notB
+	jmp_false else.4
+	push_b 0
+	push_array 0
+	updatepop_a 0 1
+	push_a 0
+	select CHAR 0 1
+	push_a 0
+	buildh ARRAY 1
+	push_a 0
+	push_b 2
+	push_b 2
+	build_u _ 1 2 n10
+	buildC_b 0
+	fillh _Cons 2 4
+	pop_a 2
+	pop_b 3
+.d 1 0
+	rtn
+else.4
+	fillh _Nil 0 1
+	pop_a 1
+	pop_b 2
+.d 1 0
+	rtn
+.nu 1 2 _ _
+.o 1 0
+n10
+	push_node_u _cycle_in_spine 1 2
+.o 2 2 ii
+ea10
+.o 2 2 ii
+s10
+	pushI 1
+	push_b 1
+	addI
+	push_a 0
+	push_b 2
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	updatepop_a 0 1
+	update_b 1 3
+	updatepop_b 0 2
+.d 2 2 ii
+	jmp s6
