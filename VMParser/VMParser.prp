@@ -5,10 +5,17 @@ MainModule
 	DclOpen:	False
 	Icl
 		WindowPosition
+<<<<<<< Updated upstream
 			X:	409
 			Y:	63
 			SizeX:	1205
 			SizeY:	680
+=======
+			X:	69
+			Y:	0
+			SizeX:	1261
+			SizeY:	672
+>>>>>>> Stashed changes
 	IclOpen:	True
 OtherModules
 	Module
