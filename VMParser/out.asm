@@ -1,1 +1,13 @@
-
+D=M
+A=A-1
+D=D+M
+M=D
+lol
+D=M
+A=A-1
+D=D+M
+M=D
+D=M
+A=A-1
+D=D+M
+M=D
