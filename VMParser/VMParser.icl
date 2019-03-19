@@ -2,46 +2,33 @@ module VMParser
 
 import StdEnv
 import StdFile
-import Directory
-
-/*
-*	Parse a "push constant" command:
-*	1. constant = extract the constant field from the VM instruction.
-*	2. instruction = the Hack machine code for 'push' instruction.
-*	3. writes the command into file.
-*
-*/
-parsePushConstant:: String *f -> Bool | FileSystem f  
-parsePushConstant pushstr w
-# constant = toString (drop (length [char \\ char <-: "push constant "]) [char \\ char <-: pushstr])
-# instruction = "@" +++ constant +++ "\nD=A\n@0\nM=M+1\nA=M\nM=D\n"
-# (ok_open,file ,w) = fopen "out.asm" FAppendText w
-| not ok_open = abort "failed to open file"
-# file = fwrites instruction file
-# (ok_close,w) = fclose file w
-| not ok_close = abort "failed to close"
-= ok_close
-
-/*
-*	Parse a "add" command:
-*	1. instruction = the Hack machine code for 'add' instruction.
-*	2. writes the command into file
-*
-*/
-parseAddCommand:: String *f -> Bool | FileSystem f  
-parseAddCommand pushstr w
-# instruction = "D=M\nA=A-1\nD=D+M\nM=D\n"
-# (ok_open,file ,w) = fopen "out.asm" FAppendText w
-| not ok_open = abort "failed to open file"
-# file = fwrites instruction file
-# (ok_close,w) = fclose file w
-| not ok_close = abort "failed to close"
-= ok_close
+import Parsing
+import FileOperations
 
 
 Start w
-# (dir,w) = getDirectoryContents (RelativePath []) w
-= parseAddCommand "akkuna mattadda" w
+// 1. Receive name of '.vm' file to parse.
+# (io,w) = stdio w                                				// open stdio
+# io = fwrites "Enter name of VM file (with '.vm'):\n" io    	// ask for name
+# (name,io) = freadline io                        			// read in name
+# name = name % (0, size name - 2)                			// remove \n from name
+# (ok,w) = fclose io w                            			// close stdio
+| not ok = abort "Couldn't close stdio"           			// abort in case of failure
+
+// 2. Read the content of the file to list of string: each string is a line.
+# (ok_read_open,inputfile,w) = fopen name FReadText w
+# (content,inputfile) = listOfLinesInFile inputfile
+# (ok_read_close,w) = fclose inputfile w
+
+// 3. Initial the output '.asm' file.
+# (ok_open,file ,w) = fopen "out.asm" FWriteText w
+| not ok_open = abort "Failed to open output file.\n"
+# file = fwrites "@0\t//Initial SP\nM=A\n\n" file
+# (ok_close,w) = fclose file w
+| not ok_close = abort "failed to close output file.\n"
+
+// 4. Parse the content of the file.
+= parse content w
 
 
 

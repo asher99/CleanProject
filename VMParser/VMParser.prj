@@ -64,8 +64,8 @@ MainModule
 		Fusion:	False
 OtherModules
 	Module
-		Name:	Directory
-		Dir:	{Application}*Libraries*Directory
+		Name:	FileOperations
+		Dir:	{Project}
 		Compiler
 			NeverMemoryProfile:	False
 			NeverTimeProfile:	False
@@ -77,11 +77,9 @@ OtherModules
 			ReadableABC:	False
 			ReuseUniqueNodes:	True
 			Fusion:	False
-		NeededObjFiles
-			ObjectFile:	cDirectory.
 	Module
-		Name:	StdLibMisc
-		Dir:	{Application}*Libraries*StdLib
+		Name:	Parsing
+		Dir:	{Project}
 		Compiler
 			NeverMemoryProfile:	False
 			NeverTimeProfile:	False
@@ -235,20 +233,6 @@ OtherModules
 			Fusion:	False
 	Module
 		Name:	StdList
-		Dir:	{Application}*Libraries*StdEnv
-		Compiler
-			NeverMemoryProfile:	False
-			NeverTimeProfile:	False
-			StrictnessAnalysis:	True
-			ListTypes:	StrictExportTypes
-			ListAttributes:	True
-			Warnings:	True
-			Verbose:	True
-			ReadableABC:	False
-			ReuseUniqueNodes:	True
-			Fusion:	False
-	Module
-		Name:	StdMaybe
 		Dir:	{Application}*Libraries*StdEnv
 		Compiler
 			NeverMemoryProfile:	False

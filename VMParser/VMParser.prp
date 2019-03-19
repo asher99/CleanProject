@@ -5,22 +5,46 @@ MainModule
 	DclOpen:	False
 	Icl
 		WindowPosition
-			X:	10
-			Y:	10
-			SizeX:	1278
-			SizeY:	672
+			X:	409
+			Y:	63
+			SizeX:	1205
+			SizeY:	680
 	IclOpen:	True
 OtherModules
 	Module
-		Name:	Directory
-		Dir:	{Application}*Libraries*Directory
-		DclOpen:	False
-		IclOpen:	False
+		Name:	FileOperations
+		Dir:	{Project}
+		Dcl
+			WindowPosition
+				X:	10
+				Y:	10
+				SizeX:	800
+				SizeY:	680
+		DclOpen:	True
+		Icl
+			WindowPosition
+				X:	385
+				Y:	182
+				SizeX:	800
+				SizeY:	680
+		IclOpen:	True
 	Module
-		Name:	StdLibMisc
-		Dir:	{Application}*Libraries*StdLib
-		DclOpen:	False
-		IclOpen:	False
+		Name:	Parsing
+		Dir:	{Project}
+		Dcl
+			WindowPosition
+				X:	-15
+				Y:	138
+				SizeX:	800
+				SizeY:	680
+		DclOpen:	True
+		Icl
+			WindowPosition
+				X:	10
+				Y:	10
+				SizeX:	800
+				SizeY:	680
+		IclOpen:	True
 	Module
 		Name:	StdArray
 		Dir:	{Application}*Libraries*StdEnv
@@ -73,11 +97,6 @@ OtherModules
 		IclOpen:	False
 	Module
 		Name:	StdList
-		Dir:	{Application}*Libraries*StdEnv
-		DclOpen:	False
-		IclOpen:	False
-	Module
-		Name:	StdMaybe
 		Dir:	{Application}*Libraries*StdEnv
 		DclOpen:	False
 		IclOpen:	False
