@@ -1,7 +1,7 @@
 .comp 920 000111010
 .start __VMParser_Start
 .depend "FileOperations" "20190319165938"
-.depend "Parsing" "20190319165404"
+.depend "Parsing" "20190319183631"
 .depend "_SystemEnumStrict" "20180913114337"
 .depend "_SystemStrictLists" "20180913114337"
 .depend "StdStrictLists" "20180913114337"
@@ -24,7 +24,7 @@
 .depend "StdOverloaded" "20180913114337"
 .depend "StdBool" "20180913114337"
 .depend "StdEnv" "20180913114337"
-.module m_VMParser "VMParser" "20190319170046"
+.module m_VMParser "VMParser" "20190319193500"
 .endinfo
 .impmod _system
 .implab _cycle_in_spine
@@ -214,7 +214,7 @@ else.1
 else.2
 	push_b 2
 	push_b 2
-	buildAC "@0\t//Initial SP\nM=A\n\n"
+	buildAC "//Initial SP\n@255\nD=A\n@0\nM=D\nM=M+1\n"
 	update_b 1 4
 	updatepop_b 0 3
 .d 1 2 f

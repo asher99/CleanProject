@@ -23,7 +23,8 @@ Start w
 // 3. Initial the output '.asm' file.
 # (ok_open,file ,w) = fopen "out.asm" FWriteText w
 | not ok_open = abort "Failed to open output file.\n"
-# file = fwrites "@0\t//Initial SP\nM=A\n\n" file
+//# file = fwrites "//Initial SP\n@0\nM=A\n\n" file
+# file = fwrites "//Initial SP\n@255\nD=A\n@0\nM=D\nM=M+1\n" file
 # (ok_close,w) = fclose file w
 | not ok_close = abort "failed to close output file.\n"
 

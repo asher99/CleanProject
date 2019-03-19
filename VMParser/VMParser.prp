@@ -5,10 +5,16 @@ MainModule
 	DclOpen:	False
 	Icl
 		WindowPosition
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 			X:	409
 			Y:	63
 			SizeX:	1205
+=======
+			X:	67
+			Y:	12
+			SizeX:	800
+>>>>>>> master
 			SizeY:	680
 =======
 			X:	69
@@ -40,16 +46,16 @@ OtherModules
 		Dir:	{Project}
 		Dcl
 			WindowPosition
-				X:	-15
-				Y:	138
+				X:	738
+				Y:	159
 				SizeX:	800
-				SizeY:	680
+				SizeY:	681
 		DclOpen:	True
 		Icl
 			WindowPosition
 				X:	10
 				Y:	10
-				SizeX:	800
+				SizeX:	1247
 				SizeY:	680
 		IclOpen:	True
 	Module
