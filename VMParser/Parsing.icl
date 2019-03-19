@@ -37,7 +37,7 @@ parseLine line w
 parsePushConstant:: String *f -> (Bool,*f) | FileSystem f  
 parsePushConstant pushstr w
 # constant = toString (drop (length [char \\ char <-: "push constant "]) [char \\ char <-: pushstr])
-# instruction = "//push instruction\n@" +++ constant +++ "D=A\n@0\nM=M+1\nA=M\nM=D\n\n"
+# instruction = "//push instruction\n@" +++ constant +++ "D=A\n@0\nA=M\nM=D\n@0\nM=M+1\n\n"
 # (ok_open,file ,w) = fopen "out.asm" FAppendText w
 | not ok_open = abort "failed to open file"
 # file = fwrites instruction file
@@ -53,13 +53,16 @@ parsePushConstant pushstr w
 */
 parseAddCommand:: String *f -> (Bool,*f) | FileSystem f  
 parseAddCommand addstr w
-# instruction = "//add instruction\nD=M\nA=A-1\nD=M+D\nM=D\n\n"
+//# instruction = "//add instruction\nA=M\nD=M\nA=A-1\nD=M+D\nM=D\n\n"
+# instruction = "//add instruction\nA=M-1\nD=M\nA=A-1\nD=M+D\nM=D\n@0\nM=M-1\n\n"
 # (ok_open,file ,w) = fopen "out.asm" FAppendText w
 | not ok_open = abort "failed to open file"
 # file = fwrites instruction file
 # (ok_close,w) = fclose file w
 | not ok_close = abort "failed to close"
 = (ok_close,w)
+
+/*
 
 /*
 *	Parse a "sub" command:
@@ -125,3 +128,5 @@ parseOrCommand andstr w
 # (ok_close,w) = fclose file w
 | not ok_close = abort "failed to close"
 = (ok_close,w)
+
+*/
