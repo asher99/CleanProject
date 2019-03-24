@@ -33,7 +33,7 @@ OtherModules
 		Dir:	{Project}
 		Dcl
 			WindowPosition
-				X:	738
+				X:	736
 				Y:	159
 				SizeX:	800
 				SizeY:	681
