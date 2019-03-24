@@ -5,24 +5,11 @@ MainModule
 	DclOpen:	False
 	Icl
 		WindowPosition
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-			X:	409
-			Y:	63
-			SizeX:	1205
-=======
-			X:	67
-			Y:	12
+			X:	10
+			Y:	10
 			SizeX:	800
->>>>>>> master
-			SizeY:	680
-=======
-			X:	69
-			Y:	0
-			SizeX:	1261
-			SizeY:	672
->>>>>>> Stashed changes
-	IclOpen:	True
+			SizeY:	576
+	IclOpen:	False
 OtherModules
 	Module
 		Name:	FileOperations
@@ -33,7 +20,7 @@ OtherModules
 				Y:	10
 				SizeX:	800
 				SizeY:	680
-		DclOpen:	True
+		DclOpen:	False
 		Icl
 			WindowPosition
 				X:	385
@@ -46,11 +33,16 @@ OtherModules
 		Dir:	{Project}
 		Dcl
 			WindowPosition
+<<<<<<< Updated upstream
 				X:	736
 				Y:	159
+=======
+				X:	566
+				Y:	71
+>>>>>>> Stashed changes
 				SizeX:	800
 				SizeY:	681
-		DclOpen:	True
+		DclOpen:	False
 		Icl
 			WindowPosition
 				X:	10
