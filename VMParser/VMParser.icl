@@ -24,12 +24,12 @@ Start w
 # (ok_open,file ,w) = fopen "out.asm" FWriteText w
 | not ok_open = abort "Failed to open output file.\n"
 //# file = fwrites "//Initial SP\n@0\nM=A\n\n" file
-# file = fwrites "//Initial SP\n@255\nD=A\n@0\nM=D\nM=M+1\n" file
+# file = fwrites "//Initial SP\n@255\nD=A\n@0\nM=D\nM=M+1\n\n" file
 # (ok_close,w) = fclose file w
 | not ok_close = abort "failed to close output file.\n"
 
 // 4. Parse the content of the file.
-= parse content w
+= parse content 1 w
 
 
 

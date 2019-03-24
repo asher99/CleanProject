@@ -1,7 +1,7 @@
 .comp 920 000111010
 .start __VMParser_Start
 .depend "FileOperations" "20190319165938"
-.depend "Parsing" "20190319183631"
+.depend "Parsing" "20190324192340"
 .depend "_SystemEnumStrict" "20180913114337"
 .depend "_SystemStrictLists" "20180913114337"
 .depend "StdStrictLists" "20180913114337"
@@ -24,7 +24,7 @@
 .depend "StdOverloaded" "20180913114337"
 .depend "StdBool" "20180913114337"
 .depend "StdEnv" "20180913114337"
-.module m_VMParser "VMParser" "20190319193500"
+.module m_VMParser "VMParser" "20190324192503"
 .endinfo
 .impmod _system
 .implab _cycle_in_spine
@@ -214,7 +214,7 @@ else.1
 else.2
 	push_b 2
 	push_b 2
-	buildAC "//Initial SP\n@255\nD=A\n@0\nM=D\nM=M+1\n"
+	buildAC "//Initial SP\n@255\nD=A\n@0\nM=D\nM=M+1\n\n"
 	update_b 1 4
 	updatepop_b 0 3
 .d 1 2 f
@@ -244,16 +244,18 @@ else.3
 	buildh e_StdFile_dfopen;31 0
 	buildh e_StdFile_dfclose;30 0
 	push_a 4
+	buildI 1
+	push_a 7
 	push_a 6
-	push_a 5
+	update_a 3 7
+	update_a 6 3
 	update_a 2 6
-	update_a 4 2
-	update_a 0 4
-	update_a 5 0
+	update_a 5 2
 	update_a 1 5
-	update_a 3 1
-	update_a 0 3
+	update_a 4 1
+	update_a 0 4
 	pop_a 1
+	update_a 6 8
 	update_a 5 7
 	update_a 4 6
 	update_a 3 5
@@ -261,5 +263,5 @@ else.3
 	update_a 1 3
 	updatepop_a 0 2
 	pop_b 1
-.d 6 0
+.d 7 0
 	jmp e_Parsing_sparse
