@@ -9,7 +9,7 @@ MainModule
 			Y:	10
 			SizeX:	800
 			SizeY:	576
-	IclOpen:	False
+	IclOpen:	True
 OtherModules
 	Module
 		Name:	FileOperations
@@ -31,25 +31,14 @@ OtherModules
 	Module
 		Name:	Parsing
 		Dir:	{Project}
-		Dcl
-			WindowPosition
-<<<<<<< Updated upstream
-				X:	736
-				Y:	159
-=======
-				X:	566
-				Y:	71
->>>>>>> Stashed changes
-				SizeX:	800
-				SizeY:	681
 		DclOpen:	False
 		Icl
 			WindowPosition
 				X:	10
 				Y:	10
-				SizeX:	1247
-				SizeY:	680
-		IclOpen:	True
+				SizeX:	800
+				SizeY:	576
+		IclOpen:	False
 	Module
 		Name:	StdArray
 		Dir:	{Application}*Libraries*StdEnv
