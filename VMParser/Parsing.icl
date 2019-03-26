@@ -38,12 +38,12 @@ parseLine line num w
 | line % (0,7) == "pop that" = parsePopThat line w				//  pop that #
 | line % (0,7) == "pop temp" = parsePopTemp line w				//  pop temp #
 
-/*																// pointer commands
-| line % (0,12) == "push pointer 0" = parsePushPointer line w	//  push pointer 0
-| line % (0,11) == "pop pointer 0" = parsePopPointer line w		//  pop pointer 0
-| line % (0,12) == "push pointer 1" = parsePushPointer line w	//  push pointer 1
-| line % (0,11) == "pop pointer 1" = parsePopPointer line w		//  pop pointer 1
-*/
+																// pointer commands
+| line % (0,13) == "push pointer 0" = parsePushPointer0 line w	//  push pointer 0
+| line % (0,12) == "pop pointer 0" = parsePopPointer0 line w		//  pop pointer 0
+| line % (0,13) == "push pointer 1" = parsePushPointer1 line w	//  push pointer 1
+| line % (0,12) == "pop pointer 1" = parsePopPointer1 line w		//  pop pointer 1
+
 | line % (0,2) == "add" = parseAddCommand line w				//  add
 | line % (0,2) == "sub" = parseSubCommand line w				//  sub
 | line % (0,2) == "neg" = parseNegCommand line w				//  neg
@@ -86,7 +86,10 @@ parsePushConstant pushstr w
 parsePushStatic:: String *f -> (Bool,*f) | FileSystem f  
 parsePushStatic pushstr w
 # offset = toString (drop (length [char \\ char <-: "push static "]) [char \\ char <-: pushstr])
-# instruction = "//push static instruction\n@" +++ offset +++ "\nD=A\n@STATIC\nA=M+D\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n\n"
+# offset = offset % (0, (size offset)-2)
+# addr = (toInt offset)+16
+# addstr = toString addr
+# instruction = "//push static instruction\n@" +++ addstr +++ "\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n\n"
 # (ok_open,file ,w) = fopen "out.asm" FAppendText w
 | not ok_open = abort "failed to open file"
 # file = fwrites instruction file
@@ -189,6 +192,26 @@ parsePushTemp pushstr w
 | not ok_close = abort "failed to close"
 = (ok_close,w)
 
+parsePushPointer0:: String *f -> (Bool,*f) | FileSystem f  
+parsePushPointer0 pushstr w
+# instruction = "//push static instruction\n@THIS\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n\n"
+# (ok_open,file ,w) = fopen "out.asm" FAppendText w
+| not ok_open = abort "failed to open file"
+# file = fwrites instruction file
+# (ok_close,w) = fclose file w
+| not ok_close = abort "failed to close"
+= (ok_close,w)
+
+parsePushPointer1:: String *f -> (Bool,*f) | FileSystem f  
+parsePushPointer1 pushstr w
+# instruction = "//push static instruction\n@THAT\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n\n"
+# (ok_open,file ,w) = fopen "out.asm" FAppendText w
+| not ok_open = abort "failed to open file"
+# file = fwrites instruction file
+# (ok_close,w) = fclose file w
+| not ok_close = abort "failed to close"
+= (ok_close,w)
+
 // ********************  pop *****************************//
 
 /*
@@ -218,8 +241,11 @@ parsePopConstant popstr w
 */
 parsePopStatic:: String *f -> (Bool,*f) | FileSystem f  
 parsePopStatic popstr w
-# static = toString (drop (length [char \\ char <-: "pop static "]) [char \\ char <-: popstr])
-# instruction = "//pop static instruction\n@" +++ static +++ "/// TODO"
+# offset = toString (drop (length [char \\ char <-: "pop static "]) [char \\ char <-: popstr])
+# offset = offset % (0, (size offset)-2)
+# addr = (toInt offset)+16
+# addstr = toString addr
+# instruction = "//pop static instruction\n@SP\nA=M-1\nD=M\n@"+++addstr+++"\nM=D\n@SP\nM=M-1\n\n"
 # (ok_open,file ,w) = fopen "out.asm" FAppendText w
 | not ok_open = abort "failed to open file"
 # file = fwrites instruction file
@@ -322,7 +348,25 @@ parsePopTemp popstr w
 | not ok_close = abort "failed to close"
 = (ok_close,w)
 
+parsePopPointer0:: String *f -> (Bool,*f) | FileSystem f  
+parsePopPointer0 popstr w
+# instruction = "//pop instruction\n@SP\nA=M-1\nD=M\n@THIS\nM=D\n@SP\nM=M-1\n\n"
+# (ok_open,file ,w) = fopen "out.asm" FAppendText w
+| not ok_open = abort "failed to open file"
+# file = fwrites instruction file
+# (ok_close,w) = fclose file w
+| not ok_close = abort "failed to close"
+= (ok_close,w)
 
+parsePopPointer1:: String *f -> (Bool,*f) | FileSystem f  
+parsePopPointer1 popstr w
+# instruction = "//pop instruction\n@SP\nA=M-1\nD=M\n@THAT\nM=D\n@SP\nM=M-1\n\n"
+# (ok_open,file ,w) = fopen "out.asm" FAppendText w
+| not ok_open = abort "failed to open file"
+# file = fwrites instruction file
+# (ok_close,w) = fclose file w
+| not ok_close = abort "failed to close"
+= (ok_close,w)
 
 /*
 *	Parse a "add" command:

@@ -33,17 +33,17 @@ OtherModules
 		Dir:	{Project}
 		Dcl
 			WindowPosition
-				X:	861
+				X:	736
 				Y:	33
 				SizeX:	783
 				SizeY:	680
 		DclOpen:	True
 		Icl
 			WindowPosition
-				X:	64
-				Y:	17
-				SizeX:	1519
-				SizeY:	730
+				X:	-7
+				Y:	-10
+				SizeX:	1516
+				SizeY:	723
 		IclOpen:	True
 	Module
 		Name:	StdArray

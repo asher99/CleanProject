@@ -50,9 +50,13 @@ parsePopThat :: String *f -> (Bool,*f) | FileSystem f
 
 parsePopTemp :: String *f -> (Bool,*f) | FileSystem f  
 
+parsePushPointer0:: String *f -> (Bool,*f) | FileSystem f  
 
+parsePushPointer1:: String *f -> (Bool,*f) | FileSystem f  
 
+parsePopPointer0:: String *f -> (Bool,*f) | FileSystem f  
 
+parsePopPointer1:: String *f -> (Bool,*f) | FileSystem f  
 
 
 

@@ -22,8 +22,8 @@
 .depend "StdOverloaded" "20180913114337"
 .depend "StdBool" "20180913114337"
 .depend "StdEnv" "20180913114337"
-.depend "Parsing" "20190326101455"
-.module m_Parsing "Parsing" "20190326150223"
+.depend "Parsing" "20190326153145"
+.module m_Parsing "Parsing" "20190326162142"
 .endinfo
 .impmod _system
 .implab _cycle_in_spine
@@ -168,7 +168,7 @@ case.2
 	update_a 0 16
 	pop_a 1
 .d 7 0
-	jsr s82
+	jsr s86
 .o 1 1 b
 	push_b 0
 	notB
@@ -728,13 +728,13 @@ else.18
 .d 6 0
 	jmp s24
 else.19
-	pushI 2
+	pushI 13
 	pushI 0
 	push_a 4
 .d 1 2 ii
 	jsr sliceAC
 .o 1 0
-	buildAC "add"
+	buildAC "push pointer 0"
 	push_a 1
 	update_a 1 2
 	update_a 0 1
@@ -758,15 +758,15 @@ else.19
 	update_a 1 8
 	updatepop_a 0 7
 .d 6 0
-	jmp s4
+	jmp s25
 else.20
-	pushI 2
+	pushI 12
 	pushI 0
 	push_a 4
 .d 1 2 ii
 	jsr sliceAC
 .o 1 0
-	buildAC "sub"
+	buildAC "pop pointer 0"
 	push_a 1
 	update_a 1 2
 	update_a 0 1
@@ -790,15 +790,15 @@ else.20
 	update_a 1 8
 	updatepop_a 0 7
 .d 6 0
-	jmp s5
+	jmp s27
 else.21
-	pushI 2
+	pushI 13
 	pushI 0
 	push_a 4
 .d 1 2 ii
 	jsr sliceAC
 .o 1 0
-	buildAC "neg"
+	buildAC "push pointer 1"
 	push_a 1
 	update_a 1 2
 	update_a 0 1
@@ -822,15 +822,15 @@ else.21
 	update_a 1 8
 	updatepop_a 0 7
 .d 6 0
-	jmp s6
+	jmp s26
 else.22
-	pushI 2
+	pushI 12
 	pushI 0
 	push_a 4
 .d 1 2 ii
 	jsr sliceAC
 .o 1 0
-	buildAC "and"
+	buildAC "pop pointer 1"
 	push_a 1
 	update_a 1 2
 	update_a 0 1
@@ -854,15 +854,15 @@ else.22
 	update_a 1 8
 	updatepop_a 0 7
 .d 6 0
-	jmp s7
+	jmp s28
 else.23
-	pushI 1
+	pushI 2
 	pushI 0
 	push_a 4
 .d 1 2 ii
 	jsr sliceAC
 .o 1 0
-	buildAC "or"
+	buildAC "add"
 	push_a 1
 	update_a 1 2
 	update_a 0 1
@@ -886,7 +886,7 @@ else.23
 	update_a 1 8
 	updatepop_a 0 7
 .d 6 0
-	jmp s8
+	jmp s4
 else.24
 	pushI 2
 	pushI 0
@@ -894,7 +894,7 @@ else.24
 .d 1 2 ii
 	jsr sliceAC
 .o 1 0
-	buildAC "not"
+	buildAC "sub"
 	push_a 1
 	update_a 1 2
 	update_a 0 1
@@ -918,8 +918,136 @@ else.24
 	update_a 1 8
 	updatepop_a 0 7
 .d 6 0
-	jmp s9
+	jmp s5
 else.25
+	pushI 2
+	pushI 0
+	push_a 4
+.d 1 2 ii
+	jsr sliceAC
+.o 1 0
+	buildAC "neg"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_false else.26
+	push_a 6
+	jsr_eval 0
+	push_a 5
+	buildh ARRAY 1
+	push_a 5
+	push_a 5
+	push_a 5
+	push_a 5
+	update_a 5 12
+	update_a 4 11
+	update_a 3 10
+	update_a 2 9
+	update_a 1 8
+	updatepop_a 0 7
+.d 6 0
+	jmp s6
+else.26
+	pushI 2
+	pushI 0
+	push_a 4
+.d 1 2 ii
+	jsr sliceAC
+.o 1 0
+	buildAC "and"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_false else.27
+	push_a 6
+	jsr_eval 0
+	push_a 5
+	buildh ARRAY 1
+	push_a 5
+	push_a 5
+	push_a 5
+	push_a 5
+	update_a 5 12
+	update_a 4 11
+	update_a 3 10
+	update_a 2 9
+	update_a 1 8
+	updatepop_a 0 7
+.d 6 0
+	jmp s7
+else.27
+	pushI 1
+	pushI 0
+	push_a 4
+.d 1 2 ii
+	jsr sliceAC
+.o 1 0
+	buildAC "or"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_false else.28
+	push_a 6
+	jsr_eval 0
+	push_a 5
+	buildh ARRAY 1
+	push_a 5
+	push_a 5
+	push_a 5
+	push_a 5
+	update_a 5 12
+	update_a 4 11
+	update_a 3 10
+	update_a 2 9
+	update_a 1 8
+	updatepop_a 0 7
+.d 6 0
+	jmp s8
+else.28
+	pushI 2
+	pushI 0
+	push_a 4
+.d 1 2 ii
+	jsr sliceAC
+.o 1 0
+	buildAC "not"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_false else.29
+	push_a 6
+	jsr_eval 0
+	push_a 5
+	buildh ARRAY 1
+	push_a 5
+	push_a 5
+	push_a 5
+	push_a 5
+	update_a 5 12
+	update_a 4 11
+	update_a 3 10
+	update_a 2 9
+	update_a 1 8
+	updatepop_a 0 7
+.d 6 0
+	jmp s9
+else.29
 	pushI 1
 	pushI 0
 	push_a 4
@@ -934,7 +1062,7 @@ else.25
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.26
+	jmp_false else.30
 	push_a 6
 	jsr_eval 0
 	push_a 6
@@ -955,7 +1083,7 @@ else.25
 	updatepop_a 0 7
 .d 6 1 i
 	jmp s10
-else.26
+else.30
 	pushI 1
 	pushI 0
 	push_a 4
@@ -970,7 +1098,7 @@ else.26
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.27
+	jmp_false else.31
 	push_a 6
 	jsr_eval 0
 	push_a 6
@@ -991,7 +1119,7 @@ else.26
 	updatepop_a 0 7
 .d 6 1 i
 	jmp s11
-else.27
+else.31
 	pushI 1
 	pushI 0
 	push_a 4
@@ -1006,7 +1134,7 @@ else.27
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.28
+	jmp_false else.32
 	push_a 6
 	jsr_eval 0
 	push_a 6
@@ -1027,7 +1155,7 @@ else.27
 	updatepop_a 0 7
 .d 6 1 i
 	jmp s12
-else.28
+else.32
 	push_a 6
 	buildB FALSE
 	update_a 1 8
@@ -1110,7 +1238,7 @@ s12
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.29
+	jmp_false else.33
 	buildAC "failed to open file"
 	updatepop_a 0 7
 	pop_b 1
@@ -1121,13 +1249,13 @@ s12
 	repl_args 2 2
 .d 2 0
 	rtn
-else.29
+else.33
 	buildI_b 0
 	build _ 1 e_StdString_ntoString;5
 	push_arg 1 3 3
 	push_arg 2 3 2
 	push_a 2
-	build _ 2 n105
+	build _ 2 n113
 	push_a 4
 	pop_b 1
 	update_a 3 10
@@ -1141,7 +1269,7 @@ else.29
 	pop_a 1
 	push_b 0
 	notB
-	jmp_false else.30
+	jmp_false else.34
 	buildAC "failed to close"
 	updatepop_a 0 2
 	pop_b 1
@@ -1152,7 +1280,7 @@ else.29
 	repl_args 2 2
 .d 2 0
 	rtn
-else.30
+else.34
 	push_arg 0 2 2
 	buildB_b 0
 	update_a 1 3
@@ -1160,14 +1288,14 @@ else.30
 	pop_b 1
 .d 2 0
 	rtn
-.n 2 _ ea105
+.n 2 _ ea113
 .o 1 0
-n105
+n113
 	push_node _cycle_in_spine 2
 .o 3 0
-ea105
+ea113
 .o 3 0
-s105
+s113
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -1300,7 +1428,7 @@ s11
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.31
+	jmp_false else.35
 	buildAC "failed to open file"
 	updatepop_a 0 7
 	pop_b 1
@@ -1311,13 +1439,13 @@ s11
 	repl_args 2 2
 .d 2 0
 	rtn
-else.31
+else.35
 	buildI_b 0
 	build _ 1 e_StdString_ntoString;5
 	push_arg 1 3 3
 	push_arg 2 3 2
 	push_a 2
-	build _ 2 n106
+	build _ 2 n114
 	push_a 4
 	pop_b 1
 	update_a 3 10
@@ -1331,7 +1459,7 @@ else.31
 	pop_a 1
 	push_b 0
 	notB
-	jmp_false else.32
+	jmp_false else.36
 	buildAC "failed to close"
 	updatepop_a 0 2
 	pop_b 1
@@ -1342,7 +1470,7 @@ else.31
 	repl_args 2 2
 .d 2 0
 	rtn
-else.32
+else.36
 	push_arg 0 2 2
 	buildB_b 0
 	update_a 1 3
@@ -1350,14 +1478,14 @@ else.32
 	pop_b 1
 .d 2 0
 	rtn
-.n 2 _ ea106
+.n 2 _ ea114
 .o 1 0
-n106
+n114
 	push_node _cycle_in_spine 2
 .o 3 0
-ea106
+ea114
 .o 3 0
-s106
+s114
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -1490,7 +1618,7 @@ s10
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.33
+	jmp_false else.37
 	buildAC "failed to open file"
 	updatepop_a 0 7
 	pop_b 1
@@ -1501,13 +1629,13 @@ s10
 	repl_args 2 2
 .d 2 0
 	rtn
-else.33
+else.37
 	buildI_b 0
 	build _ 1 e_StdString_ntoString;5
 	push_arg 1 3 3
 	push_arg 2 3 2
 	push_a 2
-	build _ 2 n107
+	build _ 2 n115
 	push_a 4
 	pop_b 1
 	update_a 3 10
@@ -1521,7 +1649,7 @@ else.33
 	pop_a 1
 	push_b 0
 	notB
-	jmp_false else.34
+	jmp_false else.38
 	buildAC "failed to close"
 	updatepop_a 0 2
 	pop_b 1
@@ -1532,7 +1660,7 @@ else.33
 	repl_args 2 2
 .d 2 0
 	rtn
-else.34
+else.38
 	push_arg 0 2 2
 	buildB_b 0
 	update_a 1 3
@@ -1540,14 +1668,14 @@ else.34
 	pop_b 1
 .d 2 0
 	rtn
-.n 2 _ ea107
+.n 2 _ ea115
 .o 1 0
-n107
+n115
 	push_node _cycle_in_spine 2
 .o 3 0
-ea107
+ea115
 .o 3 0
-s107
+s115
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -1664,7 +1792,7 @@ s9
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.35
+	jmp_false else.39
 	buildAC "failed to open file"
 	updatepop_a 0 7
 .d 1 0
@@ -1674,7 +1802,7 @@ s9
 	repl_args 2 2
 .d 2 0
 	rtn
-else.35
+else.39
 	push_arg 0 3 3
 	push_arg 1 3 2
 	buildAC "//not instruction\nA=M-1\nM=!M\nD=M\n@0\n\n"
@@ -1691,7 +1819,7 @@ else.35
 	pop_a 1
 	push_b 0
 	notB
-	jmp_false else.36
+	jmp_false else.40
 	buildAC "failed to close"
 	updatepop_a 0 1
 	pop_b 1
@@ -1702,7 +1830,7 @@ else.35
 	repl_args 2 2
 .d 2 0
 	rtn
-else.36
+else.40
 	push_arg 0 2 2
 	buildB_b 0
 	update_a 1 2
@@ -1770,7 +1898,7 @@ s8
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.37
+	jmp_false else.41
 	buildAC "failed to open file"
 	updatepop_a 0 7
 .d 1 0
@@ -1780,7 +1908,7 @@ s8
 	repl_args 2 2
 .d 2 0
 	rtn
-else.37
+else.41
 	push_arg 0 3 3
 	push_arg 1 3 2
 	buildAC "//or instruction\nA=M-1\nD=M\nA=A-1\nD=D|M\nM=D\n@0\nM=M-1\n\n"
@@ -1797,7 +1925,7 @@ else.37
 	pop_a 1
 	push_b 0
 	notB
-	jmp_false else.38
+	jmp_false else.42
 	buildAC "failed to close"
 	updatepop_a 0 1
 	pop_b 1
@@ -1808,7 +1936,7 @@ else.37
 	repl_args 2 2
 .d 2 0
 	rtn
-else.38
+else.42
 	push_arg 0 2 2
 	buildB_b 0
 	update_a 1 2
@@ -1876,7 +2004,7 @@ s7
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.39
+	jmp_false else.43
 	buildAC "failed to open file"
 	updatepop_a 0 7
 .d 1 0
@@ -1886,7 +2014,7 @@ s7
 	repl_args 2 2
 .d 2 0
 	rtn
-else.39
+else.43
 	push_arg 0 3 3
 	push_arg 1 3 2
 	buildAC "//and instruction\nA=M-1\nD=M\nA=A-1\nD=D&M\nM=D\n@0\nM=M-1\n\n"
@@ -1903,7 +2031,7 @@ else.39
 	pop_a 1
 	push_b 0
 	notB
-	jmp_false else.40
+	jmp_false else.44
 	buildAC "failed to close"
 	updatepop_a 0 1
 	pop_b 1
@@ -1914,7 +2042,7 @@ else.39
 	repl_args 2 2
 .d 2 0
 	rtn
-else.40
+else.44
 	push_arg 0 2 2
 	buildB_b 0
 	update_a 1 2
@@ -1982,7 +2110,7 @@ s6
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.41
+	jmp_false else.45
 	buildAC "failed to open file"
 	updatepop_a 0 7
 .d 1 0
@@ -1992,7 +2120,7 @@ s6
 	repl_args 2 2
 .d 2 0
 	rtn
-else.41
+else.45
 	push_arg 0 3 3
 	push_arg 1 3 2
 	buildAC "//neg instruction\nA=M-1\nM=-M\nD=M\n@0\n\n"
@@ -2009,7 +2137,7 @@ else.41
 	pop_a 1
 	push_b 0
 	notB
-	jmp_false else.42
+	jmp_false else.46
 	buildAC "failed to close"
 	updatepop_a 0 1
 	pop_b 1
@@ -2020,7 +2148,7 @@ else.41
 	repl_args 2 2
 .d 2 0
 	rtn
-else.42
+else.46
 	push_arg 0 2 2
 	buildB_b 0
 	update_a 1 2
@@ -2088,7 +2216,7 @@ s5
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.43
+	jmp_false else.47
 	buildAC "failed to open file"
 	updatepop_a 0 7
 .d 1 0
@@ -2098,7 +2226,7 @@ s5
 	repl_args 2 2
 .d 2 0
 	rtn
-else.43
+else.47
 	push_arg 0 3 3
 	push_arg 1 3 2
 	buildAC "//sub instruction\nA=M-1\nD=M\nA=A-1\nD=M-D\nM=D\n@0\nM=M-1\n\n"
@@ -2115,7 +2243,7 @@ else.43
 	pop_a 1
 	push_b 0
 	notB
-	jmp_false else.44
+	jmp_false else.48
 	buildAC "failed to close"
 	updatepop_a 0 1
 	pop_b 1
@@ -2126,7 +2254,7 @@ else.43
 	repl_args 2 2
 .d 2 0
 	rtn
-else.44
+else.48
 	push_arg 0 2 2
 	buildB_b 0
 	update_a 1 2
@@ -2194,7 +2322,7 @@ s4
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.45
+	jmp_false else.49
 	buildAC "failed to open file"
 	updatepop_a 0 7
 .d 1 0
@@ -2204,7 +2332,7 @@ s4
 	repl_args 2 2
 .d 2 0
 	rtn
-else.45
+else.49
 	push_arg 0 3 3
 	push_arg 1 3 2
 	buildAC "//add instruction\nA=M-1\nD=M\nA=A-1\nD=M+D\nM=D\n@0\nM=M-1\n\n"
@@ -2221,7 +2349,7 @@ else.45
 	pop_a 1
 	push_b 0
 	notB
-	jmp_false else.46
+	jmp_false else.50
 	buildAC "failed to close"
 	updatepop_a 0 1
 	pop_b 1
@@ -2232,7 +2360,431 @@ else.45
 	repl_args 2 2
 .d 2 0
 	rtn
-else.46
+else.50
+	push_arg 0 2 2
+	buildB_b 0
+	update_a 1 2
+	updatepop_a 0 1
+	pop_b 1
+.d 2 0
+	rtn
+.export e_Parsing_sparsePopPointer1
+.descexp e_Parsing_dparsePopPointer1 e_Parsing_nparsePopPointer1 e_Parsing_lparsePopPointer1 3 0 "parsePopPointer1"
+.a 0 a28
+.o 2 0
+e_Parsing_lparsePopPointer1
+	repl_args 2 2
+.o 3 0
+a28
+.d 3 0
+	jsr ea28
+.o 2 0
+	push_a 1
+	push_a 1
+	buildh _Tuple 2
+	updatepop_a 0 2
+.d 1 0
+	rtn
+.n 3 e_Parsing_dparsePopPointer1
+.o 1 0
+e_Parsing_nparsePopPointer1
+	push_node _cycle_in_spine 3
+.d 3 0
+	jsr ea28
+.o 2 0
+	push_a 1
+	push_a 1
+	fillh _Tuple 2 4
+	pop_a 2
+.d 1 0
+	rtn
+.o 6 0
+e_Parsing_sparsePopPointer1
+	jsr_eval 5
+.d 6 0
+	jmp s28
+.o 3 0
+ea28
+	jsr_eval 2
+	jsr_eval 0
+	repl_r_args 4 0
+.o 6 0
+s28
+	push_a 5
+	buildI 2
+	push_a 3
+	buildAC "out.asm"
+	buildh ARRAY 1
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	buildh _Nil 0
+	update_a 0 10
+	pop_a 1
+	jsr_ap 3
+	push_arg 0 3 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.51
+	buildAC "failed to open file"
+	updatepop_a 0 7
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+.d 2 0
+	rtn
+else.51
+	push_arg 0 3 3
+	push_arg 1 3 2
+	buildAC "//pop instruction\n@SP\nA=M-1\nD=M\n@THAT\nM=D\n@SP\nM=M-1\n\n"
+	buildh ARRAY 1
+	build _ 2 e_StdFile_nfwrites
+	push_a 3
+	update_a 2 9
+	update_a 1 8
+	updatepop_a 0 7
+	jsr_ap 2
+	push_arg 0 2 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	push_b 0
+	notB
+	jmp_false else.52
+	buildAC "failed to close"
+	updatepop_a 0 1
+	pop_b 1
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+.d 2 0
+	rtn
+else.52
+	push_arg 0 2 2
+	buildB_b 0
+	update_a 1 2
+	updatepop_a 0 1
+	pop_b 1
+.d 2 0
+	rtn
+.export e_Parsing_sparsePushPointer1
+.descexp e_Parsing_dparsePushPointer1 e_Parsing_nparsePushPointer1 e_Parsing_lparsePushPointer1 3 0 "parsePushPointer1"
+.a 0 a26
+.o 2 0
+e_Parsing_lparsePushPointer1
+	repl_args 2 2
+.o 3 0
+a26
+.d 3 0
+	jsr ea26
+.o 2 0
+	push_a 1
+	push_a 1
+	buildh _Tuple 2
+	updatepop_a 0 2
+.d 1 0
+	rtn
+.n 3 e_Parsing_dparsePushPointer1
+.o 1 0
+e_Parsing_nparsePushPointer1
+	push_node _cycle_in_spine 3
+.d 3 0
+	jsr ea26
+.o 2 0
+	push_a 1
+	push_a 1
+	fillh _Tuple 2 4
+	pop_a 2
+.d 1 0
+	rtn
+.o 6 0
+e_Parsing_sparsePushPointer1
+	jsr_eval 5
+.d 6 0
+	jmp s26
+.o 3 0
+ea26
+	jsr_eval 2
+	jsr_eval 0
+	repl_r_args 4 0
+.o 6 0
+s26
+	push_a 5
+	buildI 2
+	push_a 3
+	buildAC "out.asm"
+	buildh ARRAY 1
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	buildh _Nil 0
+	update_a 0 10
+	pop_a 1
+	jsr_ap 3
+	push_arg 0 3 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.53
+	buildAC "failed to open file"
+	updatepop_a 0 7
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+.d 2 0
+	rtn
+else.53
+	push_arg 0 3 3
+	push_arg 1 3 2
+	buildAC "//push static instruction\n@THAT\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n\n"
+	buildh ARRAY 1
+	build _ 2 e_StdFile_nfwrites
+	push_a 3
+	update_a 2 9
+	update_a 1 8
+	updatepop_a 0 7
+	jsr_ap 2
+	push_arg 0 2 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	push_b 0
+	notB
+	jmp_false else.54
+	buildAC "failed to close"
+	updatepop_a 0 1
+	pop_b 1
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+.d 2 0
+	rtn
+else.54
+	push_arg 0 2 2
+	buildB_b 0
+	update_a 1 2
+	updatepop_a 0 1
+	pop_b 1
+.d 2 0
+	rtn
+.export e_Parsing_sparsePopPointer0
+.descexp e_Parsing_dparsePopPointer0 e_Parsing_nparsePopPointer0 e_Parsing_lparsePopPointer0 3 0 "parsePopPointer0"
+.a 0 a27
+.o 2 0
+e_Parsing_lparsePopPointer0
+	repl_args 2 2
+.o 3 0
+a27
+.d 3 0
+	jsr ea27
+.o 2 0
+	push_a 1
+	push_a 1
+	buildh _Tuple 2
+	updatepop_a 0 2
+.d 1 0
+	rtn
+.n 3 e_Parsing_dparsePopPointer0
+.o 1 0
+e_Parsing_nparsePopPointer0
+	push_node _cycle_in_spine 3
+.d 3 0
+	jsr ea27
+.o 2 0
+	push_a 1
+	push_a 1
+	fillh _Tuple 2 4
+	pop_a 2
+.d 1 0
+	rtn
+.o 6 0
+e_Parsing_sparsePopPointer0
+	jsr_eval 5
+.d 6 0
+	jmp s27
+.o 3 0
+ea27
+	jsr_eval 2
+	jsr_eval 0
+	repl_r_args 4 0
+.o 6 0
+s27
+	push_a 5
+	buildI 2
+	push_a 3
+	buildAC "out.asm"
+	buildh ARRAY 1
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	buildh _Nil 0
+	update_a 0 10
+	pop_a 1
+	jsr_ap 3
+	push_arg 0 3 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.55
+	buildAC "failed to open file"
+	updatepop_a 0 7
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+.d 2 0
+	rtn
+else.55
+	push_arg 0 3 3
+	push_arg 1 3 2
+	buildAC "//pop instruction\n@SP\nA=M-1\nD=M\n@THIS\nM=D\n@SP\nM=M-1\n\n"
+	buildh ARRAY 1
+	build _ 2 e_StdFile_nfwrites
+	push_a 3
+	update_a 2 9
+	update_a 1 8
+	updatepop_a 0 7
+	jsr_ap 2
+	push_arg 0 2 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	push_b 0
+	notB
+	jmp_false else.56
+	buildAC "failed to close"
+	updatepop_a 0 1
+	pop_b 1
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+.d 2 0
+	rtn
+else.56
+	push_arg 0 2 2
+	buildB_b 0
+	update_a 1 2
+	updatepop_a 0 1
+	pop_b 1
+.d 2 0
+	rtn
+.export e_Parsing_sparsePushPointer0
+.descexp e_Parsing_dparsePushPointer0 e_Parsing_nparsePushPointer0 e_Parsing_lparsePushPointer0 3 0 "parsePushPointer0"
+.a 0 a25
+.o 2 0
+e_Parsing_lparsePushPointer0
+	repl_args 2 2
+.o 3 0
+a25
+.d 3 0
+	jsr ea25
+.o 2 0
+	push_a 1
+	push_a 1
+	buildh _Tuple 2
+	updatepop_a 0 2
+.d 1 0
+	rtn
+.n 3 e_Parsing_dparsePushPointer0
+.o 1 0
+e_Parsing_nparsePushPointer0
+	push_node _cycle_in_spine 3
+.d 3 0
+	jsr ea25
+.o 2 0
+	push_a 1
+	push_a 1
+	fillh _Tuple 2 4
+	pop_a 2
+.d 1 0
+	rtn
+.o 6 0
+e_Parsing_sparsePushPointer0
+	jsr_eval 5
+.d 6 0
+	jmp s25
+.o 3 0
+ea25
+	jsr_eval 2
+	jsr_eval 0
+	repl_r_args 4 0
+.o 6 0
+s25
+	push_a 5
+	buildI 2
+	push_a 3
+	buildAC "out.asm"
+	buildh ARRAY 1
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	buildh _Nil 0
+	update_a 0 10
+	pop_a 1
+	jsr_ap 3
+	push_arg 0 3 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.57
+	buildAC "failed to open file"
+	updatepop_a 0 7
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+.d 2 0
+	rtn
+else.57
+	push_arg 0 3 3
+	push_arg 1 3 2
+	buildAC "//push static instruction\n@THIS\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n\n"
+	buildh ARRAY 1
+	build _ 2 e_StdFile_nfwrites
+	push_a 3
+	update_a 2 9
+	update_a 1 8
+	updatepop_a 0 7
+	jsr_ap 2
+	push_arg 0 2 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	push_b 0
+	notB
+	jmp_false else.58
+	buildAC "failed to close"
+	updatepop_a 0 1
+	pop_b 1
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+.d 2 0
+	rtn
+else.58
 	push_arg 0 2 2
 	buildB_b 0
 	update_a 1 2
@@ -2300,7 +2852,7 @@ s24
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.47
+	jmp_false else.59
 	buildAC "failed to open file"
 	updatepop_a 0 7
 .d 1 0
@@ -2310,7 +2862,7 @@ s24
 	repl_args 2 2
 .d 2 0
 	rtn
-else.47
+else.59
 	buildAC "pop temp "
 	buildh ARRAY 1
 	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
@@ -2320,18 +2872,18 @@ else.47
 	build d_S.2 -1 n_S.2
 	push_a 1
 	build d_S.1 -1 n_S.1
-	build _ 2 n110
+	build _ 2 n118
 	push_a 2
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n109
-	build _ 2 n108
+	build _ 2 n117
+	build _ 2 n116
 	build e_StdList_dtoString;79 1 e_StdList_ntoString;79
 	push_arg 3 3 3
 	push_arg 4 3 2
 	push_a 2
-	build _ 2 n111
+	build _ 2 n119
 	push_a 6
 	update_a 3 12
 	update_a 2 11
@@ -2344,7 +2896,7 @@ else.47
 	pop_a 1
 	push_b 0
 	notB
-	jmp_false else.48
+	jmp_false else.60
 	buildAC "failed to close"
 	updatepop_a 0 2
 	pop_b 1
@@ -2355,7 +2907,7 @@ else.47
 	repl_args 2 2
 .d 2 0
 	rtn
-else.48
+else.60
 	push_arg 0 2 2
 	buildB_b 0
 	update_a 1 3
@@ -2363,14 +2915,14 @@ else.48
 	pop_b 1
 .d 2 0
 	rtn
-.n 2 _ ea111
+.n 2 _ ea119
 .o 1 0
-n111
+n119
 	push_node _cycle_in_spine 2
 .o 3 0
-ea111
+ea119
 .o 3 0
-s111
+s119
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -2425,14 +2977,14 @@ s111
 	pop_b 2
 .d 1 0
 	rtn
-.n 2 _ ea110
+.n 2 _ ea118
 .o 1 0
-n110
+n118
 	push_node _cycle_in_spine 2
 .o 3 0
-ea110
+ea118
 .o 3 0
-s110
+s118
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -2447,15 +2999,15 @@ s110
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s79
-.n 2 _ ea109
+	jmp s83
+.n 2 _ ea117
 .o 1 0
-n109
+n117
 	push_node _cycle_in_spine 2
 .o 3 0
-ea109
+ea117
 .o 3 0
-s109
+s117
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -2470,15 +3022,15 @@ s109
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s78
-.n 2 _ ea108
+	jmp s82
+.n 2 _ ea116
 .o 1 0
-n108
+n116
 	push_node _cycle_in_spine 2
 .o 3 0
-ea108
+ea116
 .o 3 0
-s108
+s116
 	push_a 1
 	jsr_eval 0
 	push_a 1
@@ -2494,12 +3046,12 @@ s108
 .d 2 1 i
 	jmp e_StdList_sdrop
 .o 2 2 ii
-s78
+s82
 	push_b 0
 	push_b 2
 	ltI
 	notB
-	jmp_false else.49
+	jmp_false else.61
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -2513,14 +3065,14 @@ s78
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n184
+	build_u _ 1 2 n192
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
 	pop_b 3
 .d 1 0
 	rtn
-else.49
+else.61
 	fillh _Nil 0 1
 	pop_a 1
 	pop_b 2
@@ -2528,12 +3080,12 @@ else.49
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n184
+n192
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea184
+ea192
 .o 2 2 ii
-s184
+s192
 	pushI 1
 	push_b 1
 	addI
@@ -2547,14 +3099,14 @@ s184
 	update_b 1 3
 	updatepop_b 0 2
 .d 2 2 ii
-	jmp s78
+	jmp s82
 .o 2 2 ii
-s79
+s83
 	push_b 0
 	push_b 2
 	ltI
 	notB
-	jmp_false else.50
+	jmp_false else.62
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -2568,14 +3120,14 @@ s79
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n185
+	build_u _ 1 2 n193
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
 	pop_b 3
 .d 1 0
 	rtn
-else.50
+else.62
 	fillh _Nil 0 1
 	pop_a 1
 	pop_b 2
@@ -2583,12 +3135,12 @@ else.50
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n185
+n193
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea185
+ea193
 .o 2 2 ii
-s185
+s193
 	pushI 1
 	push_b 1
 	addI
@@ -2602,7 +3154,7 @@ s185
 	update_b 1 3
 	updatepop_b 0 2
 .d 2 2 ii
-	jmp s79
+	jmp s83
 .export e_Parsing_sparsePopThat
 .descexp e_Parsing_dparsePopThat e_Parsing_nparsePopThat e_Parsing_lparsePopThat 3 0 "parsePopThat"
 .a 0 a23
@@ -2663,7 +3215,7 @@ s23
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.51
+	jmp_false else.63
 	buildAC "failed to open file"
 	updatepop_a 0 7
 .d 1 0
@@ -2673,7 +3225,7 @@ s23
 	repl_args 2 2
 .d 2 0
 	rtn
-else.51
+else.63
 	buildAC "pop that "
 	buildh ARRAY 1
 	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
@@ -2685,14 +3237,14 @@ else.51
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n115
+	build _ 2 n123
 	push_a 4
 	build d_S.2 -1 n_S.2
 	push_a 5
 	build d_S.1 -1 n_S.1
-	build _ 2 n114
-	build _ 2 n113
-	build _ 2 n112
+	build _ 2 n122
+	build _ 2 n121
+	build _ 2 n120
 	push_a 5
 	update_a 2 11
 	update_a 1 10
@@ -2704,7 +3256,7 @@ else.51
 	pop_a 1
 	push_b 0
 	notB
-	jmp_false else.52
+	jmp_false else.64
 	buildAC "failed to close"
 	updatepop_a 0 1
 	pop_b 1
@@ -2715,7 +3267,7 @@ else.51
 	repl_args 2 2
 .d 2 0
 	rtn
-else.52
+else.64
 	push_arg 0 2 2
 	buildB_b 0
 	update_a 1 2
@@ -2723,14 +3275,14 @@ else.52
 	pop_b 1
 .d 2 0
 	rtn
-.n 2 _ ea115
+.n 2 _ ea123
 .o 1 0
-n115
+n123
 	push_node _cycle_in_spine 2
 .o 3 0
-ea115
+ea123
 .o 3 0
-s115
+s123
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -2745,15 +3297,15 @@ s115
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s77
-.n 2 _ ea114
+	jmp s81
+.n 2 _ ea122
 .o 1 0
-n114
+n122
 	push_node _cycle_in_spine 2
 .o 3 0
-ea114
+ea122
 .o 3 0
-s114
+s122
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -2768,15 +3320,15 @@ s114
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s76
-.n 2 _ ea113
+	jmp s80
+.n 2 _ ea121
 .o 1 0
-n113
+n121
 	push_node _cycle_in_spine 2
 .o 3 0
-ea113
+ea121
 .o 3 0
-s113
+s121
 	push_a 1
 	jsr_eval 0
 	push_a 1
@@ -2791,14 +3343,14 @@ s113
 	updatepop_a 0 2
 .d 2 1 i
 	jmp e_StdList_sdrop
-.n 2 _ ea112
+.n 2 _ ea120
 .o 1 0
-n112
+n120
 	push_node _cycle_in_spine 2
 .o 3 0
-ea112
+ea120
 .o 3 0
-s112
+s120
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -2829,12 +3381,12 @@ s112
 .d 1 0
 	rtn
 .o 2 2 ii
-s76
+s80
 	push_b 0
 	push_b 2
 	ltI
 	notB
-	jmp_false else.53
+	jmp_false else.65
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -2848,14 +3400,14 @@ s76
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n182
+	build_u _ 1 2 n190
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
 	pop_b 3
 .d 1 0
 	rtn
-else.53
+else.65
 	fillh _Nil 0 1
 	pop_a 1
 	pop_b 2
@@ -2863,12 +3415,12 @@ else.53
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n182
+n190
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea182
+ea190
 .o 2 2 ii
-s182
+s190
 	pushI 1
 	push_b 1
 	addI
@@ -2882,14 +3434,14 @@ s182
 	update_b 1 3
 	updatepop_b 0 2
 .d 2 2 ii
-	jmp s76
+	jmp s80
 .o 2 2 ii
-s77
+s81
 	push_b 0
 	push_b 2
 	ltI
 	notB
-	jmp_false else.54
+	jmp_false else.66
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -2903,14 +3455,14 @@ s77
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n183
+	build_u _ 1 2 n191
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
 	pop_b 3
 .d 1 0
 	rtn
-else.54
+else.66
 	fillh _Nil 0 1
 	pop_a 1
 	pop_b 2
@@ -2918,12 +3470,12 @@ else.54
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n183
+n191
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea183
+ea191
 .o 2 2 ii
-s183
+s191
 	pushI 1
 	push_b 1
 	addI
@@ -2937,7 +3489,7 @@ s183
 	update_b 1 3
 	updatepop_b 0 2
 .d 2 2 ii
-	jmp s77
+	jmp s81
 .export e_Parsing_sparsePopThis
 .descexp e_Parsing_dparsePopThis e_Parsing_nparsePopThis e_Parsing_lparsePopThis 3 0 "parsePopThis"
 .a 0 a22
@@ -2998,7 +3550,7 @@ s22
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.55
+	jmp_false else.67
 	buildAC "failed to open file"
 	updatepop_a 0 7
 .d 1 0
@@ -3008,7 +3560,7 @@ s22
 	repl_args 2 2
 .d 2 0
 	rtn
-else.55
+else.67
 	buildAC "pop this "
 	buildh ARRAY 1
 	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
@@ -3020,14 +3572,14 @@ else.55
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n119
+	build _ 2 n127
 	push_a 4
 	build d_S.2 -1 n_S.2
 	push_a 5
 	build d_S.1 -1 n_S.1
-	build _ 2 n118
-	build _ 2 n117
-	build _ 2 n116
+	build _ 2 n126
+	build _ 2 n125
+	build _ 2 n124
 	push_a 5
 	update_a 2 11
 	update_a 1 10
@@ -3039,7 +3591,7 @@ else.55
 	pop_a 1
 	push_b 0
 	notB
-	jmp_false else.56
+	jmp_false else.68
 	buildAC "failed to close"
 	updatepop_a 0 1
 	pop_b 1
@@ -3050,7 +3602,7 @@ else.55
 	repl_args 2 2
 .d 2 0
 	rtn
-else.56
+else.68
 	push_arg 0 2 2
 	buildB_b 0
 	update_a 1 2
@@ -3058,14 +3610,14 @@ else.56
 	pop_b 1
 .d 2 0
 	rtn
-.n 2 _ ea119
+.n 2 _ ea127
 .o 1 0
-n119
+n127
 	push_node _cycle_in_spine 2
 .o 3 0
-ea119
+ea127
 .o 3 0
-s119
+s127
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -3080,15 +3632,15 @@ s119
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s75
-.n 2 _ ea118
+	jmp s79
+.n 2 _ ea126
 .o 1 0
-n118
+n126
 	push_node _cycle_in_spine 2
 .o 3 0
-ea118
+ea126
 .o 3 0
-s118
+s126
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -3103,15 +3655,15 @@ s118
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s74
-.n 2 _ ea117
+	jmp s78
+.n 2 _ ea125
 .o 1 0
-n117
+n125
 	push_node _cycle_in_spine 2
 .o 3 0
-ea117
+ea125
 .o 3 0
-s117
+s125
 	push_a 1
 	jsr_eval 0
 	push_a 1
@@ -3126,14 +3678,14 @@ s117
 	updatepop_a 0 2
 .d 2 1 i
 	jmp e_StdList_sdrop
-.n 2 _ ea116
+.n 2 _ ea124
 .o 1 0
-n116
+n124
 	push_node _cycle_in_spine 2
 .o 3 0
-ea116
+ea124
 .o 3 0
-s116
+s124
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -3164,12 +3716,12 @@ s116
 .d 1 0
 	rtn
 .o 2 2 ii
-s74
+s78
 	push_b 0
 	push_b 2
 	ltI
 	notB
-	jmp_false else.57
+	jmp_false else.69
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -3183,14 +3735,14 @@ s74
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n180
+	build_u _ 1 2 n188
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
 	pop_b 3
 .d 1 0
 	rtn
-else.57
+else.69
 	fillh _Nil 0 1
 	pop_a 1
 	pop_b 2
@@ -3198,12 +3750,12 @@ else.57
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n180
+n188
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea180
+ea188
 .o 2 2 ii
-s180
+s188
 	pushI 1
 	push_b 1
 	addI
@@ -3217,14 +3769,14 @@ s180
 	update_b 1 3
 	updatepop_b 0 2
 .d 2 2 ii
-	jmp s74
+	jmp s78
 .o 2 2 ii
-s75
+s79
 	push_b 0
 	push_b 2
 	ltI
 	notB
-	jmp_false else.58
+	jmp_false else.70
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -3238,14 +3790,14 @@ s75
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n181
+	build_u _ 1 2 n189
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
 	pop_b 3
 .d 1 0
 	rtn
-else.58
+else.70
 	fillh _Nil 0 1
 	pop_a 1
 	pop_b 2
@@ -3253,12 +3805,12 @@ else.58
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n181
+n189
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea181
+ea189
 .o 2 2 ii
-s181
+s189
 	pushI 1
 	push_b 1
 	addI
@@ -3272,7 +3824,7 @@ s181
 	update_b 1 3
 	updatepop_b 0 2
 .d 2 2 ii
-	jmp s75
+	jmp s79
 .export e_Parsing_sparsePopLocal
 .descexp e_Parsing_dparsePopLocal e_Parsing_nparsePopLocal e_Parsing_lparsePopLocal 3 0 "parsePopLocal"
 .a 0 a21
@@ -3333,7 +3885,7 @@ s21
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.59
+	jmp_false else.71
 	buildAC "failed to open file"
 	updatepop_a 0 7
 .d 1 0
@@ -3343,7 +3895,7 @@ s21
 	repl_args 2 2
 .d 2 0
 	rtn
-else.59
+else.71
 	buildAC "pop local "
 	buildh ARRAY 1
 	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
@@ -3355,14 +3907,14 @@ else.59
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n123
+	build _ 2 n131
 	push_a 4
 	build d_S.2 -1 n_S.2
 	push_a 5
 	build d_S.1 -1 n_S.1
-	build _ 2 n122
-	build _ 2 n121
-	build _ 2 n120
+	build _ 2 n130
+	build _ 2 n129
+	build _ 2 n128
 	push_a 5
 	update_a 2 11
 	update_a 1 10
@@ -3374,7 +3926,7 @@ else.59
 	pop_a 1
 	push_b 0
 	notB
-	jmp_false else.60
+	jmp_false else.72
 	buildAC "failed to close"
 	updatepop_a 0 1
 	pop_b 1
@@ -3385,7 +3937,7 @@ else.59
 	repl_args 2 2
 .d 2 0
 	rtn
-else.60
+else.72
 	push_arg 0 2 2
 	buildB_b 0
 	update_a 1 2
@@ -3393,14 +3945,14 @@ else.60
 	pop_b 1
 .d 2 0
 	rtn
-.n 2 _ ea123
+.n 2 _ ea131
 .o 1 0
-n123
+n131
 	push_node _cycle_in_spine 2
 .o 3 0
-ea123
+ea131
 .o 3 0
-s123
+s131
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -3415,15 +3967,15 @@ s123
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s73
-.n 2 _ ea122
+	jmp s77
+.n 2 _ ea130
 .o 1 0
-n122
+n130
 	push_node _cycle_in_spine 2
 .o 3 0
-ea122
+ea130
 .o 3 0
-s122
+s130
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -3438,15 +3990,15 @@ s122
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s72
-.n 2 _ ea121
+	jmp s76
+.n 2 _ ea129
 .o 1 0
-n121
+n129
 	push_node _cycle_in_spine 2
 .o 3 0
-ea121
+ea129
 .o 3 0
-s121
+s129
 	push_a 1
 	jsr_eval 0
 	push_a 1
@@ -3461,14 +4013,14 @@ s121
 	updatepop_a 0 2
 .d 2 1 i
 	jmp e_StdList_sdrop
-.n 2 _ ea120
+.n 2 _ ea128
 .o 1 0
-n120
+n128
 	push_node _cycle_in_spine 2
 .o 3 0
-ea120
+ea128
 .o 3 0
-s120
+s128
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -3499,12 +4051,12 @@ s120
 .d 1 0
 	rtn
 .o 2 2 ii
-s72
+s76
 	push_b 0
 	push_b 2
 	ltI
 	notB
-	jmp_false else.61
+	jmp_false else.73
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -3518,14 +4070,14 @@ s72
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n178
+	build_u _ 1 2 n186
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
 	pop_b 3
 .d 1 0
 	rtn
-else.61
+else.73
 	fillh _Nil 0 1
 	pop_a 1
 	pop_b 2
@@ -3533,12 +4085,12 @@ else.61
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n178
+n186
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea178
+ea186
 .o 2 2 ii
-s178
+s186
 	pushI 1
 	push_b 1
 	addI
@@ -3552,14 +4104,14 @@ s178
 	update_b 1 3
 	updatepop_b 0 2
 .d 2 2 ii
-	jmp s72
+	jmp s76
 .o 2 2 ii
-s73
+s77
 	push_b 0
 	push_b 2
 	ltI
 	notB
-	jmp_false else.62
+	jmp_false else.74
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -3573,14 +4125,14 @@ s73
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n179
+	build_u _ 1 2 n187
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
 	pop_b 3
 .d 1 0
 	rtn
-else.62
+else.74
 	fillh _Nil 0 1
 	pop_a 1
 	pop_b 2
@@ -3588,12 +4140,12 @@ else.62
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n179
+n187
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea179
+ea187
 .o 2 2 ii
-s179
+s187
 	pushI 1
 	push_b 1
 	addI
@@ -3607,7 +4159,7 @@ s179
 	update_b 1 3
 	updatepop_b 0 2
 .d 2 2 ii
-	jmp s73
+	jmp s77
 .export e_Parsing_sparsePopArgument
 .descexp e_Parsing_dparsePopArgument e_Parsing_nparsePopArgument e_Parsing_lparsePopArgument 3 0 "parsePopArgument"
 .a 0 a20
@@ -3668,7 +4220,7 @@ s20
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.63
+	jmp_false else.75
 	buildAC "failed to open file"
 	updatepop_a 0 7
 .d 1 0
@@ -3678,7 +4230,7 @@ s20
 	repl_args 2 2
 .d 2 0
 	rtn
-else.63
+else.75
 	buildAC "pop argument "
 	buildh ARRAY 1
 	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
@@ -3690,14 +4242,14 @@ else.63
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n127
+	build _ 2 n135
 	push_a 4
 	build d_S.2 -1 n_S.2
 	push_a 5
 	build d_S.1 -1 n_S.1
-	build _ 2 n126
-	build _ 2 n125
-	build _ 2 n124
+	build _ 2 n134
+	build _ 2 n133
+	build _ 2 n132
 	push_a 5
 	update_a 2 11
 	update_a 1 10
@@ -3709,7 +4261,7 @@ else.63
 	pop_a 1
 	push_b 0
 	notB
-	jmp_false else.64
+	jmp_false else.76
 	buildAC "failed to close"
 	updatepop_a 0 1
 	pop_b 1
@@ -3720,7 +4272,7 @@ else.63
 	repl_args 2 2
 .d 2 0
 	rtn
-else.64
+else.76
 	push_arg 0 2 2
 	buildB_b 0
 	update_a 1 2
@@ -3728,14 +4280,14 @@ else.64
 	pop_b 1
 .d 2 0
 	rtn
-.n 2 _ ea127
+.n 2 _ ea135
 .o 1 0
-n127
+n135
 	push_node _cycle_in_spine 2
 .o 3 0
-ea127
+ea135
 .o 3 0
-s127
+s135
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -3750,15 +4302,15 @@ s127
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s71
-.n 2 _ ea126
+	jmp s75
+.n 2 _ ea134
 .o 1 0
-n126
+n134
 	push_node _cycle_in_spine 2
 .o 3 0
-ea126
+ea134
 .o 3 0
-s126
+s134
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -3773,15 +4325,15 @@ s126
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s70
-.n 2 _ ea125
+	jmp s74
+.n 2 _ ea133
 .o 1 0
-n125
+n133
 	push_node _cycle_in_spine 2
 .o 3 0
-ea125
+ea133
 .o 3 0
-s125
+s133
 	push_a 1
 	jsr_eval 0
 	push_a 1
@@ -3796,14 +4348,14 @@ s125
 	updatepop_a 0 2
 .d 2 1 i
 	jmp e_StdList_sdrop
-.n 2 _ ea124
+.n 2 _ ea132
 .o 1 0
-n124
+n132
 	push_node _cycle_in_spine 2
 .o 3 0
-ea124
+ea132
 .o 3 0
-s124
+s132
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -3834,12 +4386,12 @@ s124
 .d 1 0
 	rtn
 .o 2 2 ii
-s70
+s74
 	push_b 0
 	push_b 2
 	ltI
 	notB
-	jmp_false else.65
+	jmp_false else.77
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -3853,14 +4405,14 @@ s70
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n176
+	build_u _ 1 2 n184
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
 	pop_b 3
 .d 1 0
 	rtn
-else.65
+else.77
 	fillh _Nil 0 1
 	pop_a 1
 	pop_b 2
@@ -3868,12 +4420,12 @@ else.65
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n176
+n184
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea176
+ea184
 .o 2 2 ii
-s176
+s184
 	pushI 1
 	push_b 1
 	addI
@@ -3887,14 +4439,14 @@ s176
 	update_b 1 3
 	updatepop_b 0 2
 .d 2 2 ii
-	jmp s70
+	jmp s74
 .o 2 2 ii
-s71
+s75
 	push_b 0
 	push_b 2
 	ltI
 	notB
-	jmp_false else.66
+	jmp_false else.78
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -3908,14 +4460,14 @@ s71
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n177
+	build_u _ 1 2 n185
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
 	pop_b 3
 .d 1 0
 	rtn
-else.66
+else.78
 	fillh _Nil 0 1
 	pop_a 1
 	pop_b 2
@@ -3923,12 +4475,12 @@ else.66
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n177
+n185
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea177
+ea185
 .o 2 2 ii
-s177
+s185
 	pushI 1
 	push_b 1
 	addI
@@ -3942,7 +4494,7 @@ s177
 	update_b 1 3
 	updatepop_b 0 2
 .d 2 2 ii
-	jmp s71
+	jmp s75
 .export e_Parsing_sparsePopStatic
 .descexp e_Parsing_dparsePopStatic e_Parsing_nparsePopStatic e_Parsing_lparsePopStatic 3 0 "parsePopStatic"
 .a 0 a19
@@ -4003,7 +4555,7 @@ s19
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.67
+	jmp_false else.79
 	buildAC "failed to open file"
 	updatepop_a 0 7
 .d 1 0
@@ -4013,27 +4565,30 @@ s19
 	repl_args 2 2
 .d 2 0
 	rtn
-else.67
+else.79
 	buildAC "pop static "
 	buildh ARRAY 1
 	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
 	push_a 6
 	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
-	push_arg 2 3 3
-	push_arg 3 3 2
+	push_a 0
+	build d_S.2 -1 n_S.2
+	push_a 1
+	build d_S.1 -1 n_S.1
+	build _ 2 n138
 	push_a 2
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n131
-	push_a 4
-	build d_S.2 -1 n_S.2
-	push_a 5
-	build d_S.1 -1 n_S.1
-	build _ 2 n130
-	build _ 2 n129
-	build _ 2 n128
-	push_a 5
+	build _ 2 n137
+	build _ 2 n136
+	build e_StdList_dtoString;79 1 e_StdList_ntoString;79
+	push_arg 3 3 3
+	push_arg 4 3 2
+	push_a 2
+	build _ 2 n139
+	push_a 6
+	update_a 3 12
 	update_a 2 11
 	update_a 1 10
 	updatepop_a 0 9
@@ -4044,9 +4599,9 @@ else.67
 	pop_a 1
 	push_b 0
 	notB
-	jmp_false else.68
+	jmp_false else.80
 	buildAC "failed to close"
-	updatepop_a 0 1
+	updatepop_a 0 2
 	pop_b 1
 .d 1 0
 	jsr print_string_
@@ -4055,22 +4610,84 @@ else.67
 	repl_args 2 2
 .d 2 0
 	rtn
-else.68
+else.80
 	push_arg 0 2 2
 	buildB_b 0
-	update_a 1 2
-	updatepop_a 0 1
+	update_a 1 3
+	updatepop_a 0 2
 	pop_b 1
 .d 2 0
 	rtn
-.n 2 _ ea131
+.n 2 _ ea139
 .o 1 0
-n131
+n139
 	push_node _cycle_in_spine 2
 .o 3 0
-ea131
+ea139
 .o 3 0
-s131
+s139
+	push_a 1
+	jsr_eval 0
+	pushF_a 2
+	pop_a 1
+	push_a 0
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	update_a 1 2
+	updatepop_a 0 1
+	push_arraysize CHAR 0 1
+	pushI 2
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	subI
+	pushI 0
+	push_array 0
+	updatepop_a 0 1
+.d 1 2 ii
+	jsr sliceAC
+.o 1 0
+.d 1 0
+	jsr e_StdInt_stoInt;23
+.o 0 1 i
+	pushI 16
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	addI
+.d 0 1 i
+	jsr ItoAC
+.o 1 0
+	buildAC "\nM=D\n@SP\nM=M-1\n\n"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.d 2 0
+	jsr catAC
+.o 1 0
+	buildAC "//pop static instruction\n@SP\nA=M-1\nD=M\n@"
+.d 2 0
+	jsr catAC
+.o 1 0
+.d 1 2 f
+	jsr writeFS
+.o 0 2 f
+	fillF_b 0 0
+	pop_b 2
+.d 1 0
+	rtn
+.n 2 _ ea138
+.o 1 0
+n138
+	push_node _cycle_in_spine 2
+.o 3 0
+ea138
+.o 3 0
+s138
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -4085,15 +4702,15 @@ s131
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s69
-.n 2 _ ea130
+	jmp s73
+.n 2 _ ea137
 .o 1 0
-n130
+n137
 	push_node _cycle_in_spine 2
 .o 3 0
-ea130
+ea137
 .o 3 0
-s130
+s137
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -4108,15 +4725,15 @@ s130
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s68
-.n 2 _ ea129
+	jmp s72
+.n 2 _ ea136
 .o 1 0
-n129
+n136
 	push_node _cycle_in_spine 2
 .o 3 0
-ea129
+ea136
 .o 3 0
-s129
+s136
 	push_a 1
 	jsr_eval 0
 	push_a 1
@@ -4131,50 +4748,13 @@ s129
 	updatepop_a 0 2
 .d 2 1 i
 	jmp e_StdList_sdrop
-.n 2 _ ea128
-.o 1 0
-n128
-	push_node _cycle_in_spine 2
-.o 3 0
-ea128
-.o 3 0
-s128
-	push_a 1
-	jsr_eval 0
-	pushF_a 2
-	pop_a 1
-	push_a 0
-	jsr_eval 0
-	updatepop_a 0 2
-.d 1 0
-	jsr e_StdList_stoString;79
-.o 1 0
-	buildAC "/// TODO"
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-.d 2 0
-	jsr catAC
-.o 1 0
-	buildAC "//pop static instruction\n@"
-.d 2 0
-	jsr catAC
-.o 1 0
-.d 1 2 f
-	jsr writeFS
-.o 0 2 f
-	fillF_b 0 0
-	pop_b 2
-.d 1 0
-	rtn
 .o 2 2 ii
-s68
+s72
 	push_b 0
 	push_b 2
 	ltI
 	notB
-	jmp_false else.69
+	jmp_false else.81
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -4188,14 +4768,14 @@ s68
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n174
+	build_u _ 1 2 n182
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
 	pop_b 3
 .d 1 0
 	rtn
-else.69
+else.81
 	fillh _Nil 0 1
 	pop_a 1
 	pop_b 2
@@ -4203,12 +4783,12 @@ else.69
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n174
+n182
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea174
+ea182
 .o 2 2 ii
-s174
+s182
 	pushI 1
 	push_b 1
 	addI
@@ -4222,14 +4802,14 @@ s174
 	update_b 1 3
 	updatepop_b 0 2
 .d 2 2 ii
-	jmp s68
+	jmp s72
 .o 2 2 ii
-s69
+s73
 	push_b 0
 	push_b 2
 	ltI
 	notB
-	jmp_false else.70
+	jmp_false else.82
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -4243,14 +4823,14 @@ s69
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n175
+	build_u _ 1 2 n183
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
 	pop_b 3
 .d 1 0
 	rtn
-else.70
+else.82
 	fillh _Nil 0 1
 	pop_a 1
 	pop_b 2
@@ -4258,12 +4838,12 @@ else.70
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n175
+n183
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea175
+ea183
 .o 2 2 ii
-s175
+s183
 	pushI 1
 	push_b 1
 	addI
@@ -4277,7 +4857,7 @@ s175
 	update_b 1 3
 	updatepop_b 0 2
 .d 2 2 ii
-	jmp s69
+	jmp s73
 .export e_Parsing_sparsePushTemp
 .descexp e_Parsing_dparsePushTemp e_Parsing_nparsePushTemp e_Parsing_lparsePushTemp 3 0 "parsePushTemp"
 .a 0 a18
@@ -4338,7 +4918,7 @@ s18
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.71
+	jmp_false else.83
 	buildAC "failed to open file"
 	updatepop_a 0 7
 .d 1 0
@@ -4348,7 +4928,7 @@ s18
 	repl_args 2 2
 .d 2 0
 	rtn
-else.71
+else.83
 	buildAC "push temp "
 	buildh ARRAY 1
 	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
@@ -4358,18 +4938,18 @@ else.71
 	build d_S.2 -1 n_S.2
 	push_a 1
 	build d_S.1 -1 n_S.1
-	build _ 2 n134
+	build _ 2 n142
 	push_a 2
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n133
-	build _ 2 n132
+	build _ 2 n141
+	build _ 2 n140
 	build e_StdList_dtoString;79 1 e_StdList_ntoString;79
 	push_arg 3 3 3
 	push_arg 4 3 2
 	push_a 2
-	build _ 2 n135
+	build _ 2 n143
 	push_a 6
 	update_a 3 12
 	update_a 2 11
@@ -4382,7 +4962,7 @@ else.71
 	pop_a 1
 	push_b 0
 	notB
-	jmp_false else.72
+	jmp_false else.84
 	buildAC "failed to close"
 	updatepop_a 0 2
 	pop_b 1
@@ -4393,7 +4973,7 @@ else.71
 	repl_args 2 2
 .d 2 0
 	rtn
-else.72
+else.84
 	push_arg 0 2 2
 	buildB_b 0
 	update_a 1 3
@@ -4401,14 +4981,14 @@ else.72
 	pop_b 1
 .d 2 0
 	rtn
-.n 2 _ ea135
+.n 2 _ ea143
 .o 1 0
-n135
+n143
 	push_node _cycle_in_spine 2
 .o 3 0
-ea135
+ea143
 .o 3 0
-s135
+s143
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -4463,14 +5043,14 @@ s135
 	pop_b 2
 .d 1 0
 	rtn
-.n 2 _ ea134
+.n 2 _ ea142
 .o 1 0
-n134
+n142
 	push_node _cycle_in_spine 2
 .o 3 0
-ea134
+ea142
 .o 3 0
-s134
+s142
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -4485,15 +5065,15 @@ s134
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s67
-.n 2 _ ea133
+	jmp s71
+.n 2 _ ea141
 .o 1 0
-n133
+n141
 	push_node _cycle_in_spine 2
 .o 3 0
-ea133
+ea141
 .o 3 0
-s133
+s141
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -4508,15 +5088,15 @@ s133
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s66
-.n 2 _ ea132
+	jmp s70
+.n 2 _ ea140
 .o 1 0
-n132
+n140
 	push_node _cycle_in_spine 2
 .o 3 0
-ea132
+ea140
 .o 3 0
-s132
+s140
 	push_a 1
 	jsr_eval 0
 	push_a 1
@@ -4532,12 +5112,12 @@ s132
 .d 2 1 i
 	jmp e_StdList_sdrop
 .o 2 2 ii
-s66
+s70
 	push_b 0
 	push_b 2
 	ltI
 	notB
-	jmp_false else.73
+	jmp_false else.85
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -4551,14 +5131,14 @@ s66
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n172
+	build_u _ 1 2 n180
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
 	pop_b 3
 .d 1 0
 	rtn
-else.73
+else.85
 	fillh _Nil 0 1
 	pop_a 1
 	pop_b 2
@@ -4566,12 +5146,12 @@ else.73
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n172
+n180
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea172
+ea180
 .o 2 2 ii
-s172
+s180
 	pushI 1
 	push_b 1
 	addI
@@ -4585,14 +5165,14 @@ s172
 	update_b 1 3
 	updatepop_b 0 2
 .d 2 2 ii
-	jmp s66
+	jmp s70
 .o 2 2 ii
-s67
+s71
 	push_b 0
 	push_b 2
 	ltI
 	notB
-	jmp_false else.74
+	jmp_false else.86
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -4606,14 +5186,14 @@ s67
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n173
+	build_u _ 1 2 n181
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
 	pop_b 3
 .d 1 0
 	rtn
-else.74
+else.86
 	fillh _Nil 0 1
 	pop_a 1
 	pop_b 2
@@ -4621,12 +5201,12 @@ else.74
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n173
+n181
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea173
+ea181
 .o 2 2 ii
-s173
+s181
 	pushI 1
 	push_b 1
 	addI
@@ -4640,7 +5220,7 @@ s173
 	update_b 1 3
 	updatepop_b 0 2
 .d 2 2 ii
-	jmp s67
+	jmp s71
 .export e_Parsing_sparsePushThat
 .descexp e_Parsing_dparsePushThat e_Parsing_nparsePushThat e_Parsing_lparsePushThat 3 0 "parsePushThat"
 .a 0 a17
@@ -4701,7 +5281,7 @@ s17
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.75
+	jmp_false else.87
 	buildAC "failed to open file"
 	updatepop_a 0 7
 .d 1 0
@@ -4711,7 +5291,7 @@ s17
 	repl_args 2 2
 .d 2 0
 	rtn
-else.75
+else.87
 	buildAC "push that "
 	buildh ARRAY 1
 	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
@@ -4723,14 +5303,14 @@ else.75
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n139
+	build _ 2 n147
 	push_a 4
 	build d_S.2 -1 n_S.2
 	push_a 5
 	build d_S.1 -1 n_S.1
-	build _ 2 n138
-	build _ 2 n137
-	build _ 2 n136
+	build _ 2 n146
+	build _ 2 n145
+	build _ 2 n144
 	push_a 5
 	update_a 2 11
 	update_a 1 10
@@ -4742,7 +5322,7 @@ else.75
 	pop_a 1
 	push_b 0
 	notB
-	jmp_false else.76
+	jmp_false else.88
 	buildAC "failed to close"
 	updatepop_a 0 1
 	pop_b 1
@@ -4753,7 +5333,7 @@ else.75
 	repl_args 2 2
 .d 2 0
 	rtn
-else.76
+else.88
 	push_arg 0 2 2
 	buildB_b 0
 	update_a 1 2
@@ -4761,14 +5341,14 @@ else.76
 	pop_b 1
 .d 2 0
 	rtn
-.n 2 _ ea139
+.n 2 _ ea147
 .o 1 0
-n139
+n147
 	push_node _cycle_in_spine 2
 .o 3 0
-ea139
+ea147
 .o 3 0
-s139
+s147
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -4783,15 +5363,15 @@ s139
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s65
-.n 2 _ ea138
+	jmp s69
+.n 2 _ ea146
 .o 1 0
-n138
+n146
 	push_node _cycle_in_spine 2
 .o 3 0
-ea138
+ea146
 .o 3 0
-s138
+s146
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -4806,15 +5386,15 @@ s138
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s64
-.n 2 _ ea137
+	jmp s68
+.n 2 _ ea145
 .o 1 0
-n137
+n145
 	push_node _cycle_in_spine 2
 .o 3 0
-ea137
+ea145
 .o 3 0
-s137
+s145
 	push_a 1
 	jsr_eval 0
 	push_a 1
@@ -4829,14 +5409,14 @@ s137
 	updatepop_a 0 2
 .d 2 1 i
 	jmp e_StdList_sdrop
-.n 2 _ ea136
+.n 2 _ ea144
 .o 1 0
-n136
+n144
 	push_node _cycle_in_spine 2
 .o 3 0
-ea136
+ea144
 .o 3 0
-s136
+s144
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -4867,12 +5447,12 @@ s136
 .d 1 0
 	rtn
 .o 2 2 ii
-s64
+s68
 	push_b 0
 	push_b 2
 	ltI
 	notB
-	jmp_false else.77
+	jmp_false else.89
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -4886,14 +5466,14 @@ s64
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n170
+	build_u _ 1 2 n178
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
 	pop_b 3
 .d 1 0
 	rtn
-else.77
+else.89
 	fillh _Nil 0 1
 	pop_a 1
 	pop_b 2
@@ -4901,12 +5481,12 @@ else.77
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n170
+n178
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea170
+ea178
 .o 2 2 ii
-s170
+s178
 	pushI 1
 	push_b 1
 	addI
@@ -4920,14 +5500,14 @@ s170
 	update_b 1 3
 	updatepop_b 0 2
 .d 2 2 ii
-	jmp s64
+	jmp s68
 .o 2 2 ii
-s65
+s69
 	push_b 0
 	push_b 2
 	ltI
 	notB
-	jmp_false else.78
+	jmp_false else.90
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -4941,14 +5521,14 @@ s65
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n171
+	build_u _ 1 2 n179
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
 	pop_b 3
 .d 1 0
 	rtn
-else.78
+else.90
 	fillh _Nil 0 1
 	pop_a 1
 	pop_b 2
@@ -4956,12 +5536,12 @@ else.78
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n171
+n179
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea171
+ea179
 .o 2 2 ii
-s171
+s179
 	pushI 1
 	push_b 1
 	addI
@@ -4975,7 +5555,7 @@ s171
 	update_b 1 3
 	updatepop_b 0 2
 .d 2 2 ii
-	jmp s65
+	jmp s69
 .export e_Parsing_sparsePushThis
 .descexp e_Parsing_dparsePushThis e_Parsing_nparsePushThis e_Parsing_lparsePushThis 3 0 "parsePushThis"
 .a 0 a16
@@ -5036,7 +5616,7 @@ s16
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.79
+	jmp_false else.91
 	buildAC "failed to open file"
 	updatepop_a 0 7
 .d 1 0
@@ -5046,7 +5626,7 @@ s16
 	repl_args 2 2
 .d 2 0
 	rtn
-else.79
+else.91
 	buildAC "push this "
 	buildh ARRAY 1
 	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
@@ -5058,14 +5638,14 @@ else.79
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n143
+	build _ 2 n151
 	push_a 4
 	build d_S.2 -1 n_S.2
 	push_a 5
 	build d_S.1 -1 n_S.1
-	build _ 2 n142
-	build _ 2 n141
-	build _ 2 n140
+	build _ 2 n150
+	build _ 2 n149
+	build _ 2 n148
 	push_a 5
 	update_a 2 11
 	update_a 1 10
@@ -5077,7 +5657,7 @@ else.79
 	pop_a 1
 	push_b 0
 	notB
-	jmp_false else.80
+	jmp_false else.92
 	buildAC "failed to close"
 	updatepop_a 0 1
 	pop_b 1
@@ -5088,7 +5668,7 @@ else.79
 	repl_args 2 2
 .d 2 0
 	rtn
-else.80
+else.92
 	push_arg 0 2 2
 	buildB_b 0
 	update_a 1 2
@@ -5096,14 +5676,14 @@ else.80
 	pop_b 1
 .d 2 0
 	rtn
-.n 2 _ ea143
+.n 2 _ ea151
 .o 1 0
-n143
+n151
 	push_node _cycle_in_spine 2
 .o 3 0
-ea143
+ea151
 .o 3 0
-s143
+s151
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -5118,15 +5698,15 @@ s143
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s63
-.n 2 _ ea142
+	jmp s67
+.n 2 _ ea150
 .o 1 0
-n142
+n150
 	push_node _cycle_in_spine 2
 .o 3 0
-ea142
+ea150
 .o 3 0
-s142
+s150
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -5141,15 +5721,15 @@ s142
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s62
-.n 2 _ ea141
+	jmp s66
+.n 2 _ ea149
 .o 1 0
-n141
+n149
 	push_node _cycle_in_spine 2
 .o 3 0
-ea141
+ea149
 .o 3 0
-s141
+s149
 	push_a 1
 	jsr_eval 0
 	push_a 1
@@ -5164,14 +5744,14 @@ s141
 	updatepop_a 0 2
 .d 2 1 i
 	jmp e_StdList_sdrop
-.n 2 _ ea140
+.n 2 _ ea148
 .o 1 0
-n140
+n148
 	push_node _cycle_in_spine 2
 .o 3 0
-ea140
+ea148
 .o 3 0
-s140
+s148
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -5202,12 +5782,12 @@ s140
 .d 1 0
 	rtn
 .o 2 2 ii
-s62
+s66
 	push_b 0
 	push_b 2
 	ltI
 	notB
-	jmp_false else.81
+	jmp_false else.93
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -5221,14 +5801,14 @@ s62
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n168
+	build_u _ 1 2 n176
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
 	pop_b 3
 .d 1 0
 	rtn
-else.81
+else.93
 	fillh _Nil 0 1
 	pop_a 1
 	pop_b 2
@@ -5236,12 +5816,12 @@ else.81
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n168
+n176
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea168
+ea176
 .o 2 2 ii
-s168
+s176
 	pushI 1
 	push_b 1
 	addI
@@ -5255,14 +5835,14 @@ s168
 	update_b 1 3
 	updatepop_b 0 2
 .d 2 2 ii
-	jmp s62
+	jmp s66
 .o 2 2 ii
-s63
+s67
 	push_b 0
 	push_b 2
 	ltI
 	notB
-	jmp_false else.82
+	jmp_false else.94
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -5276,14 +5856,14 @@ s63
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n169
+	build_u _ 1 2 n177
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
 	pop_b 3
 .d 1 0
 	rtn
-else.82
+else.94
 	fillh _Nil 0 1
 	pop_a 1
 	pop_b 2
@@ -5291,12 +5871,12 @@ else.82
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n169
+n177
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea169
+ea177
 .o 2 2 ii
-s169
+s177
 	pushI 1
 	push_b 1
 	addI
@@ -5310,7 +5890,7 @@ s169
 	update_b 1 3
 	updatepop_b 0 2
 .d 2 2 ii
-	jmp s63
+	jmp s67
 .export e_Parsing_sparsePushLocal
 .descexp e_Parsing_dparsePushLocal e_Parsing_nparsePushLocal e_Parsing_lparsePushLocal 3 0 "parsePushLocal"
 .a 0 a15
@@ -5371,7 +5951,7 @@ s15
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.83
+	jmp_false else.95
 	buildAC "failed to open file"
 	updatepop_a 0 7
 .d 1 0
@@ -5381,7 +5961,7 @@ s15
 	repl_args 2 2
 .d 2 0
 	rtn
-else.83
+else.95
 	buildAC "push local "
 	buildh ARRAY 1
 	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
@@ -5393,14 +5973,14 @@ else.83
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n147
+	build _ 2 n155
 	push_a 4
 	build d_S.2 -1 n_S.2
 	push_a 5
 	build d_S.1 -1 n_S.1
-	build _ 2 n146
-	build _ 2 n145
-	build _ 2 n144
+	build _ 2 n154
+	build _ 2 n153
+	build _ 2 n152
 	push_a 5
 	update_a 2 11
 	update_a 1 10
@@ -5412,7 +5992,7 @@ else.83
 	pop_a 1
 	push_b 0
 	notB
-	jmp_false else.84
+	jmp_false else.96
 	buildAC "failed to close"
 	updatepop_a 0 1
 	pop_b 1
@@ -5423,7 +6003,7 @@ else.83
 	repl_args 2 2
 .d 2 0
 	rtn
-else.84
+else.96
 	push_arg 0 2 2
 	buildB_b 0
 	update_a 1 2
@@ -5431,14 +6011,14 @@ else.84
 	pop_b 1
 .d 2 0
 	rtn
-.n 2 _ ea147
+.n 2 _ ea155
 .o 1 0
-n147
+n155
 	push_node _cycle_in_spine 2
 .o 3 0
-ea147
+ea155
 .o 3 0
-s147
+s155
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -5453,15 +6033,15 @@ s147
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s61
-.n 2 _ ea146
+	jmp s65
+.n 2 _ ea154
 .o 1 0
-n146
+n154
 	push_node _cycle_in_spine 2
 .o 3 0
-ea146
+ea154
 .o 3 0
-s146
+s154
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -5476,15 +6056,15 @@ s146
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s60
-.n 2 _ ea145
+	jmp s64
+.n 2 _ ea153
 .o 1 0
-n145
+n153
 	push_node _cycle_in_spine 2
 .o 3 0
-ea145
+ea153
 .o 3 0
-s145
+s153
 	push_a 1
 	jsr_eval 0
 	push_a 1
@@ -5499,14 +6079,14 @@ s145
 	updatepop_a 0 2
 .d 2 1 i
 	jmp e_StdList_sdrop
-.n 2 _ ea144
+.n 2 _ ea152
 .o 1 0
-n144
+n152
 	push_node _cycle_in_spine 2
 .o 3 0
-ea144
+ea152
 .o 3 0
-s144
+s152
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -5537,12 +6117,12 @@ s144
 .d 1 0
 	rtn
 .o 2 2 ii
-s60
+s64
 	push_b 0
 	push_b 2
 	ltI
 	notB
-	jmp_false else.85
+	jmp_false else.97
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -5556,14 +6136,14 @@ s60
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n166
+	build_u _ 1 2 n174
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
 	pop_b 3
 .d 1 0
 	rtn
-else.85
+else.97
 	fillh _Nil 0 1
 	pop_a 1
 	pop_b 2
@@ -5571,12 +6151,12 @@ else.85
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n166
+n174
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea166
+ea174
 .o 2 2 ii
-s166
+s174
 	pushI 1
 	push_b 1
 	addI
@@ -5590,14 +6170,14 @@ s166
 	update_b 1 3
 	updatepop_b 0 2
 .d 2 2 ii
-	jmp s60
+	jmp s64
 .o 2 2 ii
-s61
+s65
 	push_b 0
 	push_b 2
 	ltI
 	notB
-	jmp_false else.86
+	jmp_false else.98
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -5611,14 +6191,14 @@ s61
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n167
+	build_u _ 1 2 n175
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
 	pop_b 3
 .d 1 0
 	rtn
-else.86
+else.98
 	fillh _Nil 0 1
 	pop_a 1
 	pop_b 2
@@ -5626,12 +6206,12 @@ else.86
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n167
+n175
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea167
+ea175
 .o 2 2 ii
-s167
+s175
 	pushI 1
 	push_b 1
 	addI
@@ -5645,7 +6225,7 @@ s167
 	update_b 1 3
 	updatepop_b 0 2
 .d 2 2 ii
-	jmp s61
+	jmp s65
 .export e_Parsing_sparsePushArgument
 .descexp e_Parsing_dparsePushArgument e_Parsing_nparsePushArgument e_Parsing_lparsePushArgument 3 0 "parsePushArgument"
 .a 0 a14
@@ -5706,7 +6286,7 @@ s14
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.87
+	jmp_false else.99
 	buildAC "failed to open file"
 	updatepop_a 0 7
 .d 1 0
@@ -5716,7 +6296,7 @@ s14
 	repl_args 2 2
 .d 2 0
 	rtn
-else.87
+else.99
 	buildAC "push argument "
 	buildh ARRAY 1
 	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
@@ -5728,14 +6308,14 @@ else.87
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n151
+	build _ 2 n159
 	push_a 4
 	build d_S.2 -1 n_S.2
 	push_a 5
 	build d_S.1 -1 n_S.1
-	build _ 2 n150
-	build _ 2 n149
-	build _ 2 n148
+	build _ 2 n158
+	build _ 2 n157
+	build _ 2 n156
 	push_a 5
 	update_a 2 11
 	update_a 1 10
@@ -5747,7 +6327,7 @@ else.87
 	pop_a 1
 	push_b 0
 	notB
-	jmp_false else.88
+	jmp_false else.100
 	buildAC "failed to close"
 	updatepop_a 0 1
 	pop_b 1
@@ -5758,7 +6338,7 @@ else.87
 	repl_args 2 2
 .d 2 0
 	rtn
-else.88
+else.100
 	push_arg 0 2 2
 	buildB_b 0
 	update_a 1 2
@@ -5766,14 +6346,14 @@ else.88
 	pop_b 1
 .d 2 0
 	rtn
-.n 2 _ ea151
+.n 2 _ ea159
 .o 1 0
-n151
+n159
 	push_node _cycle_in_spine 2
 .o 3 0
-ea151
+ea159
 .o 3 0
-s151
+s159
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -5788,15 +6368,15 @@ s151
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s59
-.n 2 _ ea150
+	jmp s63
+.n 2 _ ea158
 .o 1 0
-n150
+n158
 	push_node _cycle_in_spine 2
 .o 3 0
-ea150
+ea158
 .o 3 0
-s150
+s158
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -5811,15 +6391,15 @@ s150
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s58
-.n 2 _ ea149
+	jmp s62
+.n 2 _ ea157
 .o 1 0
-n149
+n157
 	push_node _cycle_in_spine 2
 .o 3 0
-ea149
+ea157
 .o 3 0
-s149
+s157
 	push_a 1
 	jsr_eval 0
 	push_a 1
@@ -5834,14 +6414,14 @@ s149
 	updatepop_a 0 2
 .d 2 1 i
 	jmp e_StdList_sdrop
-.n 2 _ ea148
+.n 2 _ ea156
 .o 1 0
-n148
+n156
 	push_node _cycle_in_spine 2
 .o 3 0
-ea148
+ea156
 .o 3 0
-s148
+s156
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -5872,12 +6452,12 @@ s148
 .d 1 0
 	rtn
 .o 2 2 ii
-s58
+s62
 	push_b 0
 	push_b 2
 	ltI
 	notB
-	jmp_false else.89
+	jmp_false else.101
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -5891,14 +6471,14 @@ s58
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n164
+	build_u _ 1 2 n172
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
 	pop_b 3
 .d 1 0
 	rtn
-else.89
+else.101
 	fillh _Nil 0 1
 	pop_a 1
 	pop_b 2
@@ -5906,12 +6486,12 @@ else.89
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n164
+n172
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea164
+ea172
 .o 2 2 ii
-s164
+s172
 	pushI 1
 	push_b 1
 	addI
@@ -5925,14 +6505,14 @@ s164
 	update_b 1 3
 	updatepop_b 0 2
 .d 2 2 ii
-	jmp s58
+	jmp s62
 .o 2 2 ii
-s59
+s63
 	push_b 0
 	push_b 2
 	ltI
 	notB
-	jmp_false else.90
+	jmp_false else.102
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -5946,14 +6526,14 @@ s59
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n165
+	build_u _ 1 2 n173
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
 	pop_b 3
 .d 1 0
 	rtn
-else.90
+else.102
 	fillh _Nil 0 1
 	pop_a 1
 	pop_b 2
@@ -5961,12 +6541,12 @@ else.90
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n165
+n173
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea165
+ea173
 .o 2 2 ii
-s165
+s173
 	pushI 1
 	push_b 1
 	addI
@@ -5980,7 +6560,7 @@ s165
 	update_b 1 3
 	updatepop_b 0 2
 .d 2 2 ii
-	jmp s59
+	jmp s63
 .export e_Parsing_sparsePushStatic
 .descexp e_Parsing_dparsePushStatic e_Parsing_nparsePushStatic e_Parsing_lparsePushStatic 3 0 "parsePushStatic"
 .a 0 a13
@@ -6041,7 +6621,7 @@ s13
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.91
+	jmp_false else.103
 	buildAC "failed to open file"
 	updatepop_a 0 7
 .d 1 0
@@ -6051,27 +6631,30 @@ s13
 	repl_args 2 2
 .d 2 0
 	rtn
-else.91
+else.103
 	buildAC "push static "
 	buildh ARRAY 1
 	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
 	push_a 6
 	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
-	push_arg 2 3 3
-	push_arg 3 3 2
+	push_a 0
+	build d_S.2 -1 n_S.2
+	push_a 1
+	build d_S.1 -1 n_S.1
+	build _ 2 n162
 	push_a 2
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n155
-	push_a 4
-	build d_S.2 -1 n_S.2
-	push_a 5
-	build d_S.1 -1 n_S.1
-	build _ 2 n154
-	build _ 2 n153
-	build _ 2 n152
-	push_a 5
+	build _ 2 n161
+	build _ 2 n160
+	build e_StdList_dtoString;79 1 e_StdList_ntoString;79
+	push_arg 3 3 3
+	push_arg 4 3 2
+	push_a 2
+	build _ 2 n163
+	push_a 6
+	update_a 3 12
 	update_a 2 11
 	update_a 1 10
 	updatepop_a 0 9
@@ -6082,9 +6665,9 @@ else.91
 	pop_a 1
 	push_b 0
 	notB
-	jmp_false else.92
+	jmp_false else.104
 	buildAC "failed to close"
-	updatepop_a 0 1
+	updatepop_a 0 2
 	pop_b 1
 .d 1 0
 	jsr print_string_
@@ -6093,101 +6676,58 @@ else.91
 	repl_args 2 2
 .d 2 0
 	rtn
-else.92
+else.104
 	push_arg 0 2 2
 	buildB_b 0
-	update_a 1 2
-	updatepop_a 0 1
+	update_a 1 3
+	updatepop_a 0 2
 	pop_b 1
 .d 2 0
 	rtn
-.n 2 _ ea155
+.n 2 _ ea163
 .o 1 0
-n155
+n163
 	push_node _cycle_in_spine 2
 .o 3 0
-ea155
+ea163
 .o 3 0
-s155
-	push_a 0
-	jsr_eval 0
-	pushI_a 1
-	pop_a 1
-	pushI 1
-	push_b 1
-	update_b 1 2
-	update_b 0 1
-	pop_b 1
-	subI
-	push_a 1
-	pushI 0
-	updatepop_a 0 2
-.d 2 2 ii
-	jmp s57
-.n 2 _ ea154
-.o 1 0
-n154
-	push_node _cycle_in_spine 2
-.o 3 0
-ea154
-.o 3 0
-s154
-	push_a 0
-	jsr_eval 0
-	pushI_a 1
-	pop_a 1
-	pushI 1
-	push_b 1
-	update_b 1 2
-	update_b 0 1
-	pop_b 1
-	subI
-	push_a 1
-	pushI 0
-	updatepop_a 0 2
-.d 2 2 ii
-	jmp s56
-.n 2 _ ea153
-.o 1 0
-n153
-	push_node _cycle_in_spine 2
-.o 3 0
-ea153
-.o 3 0
-s153
-	push_a 1
-	jsr_eval 0
-	push_a 1
-	jsr_eval 0
-	buildh _Nil 0
-	update_a 0 3
-	update_a 0 4
-	pop_a 1
-.d 1 0
-	jsr e_StdList_slength;47
-.o 0 1 i
-	updatepop_a 0 2
-.d 2 1 i
-	jmp e_StdList_sdrop
-.n 2 _ ea152
-.o 1 0
-n152
-	push_node _cycle_in_spine 2
-.o 3 0
-ea152
-.o 3 0
-s152
+s163
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
 	pop_a 1
 	push_a 0
 	jsr_eval 0
-	updatepop_a 0 2
-.d 1 0
-	jsr e_StdList_stoString;79
+	push_array 0
+	updatepop_a 0 1
+	update_a 1 2
+	updatepop_a 0 1
+	push_arraysize CHAR 0 1
+	pushI 2
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	subI
+	pushI 0
+	push_array 0
+	updatepop_a 0 1
+.d 1 2 ii
+	jsr sliceAC
 .o 1 0
-	buildAC "\nD=A\n@STATIC\nA=M+D\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n\n"
+.d 1 0
+	jsr e_StdInt_stoInt;23
+.o 0 1 i
+	pushI 16
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	addI
+.d 0 1 i
+	jsr ItoAC
+.o 1 0
+	buildAC "\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n\n"
 	push_a 1
 	update_a 1 2
 	update_a 0 1
@@ -6206,68 +6746,81 @@ s152
 	pop_b 2
 .d 1 0
 	rtn
-.o 2 2 ii
-s56
-	push_b 0
-	push_b 2
-	ltI
-	notB
-	jmp_false else.93
-	push_a 0
-	jsr_eval 0
-	push_array 0
-	updatepop_a 0 1
-	push_b 0
-	updatepop_a 0 1
-	push_a 0
-	select CHAR 0 1
-	push_a 0
-	buildh ARRAY 1
-	push_a 0
-	push_b 2
-	push_b 2
-	build_u _ 1 2 n162
-	buildC_b 0
-	fillh _Cons 2 4
-	pop_a 2
-	pop_b 3
-.d 1 0
-	rtn
-else.93
-	fillh _Nil 0 1
-	pop_a 1
-	pop_b 2
-.d 1 0
-	rtn
-.nu 1 2 _ _
+.n 2 _ ea162
 .o 1 0
 n162
-	push_node_u _cycle_in_spine 1 2
-.o 2 2 ii
+	push_node _cycle_in_spine 2
+.o 3 0
 ea162
-.o 2 2 ii
+.o 3 0
 s162
-	pushI 1
-	push_b 1
-	addI
 	push_a 0
-	push_b 2
+	jsr_eval 0
+	pushI_a 1
+	pop_a 1
+	pushI 1
 	push_b 1
 	update_b 1 2
 	update_b 0 1
 	pop_b 1
-	updatepop_a 0 1
-	update_b 1 3
-	updatepop_b 0 2
+	subI
+	push_a 1
+	pushI 0
+	updatepop_a 0 2
 .d 2 2 ii
-	jmp s56
+	jmp s61
+.n 2 _ ea161
+.o 1 0
+n161
+	push_node _cycle_in_spine 2
+.o 3 0
+ea161
+.o 3 0
+s161
+	push_a 0
+	jsr_eval 0
+	pushI_a 1
+	pop_a 1
+	pushI 1
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	subI
+	push_a 1
+	pushI 0
+	updatepop_a 0 2
+.d 2 2 ii
+	jmp s60
+.n 2 _ ea160
+.o 1 0
+n160
+	push_node _cycle_in_spine 2
+.o 3 0
+ea160
+.o 3 0
+s160
+	push_a 1
+	jsr_eval 0
+	push_a 1
+	jsr_eval 0
+	buildh _Nil 0
+	update_a 0 3
+	update_a 0 4
+	pop_a 1
+.d 1 0
+	jsr e_StdList_slength;47
+.o 0 1 i
+	updatepop_a 0 2
+.d 2 1 i
+	jmp e_StdList_sdrop
 .o 2 2 ii
-s57
+s60
 	push_b 0
 	push_b 2
 	ltI
 	notB
-	jmp_false else.94
+	jmp_false else.105
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -6281,14 +6834,14 @@ s57
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n163
+	build_u _ 1 2 n170
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
 	pop_b 3
 .d 1 0
 	rtn
-else.94
+else.105
 	fillh _Nil 0 1
 	pop_a 1
 	pop_b 2
@@ -6296,12 +6849,12 @@ else.94
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n163
+n170
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea163
+ea170
 .o 2 2 ii
-s163
+s170
 	pushI 1
 	push_b 1
 	addI
@@ -6315,7 +6868,62 @@ s163
 	update_b 1 3
 	updatepop_b 0 2
 .d 2 2 ii
-	jmp s57
+	jmp s60
+.o 2 2 ii
+s61
+	push_b 0
+	push_b 2
+	ltI
+	notB
+	jmp_false else.106
+	push_a 0
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	push_b 0
+	updatepop_a 0 1
+	push_a 0
+	select CHAR 0 1
+	push_a 0
+	buildh ARRAY 1
+	push_a 0
+	push_b 2
+	push_b 2
+	build_u _ 1 2 n171
+	buildC_b 0
+	fillh _Cons 2 4
+	pop_a 2
+	pop_b 3
+.d 1 0
+	rtn
+else.106
+	fillh _Nil 0 1
+	pop_a 1
+	pop_b 2
+.d 1 0
+	rtn
+.nu 1 2 _ _
+.o 1 0
+n171
+	push_node_u _cycle_in_spine 1 2
+.o 2 2 ii
+ea171
+.o 2 2 ii
+s171
+	pushI 1
+	push_b 1
+	addI
+	push_a 0
+	push_b 2
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	updatepop_a 0 1
+	update_b 1 3
+	updatepop_b 0 2
+.d 2 2 ii
+	jmp s61
 .export e_Parsing_sparsePushConstant
 .descexp e_Parsing_dparsePushConstant e_Parsing_nparsePushConstant e_Parsing_lparsePushConstant 3 0 "parsePushConstant"
 .a 0 a3
@@ -6376,7 +6984,7 @@ s3
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.95
+	jmp_false else.107
 	buildAC "failed to open file"
 	updatepop_a 0 7
 .d 1 0
@@ -6386,7 +6994,7 @@ s3
 	repl_args 2 2
 .d 2 0
 	rtn
-else.95
+else.107
 	buildAC "push constant "
 	buildh ARRAY 1
 	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
@@ -6398,14 +7006,14 @@ else.95
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n159
+	build _ 2 n167
 	push_a 4
 	build d_S.2 -1 n_S.2
 	push_a 5
 	build d_S.1 -1 n_S.1
-	build _ 2 n158
-	build _ 2 n157
-	build _ 2 n156
+	build _ 2 n166
+	build _ 2 n165
+	build _ 2 n164
 	push_a 5
 	update_a 2 11
 	update_a 1 10
@@ -6417,7 +7025,7 @@ else.95
 	pop_a 1
 	push_b 0
 	notB
-	jmp_false else.96
+	jmp_false else.108
 	buildAC "failed to close"
 	updatepop_a 0 1
 	pop_b 1
@@ -6428,7 +7036,7 @@ else.95
 	repl_args 2 2
 .d 2 0
 	rtn
-else.96
+else.108
 	push_arg 0 2 2
 	buildB_b 0
 	update_a 1 2
@@ -6436,14 +7044,14 @@ else.96
 	pop_b 1
 .d 2 0
 	rtn
-.n 2 _ ea159
+.n 2 _ ea167
 .o 1 0
-n159
+n167
 	push_node _cycle_in_spine 2
 .o 3 0
-ea159
+ea167
 .o 3 0
-s159
+s167
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -6458,15 +7066,15 @@ s159
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s55
-.n 2 _ ea158
+	jmp s59
+.n 2 _ ea166
 .o 1 0
-n158
+n166
 	push_node _cycle_in_spine 2
 .o 3 0
-ea158
+ea166
 .o 3 0
-s158
+s166
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -6481,15 +7089,15 @@ s158
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s54
-.n 2 _ ea157
+	jmp s58
+.n 2 _ ea165
 .o 1 0
-n157
+n165
 	push_node _cycle_in_spine 2
 .o 3 0
-ea157
+ea165
 .o 3 0
-s157
+s165
 	push_a 1
 	jsr_eval 0
 	push_a 1
@@ -6504,14 +7112,14 @@ s157
 	updatepop_a 0 2
 .d 2 1 i
 	jmp e_StdList_sdrop
-.n 2 _ ea156
+.n 2 _ ea164
 .o 1 0
-n156
+n164
 	push_node _cycle_in_spine 2
 .o 3 0
-ea156
+ea164
 .o 3 0
-s156
+s164
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -6542,12 +7150,12 @@ s156
 .d 1 0
 	rtn
 .o 2 2 ii
-s54
+s58
 	push_b 0
 	push_b 2
 	ltI
 	notB
-	jmp_false else.97
+	jmp_false else.109
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -6561,14 +7169,14 @@ s54
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n160
+	build_u _ 1 2 n168
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
 	pop_b 3
 .d 1 0
 	rtn
-else.97
+else.109
 	fillh _Nil 0 1
 	pop_a 1
 	pop_b 2
@@ -6576,12 +7184,12 @@ else.97
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n160
+n168
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea160
+ea168
 .o 2 2 ii
-s160
+s168
 	pushI 1
 	push_b 1
 	addI
@@ -6595,14 +7203,14 @@ s160
 	update_b 1 3
 	updatepop_b 0 2
 .d 2 2 ii
-	jmp s54
+	jmp s58
 .o 2 2 ii
-s55
+s59
 	push_b 0
 	push_b 2
 	ltI
 	notB
-	jmp_false else.98
+	jmp_false else.110
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -6616,14 +7224,14 @@ s55
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n161
+	build_u _ 1 2 n169
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
 	pop_b 3
 .d 1 0
 	rtn
-else.98
+else.110
 	fillh _Nil 0 1
 	pop_a 1
 	pop_b 2
@@ -6631,12 +7239,12 @@ else.98
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n161
+n169
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea161
+ea169
 .o 2 2 ii
-s161
+s169
 	pushI 1
 	push_b 1
 	addI
@@ -6650,28 +7258,28 @@ s161
 	update_b 1 3
 	updatepop_b 0 2
 .d 2 2 ii
-	jmp s55
+	jmp s59
 .o 7 0
-s82
+s86
 	buildAC "\n"
 	push_a 5
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_true then.99
+	jmp_true then.111
 	buildAC ""
 	push_a 5
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.99
-then.99
+	jmp_false else.111
+then.111
 	push_a 6
 	pushB TRUE
 	updatepop_a 0 7
 .d 1 1 b
 	rtn
-else.99
+else.111
 	pushI 1
 	pushI 0
 	push_a 4
@@ -6686,13 +7294,13 @@ else.99
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.101
+	jmp_false else.113
 	push_a 6
 	pushB TRUE
 	updatepop_a 0 7
 .d 1 1 b
 	rtn
-else.101
+else.113
 	pushI 12
 	pushI 0
 	push_a 4
@@ -6700,378 +7308,6 @@ else.101
 	jsr sliceAC
 .o 1 0
 	buildAC "push constant"
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-.d 2 0
-	jsr eqAC
-.o 0 1 b	
-	jmp_false else.102
-	push_a 6
-	jsr_eval 0
-	push_a 5
-	push_a 5
-	push_a 5
-	push_a 5
-	push_a 5
-	update_a 5 12
-	update_a 4 11
-	update_a 3 10
-	update_a 2 9
-	update_a 1 8
-	updatepop_a 0 7
-.d 6 0
-	jmp s104
-else.102
-	pushI 10
-	pushI 0
-	push_a 4
-.d 1 2 ii
-	jsr sliceAC
-.o 1 0
-	buildAC "push static"
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-.d 2 0
-	jsr eqAC
-.o 0 1 b	
-	jmp_false else.103
-	push_a 6
-	jsr_eval 0
-	push_a 5
-	push_a 5
-	push_a 5
-	push_a 5
-	push_a 5
-	update_a 5 12
-	update_a 4 11
-	update_a 3 10
-	update_a 2 9
-	update_a 1 8
-	updatepop_a 0 7
-.d 6 0
-	jmp s103
-else.103
-	pushI 12
-	pushI 0
-	push_a 4
-.d 1 2 ii
-	jsr sliceAC
-.o 1 0
-	buildAC "push argument"
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-.d 2 0
-	jsr eqAC
-.o 0 1 b	
-	jmp_false else.104
-	push_a 6
-	jsr_eval 0
-	push_a 5
-	push_a 5
-	push_a 5
-	push_a 5
-	push_a 5
-	update_a 5 12
-	update_a 4 11
-	update_a 3 10
-	update_a 2 9
-	update_a 1 8
-	updatepop_a 0 7
-.d 6 0
-	jmp s102
-else.104
-	pushI 9
-	pushI 0
-	push_a 4
-.d 1 2 ii
-	jsr sliceAC
-.o 1 0
-	buildAC "push local"
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-.d 2 0
-	jsr eqAC
-.o 0 1 b	
-	jmp_false else.105
-	push_a 6
-	jsr_eval 0
-	push_a 5
-	push_a 5
-	push_a 5
-	push_a 5
-	push_a 5
-	update_a 5 12
-	update_a 4 11
-	update_a 3 10
-	update_a 2 9
-	update_a 1 8
-	updatepop_a 0 7
-.d 6 0
-	jmp s101
-else.105
-	pushI 8
-	pushI 0
-	push_a 4
-.d 1 2 ii
-	jsr sliceAC
-.o 1 0
-	buildAC "push this"
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-.d 2 0
-	jsr eqAC
-.o 0 1 b	
-	jmp_false else.106
-	push_a 6
-	jsr_eval 0
-	push_a 5
-	push_a 5
-	push_a 5
-	push_a 5
-	push_a 5
-	update_a 5 12
-	update_a 4 11
-	update_a 3 10
-	update_a 2 9
-	update_a 1 8
-	updatepop_a 0 7
-.d 6 0
-	jmp s100
-else.106
-	pushI 8
-	pushI 0
-	push_a 4
-.d 1 2 ii
-	jsr sliceAC
-.o 1 0
-	buildAC "push that"
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-.d 2 0
-	jsr eqAC
-.o 0 1 b	
-	jmp_false else.107
-	push_a 6
-	jsr_eval 0
-	push_a 5
-	push_a 5
-	push_a 5
-	push_a 5
-	push_a 5
-	update_a 5 12
-	update_a 4 11
-	update_a 3 10
-	update_a 2 9
-	update_a 1 8
-	updatepop_a 0 7
-.d 6 0
-	jmp s99
-else.107
-	pushI 8
-	pushI 0
-	push_a 4
-.d 1 2 ii
-	jsr sliceAC
-.o 1 0
-	buildAC "push temp"
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-.d 2 0
-	jsr eqAC
-.o 0 1 b	
-	jmp_false else.108
-	push_a 6
-	jsr_eval 0
-	push_a 5
-	push_a 5
-	push_a 5
-	push_a 5
-	push_a 5
-	update_a 5 12
-	update_a 4 11
-	update_a 3 10
-	update_a 2 9
-	update_a 1 8
-	updatepop_a 0 7
-.d 6 0
-	jmp s98
-else.108
-	pushI 9
-	pushI 0
-	push_a 4
-.d 1 2 ii
-	jsr sliceAC
-.o 1 0
-	buildAC "pop static"
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-.d 2 0
-	jsr eqAC
-.o 0 1 b	
-	jmp_false else.109
-	push_a 6
-	jsr_eval 0
-	push_a 5
-	push_a 5
-	push_a 5
-	push_a 5
-	push_a 5
-	update_a 5 12
-	update_a 4 11
-	update_a 3 10
-	update_a 2 9
-	update_a 1 8
-	updatepop_a 0 7
-.d 6 0
-	jmp s97
-else.109
-	pushI 11
-	pushI 0
-	push_a 4
-.d 1 2 ii
-	jsr sliceAC
-.o 1 0
-	buildAC "pop argument"
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-.d 2 0
-	jsr eqAC
-.o 0 1 b	
-	jmp_false else.110
-	push_a 6
-	jsr_eval 0
-	push_a 5
-	push_a 5
-	push_a 5
-	push_a 5
-	push_a 5
-	update_a 5 12
-	update_a 4 11
-	update_a 3 10
-	update_a 2 9
-	update_a 1 8
-	updatepop_a 0 7
-.d 6 0
-	jmp s96
-else.110
-	pushI 8
-	pushI 0
-	push_a 4
-.d 1 2 ii
-	jsr sliceAC
-.o 1 0
-	buildAC "pop local"
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-.d 2 0
-	jsr eqAC
-.o 0 1 b	
-	jmp_false else.111
-	push_a 6
-	jsr_eval 0
-	push_a 5
-	push_a 5
-	push_a 5
-	push_a 5
-	push_a 5
-	update_a 5 12
-	update_a 4 11
-	update_a 3 10
-	update_a 2 9
-	update_a 1 8
-	updatepop_a 0 7
-.d 6 0
-	jmp s95
-else.111
-	pushI 7
-	pushI 0
-	push_a 4
-.d 1 2 ii
-	jsr sliceAC
-.o 1 0
-	buildAC "pop this"
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-.d 2 0
-	jsr eqAC
-.o 0 1 b	
-	jmp_false else.112
-	push_a 6
-	jsr_eval 0
-	push_a 5
-	push_a 5
-	push_a 5
-	push_a 5
-	push_a 5
-	update_a 5 12
-	update_a 4 11
-	update_a 3 10
-	update_a 2 9
-	update_a 1 8
-	updatepop_a 0 7
-.d 6 0
-	jmp s94
-else.112
-	pushI 7
-	pushI 0
-	push_a 4
-.d 1 2 ii
-	jsr sliceAC
-.o 1 0
-	buildAC "pop that"
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-.d 2 0
-	jsr eqAC
-.o 0 1 b	
-	jmp_false else.113
-	push_a 6
-	jsr_eval 0
-	push_a 5
-	push_a 5
-	push_a 5
-	push_a 5
-	push_a 5
-	update_a 5 12
-	update_a 4 11
-	update_a 3 10
-	update_a 2 9
-	update_a 1 8
-	updatepop_a 0 7
-.d 6 0
-	jmp s93
-else.113
-	pushI 7
-	pushI 0
-	push_a 4
-.d 1 2 ii
-	jsr sliceAC
-.o 1 0
-	buildAC "pop temp"
 	push_a 1
 	update_a 1 2
 	update_a 0 1
@@ -7094,15 +7330,15 @@ else.113
 	update_a 1 8
 	updatepop_a 0 7
 .d 6 0
-	jmp s92
+	jmp s112
 else.114
-	pushI 2
+	pushI 10
 	pushI 0
 	push_a 4
 .d 1 2 ii
 	jsr sliceAC
 .o 1 0
-	buildAC "add"
+	buildAC "push static"
 	push_a 1
 	update_a 1 2
 	update_a 0 1
@@ -7125,15 +7361,15 @@ else.114
 	update_a 1 8
 	updatepop_a 0 7
 .d 6 0
-	jmp s91
+	jmp s111
 else.115
-	pushI 2
+	pushI 12
 	pushI 0
 	push_a 4
 .d 1 2 ii
 	jsr sliceAC
 .o 1 0
-	buildAC "sub"
+	buildAC "push argument"
 	push_a 1
 	update_a 1 2
 	update_a 0 1
@@ -7156,15 +7392,15 @@ else.115
 	update_a 1 8
 	updatepop_a 0 7
 .d 6 0
-	jmp s90
+	jmp s110
 else.116
-	pushI 2
+	pushI 9
 	pushI 0
 	push_a 4
 .d 1 2 ii
 	jsr sliceAC
 .o 1 0
-	buildAC "neg"
+	buildAC "push local"
 	push_a 1
 	update_a 1 2
 	update_a 0 1
@@ -7187,15 +7423,15 @@ else.116
 	update_a 1 8
 	updatepop_a 0 7
 .d 6 0
-	jmp s89
+	jmp s109
 else.117
-	pushI 2
+	pushI 8
 	pushI 0
 	push_a 4
 .d 1 2 ii
 	jsr sliceAC
 .o 1 0
-	buildAC "and"
+	buildAC "push this"
 	push_a 1
 	update_a 1 2
 	update_a 0 1
@@ -7218,15 +7454,15 @@ else.117
 	update_a 1 8
 	updatepop_a 0 7
 .d 6 0
-	jmp s88
+	jmp s108
 else.118
-	pushI 1
+	pushI 8
 	pushI 0
 	push_a 4
 .d 1 2 ii
 	jsr sliceAC
 .o 1 0
-	buildAC "or"
+	buildAC "push that"
 	push_a 1
 	update_a 1 2
 	update_a 0 1
@@ -7249,15 +7485,15 @@ else.118
 	update_a 1 8
 	updatepop_a 0 7
 .d 6 0
-	jmp s87
+	jmp s107
 else.119
-	pushI 2
+	pushI 8
 	pushI 0
 	push_a 4
 .d 1 2 ii
 	jsr sliceAC
 .o 1 0
-	buildAC "not"
+	buildAC "push temp"
 	push_a 1
 	update_a 1 2
 	update_a 0 1
@@ -7280,8 +7516,504 @@ else.119
 	update_a 1 8
 	updatepop_a 0 7
 .d 6 0
-	jmp s86
+	jmp s106
 else.120
+	pushI 9
+	pushI 0
+	push_a 4
+.d 1 2 ii
+	jsr sliceAC
+.o 1 0
+	buildAC "pop static"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_false else.121
+	push_a 6
+	jsr_eval 0
+	push_a 5
+	push_a 5
+	push_a 5
+	push_a 5
+	push_a 5
+	update_a 5 12
+	update_a 4 11
+	update_a 3 10
+	update_a 2 9
+	update_a 1 8
+	updatepop_a 0 7
+.d 6 0
+	jmp s105
+else.121
+	pushI 11
+	pushI 0
+	push_a 4
+.d 1 2 ii
+	jsr sliceAC
+.o 1 0
+	buildAC "pop argument"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_false else.122
+	push_a 6
+	jsr_eval 0
+	push_a 5
+	push_a 5
+	push_a 5
+	push_a 5
+	push_a 5
+	update_a 5 12
+	update_a 4 11
+	update_a 3 10
+	update_a 2 9
+	update_a 1 8
+	updatepop_a 0 7
+.d 6 0
+	jmp s104
+else.122
+	pushI 8
+	pushI 0
+	push_a 4
+.d 1 2 ii
+	jsr sliceAC
+.o 1 0
+	buildAC "pop local"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_false else.123
+	push_a 6
+	jsr_eval 0
+	push_a 5
+	push_a 5
+	push_a 5
+	push_a 5
+	push_a 5
+	update_a 5 12
+	update_a 4 11
+	update_a 3 10
+	update_a 2 9
+	update_a 1 8
+	updatepop_a 0 7
+.d 6 0
+	jmp s103
+else.123
+	pushI 7
+	pushI 0
+	push_a 4
+.d 1 2 ii
+	jsr sliceAC
+.o 1 0
+	buildAC "pop this"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_false else.124
+	push_a 6
+	jsr_eval 0
+	push_a 5
+	push_a 5
+	push_a 5
+	push_a 5
+	push_a 5
+	update_a 5 12
+	update_a 4 11
+	update_a 3 10
+	update_a 2 9
+	update_a 1 8
+	updatepop_a 0 7
+.d 6 0
+	jmp s102
+else.124
+	pushI 7
+	pushI 0
+	push_a 4
+.d 1 2 ii
+	jsr sliceAC
+.o 1 0
+	buildAC "pop that"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_false else.125
+	push_a 6
+	jsr_eval 0
+	push_a 5
+	push_a 5
+	push_a 5
+	push_a 5
+	push_a 5
+	update_a 5 12
+	update_a 4 11
+	update_a 3 10
+	update_a 2 9
+	update_a 1 8
+	updatepop_a 0 7
+.d 6 0
+	jmp s101
+else.125
+	pushI 7
+	pushI 0
+	push_a 4
+.d 1 2 ii
+	jsr sliceAC
+.o 1 0
+	buildAC "pop temp"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_false else.126
+	push_a 6
+	jsr_eval 0
+	push_a 5
+	push_a 5
+	push_a 5
+	push_a 5
+	push_a 5
+	update_a 5 12
+	update_a 4 11
+	update_a 3 10
+	update_a 2 9
+	update_a 1 8
+	updatepop_a 0 7
+.d 6 0
+	jmp s100
+else.126
+	pushI 13
+	pushI 0
+	push_a 4
+.d 1 2 ii
+	jsr sliceAC
+.o 1 0
+	buildAC "push pointer 0"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_false else.127
+	push_a 6
+	jsr_eval 0
+	push_a 5
+	push_a 5
+	push_a 5
+	push_a 5
+	push_a 5
+	update_a 5 12
+	update_a 4 11
+	update_a 3 10
+	update_a 2 9
+	update_a 1 8
+	updatepop_a 0 7
+.d 6 0
+	jmp s99
+else.127
+	pushI 12
+	pushI 0
+	push_a 4
+.d 1 2 ii
+	jsr sliceAC
+.o 1 0
+	buildAC "pop pointer 0"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_false else.128
+	push_a 6
+	jsr_eval 0
+	push_a 5
+	push_a 5
+	push_a 5
+	push_a 5
+	push_a 5
+	update_a 5 12
+	update_a 4 11
+	update_a 3 10
+	update_a 2 9
+	update_a 1 8
+	updatepop_a 0 7
+.d 6 0
+	jmp s98
+else.128
+	pushI 13
+	pushI 0
+	push_a 4
+.d 1 2 ii
+	jsr sliceAC
+.o 1 0
+	buildAC "push pointer 1"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_false else.129
+	push_a 6
+	jsr_eval 0
+	push_a 5
+	push_a 5
+	push_a 5
+	push_a 5
+	push_a 5
+	update_a 5 12
+	update_a 4 11
+	update_a 3 10
+	update_a 2 9
+	update_a 1 8
+	updatepop_a 0 7
+.d 6 0
+	jmp s97
+else.129
+	pushI 12
+	pushI 0
+	push_a 4
+.d 1 2 ii
+	jsr sliceAC
+.o 1 0
+	buildAC "pop pointer 1"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_false else.130
+	push_a 6
+	jsr_eval 0
+	push_a 5
+	push_a 5
+	push_a 5
+	push_a 5
+	push_a 5
+	update_a 5 12
+	update_a 4 11
+	update_a 3 10
+	update_a 2 9
+	update_a 1 8
+	updatepop_a 0 7
+.d 6 0
+	jmp s96
+else.130
+	pushI 2
+	pushI 0
+	push_a 4
+.d 1 2 ii
+	jsr sliceAC
+.o 1 0
+	buildAC "add"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_false else.131
+	push_a 6
+	jsr_eval 0
+	push_a 5
+	push_a 5
+	push_a 5
+	push_a 5
+	push_a 5
+	update_a 5 12
+	update_a 4 11
+	update_a 3 10
+	update_a 2 9
+	update_a 1 8
+	updatepop_a 0 7
+.d 6 0
+	jmp s95
+else.131
+	pushI 2
+	pushI 0
+	push_a 4
+.d 1 2 ii
+	jsr sliceAC
+.o 1 0
+	buildAC "sub"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_false else.132
+	push_a 6
+	jsr_eval 0
+	push_a 5
+	push_a 5
+	push_a 5
+	push_a 5
+	push_a 5
+	update_a 5 12
+	update_a 4 11
+	update_a 3 10
+	update_a 2 9
+	update_a 1 8
+	updatepop_a 0 7
+.d 6 0
+	jmp s94
+else.132
+	pushI 2
+	pushI 0
+	push_a 4
+.d 1 2 ii
+	jsr sliceAC
+.o 1 0
+	buildAC "neg"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_false else.133
+	push_a 6
+	jsr_eval 0
+	push_a 5
+	push_a 5
+	push_a 5
+	push_a 5
+	push_a 5
+	update_a 5 12
+	update_a 4 11
+	update_a 3 10
+	update_a 2 9
+	update_a 1 8
+	updatepop_a 0 7
+.d 6 0
+	jmp s93
+else.133
+	pushI 2
+	pushI 0
+	push_a 4
+.d 1 2 ii
+	jsr sliceAC
+.o 1 0
+	buildAC "and"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_false else.134
+	push_a 6
+	jsr_eval 0
+	push_a 5
+	push_a 5
+	push_a 5
+	push_a 5
+	push_a 5
+	update_a 5 12
+	update_a 4 11
+	update_a 3 10
+	update_a 2 9
+	update_a 1 8
+	updatepop_a 0 7
+.d 6 0
+	jmp s92
+else.134
+	pushI 1
+	pushI 0
+	push_a 4
+.d 1 2 ii
+	jsr sliceAC
+.o 1 0
+	buildAC "or"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_false else.135
+	push_a 6
+	jsr_eval 0
+	push_a 5
+	push_a 5
+	push_a 5
+	push_a 5
+	push_a 5
+	update_a 5 12
+	update_a 4 11
+	update_a 3 10
+	update_a 2 9
+	update_a 1 8
+	updatepop_a 0 7
+.d 6 0
+	jmp s91
+else.135
+	pushI 2
+	pushI 0
+	push_a 4
+.d 1 2 ii
+	jsr sliceAC
+.o 1 0
+	buildAC "not"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_false else.136
+	push_a 6
+	jsr_eval 0
+	push_a 5
+	push_a 5
+	push_a 5
+	push_a 5
+	push_a 5
+	update_a 5 12
+	update_a 4 11
+	update_a 3 10
+	update_a 2 9
+	update_a 1 8
+	updatepop_a 0 7
+.d 6 0
+	jmp s90
+else.136
 	pushI 1
 	pushI 0
 	push_a 4
@@ -7296,7 +8028,7 @@ else.120
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.121
+	jmp_false else.137
 	push_a 6
 	jsr_eval 0
 	push_a 6
@@ -7315,8 +8047,8 @@ else.120
 	update_a 1 8
 	updatepop_a 0 7
 .d 6 1 i
-	jmp s85
-else.121
+	jmp s89
+else.137
 	pushI 1
 	pushI 0
 	push_a 4
@@ -7331,7 +8063,7 @@ else.121
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.122
+	jmp_false else.138
 	push_a 6
 	jsr_eval 0
 	push_a 6
@@ -7350,8 +8082,8 @@ else.121
 	update_a 1 8
 	updatepop_a 0 7
 .d 6 1 i
-	jmp s84
-else.122
+	jmp s88
+else.138
 	pushI 1
 	pushI 0
 	push_a 4
@@ -7366,7 +8098,7 @@ else.122
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.123
+	jmp_false else.139
 	push_a 6
 	jsr_eval 0
 	push_a 6
@@ -7385,15 +8117,15 @@ else.122
 	update_a 1 8
 	updatepop_a 0 7
 .d 6 1 i
-	jmp s83
-else.123
+	jmp s87
+else.139
 	push_a 6
 	pushB FALSE
 	updatepop_a 0 7
 .d 1 1 b
 	rtn
 .o 6 1 i
-s83
+s87
 	push_a 5
 	buildI 2
 	push_a 3
@@ -7412,7 +8144,7 @@ s83
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.124
+	jmp_false else.140
 	buildAC "failed to open file"
 	updatepop_a 0 7
 	pop_b 1
@@ -7426,13 +8158,13 @@ s83
 	pop_a 1
 .d 1 1 b
 	rtn
-else.124
+else.140
 	buildI_b 0
 	build _ 1 e_StdString_ntoString;5
 	push_arg 1 3 3
 	push_arg 2 3 2
 	push_a 2
-	build _ 2 n186
+	build _ 2 n194
 	push_a 4
 	pop_b 1
 	update_a 3 10
@@ -7446,7 +8178,7 @@ else.124
 	pop_a 1
 	push_b 0
 	notB
-	jmp_false else.125
+	jmp_false else.141
 	buildAC "failed to close"
 	updatepop_a 0 2
 	pop_b 1
@@ -7460,21 +8192,21 @@ else.124
 	pop_a 1
 .d 1 1 b
 	rtn
-else.125
+else.141
 	push_arg 0 2 2
 	push_b 0
 	updatepop_a 0 2
 	updatepop_b 0 1
 .d 1 1 b
 	rtn
-.n 2 _ ea186
+.n 2 _ ea194
 .o 1 0
-n186
+n194
 	push_node _cycle_in_spine 2
 .o 3 0
-ea186
+ea194
 .o 3 0
-s186
+s194
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -7532,7 +8264,7 @@ s186
 .d 1 0
 	rtn
 .o 6 1 i
-s84
+s88
 	push_a 5
 	buildI 2
 	push_a 3
@@ -7551,7 +8283,7 @@ s84
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.126
+	jmp_false else.142
 	buildAC "failed to open file"
 	updatepop_a 0 7
 	pop_b 1
@@ -7565,13 +8297,13 @@ s84
 	pop_a 1
 .d 1 1 b
 	rtn
-else.126
+else.142
 	buildI_b 0
 	build _ 1 e_StdString_ntoString;5
 	push_arg 1 3 3
 	push_arg 2 3 2
 	push_a 2
-	build _ 2 n187
+	build _ 2 n195
 	push_a 4
 	pop_b 1
 	update_a 3 10
@@ -7585,7 +8317,7 @@ else.126
 	pop_a 1
 	push_b 0
 	notB
-	jmp_false else.127
+	jmp_false else.143
 	buildAC "failed to close"
 	updatepop_a 0 2
 	pop_b 1
@@ -7599,21 +8331,21 @@ else.126
 	pop_a 1
 .d 1 1 b
 	rtn
-else.127
+else.143
 	push_arg 0 2 2
 	push_b 0
 	updatepop_a 0 2
 	updatepop_b 0 1
 .d 1 1 b
 	rtn
-.n 2 _ ea187
+.n 2 _ ea195
 .o 1 0
-n187
+n195
 	push_node _cycle_in_spine 2
 .o 3 0
-ea187
+ea195
 .o 3 0
-s187
+s195
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -7671,7 +8403,7 @@ s187
 .d 1 0
 	rtn
 .o 6 1 i
-s85
+s89
 	push_a 5
 	buildI 2
 	push_a 3
@@ -7690,7 +8422,7 @@ s85
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.128
+	jmp_false else.144
 	buildAC "failed to open file"
 	updatepop_a 0 7
 	pop_b 1
@@ -7704,13 +8436,13 @@ s85
 	pop_a 1
 .d 1 1 b
 	rtn
-else.128
+else.144
 	buildI_b 0
 	build _ 1 e_StdString_ntoString;5
 	push_arg 1 3 3
 	push_arg 2 3 2
 	push_a 2
-	build _ 2 n188
+	build _ 2 n196
 	push_a 4
 	pop_b 1
 	update_a 3 10
@@ -7724,7 +8456,7 @@ else.128
 	pop_a 1
 	push_b 0
 	notB
-	jmp_false else.129
+	jmp_false else.145
 	buildAC "failed to close"
 	updatepop_a 0 2
 	pop_b 1
@@ -7738,21 +8470,21 @@ else.128
 	pop_a 1
 .d 1 1 b
 	rtn
-else.129
+else.145
 	push_arg 0 2 2
 	push_b 0
 	updatepop_a 0 2
 	updatepop_b 0 1
 .d 1 1 b
 	rtn
-.n 2 _ ea188
+.n 2 _ ea196
 .o 1 0
-n188
+n196
 	push_node _cycle_in_spine 2
 .o 3 0
-ea188
+ea196
 .o 3 0
-s188
+s196
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -7810,290 +8542,6 @@ s188
 .d 1 0
 	rtn
 .o 6 0
-s86
-	push_a 5
-	buildI 2
-	push_a 3
-	buildAC "out.asm"
-	buildh ARRAY 1
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-	buildh _Nil 0
-	update_a 0 10
-	pop_a 1
-	jsr_ap 3
-	push_arg 0 3 1
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-	notB
-	jmp_false else.130
-	buildAC "failed to open file"
-	updatepop_a 0 7
-.d 1 0
-	jsr print_string_
-.o 0 0
-	halt
-	repl_args 2 2
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-.d 1 1 b
-	rtn
-else.130
-	push_arg 0 3 3
-	push_arg 1 3 2
-	buildAC "//not instruction\nA=M-1\nM=!M\nD=M\n@0\n\n"
-	buildh ARRAY 1
-	build _ 2 e_StdFile_nfwrites
-	push_a 3
-	update_a 2 9
-	update_a 1 8
-	updatepop_a 0 7
-	jsr_ap 2
-	push_arg 0 2 1
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-	push_b 0
-	notB
-	jmp_false else.131
-	buildAC "failed to close"
-	updatepop_a 0 1
-	pop_b 1
-.d 1 0
-	jsr print_string_
-.o 0 0
-	halt
-	repl_args 2 2
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-.d 1 1 b
-	rtn
-else.131
-	push_arg 0 2 2
-	push_b 0
-	updatepop_a 0 1
-	updatepop_b 0 1
-.d 1 1 b
-	rtn
-.o 6 0
-s87
-	push_a 5
-	buildI 2
-	push_a 3
-	buildAC "out.asm"
-	buildh ARRAY 1
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-	buildh _Nil 0
-	update_a 0 10
-	pop_a 1
-	jsr_ap 3
-	push_arg 0 3 1
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-	notB
-	jmp_false else.132
-	buildAC "failed to open file"
-	updatepop_a 0 7
-.d 1 0
-	jsr print_string_
-.o 0 0
-	halt
-	repl_args 2 2
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-.d 1 1 b
-	rtn
-else.132
-	push_arg 0 3 3
-	push_arg 1 3 2
-	buildAC "//or instruction\nA=M-1\nD=M\nA=A-1\nD=D|M\nM=D\n@0\nM=M-1\n\n"
-	buildh ARRAY 1
-	build _ 2 e_StdFile_nfwrites
-	push_a 3
-	update_a 2 9
-	update_a 1 8
-	updatepop_a 0 7
-	jsr_ap 2
-	push_arg 0 2 1
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-	push_b 0
-	notB
-	jmp_false else.133
-	buildAC "failed to close"
-	updatepop_a 0 1
-	pop_b 1
-.d 1 0
-	jsr print_string_
-.o 0 0
-	halt
-	repl_args 2 2
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-.d 1 1 b
-	rtn
-else.133
-	push_arg 0 2 2
-	push_b 0
-	updatepop_a 0 1
-	updatepop_b 0 1
-.d 1 1 b
-	rtn
-.o 6 0
-s88
-	push_a 5
-	buildI 2
-	push_a 3
-	buildAC "out.asm"
-	buildh ARRAY 1
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-	buildh _Nil 0
-	update_a 0 10
-	pop_a 1
-	jsr_ap 3
-	push_arg 0 3 1
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-	notB
-	jmp_false else.134
-	buildAC "failed to open file"
-	updatepop_a 0 7
-.d 1 0
-	jsr print_string_
-.o 0 0
-	halt
-	repl_args 2 2
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-.d 1 1 b
-	rtn
-else.134
-	push_arg 0 3 3
-	push_arg 1 3 2
-	buildAC "//and instruction\nA=M-1\nD=M\nA=A-1\nD=D&M\nM=D\n@0\nM=M-1\n\n"
-	buildh ARRAY 1
-	build _ 2 e_StdFile_nfwrites
-	push_a 3
-	update_a 2 9
-	update_a 1 8
-	updatepop_a 0 7
-	jsr_ap 2
-	push_arg 0 2 1
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-	push_b 0
-	notB
-	jmp_false else.135
-	buildAC "failed to close"
-	updatepop_a 0 1
-	pop_b 1
-.d 1 0
-	jsr print_string_
-.o 0 0
-	halt
-	repl_args 2 2
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-.d 1 1 b
-	rtn
-else.135
-	push_arg 0 2 2
-	push_b 0
-	updatepop_a 0 1
-	updatepop_b 0 1
-.d 1 1 b
-	rtn
-.o 6 0
-s89
-	push_a 5
-	buildI 2
-	push_a 3
-	buildAC "out.asm"
-	buildh ARRAY 1
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-	buildh _Nil 0
-	update_a 0 10
-	pop_a 1
-	jsr_ap 3
-	push_arg 0 3 1
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-	notB
-	jmp_false else.136
-	buildAC "failed to open file"
-	updatepop_a 0 7
-.d 1 0
-	jsr print_string_
-.o 0 0
-	halt
-	repl_args 2 2
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-.d 1 1 b
-	rtn
-else.136
-	push_arg 0 3 3
-	push_arg 1 3 2
-	buildAC "//neg instruction\nA=M-1\nM=-M\nD=M\n@0\n\n"
-	buildh ARRAY 1
-	build _ 2 e_StdFile_nfwrites
-	push_a 3
-	update_a 2 9
-	update_a 1 8
-	updatepop_a 0 7
-	jsr_ap 2
-	push_arg 0 2 1
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-	push_b 0
-	notB
-	jmp_false else.137
-	buildAC "failed to close"
-	updatepop_a 0 1
-	pop_b 1
-.d 1 0
-	jsr print_string_
-.o 0 0
-	halt
-	repl_args 2 2
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-.d 1 1 b
-	rtn
-else.137
-	push_arg 0 2 2
-	push_b 0
-	updatepop_a 0 1
-	updatepop_b 0 1
-.d 1 1 b
-	rtn
-.o 6 0
 s90
 	push_a 5
 	buildI 2
@@ -8113,7 +8561,7 @@ s90
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.138
+	jmp_false else.146
 	buildAC "failed to open file"
 	updatepop_a 0 7
 .d 1 0
@@ -8126,10 +8574,10 @@ s90
 	pop_a 1
 .d 1 1 b
 	rtn
-else.138
+else.146
 	push_arg 0 3 3
 	push_arg 1 3 2
-	buildAC "//sub instruction\nA=M-1\nD=M\nA=A-1\nD=M-D\nM=D\n@0\nM=M-1\n\n"
+	buildAC "//not instruction\nA=M-1\nM=!M\nD=M\n@0\n\n"
 	buildh ARRAY 1
 	build _ 2 e_StdFile_nfwrites
 	push_a 3
@@ -8143,7 +8591,7 @@ else.138
 	pop_a 1
 	push_b 0
 	notB
-	jmp_false else.139
+	jmp_false else.147
 	buildAC "failed to close"
 	updatepop_a 0 1
 	pop_b 1
@@ -8157,7 +8605,7 @@ else.138
 	pop_a 1
 .d 1 1 b
 	rtn
-else.139
+else.147
 	push_arg 0 2 2
 	push_b 0
 	updatepop_a 0 1
@@ -8184,7 +8632,7 @@ s91
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.140
+	jmp_false else.148
 	buildAC "failed to open file"
 	updatepop_a 0 7
 .d 1 0
@@ -8197,10 +8645,10 @@ s91
 	pop_a 1
 .d 1 1 b
 	rtn
-else.140
+else.148
 	push_arg 0 3 3
 	push_arg 1 3 2
-	buildAC "//add instruction\nA=M-1\nD=M\nA=A-1\nD=M+D\nM=D\n@0\nM=M-1\n\n"
+	buildAC "//or instruction\nA=M-1\nD=M\nA=A-1\nD=D|M\nM=D\n@0\nM=M-1\n\n"
 	buildh ARRAY 1
 	build _ 2 e_StdFile_nfwrites
 	push_a 3
@@ -8214,7 +8662,7 @@ else.140
 	pop_a 1
 	push_b 0
 	notB
-	jmp_false else.141
+	jmp_false else.149
 	buildAC "failed to close"
 	updatepop_a 0 1
 	pop_b 1
@@ -8228,7 +8676,7 @@ else.140
 	pop_a 1
 .d 1 1 b
 	rtn
-else.141
+else.149
 	push_arg 0 2 2
 	push_b 0
 	updatepop_a 0 1
@@ -8255,7 +8703,7 @@ s92
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.142
+	jmp_false else.150
 	buildAC "failed to open file"
 	updatepop_a 0 7
 .d 1 0
@@ -8268,7 +8716,575 @@ s92
 	pop_a 1
 .d 1 1 b
 	rtn
-else.142
+else.150
+	push_arg 0 3 3
+	push_arg 1 3 2
+	buildAC "//and instruction\nA=M-1\nD=M\nA=A-1\nD=D&M\nM=D\n@0\nM=M-1\n\n"
+	buildh ARRAY 1
+	build _ 2 e_StdFile_nfwrites
+	push_a 3
+	update_a 2 9
+	update_a 1 8
+	updatepop_a 0 7
+	jsr_ap 2
+	push_arg 0 2 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	push_b 0
+	notB
+	jmp_false else.151
+	buildAC "failed to close"
+	updatepop_a 0 1
+	pop_b 1
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 1 1 b
+	rtn
+else.151
+	push_arg 0 2 2
+	push_b 0
+	updatepop_a 0 1
+	updatepop_b 0 1
+.d 1 1 b
+	rtn
+.o 6 0
+s93
+	push_a 5
+	buildI 2
+	push_a 3
+	buildAC "out.asm"
+	buildh ARRAY 1
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	buildh _Nil 0
+	update_a 0 10
+	pop_a 1
+	jsr_ap 3
+	push_arg 0 3 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.152
+	buildAC "failed to open file"
+	updatepop_a 0 7
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 1 1 b
+	rtn
+else.152
+	push_arg 0 3 3
+	push_arg 1 3 2
+	buildAC "//neg instruction\nA=M-1\nM=-M\nD=M\n@0\n\n"
+	buildh ARRAY 1
+	build _ 2 e_StdFile_nfwrites
+	push_a 3
+	update_a 2 9
+	update_a 1 8
+	updatepop_a 0 7
+	jsr_ap 2
+	push_arg 0 2 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	push_b 0
+	notB
+	jmp_false else.153
+	buildAC "failed to close"
+	updatepop_a 0 1
+	pop_b 1
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 1 1 b
+	rtn
+else.153
+	push_arg 0 2 2
+	push_b 0
+	updatepop_a 0 1
+	updatepop_b 0 1
+.d 1 1 b
+	rtn
+.o 6 0
+s94
+	push_a 5
+	buildI 2
+	push_a 3
+	buildAC "out.asm"
+	buildh ARRAY 1
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	buildh _Nil 0
+	update_a 0 10
+	pop_a 1
+	jsr_ap 3
+	push_arg 0 3 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.154
+	buildAC "failed to open file"
+	updatepop_a 0 7
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 1 1 b
+	rtn
+else.154
+	push_arg 0 3 3
+	push_arg 1 3 2
+	buildAC "//sub instruction\nA=M-1\nD=M\nA=A-1\nD=M-D\nM=D\n@0\nM=M-1\n\n"
+	buildh ARRAY 1
+	build _ 2 e_StdFile_nfwrites
+	push_a 3
+	update_a 2 9
+	update_a 1 8
+	updatepop_a 0 7
+	jsr_ap 2
+	push_arg 0 2 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	push_b 0
+	notB
+	jmp_false else.155
+	buildAC "failed to close"
+	updatepop_a 0 1
+	pop_b 1
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 1 1 b
+	rtn
+else.155
+	push_arg 0 2 2
+	push_b 0
+	updatepop_a 0 1
+	updatepop_b 0 1
+.d 1 1 b
+	rtn
+.o 6 0
+s95
+	push_a 5
+	buildI 2
+	push_a 3
+	buildAC "out.asm"
+	buildh ARRAY 1
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	buildh _Nil 0
+	update_a 0 10
+	pop_a 1
+	jsr_ap 3
+	push_arg 0 3 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.156
+	buildAC "failed to open file"
+	updatepop_a 0 7
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 1 1 b
+	rtn
+else.156
+	push_arg 0 3 3
+	push_arg 1 3 2
+	buildAC "//add instruction\nA=M-1\nD=M\nA=A-1\nD=M+D\nM=D\n@0\nM=M-1\n\n"
+	buildh ARRAY 1
+	build _ 2 e_StdFile_nfwrites
+	push_a 3
+	update_a 2 9
+	update_a 1 8
+	updatepop_a 0 7
+	jsr_ap 2
+	push_arg 0 2 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	push_b 0
+	notB
+	jmp_false else.157
+	buildAC "failed to close"
+	updatepop_a 0 1
+	pop_b 1
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 1 1 b
+	rtn
+else.157
+	push_arg 0 2 2
+	push_b 0
+	updatepop_a 0 1
+	updatepop_b 0 1
+.d 1 1 b
+	rtn
+.o 6 0
+s96
+	push_a 5
+	buildI 2
+	push_a 3
+	buildAC "out.asm"
+	buildh ARRAY 1
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	buildh _Nil 0
+	update_a 0 10
+	pop_a 1
+	jsr_ap 3
+	push_arg 0 3 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.158
+	buildAC "failed to open file"
+	updatepop_a 0 7
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 1 1 b
+	rtn
+else.158
+	push_arg 0 3 3
+	push_arg 1 3 2
+	buildAC "//pop instruction\n@SP\nA=M-1\nD=M\n@THAT\nM=D\n@SP\nM=M-1\n\n"
+	buildh ARRAY 1
+	build _ 2 e_StdFile_nfwrites
+	push_a 3
+	update_a 2 9
+	update_a 1 8
+	updatepop_a 0 7
+	jsr_ap 2
+	push_arg 0 2 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	push_b 0
+	notB
+	jmp_false else.159
+	buildAC "failed to close"
+	updatepop_a 0 1
+	pop_b 1
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 1 1 b
+	rtn
+else.159
+	push_arg 0 2 2
+	push_b 0
+	updatepop_a 0 1
+	updatepop_b 0 1
+.d 1 1 b
+	rtn
+.o 6 0
+s97
+	push_a 5
+	buildI 2
+	push_a 3
+	buildAC "out.asm"
+	buildh ARRAY 1
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	buildh _Nil 0
+	update_a 0 10
+	pop_a 1
+	jsr_ap 3
+	push_arg 0 3 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.160
+	buildAC "failed to open file"
+	updatepop_a 0 7
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 1 1 b
+	rtn
+else.160
+	push_arg 0 3 3
+	push_arg 1 3 2
+	buildAC "//push static instruction\n@THAT\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n\n"
+	buildh ARRAY 1
+	build _ 2 e_StdFile_nfwrites
+	push_a 3
+	update_a 2 9
+	update_a 1 8
+	updatepop_a 0 7
+	jsr_ap 2
+	push_arg 0 2 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	push_b 0
+	notB
+	jmp_false else.161
+	buildAC "failed to close"
+	updatepop_a 0 1
+	pop_b 1
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 1 1 b
+	rtn
+else.161
+	push_arg 0 2 2
+	push_b 0
+	updatepop_a 0 1
+	updatepop_b 0 1
+.d 1 1 b
+	rtn
+.o 6 0
+s98
+	push_a 5
+	buildI 2
+	push_a 3
+	buildAC "out.asm"
+	buildh ARRAY 1
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	buildh _Nil 0
+	update_a 0 10
+	pop_a 1
+	jsr_ap 3
+	push_arg 0 3 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.162
+	buildAC "failed to open file"
+	updatepop_a 0 7
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 1 1 b
+	rtn
+else.162
+	push_arg 0 3 3
+	push_arg 1 3 2
+	buildAC "//pop instruction\n@SP\nA=M-1\nD=M\n@THIS\nM=D\n@SP\nM=M-1\n\n"
+	buildh ARRAY 1
+	build _ 2 e_StdFile_nfwrites
+	push_a 3
+	update_a 2 9
+	update_a 1 8
+	updatepop_a 0 7
+	jsr_ap 2
+	push_arg 0 2 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	push_b 0
+	notB
+	jmp_false else.163
+	buildAC "failed to close"
+	updatepop_a 0 1
+	pop_b 1
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 1 1 b
+	rtn
+else.163
+	push_arg 0 2 2
+	push_b 0
+	updatepop_a 0 1
+	updatepop_b 0 1
+.d 1 1 b
+	rtn
+.o 6 0
+s99
+	push_a 5
+	buildI 2
+	push_a 3
+	buildAC "out.asm"
+	buildh ARRAY 1
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	buildh _Nil 0
+	update_a 0 10
+	pop_a 1
+	jsr_ap 3
+	push_arg 0 3 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.164
+	buildAC "failed to open file"
+	updatepop_a 0 7
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 1 1 b
+	rtn
+else.164
+	push_arg 0 3 3
+	push_arg 1 3 2
+	buildAC "//push static instruction\n@THIS\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n\n"
+	buildh ARRAY 1
+	build _ 2 e_StdFile_nfwrites
+	push_a 3
+	update_a 2 9
+	update_a 1 8
+	updatepop_a 0 7
+	jsr_ap 2
+	push_arg 0 2 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	push_b 0
+	notB
+	jmp_false else.165
+	buildAC "failed to close"
+	updatepop_a 0 1
+	pop_b 1
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 1 1 b
+	rtn
+else.165
+	push_arg 0 2 2
+	push_b 0
+	updatepop_a 0 1
+	updatepop_b 0 1
+.d 1 1 b
+	rtn
+.o 6 0
+s100
+	push_a 5
+	buildI 2
+	push_a 3
+	buildAC "out.asm"
+	buildh ARRAY 1
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	buildh _Nil 0
+	update_a 0 10
+	pop_a 1
+	jsr_ap 3
+	push_arg 0 3 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.166
+	buildAC "failed to open file"
+	updatepop_a 0 7
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 1 1 b
+	rtn
+else.166
 	buildAC "pop temp "
 	buildh ARRAY 1
 	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
@@ -8279,18 +9295,18 @@ else.142
 	build d_S.2 -1 n_S.2
 	push_a 1
 	build d_S.1 -1 n_S.1
-	build _ 2 n191
+	build _ 2 n199
 	push_a 2
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n190
-	build _ 2 n189
+	build _ 2 n198
+	build _ 2 n197
 	build e_StdList_dtoString;79 1 e_StdList_ntoString;79
 	push_arg 3 3 3
 	push_arg 4 3 2
 	push_a 2
-	build _ 2 n192
+	build _ 2 n200
 	push_a 6
 	update_a 3 12
 	update_a 2 11
@@ -8303,7 +9319,7 @@ else.142
 	pop_a 1
 	push_b 0
 	notB
-	jmp_false else.143
+	jmp_false else.167
 	buildAC "failed to close"
 	updatepop_a 0 2
 	pop_b 1
@@ -8317,21 +9333,21 @@ else.142
 	pop_a 1
 .d 1 1 b
 	rtn
-else.143
+else.167
 	push_arg 0 2 2
 	push_b 0
 	updatepop_a 0 2
 	updatepop_b 0 1
 .d 1 1 b
 	rtn
-.n 2 _ ea192
+.n 2 _ ea200
 .o 1 0
-n192
+n200
 	push_node _cycle_in_spine 2
 .o 3 0
-ea192
+ea200
 .o 3 0
-s192
+s200
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -8386,374 +9402,6 @@ s192
 	pop_b 2
 .d 1 0
 	rtn
-.n 2 _ ea191
-.o 1 0
-n191
-	push_node _cycle_in_spine 2
-.o 3 0
-ea191
-.o 3 0
-s191
-	push_a 0
-	jsr_eval 0
-	pushI_a 1
-	pop_a 1
-	pushI 1
-	push_b 1
-	update_b 1 2
-	update_b 0 1
-	pop_b 1
-	subI
-	push_a 1
-	pushI 0
-	updatepop_a 0 2
-.d 2 2 ii
-	jmp s79
-.n 2 _ ea190
-.o 1 0
-n190
-	push_node _cycle_in_spine 2
-.o 3 0
-ea190
-.o 3 0
-s190
-	push_a 0
-	jsr_eval 0
-	pushI_a 1
-	pop_a 1
-	pushI 1
-	push_b 1
-	update_b 1 2
-	update_b 0 1
-	pop_b 1
-	subI
-	push_a 1
-	pushI 0
-	updatepop_a 0 2
-.d 2 2 ii
-	jmp s78
-.n 2 _ ea189
-.o 1 0
-n189
-	push_node _cycle_in_spine 2
-.o 3 0
-ea189
-.o 3 0
-s189
-	push_a 1
-	jsr_eval 0
-	push_a 1
-	jsr_eval 0
-	buildh _Nil 0
-	update_a 0 3
-	update_a 0 4
-	pop_a 1
-.d 1 0
-	jsr e_StdList_slength;47
-.o 0 1 i
-	updatepop_a 0 2
-.d 2 1 i
-	jmp e_StdList_sdrop
-.o 6 0
-s93
-	push_a 5
-	buildI 2
-	push_a 3
-	buildAC "out.asm"
-	buildh ARRAY 1
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-	buildh _Nil 0
-	update_a 0 10
-	pop_a 1
-	jsr_ap 3
-	push_arg 0 3 1
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-	notB
-	jmp_false else.144
-	buildAC "failed to open file"
-	updatepop_a 0 7
-.d 1 0
-	jsr print_string_
-.o 0 0
-	halt
-	repl_args 2 2
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-.d 1 1 b
-	rtn
-else.144
-	buildAC "pop that "
-	buildh ARRAY 1
-	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
-	push_a 6
-	buildh ARRAY 1
-	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
-	push_arg 2 3 3
-	push_arg 3 3 2
-	push_a 2
-	build d_S.2 -1 n_S.2
-	push_a 3
-	build d_S.1 -1 n_S.1
-	build _ 2 n196
-	push_a 4
-	build d_S.2 -1 n_S.2
-	push_a 5
-	build d_S.1 -1 n_S.1
-	build _ 2 n195
-	build _ 2 n194
-	build _ 2 n193
-	push_a 5
-	update_a 2 11
-	update_a 1 10
-	updatepop_a 0 9
-	jsr_ap 2
-	push_arg 0 2 1
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-	push_b 0
-	notB
-	jmp_false else.145
-	buildAC "failed to close"
-	updatepop_a 0 1
-	pop_b 1
-.d 1 0
-	jsr print_string_
-.o 0 0
-	halt
-	repl_args 2 2
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-.d 1 1 b
-	rtn
-else.145
-	push_arg 0 2 2
-	push_b 0
-	updatepop_a 0 1
-	updatepop_b 0 1
-.d 1 1 b
-	rtn
-.n 2 _ ea196
-.o 1 0
-n196
-	push_node _cycle_in_spine 2
-.o 3 0
-ea196
-.o 3 0
-s196
-	push_a 0
-	jsr_eval 0
-	pushI_a 1
-	pop_a 1
-	pushI 1
-	push_b 1
-	update_b 1 2
-	update_b 0 1
-	pop_b 1
-	subI
-	push_a 1
-	pushI 0
-	updatepop_a 0 2
-.d 2 2 ii
-	jmp s77
-.n 2 _ ea195
-.o 1 0
-n195
-	push_node _cycle_in_spine 2
-.o 3 0
-ea195
-.o 3 0
-s195
-	push_a 0
-	jsr_eval 0
-	pushI_a 1
-	pop_a 1
-	pushI 1
-	push_b 1
-	update_b 1 2
-	update_b 0 1
-	pop_b 1
-	subI
-	push_a 1
-	pushI 0
-	updatepop_a 0 2
-.d 2 2 ii
-	jmp s76
-.n 2 _ ea194
-.o 1 0
-n194
-	push_node _cycle_in_spine 2
-.o 3 0
-ea194
-.o 3 0
-s194
-	push_a 1
-	jsr_eval 0
-	push_a 1
-	jsr_eval 0
-	buildh _Nil 0
-	update_a 0 3
-	update_a 0 4
-	pop_a 1
-.d 1 0
-	jsr e_StdList_slength;47
-.o 0 1 i
-	updatepop_a 0 2
-.d 2 1 i
-	jmp e_StdList_sdrop
-.n 2 _ ea193
-.o 1 0
-n193
-	push_node _cycle_in_spine 2
-.o 3 0
-ea193
-.o 3 0
-s193
-	push_a 1
-	jsr_eval 0
-	pushF_a 2
-	pop_a 1
-	push_a 0
-	jsr_eval 0
-	updatepop_a 0 2
-.d 1 0
-	jsr e_StdList_stoString;79
-.o 1 0
-	buildAC "\nD=A\n@THAT\nA=M+D\nD=A\n@13\nM=D\n@SP\nA=M-1\nD=M\n@13\nA=M\nM=D\n@SP\nM=M-1\n@13\nM=0\n\n"
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-.d 2 0
-	jsr catAC
-.o 1 0
-	buildAC "//pop that instruction\n@"
-.d 2 0
-	jsr catAC
-.o 1 0
-.d 1 2 f
-	jsr writeFS
-.o 0 2 f
-	fillF_b 0 0
-	pop_b 2
-.d 1 0
-	rtn
-.o 6 0
-s94
-	push_a 5
-	buildI 2
-	push_a 3
-	buildAC "out.asm"
-	buildh ARRAY 1
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-	buildh _Nil 0
-	update_a 0 10
-	pop_a 1
-	jsr_ap 3
-	push_arg 0 3 1
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-	notB
-	jmp_false else.146
-	buildAC "failed to open file"
-	updatepop_a 0 7
-.d 1 0
-	jsr print_string_
-.o 0 0
-	halt
-	repl_args 2 2
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-.d 1 1 b
-	rtn
-else.146
-	buildAC "pop this "
-	buildh ARRAY 1
-	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
-	push_a 6
-	buildh ARRAY 1
-	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
-	push_arg 2 3 3
-	push_arg 3 3 2
-	push_a 2
-	build d_S.2 -1 n_S.2
-	push_a 3
-	build d_S.1 -1 n_S.1
-	build _ 2 n200
-	push_a 4
-	build d_S.2 -1 n_S.2
-	push_a 5
-	build d_S.1 -1 n_S.1
-	build _ 2 n199
-	build _ 2 n198
-	build _ 2 n197
-	push_a 5
-	update_a 2 11
-	update_a 1 10
-	updatepop_a 0 9
-	jsr_ap 2
-	push_arg 0 2 1
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-	push_b 0
-	notB
-	jmp_false else.147
-	buildAC "failed to close"
-	updatepop_a 0 1
-	pop_b 1
-.d 1 0
-	jsr print_string_
-.o 0 0
-	halt
-	repl_args 2 2
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-.d 1 1 b
-	rtn
-else.147
-	push_arg 0 2 2
-	push_b 0
-	updatepop_a 0 1
-	updatepop_b 0 1
-.d 1 1 b
-	rtn
-.n 2 _ ea200
-.o 1 0
-n200
-	push_node _cycle_in_spine 2
-.o 3 0
-ea200
-.o 3 0
-s200
-	push_a 0
-	jsr_eval 0
-	pushI_a 1
-	pop_a 1
-	pushI 1
-	push_b 1
-	update_b 1 2
-	update_b 0 1
-	pop_b 1
-	subI
-	push_a 1
-	pushI 0
-	updatepop_a 0 2
-.d 2 2 ii
-	jmp s75
 .n 2 _ ea199
 .o 1 0
 n199
@@ -8776,7 +9424,7 @@ s199
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s74
+	jmp s83
 .n 2 _ ea198
 .o 1 0
 n198
@@ -8785,6 +9433,29 @@ n198
 ea198
 .o 3 0
 s198
+	push_a 0
+	jsr_eval 0
+	pushI_a 1
+	pop_a 1
+	pushI 1
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	subI
+	push_a 1
+	pushI 0
+	updatepop_a 0 2
+.d 2 2 ii
+	jmp s82
+.n 2 _ ea197
+.o 1 0
+n197
+	push_node _cycle_in_spine 2
+.o 3 0
+ea197
+.o 3 0
+s197
 	push_a 1
 	jsr_eval 0
 	push_a 1
@@ -8799,45 +9470,8 @@ s198
 	updatepop_a 0 2
 .d 2 1 i
 	jmp e_StdList_sdrop
-.n 2 _ ea197
-.o 1 0
-n197
-	push_node _cycle_in_spine 2
-.o 3 0
-ea197
-.o 3 0
-s197
-	push_a 1
-	jsr_eval 0
-	pushF_a 2
-	pop_a 1
-	push_a 0
-	jsr_eval 0
-	updatepop_a 0 2
-.d 1 0
-	jsr e_StdList_stoString;79
-.o 1 0
-	buildAC "\nD=A\n@THIS\nA=M+D\nD=A\n@13\nM=D\n@SP\nA=M-1\nD=M\n@13\nA=M\nM=D\n@SP\nM=M-1\n@13\nM=0\n\n"
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-.d 2 0
-	jsr catAC
-.o 1 0
-	buildAC "//pop this instruction\n@"
-.d 2 0
-	jsr catAC
-.o 1 0
-.d 1 2 f
-	jsr writeFS
-.o 0 2 f
-	fillF_b 0 0
-	pop_b 2
-.d 1 0
-	rtn
 .o 6 0
-s95
+s101
 	push_a 5
 	buildI 2
 	push_a 3
@@ -8856,7 +9490,7 @@ s95
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.148
+	jmp_false else.168
 	buildAC "failed to open file"
 	updatepop_a 0 7
 .d 1 0
@@ -8869,8 +9503,8 @@ s95
 	pop_a 1
 .d 1 1 b
 	rtn
-else.148
-	buildAC "pop local "
+else.168
+	buildAC "pop that "
 	buildh ARRAY 1
 	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
 	push_a 6
@@ -8901,7 +9535,7 @@ else.148
 	pop_a 1
 	push_b 0
 	notB
-	jmp_false else.149
+	jmp_false else.169
 	buildAC "failed to close"
 	updatepop_a 0 1
 	pop_b 1
@@ -8915,7 +9549,7 @@ else.148
 	pop_a 1
 .d 1 1 b
 	rtn
-else.149
+else.169
 	push_arg 0 2 2
 	push_b 0
 	updatepop_a 0 1
@@ -8944,7 +9578,7 @@ s204
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s73
+	jmp s81
 .n 2 _ ea203
 .o 1 0
 n203
@@ -8967,7 +9601,7 @@ s203
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s72
+	jmp s80
 .n 2 _ ea202
 .o 1 0
 n202
@@ -9008,7 +9642,7 @@ s201
 .d 1 0
 	jsr e_StdList_stoString;79
 .o 1 0
-	buildAC "\nD=A\n@LCL\nA=M+D\nD=A\n@13\nM=D\n@SP\nA=M-1\nD=M\n@13\nA=M\nM=D\n@SP\nM=M-1\n@13\nM=0\n\n"
+	buildAC "\nD=A\n@THAT\nA=M+D\nD=A\n@13\nM=D\n@SP\nA=M-1\nD=M\n@13\nA=M\nM=D\n@SP\nM=M-1\n@13\nM=0\n\n"
 	push_a 1
 	update_a 1 2
 	update_a 0 1
@@ -9016,7 +9650,7 @@ s201
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "//pop local instruction\n@"
+	buildAC "//pop that instruction\n@"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -9028,7 +9662,7 @@ s201
 .d 1 0
 	rtn
 .o 6 0
-s96
+s102
 	push_a 5
 	buildI 2
 	push_a 3
@@ -9047,7 +9681,7 @@ s96
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.150
+	jmp_false else.170
 	buildAC "failed to open file"
 	updatepop_a 0 7
 .d 1 0
@@ -9060,8 +9694,8 @@ s96
 	pop_a 1
 .d 1 1 b
 	rtn
-else.150
-	buildAC "pop argument "
+else.170
+	buildAC "pop this "
 	buildh ARRAY 1
 	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
 	push_a 6
@@ -9092,7 +9726,7 @@ else.150
 	pop_a 1
 	push_b 0
 	notB
-	jmp_false else.151
+	jmp_false else.171
 	buildAC "failed to close"
 	updatepop_a 0 1
 	pop_b 1
@@ -9106,7 +9740,7 @@ else.150
 	pop_a 1
 .d 1 1 b
 	rtn
-else.151
+else.171
 	push_arg 0 2 2
 	push_b 0
 	updatepop_a 0 1
@@ -9135,7 +9769,7 @@ s208
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s71
+	jmp s79
 .n 2 _ ea207
 .o 1 0
 n207
@@ -9158,7 +9792,7 @@ s207
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s70
+	jmp s78
 .n 2 _ ea206
 .o 1 0
 n206
@@ -9199,7 +9833,7 @@ s205
 .d 1 0
 	jsr e_StdList_stoString;79
 .o 1 0
-	buildAC "\nD=A\n@ARG\nA=M+D\nD=A\n@13\nM=D\n@SP\nA=M-1\nD=M\n@13\nA=M\nM=D\n@SP\nM=M-1\n@13\nM=0\n\n"
+	buildAC "\nD=A\n@THIS\nA=M+D\nD=A\n@13\nM=D\n@SP\nA=M-1\nD=M\n@13\nA=M\nM=D\n@SP\nM=M-1\n@13\nM=0\n\n"
 	push_a 1
 	update_a 1 2
 	update_a 0 1
@@ -9207,7 +9841,7 @@ s205
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "//pop argument instruction\n@"
+	buildAC "//pop this instruction\n@"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -9219,7 +9853,7 @@ s205
 .d 1 0
 	rtn
 .o 6 0
-s97
+s103
 	push_a 5
 	buildI 2
 	push_a 3
@@ -9238,7 +9872,7 @@ s97
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.152
+	jmp_false else.172
 	buildAC "failed to open file"
 	updatepop_a 0 7
 .d 1 0
@@ -9251,8 +9885,8 @@ s97
 	pop_a 1
 .d 1 1 b
 	rtn
-else.152
-	buildAC "pop static "
+else.172
+	buildAC "pop local "
 	buildh ARRAY 1
 	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
 	push_a 6
@@ -9283,7 +9917,7 @@ else.152
 	pop_a 1
 	push_b 0
 	notB
-	jmp_false else.153
+	jmp_false else.173
 	buildAC "failed to close"
 	updatepop_a 0 1
 	pop_b 1
@@ -9297,7 +9931,7 @@ else.152
 	pop_a 1
 .d 1 1 b
 	rtn
-else.153
+else.173
 	push_arg 0 2 2
 	push_b 0
 	updatepop_a 0 1
@@ -9326,7 +9960,7 @@ s212
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s69
+	jmp s77
 .n 2 _ ea211
 .o 1 0
 n211
@@ -9349,7 +9983,7 @@ s211
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s68
+	jmp s76
 .n 2 _ ea210
 .o 1 0
 n210
@@ -9390,7 +10024,7 @@ s209
 .d 1 0
 	jsr e_StdList_stoString;79
 .o 1 0
-	buildAC "/// TODO"
+	buildAC "\nD=A\n@LCL\nA=M+D\nD=A\n@13\nM=D\n@SP\nA=M-1\nD=M\n@13\nA=M\nM=D\n@SP\nM=M-1\n@13\nM=0\n\n"
 	push_a 1
 	update_a 1 2
 	update_a 0 1
@@ -9398,7 +10032,7 @@ s209
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "//pop static instruction\n@"
+	buildAC "//pop local instruction\n@"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -9410,7 +10044,7 @@ s209
 .d 1 0
 	rtn
 .o 6 0
-s98
+s104
 	push_a 5
 	buildI 2
 	push_a 3
@@ -9429,7 +10063,7 @@ s98
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.154
+	jmp_false else.174
 	buildAC "failed to open file"
 	updatepop_a 0 7
 .d 1 0
@@ -9442,8 +10076,199 @@ s98
 	pop_a 1
 .d 1 1 b
 	rtn
-else.154
-	buildAC "push temp "
+else.174
+	buildAC "pop argument "
+	buildh ARRAY 1
+	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
+	push_a 6
+	buildh ARRAY 1
+	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
+	push_arg 2 3 3
+	push_arg 3 3 2
+	push_a 2
+	build d_S.2 -1 n_S.2
+	push_a 3
+	build d_S.1 -1 n_S.1
+	build _ 2 n216
+	push_a 4
+	build d_S.2 -1 n_S.2
+	push_a 5
+	build d_S.1 -1 n_S.1
+	build _ 2 n215
+	build _ 2 n214
+	build _ 2 n213
+	push_a 5
+	update_a 2 11
+	update_a 1 10
+	updatepop_a 0 9
+	jsr_ap 2
+	push_arg 0 2 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	push_b 0
+	notB
+	jmp_false else.175
+	buildAC "failed to close"
+	updatepop_a 0 1
+	pop_b 1
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 1 1 b
+	rtn
+else.175
+	push_arg 0 2 2
+	push_b 0
+	updatepop_a 0 1
+	updatepop_b 0 1
+.d 1 1 b
+	rtn
+.n 2 _ ea216
+.o 1 0
+n216
+	push_node _cycle_in_spine 2
+.o 3 0
+ea216
+.o 3 0
+s216
+	push_a 0
+	jsr_eval 0
+	pushI_a 1
+	pop_a 1
+	pushI 1
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	subI
+	push_a 1
+	pushI 0
+	updatepop_a 0 2
+.d 2 2 ii
+	jmp s75
+.n 2 _ ea215
+.o 1 0
+n215
+	push_node _cycle_in_spine 2
+.o 3 0
+ea215
+.o 3 0
+s215
+	push_a 0
+	jsr_eval 0
+	pushI_a 1
+	pop_a 1
+	pushI 1
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	subI
+	push_a 1
+	pushI 0
+	updatepop_a 0 2
+.d 2 2 ii
+	jmp s74
+.n 2 _ ea214
+.o 1 0
+n214
+	push_node _cycle_in_spine 2
+.o 3 0
+ea214
+.o 3 0
+s214
+	push_a 1
+	jsr_eval 0
+	push_a 1
+	jsr_eval 0
+	buildh _Nil 0
+	update_a 0 3
+	update_a 0 4
+	pop_a 1
+.d 1 0
+	jsr e_StdList_slength;47
+.o 0 1 i
+	updatepop_a 0 2
+.d 2 1 i
+	jmp e_StdList_sdrop
+.n 2 _ ea213
+.o 1 0
+n213
+	push_node _cycle_in_spine 2
+.o 3 0
+ea213
+.o 3 0
+s213
+	push_a 1
+	jsr_eval 0
+	pushF_a 2
+	pop_a 1
+	push_a 0
+	jsr_eval 0
+	updatepop_a 0 2
+.d 1 0
+	jsr e_StdList_stoString;79
+.o 1 0
+	buildAC "\nD=A\n@ARG\nA=M+D\nD=A\n@13\nM=D\n@SP\nA=M-1\nD=M\n@13\nA=M\nM=D\n@SP\nM=M-1\n@13\nM=0\n\n"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.d 2 0
+	jsr catAC
+.o 1 0
+	buildAC "//pop argument instruction\n@"
+.d 2 0
+	jsr catAC
+.o 1 0
+.d 1 2 f
+	jsr writeFS
+.o 0 2 f
+	fillF_b 0 0
+	pop_b 2
+.d 1 0
+	rtn
+.o 6 0
+s105
+	push_a 5
+	buildI 2
+	push_a 3
+	buildAC "out.asm"
+	buildh ARRAY 1
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	buildh _Nil 0
+	update_a 0 10
+	pop_a 1
+	jsr_ap 3
+	push_arg 0 3 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.176
+	buildAC "failed to open file"
+	updatepop_a 0 7
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 1 1 b
+	rtn
+else.176
+	buildAC "pop static "
 	buildh ARRAY 1
 	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
 	push_a 6
@@ -9453,18 +10278,18 @@ else.154
 	build d_S.2 -1 n_S.2
 	push_a 1
 	build d_S.1 -1 n_S.1
-	build _ 2 n215
+	build _ 2 n219
 	push_a 2
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n214
-	build _ 2 n213
+	build _ 2 n218
+	build _ 2 n217
 	build e_StdList_dtoString;79 1 e_StdList_ntoString;79
 	push_arg 3 3 3
 	push_arg 4 3 2
 	push_a 2
-	build _ 2 n216
+	build _ 2 n220
 	push_a 6
 	update_a 3 12
 	update_a 2 11
@@ -9477,7 +10302,7 @@ else.154
 	pop_a 1
 	push_b 0
 	notB
-	jmp_false else.155
+	jmp_false else.177
 	buildAC "failed to close"
 	updatepop_a 0 2
 	pop_b 1
@@ -9491,21 +10316,240 @@ else.154
 	pop_a 1
 .d 1 1 b
 	rtn
-else.155
+else.177
 	push_arg 0 2 2
 	push_b 0
 	updatepop_a 0 2
 	updatepop_b 0 1
 .d 1 1 b
 	rtn
-.n 2 _ ea216
+.n 2 _ ea220
 .o 1 0
-n216
+n220
 	push_node _cycle_in_spine 2
 .o 3 0
-ea216
+ea220
 .o 3 0
-s216
+s220
+	push_a 1
+	jsr_eval 0
+	pushF_a 2
+	pop_a 1
+	push_a 0
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	update_a 1 2
+	updatepop_a 0 1
+	push_arraysize CHAR 0 1
+	pushI 2
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	subI
+	pushI 0
+	push_array 0
+	updatepop_a 0 1
+.d 1 2 ii
+	jsr sliceAC
+.o 1 0
+.d 1 0
+	jsr e_StdInt_stoInt;23
+.o 0 1 i
+	pushI 16
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	addI
+.d 0 1 i
+	jsr ItoAC
+.o 1 0
+	buildAC "\nM=D\n@SP\nM=M-1\n\n"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.d 2 0
+	jsr catAC
+.o 1 0
+	buildAC "//pop static instruction\n@SP\nA=M-1\nD=M\n@"
+.d 2 0
+	jsr catAC
+.o 1 0
+.d 1 2 f
+	jsr writeFS
+.o 0 2 f
+	fillF_b 0 0
+	pop_b 2
+.d 1 0
+	rtn
+.n 2 _ ea219
+.o 1 0
+n219
+	push_node _cycle_in_spine 2
+.o 3 0
+ea219
+.o 3 0
+s219
+	push_a 0
+	jsr_eval 0
+	pushI_a 1
+	pop_a 1
+	pushI 1
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	subI
+	push_a 1
+	pushI 0
+	updatepop_a 0 2
+.d 2 2 ii
+	jmp s73
+.n 2 _ ea218
+.o 1 0
+n218
+	push_node _cycle_in_spine 2
+.o 3 0
+ea218
+.o 3 0
+s218
+	push_a 0
+	jsr_eval 0
+	pushI_a 1
+	pop_a 1
+	pushI 1
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	subI
+	push_a 1
+	pushI 0
+	updatepop_a 0 2
+.d 2 2 ii
+	jmp s72
+.n 2 _ ea217
+.o 1 0
+n217
+	push_node _cycle_in_spine 2
+.o 3 0
+ea217
+.o 3 0
+s217
+	push_a 1
+	jsr_eval 0
+	push_a 1
+	jsr_eval 0
+	buildh _Nil 0
+	update_a 0 3
+	update_a 0 4
+	pop_a 1
+.d 1 0
+	jsr e_StdList_slength;47
+.o 0 1 i
+	updatepop_a 0 2
+.d 2 1 i
+	jmp e_StdList_sdrop
+.o 6 0
+s106
+	push_a 5
+	buildI 2
+	push_a 3
+	buildAC "out.asm"
+	buildh ARRAY 1
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	buildh _Nil 0
+	update_a 0 10
+	pop_a 1
+	jsr_ap 3
+	push_arg 0 3 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.178
+	buildAC "failed to open file"
+	updatepop_a 0 7
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 1 1 b
+	rtn
+else.178
+	buildAC "push temp "
+	buildh ARRAY 1
+	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
+	push_a 6
+	buildh ARRAY 1
+	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
+	push_a 0
+	build d_S.2 -1 n_S.2
+	push_a 1
+	build d_S.1 -1 n_S.1
+	build _ 2 n223
+	push_a 2
+	build d_S.2 -1 n_S.2
+	push_a 3
+	build d_S.1 -1 n_S.1
+	build _ 2 n222
+	build _ 2 n221
+	build e_StdList_dtoString;79 1 e_StdList_ntoString;79
+	push_arg 3 3 3
+	push_arg 4 3 2
+	push_a 2
+	build _ 2 n224
+	push_a 6
+	update_a 3 12
+	update_a 2 11
+	update_a 1 10
+	updatepop_a 0 9
+	jsr_ap 2
+	push_arg 0 2 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	push_b 0
+	notB
+	jmp_false else.179
+	buildAC "failed to close"
+	updatepop_a 0 2
+	pop_b 1
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 1 1 b
+	rtn
+else.179
+	push_arg 0 2 2
+	push_b 0
+	updatepop_a 0 2
+	updatepop_b 0 1
+.d 1 1 b
+	rtn
+.n 2 _ ea224
+.o 1 0
+n224
+	push_node _cycle_in_spine 2
+.o 3 0
+ea224
+.o 3 0
+s224
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -9560,374 +10604,6 @@ s216
 	pop_b 2
 .d 1 0
 	rtn
-.n 2 _ ea215
-.o 1 0
-n215
-	push_node _cycle_in_spine 2
-.o 3 0
-ea215
-.o 3 0
-s215
-	push_a 0
-	jsr_eval 0
-	pushI_a 1
-	pop_a 1
-	pushI 1
-	push_b 1
-	update_b 1 2
-	update_b 0 1
-	pop_b 1
-	subI
-	push_a 1
-	pushI 0
-	updatepop_a 0 2
-.d 2 2 ii
-	jmp s67
-.n 2 _ ea214
-.o 1 0
-n214
-	push_node _cycle_in_spine 2
-.o 3 0
-ea214
-.o 3 0
-s214
-	push_a 0
-	jsr_eval 0
-	pushI_a 1
-	pop_a 1
-	pushI 1
-	push_b 1
-	update_b 1 2
-	update_b 0 1
-	pop_b 1
-	subI
-	push_a 1
-	pushI 0
-	updatepop_a 0 2
-.d 2 2 ii
-	jmp s66
-.n 2 _ ea213
-.o 1 0
-n213
-	push_node _cycle_in_spine 2
-.o 3 0
-ea213
-.o 3 0
-s213
-	push_a 1
-	jsr_eval 0
-	push_a 1
-	jsr_eval 0
-	buildh _Nil 0
-	update_a 0 3
-	update_a 0 4
-	pop_a 1
-.d 1 0
-	jsr e_StdList_slength;47
-.o 0 1 i
-	updatepop_a 0 2
-.d 2 1 i
-	jmp e_StdList_sdrop
-.o 6 0
-s99
-	push_a 5
-	buildI 2
-	push_a 3
-	buildAC "out.asm"
-	buildh ARRAY 1
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-	buildh _Nil 0
-	update_a 0 10
-	pop_a 1
-	jsr_ap 3
-	push_arg 0 3 1
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-	notB
-	jmp_false else.156
-	buildAC "failed to open file"
-	updatepop_a 0 7
-.d 1 0
-	jsr print_string_
-.o 0 0
-	halt
-	repl_args 2 2
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-.d 1 1 b
-	rtn
-else.156
-	buildAC "push that "
-	buildh ARRAY 1
-	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
-	push_a 6
-	buildh ARRAY 1
-	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
-	push_arg 2 3 3
-	push_arg 3 3 2
-	push_a 2
-	build d_S.2 -1 n_S.2
-	push_a 3
-	build d_S.1 -1 n_S.1
-	build _ 2 n220
-	push_a 4
-	build d_S.2 -1 n_S.2
-	push_a 5
-	build d_S.1 -1 n_S.1
-	build _ 2 n219
-	build _ 2 n218
-	build _ 2 n217
-	push_a 5
-	update_a 2 11
-	update_a 1 10
-	updatepop_a 0 9
-	jsr_ap 2
-	push_arg 0 2 1
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-	push_b 0
-	notB
-	jmp_false else.157
-	buildAC "failed to close"
-	updatepop_a 0 1
-	pop_b 1
-.d 1 0
-	jsr print_string_
-.o 0 0
-	halt
-	repl_args 2 2
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-.d 1 1 b
-	rtn
-else.157
-	push_arg 0 2 2
-	push_b 0
-	updatepop_a 0 1
-	updatepop_b 0 1
-.d 1 1 b
-	rtn
-.n 2 _ ea220
-.o 1 0
-n220
-	push_node _cycle_in_spine 2
-.o 3 0
-ea220
-.o 3 0
-s220
-	push_a 0
-	jsr_eval 0
-	pushI_a 1
-	pop_a 1
-	pushI 1
-	push_b 1
-	update_b 1 2
-	update_b 0 1
-	pop_b 1
-	subI
-	push_a 1
-	pushI 0
-	updatepop_a 0 2
-.d 2 2 ii
-	jmp s65
-.n 2 _ ea219
-.o 1 0
-n219
-	push_node _cycle_in_spine 2
-.o 3 0
-ea219
-.o 3 0
-s219
-	push_a 0
-	jsr_eval 0
-	pushI_a 1
-	pop_a 1
-	pushI 1
-	push_b 1
-	update_b 1 2
-	update_b 0 1
-	pop_b 1
-	subI
-	push_a 1
-	pushI 0
-	updatepop_a 0 2
-.d 2 2 ii
-	jmp s64
-.n 2 _ ea218
-.o 1 0
-n218
-	push_node _cycle_in_spine 2
-.o 3 0
-ea218
-.o 3 0
-s218
-	push_a 1
-	jsr_eval 0
-	push_a 1
-	jsr_eval 0
-	buildh _Nil 0
-	update_a 0 3
-	update_a 0 4
-	pop_a 1
-.d 1 0
-	jsr e_StdList_slength;47
-.o 0 1 i
-	updatepop_a 0 2
-.d 2 1 i
-	jmp e_StdList_sdrop
-.n 2 _ ea217
-.o 1 0
-n217
-	push_node _cycle_in_spine 2
-.o 3 0
-ea217
-.o 3 0
-s217
-	push_a 1
-	jsr_eval 0
-	pushF_a 2
-	pop_a 1
-	push_a 0
-	jsr_eval 0
-	updatepop_a 0 2
-.d 1 0
-	jsr e_StdList_stoString;79
-.o 1 0
-	buildAC "\nD=A\n@THAT\nA=M+D\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n\n"
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-.d 2 0
-	jsr catAC
-.o 1 0
-	buildAC "//push that instruction\n@"
-.d 2 0
-	jsr catAC
-.o 1 0
-.d 1 2 f
-	jsr writeFS
-.o 0 2 f
-	fillF_b 0 0
-	pop_b 2
-.d 1 0
-	rtn
-.o 6 0
-s100
-	push_a 5
-	buildI 2
-	push_a 3
-	buildAC "out.asm"
-	buildh ARRAY 1
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-	buildh _Nil 0
-	update_a 0 10
-	pop_a 1
-	jsr_ap 3
-	push_arg 0 3 1
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-	notB
-	jmp_false else.158
-	buildAC "failed to open file"
-	updatepop_a 0 7
-.d 1 0
-	jsr print_string_
-.o 0 0
-	halt
-	repl_args 2 2
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-.d 1 1 b
-	rtn
-else.158
-	buildAC "push this "
-	buildh ARRAY 1
-	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
-	push_a 6
-	buildh ARRAY 1
-	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
-	push_arg 2 3 3
-	push_arg 3 3 2
-	push_a 2
-	build d_S.2 -1 n_S.2
-	push_a 3
-	build d_S.1 -1 n_S.1
-	build _ 2 n224
-	push_a 4
-	build d_S.2 -1 n_S.2
-	push_a 5
-	build d_S.1 -1 n_S.1
-	build _ 2 n223
-	build _ 2 n222
-	build _ 2 n221
-	push_a 5
-	update_a 2 11
-	update_a 1 10
-	updatepop_a 0 9
-	jsr_ap 2
-	push_arg 0 2 1
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-	push_b 0
-	notB
-	jmp_false else.159
-	buildAC "failed to close"
-	updatepop_a 0 1
-	pop_b 1
-.d 1 0
-	jsr print_string_
-.o 0 0
-	halt
-	repl_args 2 2
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-.d 1 1 b
-	rtn
-else.159
-	push_arg 0 2 2
-	push_b 0
-	updatepop_a 0 1
-	updatepop_b 0 1
-.d 1 1 b
-	rtn
-.n 2 _ ea224
-.o 1 0
-n224
-	push_node _cycle_in_spine 2
-.o 3 0
-ea224
-.o 3 0
-s224
-	push_a 0
-	jsr_eval 0
-	pushI_a 1
-	pop_a 1
-	pushI 1
-	push_b 1
-	update_b 1 2
-	update_b 0 1
-	pop_b 1
-	subI
-	push_a 1
-	pushI 0
-	updatepop_a 0 2
-.d 2 2 ii
-	jmp s63
 .n 2 _ ea223
 .o 1 0
 n223
@@ -9950,7 +10626,7 @@ s223
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s62
+	jmp s71
 .n 2 _ ea222
 .o 1 0
 n222
@@ -9959,6 +10635,29 @@ n222
 ea222
 .o 3 0
 s222
+	push_a 0
+	jsr_eval 0
+	pushI_a 1
+	pop_a 1
+	pushI 1
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	subI
+	push_a 1
+	pushI 0
+	updatepop_a 0 2
+.d 2 2 ii
+	jmp s70
+.n 2 _ ea221
+.o 1 0
+n221
+	push_node _cycle_in_spine 2
+.o 3 0
+ea221
+.o 3 0
+s221
 	push_a 1
 	jsr_eval 0
 	push_a 1
@@ -9973,45 +10672,8 @@ s222
 	updatepop_a 0 2
 .d 2 1 i
 	jmp e_StdList_sdrop
-.n 2 _ ea221
-.o 1 0
-n221
-	push_node _cycle_in_spine 2
-.o 3 0
-ea221
-.o 3 0
-s221
-	push_a 1
-	jsr_eval 0
-	pushF_a 2
-	pop_a 1
-	push_a 0
-	jsr_eval 0
-	updatepop_a 0 2
-.d 1 0
-	jsr e_StdList_stoString;79
-.o 1 0
-	buildAC "\nD=A\n@THIS\nA=M+D\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n\n"
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-.d 2 0
-	jsr catAC
-.o 1 0
-	buildAC "//push this instruction\n@"
-.d 2 0
-	jsr catAC
-.o 1 0
-.d 1 2 f
-	jsr writeFS
-.o 0 2 f
-	fillF_b 0 0
-	pop_b 2
-.d 1 0
-	rtn
 .o 6 0
-s101
+s107
 	push_a 5
 	buildI 2
 	push_a 3
@@ -10030,7 +10692,7 @@ s101
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.160
+	jmp_false else.180
 	buildAC "failed to open file"
 	updatepop_a 0 7
 .d 1 0
@@ -10043,8 +10705,8 @@ s101
 	pop_a 1
 .d 1 1 b
 	rtn
-else.160
-	buildAC "push local "
+else.180
+	buildAC "push that "
 	buildh ARRAY 1
 	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
 	push_a 6
@@ -10075,7 +10737,7 @@ else.160
 	pop_a 1
 	push_b 0
 	notB
-	jmp_false else.161
+	jmp_false else.181
 	buildAC "failed to close"
 	updatepop_a 0 1
 	pop_b 1
@@ -10089,7 +10751,7 @@ else.160
 	pop_a 1
 .d 1 1 b
 	rtn
-else.161
+else.181
 	push_arg 0 2 2
 	push_b 0
 	updatepop_a 0 1
@@ -10118,7 +10780,7 @@ s228
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s61
+	jmp s69
 .n 2 _ ea227
 .o 1 0
 n227
@@ -10141,7 +10803,7 @@ s227
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s60
+	jmp s68
 .n 2 _ ea226
 .o 1 0
 n226
@@ -10182,7 +10844,7 @@ s225
 .d 1 0
 	jsr e_StdList_stoString;79
 .o 1 0
-	buildAC "\nD=A\n@LCL\nA=M+D\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n\n"
+	buildAC "\nD=A\n@THAT\nA=M+D\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n\n"
 	push_a 1
 	update_a 1 2
 	update_a 0 1
@@ -10190,7 +10852,7 @@ s225
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "//push local instruction\n@"
+	buildAC "//push that instruction\n@"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -10202,7 +10864,7 @@ s225
 .d 1 0
 	rtn
 .o 6 0
-s102
+s108
 	push_a 5
 	buildI 2
 	push_a 3
@@ -10221,7 +10883,7 @@ s102
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.162
+	jmp_false else.182
 	buildAC "failed to open file"
 	updatepop_a 0 7
 .d 1 0
@@ -10234,8 +10896,8 @@ s102
 	pop_a 1
 .d 1 1 b
 	rtn
-else.162
-	buildAC "push argument "
+else.182
+	buildAC "push this "
 	buildh ARRAY 1
 	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
 	push_a 6
@@ -10266,7 +10928,7 @@ else.162
 	pop_a 1
 	push_b 0
 	notB
-	jmp_false else.163
+	jmp_false else.183
 	buildAC "failed to close"
 	updatepop_a 0 1
 	pop_b 1
@@ -10280,7 +10942,7 @@ else.162
 	pop_a 1
 .d 1 1 b
 	rtn
-else.163
+else.183
 	push_arg 0 2 2
 	push_b 0
 	updatepop_a 0 1
@@ -10309,7 +10971,7 @@ s232
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s59
+	jmp s67
 .n 2 _ ea231
 .o 1 0
 n231
@@ -10332,7 +10994,7 @@ s231
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s58
+	jmp s66
 .n 2 _ ea230
 .o 1 0
 n230
@@ -10373,7 +11035,7 @@ s229
 .d 1 0
 	jsr e_StdList_stoString;79
 .o 1 0
-	buildAC "\nD=A\n@ARG\nA=M+D\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n\n"
+	buildAC "\nD=A\n@THIS\nA=M+D\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n\n"
 	push_a 1
 	update_a 1 2
 	update_a 0 1
@@ -10381,7 +11043,7 @@ s229
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "//push argument instruction\n@"
+	buildAC "//push this instruction\n@"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -10393,7 +11055,7 @@ s229
 .d 1 0
 	rtn
 .o 6 0
-s103
+s109
 	push_a 5
 	buildI 2
 	push_a 3
@@ -10412,7 +11074,7 @@ s103
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.164
+	jmp_false else.184
 	buildAC "failed to open file"
 	updatepop_a 0 7
 .d 1 0
@@ -10425,8 +11087,8 @@ s103
 	pop_a 1
 .d 1 1 b
 	rtn
-else.164
-	buildAC "push static "
+else.184
+	buildAC "push local "
 	buildh ARRAY 1
 	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
 	push_a 6
@@ -10457,7 +11119,7 @@ else.164
 	pop_a 1
 	push_b 0
 	notB
-	jmp_false else.165
+	jmp_false else.185
 	buildAC "failed to close"
 	updatepop_a 0 1
 	pop_b 1
@@ -10471,7 +11133,7 @@ else.164
 	pop_a 1
 .d 1 1 b
 	rtn
-else.165
+else.185
 	push_arg 0 2 2
 	push_b 0
 	updatepop_a 0 1
@@ -10500,7 +11162,7 @@ s236
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s57
+	jmp s65
 .n 2 _ ea235
 .o 1 0
 n235
@@ -10523,7 +11185,7 @@ s235
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s56
+	jmp s64
 .n 2 _ ea234
 .o 1 0
 n234
@@ -10564,7 +11226,7 @@ s233
 .d 1 0
 	jsr e_StdList_stoString;79
 .o 1 0
-	buildAC "\nD=A\n@STATIC\nA=M+D\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n\n"
+	buildAC "\nD=A\n@LCL\nA=M+D\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n\n"
 	push_a 1
 	update_a 1 2
 	update_a 0 1
@@ -10572,7 +11234,7 @@ s233
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "//push static instruction\n@"
+	buildAC "//push local instruction\n@"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -10584,7 +11246,7 @@ s233
 .d 1 0
 	rtn
 .o 6 0
-s104
+s110
 	push_a 5
 	buildI 2
 	push_a 3
@@ -10603,7 +11265,7 @@ s104
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.166
+	jmp_false else.186
 	buildAC "failed to open file"
 	updatepop_a 0 7
 .d 1 0
@@ -10616,8 +11278,8 @@ s104
 	pop_a 1
 .d 1 1 b
 	rtn
-else.166
-	buildAC "push constant "
+else.186
+	buildAC "push argument "
 	buildh ARRAY 1
 	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
 	push_a 6
@@ -10648,7 +11310,7 @@ else.166
 	pop_a 1
 	push_b 0
 	notB
-	jmp_false else.167
+	jmp_false else.187
 	buildAC "failed to close"
 	updatepop_a 0 1
 	pop_b 1
@@ -10662,7 +11324,7 @@ else.166
 	pop_a 1
 .d 1 1 b
 	rtn
-else.167
+else.187
 	push_arg 0 2 2
 	push_b 0
 	updatepop_a 0 1
@@ -10691,7 +11353,7 @@ s240
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s55
+	jmp s63
 .n 2 _ ea239
 .o 1 0
 n239
@@ -10714,7 +11376,7 @@ s239
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s54
+	jmp s62
 .n 2 _ ea238
 .o 1 0
 n238
@@ -10745,6 +11407,416 @@ n237
 ea237
 .o 3 0
 s237
+	push_a 1
+	jsr_eval 0
+	pushF_a 2
+	pop_a 1
+	push_a 0
+	jsr_eval 0
+	updatepop_a 0 2
+.d 1 0
+	jsr e_StdList_stoString;79
+.o 1 0
+	buildAC "\nD=A\n@ARG\nA=M+D\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n\n"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.d 2 0
+	jsr catAC
+.o 1 0
+	buildAC "//push argument instruction\n@"
+.d 2 0
+	jsr catAC
+.o 1 0
+.d 1 2 f
+	jsr writeFS
+.o 0 2 f
+	fillF_b 0 0
+	pop_b 2
+.d 1 0
+	rtn
+.o 6 0
+s111
+	push_a 5
+	buildI 2
+	push_a 3
+	buildAC "out.asm"
+	buildh ARRAY 1
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	buildh _Nil 0
+	update_a 0 10
+	pop_a 1
+	jsr_ap 3
+	push_arg 0 3 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.188
+	buildAC "failed to open file"
+	updatepop_a 0 7
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 1 1 b
+	rtn
+else.188
+	buildAC "push static "
+	buildh ARRAY 1
+	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
+	push_a 6
+	buildh ARRAY 1
+	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
+	push_a 0
+	build d_S.2 -1 n_S.2
+	push_a 1
+	build d_S.1 -1 n_S.1
+	build _ 2 n243
+	push_a 2
+	build d_S.2 -1 n_S.2
+	push_a 3
+	build d_S.1 -1 n_S.1
+	build _ 2 n242
+	build _ 2 n241
+	build e_StdList_dtoString;79 1 e_StdList_ntoString;79
+	push_arg 3 3 3
+	push_arg 4 3 2
+	push_a 2
+	build _ 2 n244
+	push_a 6
+	update_a 3 12
+	update_a 2 11
+	update_a 1 10
+	updatepop_a 0 9
+	jsr_ap 2
+	push_arg 0 2 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	push_b 0
+	notB
+	jmp_false else.189
+	buildAC "failed to close"
+	updatepop_a 0 2
+	pop_b 1
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 1 1 b
+	rtn
+else.189
+	push_arg 0 2 2
+	push_b 0
+	updatepop_a 0 2
+	updatepop_b 0 1
+.d 1 1 b
+	rtn
+.n 2 _ ea244
+.o 1 0
+n244
+	push_node _cycle_in_spine 2
+.o 3 0
+ea244
+.o 3 0
+s244
+	push_a 1
+	jsr_eval 0
+	pushF_a 2
+	pop_a 1
+	push_a 0
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	update_a 1 2
+	updatepop_a 0 1
+	push_arraysize CHAR 0 1
+	pushI 2
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	subI
+	pushI 0
+	push_array 0
+	updatepop_a 0 1
+.d 1 2 ii
+	jsr sliceAC
+.o 1 0
+.d 1 0
+	jsr e_StdInt_stoInt;23
+.o 0 1 i
+	pushI 16
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	addI
+.d 0 1 i
+	jsr ItoAC
+.o 1 0
+	buildAC "\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n\n"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.d 2 0
+	jsr catAC
+.o 1 0
+	buildAC "//push static instruction\n@"
+.d 2 0
+	jsr catAC
+.o 1 0
+.d 1 2 f
+	jsr writeFS
+.o 0 2 f
+	fillF_b 0 0
+	pop_b 2
+.d 1 0
+	rtn
+.n 2 _ ea243
+.o 1 0
+n243
+	push_node _cycle_in_spine 2
+.o 3 0
+ea243
+.o 3 0
+s243
+	push_a 0
+	jsr_eval 0
+	pushI_a 1
+	pop_a 1
+	pushI 1
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	subI
+	push_a 1
+	pushI 0
+	updatepop_a 0 2
+.d 2 2 ii
+	jmp s61
+.n 2 _ ea242
+.o 1 0
+n242
+	push_node _cycle_in_spine 2
+.o 3 0
+ea242
+.o 3 0
+s242
+	push_a 0
+	jsr_eval 0
+	pushI_a 1
+	pop_a 1
+	pushI 1
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	subI
+	push_a 1
+	pushI 0
+	updatepop_a 0 2
+.d 2 2 ii
+	jmp s60
+.n 2 _ ea241
+.o 1 0
+n241
+	push_node _cycle_in_spine 2
+.o 3 0
+ea241
+.o 3 0
+s241
+	push_a 1
+	jsr_eval 0
+	push_a 1
+	jsr_eval 0
+	buildh _Nil 0
+	update_a 0 3
+	update_a 0 4
+	pop_a 1
+.d 1 0
+	jsr e_StdList_slength;47
+.o 0 1 i
+	updatepop_a 0 2
+.d 2 1 i
+	jmp e_StdList_sdrop
+.o 6 0
+s112
+	push_a 5
+	buildI 2
+	push_a 3
+	buildAC "out.asm"
+	buildh ARRAY 1
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	buildh _Nil 0
+	update_a 0 10
+	pop_a 1
+	jsr_ap 3
+	push_arg 0 3 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.190
+	buildAC "failed to open file"
+	updatepop_a 0 7
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 1 1 b
+	rtn
+else.190
+	buildAC "push constant "
+	buildh ARRAY 1
+	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
+	push_a 6
+	buildh ARRAY 1
+	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
+	push_arg 2 3 3
+	push_arg 3 3 2
+	push_a 2
+	build d_S.2 -1 n_S.2
+	push_a 3
+	build d_S.1 -1 n_S.1
+	build _ 2 n248
+	push_a 4
+	build d_S.2 -1 n_S.2
+	push_a 5
+	build d_S.1 -1 n_S.1
+	build _ 2 n247
+	build _ 2 n246
+	build _ 2 n245
+	push_a 5
+	update_a 2 11
+	update_a 1 10
+	updatepop_a 0 9
+	jsr_ap 2
+	push_arg 0 2 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	push_b 0
+	notB
+	jmp_false else.191
+	buildAC "failed to close"
+	updatepop_a 0 1
+	pop_b 1
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 1 1 b
+	rtn
+else.191
+	push_arg 0 2 2
+	push_b 0
+	updatepop_a 0 1
+	updatepop_b 0 1
+.d 1 1 b
+	rtn
+.n 2 _ ea248
+.o 1 0
+n248
+	push_node _cycle_in_spine 2
+.o 3 0
+ea248
+.o 3 0
+s248
+	push_a 0
+	jsr_eval 0
+	pushI_a 1
+	pop_a 1
+	pushI 1
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	subI
+	push_a 1
+	pushI 0
+	updatepop_a 0 2
+.d 2 2 ii
+	jmp s59
+.n 2 _ ea247
+.o 1 0
+n247
+	push_node _cycle_in_spine 2
+.o 3 0
+ea247
+.o 3 0
+s247
+	push_a 0
+	jsr_eval 0
+	pushI_a 1
+	pop_a 1
+	pushI 1
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	subI
+	push_a 1
+	pushI 0
+	updatepop_a 0 2
+.d 2 2 ii
+	jmp s58
+.n 2 _ ea246
+.o 1 0
+n246
+	push_node _cycle_in_spine 2
+.o 3 0
+ea246
+.o 3 0
+s246
+	push_a 1
+	jsr_eval 0
+	push_a 1
+	jsr_eval 0
+	buildh _Nil 0
+	update_a 0 3
+	update_a 0 4
+	pop_a 1
+.d 1 0
+	jsr e_StdList_slength;47
+.o 0 1 i
+	updatepop_a 0 2
+.d 2 1 i
+	jmp e_StdList_sdrop
+.n 2 _ ea245
+.o 1 0
+n245
+	push_node _cycle_in_spine 2
+.o 3 0
+ea245
+.o 3 0
+s245
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
