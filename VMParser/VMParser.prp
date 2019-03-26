@@ -5,10 +5,10 @@ MainModule
 	DclOpen:	False
 	Icl
 		WindowPosition
-			X:	10
-			Y:	10
-			SizeX:	800
-			SizeY:	576
+			X:	0
+			Y:	713
+			SizeX:	17
+			SizeY:	0
 	IclOpen:	True
 OtherModules
 	Module
@@ -40,10 +40,10 @@ OtherModules
 		DclOpen:	True
 		Icl
 			WindowPosition
-				X:	10
-				Y:	10
-				SizeX:	800
-				SizeY:	639
+				X:	64
+				Y:	17
+				SizeX:	1519
+				SizeY:	730
 		IclOpen:	True
 	Module
 		Name:	StdArray

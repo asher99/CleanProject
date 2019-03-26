@@ -178,7 +178,10 @@ parsePushThat pushstr w
 parsePushTemp :: String *f -> (Bool,*f) | FileSystem f  
 parsePushTemp pushstr w
 # offset = toString (drop (length [char \\ char <-: "push temp "]) [char \\ char <-: pushstr])
-# instruction = "//push temp instruction\n@" +++ offset +++ "\nD=A\n@TEMP\nA=M+D\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n\n"
+# offset = offset % (0, (size offset)-2)
+# addr = (toInt offset)+5
+# addstr = toString addr
+# instruction = "//push temp instruction\n@" +++ addstr +++ "\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n\n"
 # (ok_open,file ,w) = fopen "out.asm" FAppendText w
 | not ok_open = abort "failed to open file"
 # file = fwrites instruction file
@@ -198,7 +201,7 @@ parsePushTemp pushstr w
 parsePopConstant:: String *f -> (Bool,*f) | FileSystem f  
 parsePopConstant popstr w
 # constant = toString (drop (length [char \\ char <-: "pop constant "]) [char \\ char <-: popstr])
-# instruction = "//pop instruction\n@" +++ constant +++ "D=A\n@0\nA=M\nM=D\n@0\nM=M+1\n\n"
+# instruction = "//pop instruction\n@" // TODO +++ constant +++ "D=A\n@0\nA=M\nM=D\n@0\nM=M+1\n\n"
 # (ok_open,file ,w) = fopen "out.asm" FAppendText w
 | not ok_open = abort "failed to open file"
 # file = fwrites instruction file
@@ -235,7 +238,7 @@ parsePopStatic popstr w
 parsePopArgument:: String *f -> (Bool,*f) | FileSystem f  
 parsePopArgument popstr w
 # offset = toString (drop (length [char \\ char <-: "pop argument "]) [char \\ char <-: popstr])
-# instruction = "//pop argument instruction\n@"+++offset+++"\nD=A\n@ARG\nA=M+D\nD=A\n@13\nM=D\n@SP\nA=M-1\nD=M\n@13\nA=M\nM=D\n@SP\nM=M-1\n\n"
+# instruction = "//pop argument instruction\n@"+++offset+++"\nD=A\n@ARG\nA=M+D\nD=A\n@13\nM=D\n@SP\nA=M-1\nD=M\n@13\nA=M\nM=D\n@SP\nM=M-1\n@13\nM=0\n\n"
 # (ok_open,file ,w) = fopen "out.asm" FAppendText w
 | not ok_open = abort "failed to open file"
 # file = fwrites instruction file
@@ -253,7 +256,7 @@ parsePopArgument popstr w
 parsePopLocal :: String *f -> (Bool,*f) | FileSystem f  
 parsePopLocal popstr w
 # offset = toString (drop (length [char \\ char <-: "pop local "]) [char \\ char <-: popstr])
-# instruction = "//pop local instruction\n@"+++offset+++"\nD=A\n@LCL\nA=M+D\nD=A\n@13\nM=D\n@SP\nA=M-1\nD=M\n@13\nA=M\nM=D\n@SP\nM=M-1\n\n"
+# instruction = "//pop local instruction\n@"+++offset+++"\nD=A\n@LCL\nA=M+D\nD=A\n@13\nM=D\n@SP\nA=M-1\nD=M\n@13\nA=M\nM=D\n@SP\nM=M-1\n@13\nM=0\n\n"
 # (ok_open,file ,w) = fopen "out.asm" FAppendText w
 | not ok_open = abort "failed to open file"
 # file = fwrites instruction file
@@ -271,7 +274,7 @@ parsePopLocal popstr w
 parsePopThis :: String *f -> (Bool,*f) | FileSystem f  
 parsePopThis popstr w
 # offset = toString (drop (length [char \\ char <-: "pop this "]) [char \\ char <-: popstr])
-# instruction = "//pop this instruction\n@"+++offset+++"\nD=A\n@THIS\nA=M+D\nD=A\n@13\nM=D\n@SP\nA=M-1\nD=M\n@13\nA=M\nM=D\n@SP\nM=M-1\n\n"
+# instruction = "//pop this instruction\n@"+++offset+++"\nD=A\n@THIS\nA=M+D\nD=A\n@13\nM=D\n@SP\nA=M-1\nD=M\n@13\nA=M\nM=D\n@SP\nM=M-1\n@13\nM=0\n\n"
 # (ok_open,file ,w) = fopen "out.asm" FAppendText w
 | not ok_open = abort "failed to open file"
 # file = fwrites instruction file
@@ -289,7 +292,7 @@ parsePopThis popstr w
 parsePopThat :: String *f -> (Bool,*f) | FileSystem f  
 parsePopThat popstr w
 # offset = toString (drop (length [char \\ char <-: "pop that "]) [char \\ char <-: popstr])
-# instruction = "//pop that instruction\n@"+++offset+++"\nD=A\n@THIS\nA=M+D\nD=A\n@13\nM=D\n@SP\nA=M-1\nD=M\n@13\nA=M\nM=D\n@SP\nM=M-1\n\n"
+# instruction = "//pop that instruction\n@"+++offset+++"\nD=A\n@THAT\nA=M+D\nD=A\n@13\nM=D\n@SP\nA=M-1\nD=M\n@13\nA=M\nM=D\n@SP\nM=M-1\n@13\nM=0\n\n"
 # (ok_open,file ,w) = fopen "out.asm" FAppendText w
 | not ok_open = abort "failed to open file"
 # file = fwrites instruction file
@@ -307,8 +310,11 @@ parsePopThat popstr w
 */
 parsePopTemp :: String *f -> (Bool,*f) | FileSystem f  
 parsePopTemp popstr w
-# temp = toString (toInt (toString(drop (length [char \\ char <-: "pop temp "]) [char \\ char <-: popstr]))+1)
-# instruction = "//pop temp instruction\n@SP\nA=M-1\nD=M\n@"+++temp+++"\nM=D\n@SP\nM=M-1\n\n"
+# offset = toString (drop (length [char \\ char <-: "pop temp "]) [char \\ char <-: popstr])
+# offset = offset % (0, (size offset)-2)
+# addr = (toInt offset)+5
+# addstr = toString addr
+# instruction = "//pop temp instruction\n@SP\nA=M-1\nD=M\n@"+++addstr+++"\nM=D\n@SP\nM=M-1\n\n"
 # (ok_open,file ,w) = fopen "out.asm" FAppendText w
 | not ok_open = abort "failed to open file"
 # file = fwrites instruction file

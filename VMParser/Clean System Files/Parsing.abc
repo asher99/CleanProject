@@ -23,7 +23,7 @@
 .depend "StdBool" "20180913114337"
 .depend "StdEnv" "20180913114337"
 .depend "Parsing" "20190326101455"
-.module m_Parsing "Parsing" "20190326124740"
+.module m_Parsing "Parsing" "20190326150223"
 .endinfo
 .impmod _system
 .implab _cycle_in_spine
@@ -65,7 +65,9 @@
 .impmod StdList
 .implab e_StdList_sdrop
 .implab e_StdList_slength;47
+.impdesc e_StdList_dtoString;79
 .implab e_StdList_stoString;79
+.implab e_StdList_ntoString;79
 .impmod StdFile
 .impdesc e_StdFile_dfwrites
 .implab e_StdFile_sfwrites
@@ -166,7 +168,7 @@ case.2
 	update_a 0 16
 	pop_a 1
 .d 7 0
-	jsr s84
+	jsr s82
 .o 1 1 b
 	push_b 0
 	notB
@@ -1125,7 +1127,7 @@ else.29
 	push_arg 1 3 3
 	push_arg 2 3 2
 	push_a 2
-	build _ 2 n107
+	build _ 2 n105
 	push_a 4
 	pop_b 1
 	update_a 3 10
@@ -1158,14 +1160,14 @@ else.30
 	pop_b 1
 .d 2 0
 	rtn
-.n 2 _ ea107
+.n 2 _ ea105
 .o 1 0
-n107
+n105
 	push_node _cycle_in_spine 2
 .o 3 0
-ea107
+ea105
 .o 3 0
-s107
+s105
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -1315,7 +1317,7 @@ else.31
 	push_arg 1 3 3
 	push_arg 2 3 2
 	push_a 2
-	build _ 2 n108
+	build _ 2 n106
 	push_a 4
 	pop_b 1
 	update_a 3 10
@@ -1348,14 +1350,14 @@ else.32
 	pop_b 1
 .d 2 0
 	rtn
-.n 2 _ ea108
+.n 2 _ ea106
 .o 1 0
-n108
+n106
 	push_node _cycle_in_spine 2
 .o 3 0
-ea108
+ea106
 .o 3 0
-s108
+s106
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -1505,7 +1507,7 @@ else.33
 	push_arg 1 3 3
 	push_arg 2 3 2
 	push_a 2
-	build _ 2 n109
+	build _ 2 n107
 	push_a 4
 	pop_b 1
 	update_a 3 10
@@ -1538,14 +1540,14 @@ else.34
 	pop_b 1
 .d 2 0
 	rtn
-.n 2 _ ea109
+.n 2 _ ea107
 .o 1 0
-n109
+n107
 	push_node _cycle_in_spine 2
 .o 3 0
-ea109
+ea107
 .o 3 0
-s109
+s107
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -2314,21 +2316,24 @@ else.47
 	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
 	push_a 6
 	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
-	push_arg 2 3 3
-	push_arg 3 3 2
+	push_a 0
+	build d_S.2 -1 n_S.2
+	push_a 1
+	build d_S.1 -1 n_S.1
+	build _ 2 n110
 	push_a 2
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n113
-	push_a 4
-	build d_S.2 -1 n_S.2
-	push_a 5
-	build d_S.1 -1 n_S.1
-	build _ 2 n112
+	build _ 2 n109
+	build _ 2 n108
+	build e_StdList_dtoString;79 1 e_StdList_ntoString;79
+	push_arg 3 3 3
+	push_arg 4 3 2
+	push_a 2
 	build _ 2 n111
-	build _ 2 n110
-	push_a 5
+	push_a 6
+	update_a 3 12
 	update_a 2 11
 	update_a 1 10
 	updatepop_a 0 9
@@ -2341,7 +2346,7 @@ else.47
 	notB
 	jmp_false else.48
 	buildAC "failed to close"
-	updatepop_a 0 1
+	updatepop_a 0 2
 	pop_b 1
 .d 1 0
 	jsr print_string_
@@ -2353,57 +2358,11 @@ else.47
 else.48
 	push_arg 0 2 2
 	buildB_b 0
-	update_a 1 2
-	updatepop_a 0 1
+	update_a 1 3
+	updatepop_a 0 2
 	pop_b 1
 .d 2 0
 	rtn
-.n 2 _ ea113
-.o 1 0
-n113
-	push_node _cycle_in_spine 2
-.o 3 0
-ea113
-.o 3 0
-s113
-	push_a 0
-	jsr_eval 0
-	pushI_a 1
-	pop_a 1
-	pushI 1
-	push_b 1
-	update_b 1 2
-	update_b 0 1
-	pop_b 1
-	subI
-	push_a 1
-	pushI 0
-	updatepop_a 0 2
-.d 2 2 ii
-	jmp s79
-.n 2 _ ea112
-.o 1 0
-n112
-	push_node _cycle_in_spine 2
-.o 3 0
-ea112
-.o 3 0
-s112
-	push_a 0
-	jsr_eval 0
-	pushI_a 1
-	pop_a 1
-	pushI 1
-	push_b 1
-	update_b 1 2
-	update_b 0 1
-	pop_b 1
-	subI
-	push_a 1
-	pushI 0
-	updatepop_a 0 2
-.d 2 2 ii
-	jmp s78
 .n 2 _ ea111
 .o 1 0
 n111
@@ -2414,40 +2373,31 @@ ea111
 s111
 	push_a 1
 	jsr_eval 0
-	push_a 1
-	jsr_eval 0
-	buildh _Nil 0
-	update_a 0 3
-	update_a 0 4
-	pop_a 1
-.d 1 0
-	jsr e_StdList_slength;47
-.o 0 1 i
-	updatepop_a 0 2
-.d 2 1 i
-	jmp e_StdList_sdrop
-.n 2 _ ea110
-.o 1 0
-n110
-	push_node _cycle_in_spine 2
-.o 3 0
-ea110
-.o 3 0
-s110
-	push_a 1
-	jsr_eval 0
 	pushF_a 2
 	pop_a 1
 	push_a 0
 	jsr_eval 0
-	updatepop_a 0 2
-.d 1 0
-	jsr e_StdList_stoString;79
+	push_array 0
+	updatepop_a 0 1
+	update_a 1 2
+	updatepop_a 0 1
+	push_arraysize CHAR 0 1
+	pushI 2
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	subI
+	pushI 0
+	push_array 0
+	updatepop_a 0 1
+.d 1 2 ii
+	jsr sliceAC
 .o 1 0
 .d 1 0
 	jsr e_StdInt_stoInt;23
 .o 0 1 i
-	pushI 1
+	pushI 5
 	push_b 1
 	update_b 1 2
 	update_b 0 1
@@ -2475,6 +2425,74 @@ s110
 	pop_b 2
 .d 1 0
 	rtn
+.n 2 _ ea110
+.o 1 0
+n110
+	push_node _cycle_in_spine 2
+.o 3 0
+ea110
+.o 3 0
+s110
+	push_a 0
+	jsr_eval 0
+	pushI_a 1
+	pop_a 1
+	pushI 1
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	subI
+	push_a 1
+	pushI 0
+	updatepop_a 0 2
+.d 2 2 ii
+	jmp s79
+.n 2 _ ea109
+.o 1 0
+n109
+	push_node _cycle_in_spine 2
+.o 3 0
+ea109
+.o 3 0
+s109
+	push_a 0
+	jsr_eval 0
+	pushI_a 1
+	pop_a 1
+	pushI 1
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	subI
+	push_a 1
+	pushI 0
+	updatepop_a 0 2
+.d 2 2 ii
+	jmp s78
+.n 2 _ ea108
+.o 1 0
+n108
+	push_node _cycle_in_spine 2
+.o 3 0
+ea108
+.o 3 0
+s108
+	push_a 1
+	jsr_eval 0
+	push_a 1
+	jsr_eval 0
+	buildh _Nil 0
+	update_a 0 3
+	update_a 0 4
+	pop_a 1
+.d 1 0
+	jsr e_StdList_slength;47
+.o 0 1 i
+	updatepop_a 0 2
+.d 2 1 i
+	jmp e_StdList_sdrop
 .o 2 2 ii
 s78
 	push_b 0
@@ -2495,7 +2513,7 @@ s78
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n186
+	build_u _ 1 2 n184
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
@@ -2510,12 +2528,12 @@ else.49
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n186
+n184
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea186
+ea184
 .o 2 2 ii
-s186
+s184
 	pushI 1
 	push_b 1
 	addI
@@ -2550,7 +2568,7 @@ s79
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n187
+	build_u _ 1 2 n185
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
@@ -2565,12 +2583,12 @@ else.50
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n187
+n185
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea187
+ea185
 .o 2 2 ii
-s187
+s185
 	pushI 1
 	push_b 1
 	addI
@@ -2667,14 +2685,14 @@ else.51
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n117
+	build _ 2 n115
 	push_a 4
 	build d_S.2 -1 n_S.2
 	push_a 5
 	build d_S.1 -1 n_S.1
-	build _ 2 n116
-	build _ 2 n115
 	build _ 2 n114
+	build _ 2 n113
+	build _ 2 n112
 	push_a 5
 	update_a 2 11
 	update_a 1 10
@@ -2705,14 +2723,14 @@ else.52
 	pop_b 1
 .d 2 0
 	rtn
-.n 2 _ ea117
+.n 2 _ ea115
 .o 1 0
-n117
+n115
 	push_node _cycle_in_spine 2
 .o 3 0
-ea117
+ea115
 .o 3 0
-s117
+s115
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -2728,14 +2746,14 @@ s117
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s77
-.n 2 _ ea116
+.n 2 _ ea114
 .o 1 0
-n116
+n114
 	push_node _cycle_in_spine 2
 .o 3 0
-ea116
+ea114
 .o 3 0
-s116
+s114
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -2751,14 +2769,14 @@ s116
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s76
-.n 2 _ ea115
+.n 2 _ ea113
 .o 1 0
-n115
+n113
 	push_node _cycle_in_spine 2
 .o 3 0
-ea115
+ea113
 .o 3 0
-s115
+s113
 	push_a 1
 	jsr_eval 0
 	push_a 1
@@ -2773,14 +2791,14 @@ s115
 	updatepop_a 0 2
 .d 2 1 i
 	jmp e_StdList_sdrop
-.n 2 _ ea114
+.n 2 _ ea112
 .o 1 0
-n114
+n112
 	push_node _cycle_in_spine 2
 .o 3 0
-ea114
+ea112
 .o 3 0
-s114
+s112
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -2791,7 +2809,7 @@ s114
 .d 1 0
 	jsr e_StdList_stoString;79
 .o 1 0
-	buildAC "\nD=A\n@THIS\nA=M+D\nD=A\n@13\nM=D\n@SP\nA=M-1\nD=M\n@13\nA=M\nM=D\n@SP\nM=M-1\n\n"
+	buildAC "\nD=A\n@THAT\nA=M+D\nD=A\n@13\nM=D\n@SP\nA=M-1\nD=M\n@13\nA=M\nM=D\n@SP\nM=M-1\n@13\nM=0\n\n"
 	push_a 1
 	update_a 1 2
 	update_a 0 1
@@ -2830,7 +2848,7 @@ s76
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n184
+	build_u _ 1 2 n182
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
@@ -2845,12 +2863,12 @@ else.53
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n184
+n182
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea184
+ea182
 .o 2 2 ii
-s184
+s182
 	pushI 1
 	push_b 1
 	addI
@@ -2885,7 +2903,7 @@ s77
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n185
+	build_u _ 1 2 n183
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
@@ -2900,12 +2918,12 @@ else.54
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n185
+n183
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea185
+ea183
 .o 2 2 ii
-s185
+s183
 	pushI 1
 	push_b 1
 	addI
@@ -3002,14 +3020,14 @@ else.55
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n121
+	build _ 2 n119
 	push_a 4
 	build d_S.2 -1 n_S.2
 	push_a 5
 	build d_S.1 -1 n_S.1
-	build _ 2 n120
-	build _ 2 n119
 	build _ 2 n118
+	build _ 2 n117
+	build _ 2 n116
 	push_a 5
 	update_a 2 11
 	update_a 1 10
@@ -3040,14 +3058,14 @@ else.56
 	pop_b 1
 .d 2 0
 	rtn
-.n 2 _ ea121
+.n 2 _ ea119
 .o 1 0
-n121
+n119
 	push_node _cycle_in_spine 2
 .o 3 0
-ea121
+ea119
 .o 3 0
-s121
+s119
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -3063,14 +3081,14 @@ s121
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s75
-.n 2 _ ea120
+.n 2 _ ea118
 .o 1 0
-n120
+n118
 	push_node _cycle_in_spine 2
 .o 3 0
-ea120
+ea118
 .o 3 0
-s120
+s118
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -3086,14 +3104,14 @@ s120
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s74
-.n 2 _ ea119
+.n 2 _ ea117
 .o 1 0
-n119
+n117
 	push_node _cycle_in_spine 2
 .o 3 0
-ea119
+ea117
 .o 3 0
-s119
+s117
 	push_a 1
 	jsr_eval 0
 	push_a 1
@@ -3108,14 +3126,14 @@ s119
 	updatepop_a 0 2
 .d 2 1 i
 	jmp e_StdList_sdrop
-.n 2 _ ea118
+.n 2 _ ea116
 .o 1 0
-n118
+n116
 	push_node _cycle_in_spine 2
 .o 3 0
-ea118
+ea116
 .o 3 0
-s118
+s116
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -3126,7 +3144,7 @@ s118
 .d 1 0
 	jsr e_StdList_stoString;79
 .o 1 0
-	buildAC "\nD=A\n@THIS\nA=M+D\nD=A\n@13\nM=D\n@SP\nA=M-1\nD=M\n@13\nA=M\nM=D\n@SP\nM=M-1\n\n"
+	buildAC "\nD=A\n@THIS\nA=M+D\nD=A\n@13\nM=D\n@SP\nA=M-1\nD=M\n@13\nA=M\nM=D\n@SP\nM=M-1\n@13\nM=0\n\n"
 	push_a 1
 	update_a 1 2
 	update_a 0 1
@@ -3165,7 +3183,7 @@ s74
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n182
+	build_u _ 1 2 n180
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
@@ -3180,12 +3198,12 @@ else.57
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n182
+n180
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea182
+ea180
 .o 2 2 ii
-s182
+s180
 	pushI 1
 	push_b 1
 	addI
@@ -3220,7 +3238,7 @@ s75
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n183
+	build_u _ 1 2 n181
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
@@ -3235,12 +3253,12 @@ else.58
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n183
+n181
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea183
+ea181
 .o 2 2 ii
-s183
+s181
 	pushI 1
 	push_b 1
 	addI
@@ -3337,14 +3355,14 @@ else.59
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n125
+	build _ 2 n123
 	push_a 4
 	build d_S.2 -1 n_S.2
 	push_a 5
 	build d_S.1 -1 n_S.1
-	build _ 2 n124
-	build _ 2 n123
 	build _ 2 n122
+	build _ 2 n121
+	build _ 2 n120
 	push_a 5
 	update_a 2 11
 	update_a 1 10
@@ -3375,14 +3393,14 @@ else.60
 	pop_b 1
 .d 2 0
 	rtn
-.n 2 _ ea125
+.n 2 _ ea123
 .o 1 0
-n125
+n123
 	push_node _cycle_in_spine 2
 .o 3 0
-ea125
+ea123
 .o 3 0
-s125
+s123
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -3398,14 +3416,14 @@ s125
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s73
-.n 2 _ ea124
+.n 2 _ ea122
 .o 1 0
-n124
+n122
 	push_node _cycle_in_spine 2
 .o 3 0
-ea124
+ea122
 .o 3 0
-s124
+s122
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -3421,14 +3439,14 @@ s124
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s72
-.n 2 _ ea123
+.n 2 _ ea121
 .o 1 0
-n123
+n121
 	push_node _cycle_in_spine 2
 .o 3 0
-ea123
+ea121
 .o 3 0
-s123
+s121
 	push_a 1
 	jsr_eval 0
 	push_a 1
@@ -3443,14 +3461,14 @@ s123
 	updatepop_a 0 2
 .d 2 1 i
 	jmp e_StdList_sdrop
-.n 2 _ ea122
+.n 2 _ ea120
 .o 1 0
-n122
+n120
 	push_node _cycle_in_spine 2
 .o 3 0
-ea122
+ea120
 .o 3 0
-s122
+s120
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -3461,7 +3479,7 @@ s122
 .d 1 0
 	jsr e_StdList_stoString;79
 .o 1 0
-	buildAC "\nD=A\n@LCL\nA=M+D\nD=A\n@13\nM=D\n@SP\nA=M-1\nD=M\n@13\nA=M\nM=D\n@SP\nM=M-1\n\n"
+	buildAC "\nD=A\n@LCL\nA=M+D\nD=A\n@13\nM=D\n@SP\nA=M-1\nD=M\n@13\nA=M\nM=D\n@SP\nM=M-1\n@13\nM=0\n\n"
 	push_a 1
 	update_a 1 2
 	update_a 0 1
@@ -3500,7 +3518,7 @@ s72
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n180
+	build_u _ 1 2 n178
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
@@ -3515,12 +3533,12 @@ else.61
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n180
+n178
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea180
+ea178
 .o 2 2 ii
-s180
+s178
 	pushI 1
 	push_b 1
 	addI
@@ -3555,7 +3573,7 @@ s73
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n181
+	build_u _ 1 2 n179
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
@@ -3570,12 +3588,12 @@ else.62
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n181
+n179
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea181
+ea179
 .o 2 2 ii
-s181
+s179
 	pushI 1
 	push_b 1
 	addI
@@ -3672,14 +3690,14 @@ else.63
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n129
+	build _ 2 n127
 	push_a 4
 	build d_S.2 -1 n_S.2
 	push_a 5
 	build d_S.1 -1 n_S.1
-	build _ 2 n128
-	build _ 2 n127
 	build _ 2 n126
+	build _ 2 n125
+	build _ 2 n124
 	push_a 5
 	update_a 2 11
 	update_a 1 10
@@ -3710,14 +3728,14 @@ else.64
 	pop_b 1
 .d 2 0
 	rtn
-.n 2 _ ea129
+.n 2 _ ea127
 .o 1 0
-n129
+n127
 	push_node _cycle_in_spine 2
 .o 3 0
-ea129
+ea127
 .o 3 0
-s129
+s127
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -3733,14 +3751,14 @@ s129
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s71
-.n 2 _ ea128
+.n 2 _ ea126
 .o 1 0
-n128
+n126
 	push_node _cycle_in_spine 2
 .o 3 0
-ea128
+ea126
 .o 3 0
-s128
+s126
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -3756,14 +3774,14 @@ s128
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s70
-.n 2 _ ea127
+.n 2 _ ea125
 .o 1 0
-n127
+n125
 	push_node _cycle_in_spine 2
 .o 3 0
-ea127
+ea125
 .o 3 0
-s127
+s125
 	push_a 1
 	jsr_eval 0
 	push_a 1
@@ -3778,14 +3796,14 @@ s127
 	updatepop_a 0 2
 .d 2 1 i
 	jmp e_StdList_sdrop
-.n 2 _ ea126
+.n 2 _ ea124
 .o 1 0
-n126
+n124
 	push_node _cycle_in_spine 2
 .o 3 0
-ea126
+ea124
 .o 3 0
-s126
+s124
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -3796,7 +3814,7 @@ s126
 .d 1 0
 	jsr e_StdList_stoString;79
 .o 1 0
-	buildAC "\nD=A\n@ARG\nA=M+D\nD=A\n@13\nM=D\n@SP\nA=M-1\nD=M\n@13\nA=M\nM=D\n@SP\nM=M-1\n\n"
+	buildAC "\nD=A\n@ARG\nA=M+D\nD=A\n@13\nM=D\n@SP\nA=M-1\nD=M\n@13\nA=M\nM=D\n@SP\nM=M-1\n@13\nM=0\n\n"
 	push_a 1
 	update_a 1 2
 	update_a 0 1
@@ -3835,7 +3853,7 @@ s70
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n178
+	build_u _ 1 2 n176
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
@@ -3850,12 +3868,12 @@ else.65
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n178
+n176
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea178
+ea176
 .o 2 2 ii
-s178
+s176
 	pushI 1
 	push_b 1
 	addI
@@ -3890,7 +3908,7 @@ s71
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n179
+	build_u _ 1 2 n177
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
@@ -3905,12 +3923,12 @@ else.66
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n179
+n177
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea179
+ea177
 .o 2 2 ii
-s179
+s177
 	pushI 1
 	push_b 1
 	addI
@@ -4007,14 +4025,14 @@ else.67
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n133
+	build _ 2 n131
 	push_a 4
 	build d_S.2 -1 n_S.2
 	push_a 5
 	build d_S.1 -1 n_S.1
-	build _ 2 n132
-	build _ 2 n131
 	build _ 2 n130
+	build _ 2 n129
+	build _ 2 n128
 	push_a 5
 	update_a 2 11
 	update_a 1 10
@@ -4045,14 +4063,14 @@ else.68
 	pop_b 1
 .d 2 0
 	rtn
-.n 2 _ ea133
+.n 2 _ ea131
 .o 1 0
-n133
+n131
 	push_node _cycle_in_spine 2
 .o 3 0
-ea133
+ea131
 .o 3 0
-s133
+s131
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -4068,14 +4086,14 @@ s133
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s69
-.n 2 _ ea132
+.n 2 _ ea130
 .o 1 0
-n132
+n130
 	push_node _cycle_in_spine 2
 .o 3 0
-ea132
+ea130
 .o 3 0
-s132
+s130
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -4091,14 +4109,14 @@ s132
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s68
-.n 2 _ ea131
+.n 2 _ ea129
 .o 1 0
-n131
+n129
 	push_node _cycle_in_spine 2
 .o 3 0
-ea131
+ea129
 .o 3 0
-s131
+s129
 	push_a 1
 	jsr_eval 0
 	push_a 1
@@ -4113,14 +4131,14 @@ s131
 	updatepop_a 0 2
 .d 2 1 i
 	jmp e_StdList_sdrop
-.n 2 _ ea130
+.n 2 _ ea128
 .o 1 0
-n130
+n128
 	push_node _cycle_in_spine 2
 .o 3 0
-ea130
+ea128
 .o 3 0
-s130
+s128
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -4170,7 +4188,7 @@ s68
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n176
+	build_u _ 1 2 n174
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
@@ -4185,12 +4203,12 @@ else.69
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n176
+n174
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea176
+ea174
 .o 2 2 ii
-s176
+s174
 	pushI 1
 	push_b 1
 	addI
@@ -4225,7 +4243,7 @@ s69
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n177
+	build_u _ 1 2 n175
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
@@ -4240,12 +4258,12 @@ else.70
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n177
+n175
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea177
+ea175
 .o 2 2 ii
-s177
+s175
 	pushI 1
 	push_b 1
 	addI
@@ -4336,21 +4354,24 @@ else.71
 	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
 	push_a 6
 	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
-	push_arg 2 3 3
-	push_arg 3 3 2
+	push_a 0
+	build d_S.2 -1 n_S.2
+	push_a 1
+	build d_S.1 -1 n_S.1
+	build _ 2 n134
 	push_a 2
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n137
-	push_a 4
-	build d_S.2 -1 n_S.2
-	push_a 5
-	build d_S.1 -1 n_S.1
-	build _ 2 n136
+	build _ 2 n133
+	build _ 2 n132
+	build e_StdList_dtoString;79 1 e_StdList_ntoString;79
+	push_arg 3 3 3
+	push_arg 4 3 2
+	push_a 2
 	build _ 2 n135
-	build _ 2 n134
-	push_a 5
+	push_a 6
+	update_a 3 12
 	update_a 2 11
 	update_a 1 10
 	updatepop_a 0 9
@@ -4363,7 +4384,7 @@ else.71
 	notB
 	jmp_false else.72
 	buildAC "failed to close"
-	updatepop_a 0 1
+	updatepop_a 0 2
 	pop_b 1
 .d 1 0
 	jsr print_string_
@@ -4375,57 +4396,11 @@ else.71
 else.72
 	push_arg 0 2 2
 	buildB_b 0
-	update_a 1 2
-	updatepop_a 0 1
+	update_a 1 3
+	updatepop_a 0 2
 	pop_b 1
 .d 2 0
 	rtn
-.n 2 _ ea137
-.o 1 0
-n137
-	push_node _cycle_in_spine 2
-.o 3 0
-ea137
-.o 3 0
-s137
-	push_a 0
-	jsr_eval 0
-	pushI_a 1
-	pop_a 1
-	pushI 1
-	push_b 1
-	update_b 1 2
-	update_b 0 1
-	pop_b 1
-	subI
-	push_a 1
-	pushI 0
-	updatepop_a 0 2
-.d 2 2 ii
-	jmp s67
-.n 2 _ ea136
-.o 1 0
-n136
-	push_node _cycle_in_spine 2
-.o 3 0
-ea136
-.o 3 0
-s136
-	push_a 0
-	jsr_eval 0
-	pushI_a 1
-	pop_a 1
-	pushI 1
-	push_b 1
-	update_b 1 2
-	update_b 0 1
-	pop_b 1
-	subI
-	push_a 1
-	pushI 0
-	updatepop_a 0 2
-.d 2 2 ii
-	jmp s66
 .n 2 _ ea135
 .o 1 0
 n135
@@ -4436,37 +4411,40 @@ ea135
 s135
 	push_a 1
 	jsr_eval 0
-	push_a 1
-	jsr_eval 0
-	buildh _Nil 0
-	update_a 0 3
-	update_a 0 4
-	pop_a 1
-.d 1 0
-	jsr e_StdList_slength;47
-.o 0 1 i
-	updatepop_a 0 2
-.d 2 1 i
-	jmp e_StdList_sdrop
-.n 2 _ ea134
-.o 1 0
-n134
-	push_node _cycle_in_spine 2
-.o 3 0
-ea134
-.o 3 0
-s134
-	push_a 1
-	jsr_eval 0
 	pushF_a 2
 	pop_a 1
 	push_a 0
 	jsr_eval 0
-	updatepop_a 0 2
-.d 1 0
-	jsr e_StdList_stoString;79
+	push_array 0
+	updatepop_a 0 1
+	update_a 1 2
+	updatepop_a 0 1
+	push_arraysize CHAR 0 1
+	pushI 2
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	subI
+	pushI 0
+	push_array 0
+	updatepop_a 0 1
+.d 1 2 ii
+	jsr sliceAC
 .o 1 0
-	buildAC "\nD=A\n@TEMP\nA=M+D\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n\n"
+.d 1 0
+	jsr e_StdInt_stoInt;23
+.o 0 1 i
+	pushI 5
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	addI
+.d 0 1 i
+	jsr ItoAC
+.o 1 0
+	buildAC "\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n\n"
 	push_a 1
 	update_a 1 2
 	update_a 0 1
@@ -4485,6 +4463,74 @@ s134
 	pop_b 2
 .d 1 0
 	rtn
+.n 2 _ ea134
+.o 1 0
+n134
+	push_node _cycle_in_spine 2
+.o 3 0
+ea134
+.o 3 0
+s134
+	push_a 0
+	jsr_eval 0
+	pushI_a 1
+	pop_a 1
+	pushI 1
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	subI
+	push_a 1
+	pushI 0
+	updatepop_a 0 2
+.d 2 2 ii
+	jmp s67
+.n 2 _ ea133
+.o 1 0
+n133
+	push_node _cycle_in_spine 2
+.o 3 0
+ea133
+.o 3 0
+s133
+	push_a 0
+	jsr_eval 0
+	pushI_a 1
+	pop_a 1
+	pushI 1
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	subI
+	push_a 1
+	pushI 0
+	updatepop_a 0 2
+.d 2 2 ii
+	jmp s66
+.n 2 _ ea132
+.o 1 0
+n132
+	push_node _cycle_in_spine 2
+.o 3 0
+ea132
+.o 3 0
+s132
+	push_a 1
+	jsr_eval 0
+	push_a 1
+	jsr_eval 0
+	buildh _Nil 0
+	update_a 0 3
+	update_a 0 4
+	pop_a 1
+.d 1 0
+	jsr e_StdList_slength;47
+.o 0 1 i
+	updatepop_a 0 2
+.d 2 1 i
+	jmp e_StdList_sdrop
 .o 2 2 ii
 s66
 	push_b 0
@@ -4505,7 +4551,7 @@ s66
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n174
+	build_u _ 1 2 n172
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
@@ -4520,12 +4566,12 @@ else.73
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n174
+n172
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea174
+ea172
 .o 2 2 ii
-s174
+s172
 	pushI 1
 	push_b 1
 	addI
@@ -4560,7 +4606,7 @@ s67
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n175
+	build_u _ 1 2 n173
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
@@ -4575,12 +4621,12 @@ else.74
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n175
+n173
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea175
+ea173
 .o 2 2 ii
-s175
+s173
 	pushI 1
 	push_b 1
 	addI
@@ -4677,14 +4723,14 @@ else.75
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n141
+	build _ 2 n139
 	push_a 4
 	build d_S.2 -1 n_S.2
 	push_a 5
 	build d_S.1 -1 n_S.1
-	build _ 2 n140
-	build _ 2 n139
 	build _ 2 n138
+	build _ 2 n137
+	build _ 2 n136
 	push_a 5
 	update_a 2 11
 	update_a 1 10
@@ -4715,14 +4761,14 @@ else.76
 	pop_b 1
 .d 2 0
 	rtn
-.n 2 _ ea141
+.n 2 _ ea139
 .o 1 0
-n141
+n139
 	push_node _cycle_in_spine 2
 .o 3 0
-ea141
+ea139
 .o 3 0
-s141
+s139
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -4738,14 +4784,14 @@ s141
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s65
-.n 2 _ ea140
+.n 2 _ ea138
 .o 1 0
-n140
+n138
 	push_node _cycle_in_spine 2
 .o 3 0
-ea140
+ea138
 .o 3 0
-s140
+s138
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -4761,14 +4807,14 @@ s140
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s64
-.n 2 _ ea139
+.n 2 _ ea137
 .o 1 0
-n139
+n137
 	push_node _cycle_in_spine 2
 .o 3 0
-ea139
+ea137
 .o 3 0
-s139
+s137
 	push_a 1
 	jsr_eval 0
 	push_a 1
@@ -4783,14 +4829,14 @@ s139
 	updatepop_a 0 2
 .d 2 1 i
 	jmp e_StdList_sdrop
-.n 2 _ ea138
+.n 2 _ ea136
 .o 1 0
-n138
+n136
 	push_node _cycle_in_spine 2
 .o 3 0
-ea138
+ea136
 .o 3 0
-s138
+s136
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -4840,7 +4886,7 @@ s64
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n172
+	build_u _ 1 2 n170
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
@@ -4855,12 +4901,12 @@ else.77
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n172
+n170
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea172
+ea170
 .o 2 2 ii
-s172
+s170
 	pushI 1
 	push_b 1
 	addI
@@ -4895,7 +4941,7 @@ s65
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n173
+	build_u _ 1 2 n171
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
@@ -4910,12 +4956,12 @@ else.78
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n173
+n171
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea173
+ea171
 .o 2 2 ii
-s173
+s171
 	pushI 1
 	push_b 1
 	addI
@@ -5012,14 +5058,14 @@ else.79
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n145
+	build _ 2 n143
 	push_a 4
 	build d_S.2 -1 n_S.2
 	push_a 5
 	build d_S.1 -1 n_S.1
-	build _ 2 n144
-	build _ 2 n143
 	build _ 2 n142
+	build _ 2 n141
+	build _ 2 n140
 	push_a 5
 	update_a 2 11
 	update_a 1 10
@@ -5050,14 +5096,14 @@ else.80
 	pop_b 1
 .d 2 0
 	rtn
-.n 2 _ ea145
+.n 2 _ ea143
 .o 1 0
-n145
+n143
 	push_node _cycle_in_spine 2
 .o 3 0
-ea145
+ea143
 .o 3 0
-s145
+s143
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -5073,14 +5119,14 @@ s145
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s63
-.n 2 _ ea144
+.n 2 _ ea142
 .o 1 0
-n144
+n142
 	push_node _cycle_in_spine 2
 .o 3 0
-ea144
+ea142
 .o 3 0
-s144
+s142
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -5096,14 +5142,14 @@ s144
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s62
-.n 2 _ ea143
+.n 2 _ ea141
 .o 1 0
-n143
+n141
 	push_node _cycle_in_spine 2
 .o 3 0
-ea143
+ea141
 .o 3 0
-s143
+s141
 	push_a 1
 	jsr_eval 0
 	push_a 1
@@ -5118,14 +5164,14 @@ s143
 	updatepop_a 0 2
 .d 2 1 i
 	jmp e_StdList_sdrop
-.n 2 _ ea142
+.n 2 _ ea140
 .o 1 0
-n142
+n140
 	push_node _cycle_in_spine 2
 .o 3 0
-ea142
+ea140
 .o 3 0
-s142
+s140
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -5175,7 +5221,7 @@ s62
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n170
+	build_u _ 1 2 n168
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
@@ -5190,12 +5236,12 @@ else.81
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n170
+n168
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea170
+ea168
 .o 2 2 ii
-s170
+s168
 	pushI 1
 	push_b 1
 	addI
@@ -5230,7 +5276,7 @@ s63
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n171
+	build_u _ 1 2 n169
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
@@ -5245,12 +5291,12 @@ else.82
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n171
+n169
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea171
+ea169
 .o 2 2 ii
-s171
+s169
 	pushI 1
 	push_b 1
 	addI
@@ -5347,14 +5393,14 @@ else.83
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n149
+	build _ 2 n147
 	push_a 4
 	build d_S.2 -1 n_S.2
 	push_a 5
 	build d_S.1 -1 n_S.1
-	build _ 2 n148
-	build _ 2 n147
 	build _ 2 n146
+	build _ 2 n145
+	build _ 2 n144
 	push_a 5
 	update_a 2 11
 	update_a 1 10
@@ -5385,14 +5431,14 @@ else.84
 	pop_b 1
 .d 2 0
 	rtn
-.n 2 _ ea149
+.n 2 _ ea147
 .o 1 0
-n149
+n147
 	push_node _cycle_in_spine 2
 .o 3 0
-ea149
+ea147
 .o 3 0
-s149
+s147
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -5408,14 +5454,14 @@ s149
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s61
-.n 2 _ ea148
+.n 2 _ ea146
 .o 1 0
-n148
+n146
 	push_node _cycle_in_spine 2
 .o 3 0
-ea148
+ea146
 .o 3 0
-s148
+s146
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -5431,14 +5477,14 @@ s148
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s60
-.n 2 _ ea147
+.n 2 _ ea145
 .o 1 0
-n147
+n145
 	push_node _cycle_in_spine 2
 .o 3 0
-ea147
+ea145
 .o 3 0
-s147
+s145
 	push_a 1
 	jsr_eval 0
 	push_a 1
@@ -5453,14 +5499,14 @@ s147
 	updatepop_a 0 2
 .d 2 1 i
 	jmp e_StdList_sdrop
-.n 2 _ ea146
+.n 2 _ ea144
 .o 1 0
-n146
+n144
 	push_node _cycle_in_spine 2
 .o 3 0
-ea146
+ea144
 .o 3 0
-s146
+s144
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -5510,7 +5556,7 @@ s60
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n168
+	build_u _ 1 2 n166
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
@@ -5525,12 +5571,12 @@ else.85
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n168
+n166
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea168
+ea166
 .o 2 2 ii
-s168
+s166
 	pushI 1
 	push_b 1
 	addI
@@ -5565,7 +5611,7 @@ s61
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n169
+	build_u _ 1 2 n167
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
@@ -5580,12 +5626,12 @@ else.86
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n169
+n167
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea169
+ea167
 .o 2 2 ii
-s169
+s167
 	pushI 1
 	push_b 1
 	addI
@@ -5682,14 +5728,14 @@ else.87
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n153
+	build _ 2 n151
 	push_a 4
 	build d_S.2 -1 n_S.2
 	push_a 5
 	build d_S.1 -1 n_S.1
-	build _ 2 n152
-	build _ 2 n151
 	build _ 2 n150
+	build _ 2 n149
+	build _ 2 n148
 	push_a 5
 	update_a 2 11
 	update_a 1 10
@@ -5720,14 +5766,14 @@ else.88
 	pop_b 1
 .d 2 0
 	rtn
-.n 2 _ ea153
+.n 2 _ ea151
 .o 1 0
-n153
+n151
 	push_node _cycle_in_spine 2
 .o 3 0
-ea153
+ea151
 .o 3 0
-s153
+s151
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -5743,14 +5789,14 @@ s153
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s59
-.n 2 _ ea152
+.n 2 _ ea150
 .o 1 0
-n152
+n150
 	push_node _cycle_in_spine 2
 .o 3 0
-ea152
+ea150
 .o 3 0
-s152
+s150
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -5766,14 +5812,14 @@ s152
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s58
-.n 2 _ ea151
+.n 2 _ ea149
 .o 1 0
-n151
+n149
 	push_node _cycle_in_spine 2
 .o 3 0
-ea151
+ea149
 .o 3 0
-s151
+s149
 	push_a 1
 	jsr_eval 0
 	push_a 1
@@ -5788,14 +5834,14 @@ s151
 	updatepop_a 0 2
 .d 2 1 i
 	jmp e_StdList_sdrop
-.n 2 _ ea150
+.n 2 _ ea148
 .o 1 0
-n150
+n148
 	push_node _cycle_in_spine 2
 .o 3 0
-ea150
+ea148
 .o 3 0
-s150
+s148
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -5845,7 +5891,7 @@ s58
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n166
+	build_u _ 1 2 n164
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
@@ -5860,12 +5906,12 @@ else.89
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n166
+n164
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea166
+ea164
 .o 2 2 ii
-s166
+s164
 	pushI 1
 	push_b 1
 	addI
@@ -5900,7 +5946,7 @@ s59
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n167
+	build_u _ 1 2 n165
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
@@ -5915,12 +5961,12 @@ else.90
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n167
+n165
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea167
+ea165
 .o 2 2 ii
-s167
+s165
 	pushI 1
 	push_b 1
 	addI
@@ -6017,14 +6063,14 @@ else.91
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n157
+	build _ 2 n155
 	push_a 4
 	build d_S.2 -1 n_S.2
 	push_a 5
 	build d_S.1 -1 n_S.1
-	build _ 2 n156
-	build _ 2 n155
 	build _ 2 n154
+	build _ 2 n153
+	build _ 2 n152
 	push_a 5
 	update_a 2 11
 	update_a 1 10
@@ -6055,14 +6101,14 @@ else.92
 	pop_b 1
 .d 2 0
 	rtn
-.n 2 _ ea157
+.n 2 _ ea155
 .o 1 0
-n157
+n155
 	push_node _cycle_in_spine 2
 .o 3 0
-ea157
+ea155
 .o 3 0
-s157
+s155
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -6078,14 +6124,14 @@ s157
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s57
-.n 2 _ ea156
+.n 2 _ ea154
 .o 1 0
-n156
+n154
 	push_node _cycle_in_spine 2
 .o 3 0
-ea156
+ea154
 .o 3 0
-s156
+s154
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -6101,14 +6147,14 @@ s156
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s56
-.n 2 _ ea155
+.n 2 _ ea153
 .o 1 0
-n155
+n153
 	push_node _cycle_in_spine 2
 .o 3 0
-ea155
+ea153
 .o 3 0
-s155
+s153
 	push_a 1
 	jsr_eval 0
 	push_a 1
@@ -6123,14 +6169,14 @@ s155
 	updatepop_a 0 2
 .d 2 1 i
 	jmp e_StdList_sdrop
-.n 2 _ ea154
+.n 2 _ ea152
 .o 1 0
-n154
+n152
 	push_node _cycle_in_spine 2
 .o 3 0
-ea154
+ea152
 .o 3 0
-s154
+s152
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -6180,7 +6226,7 @@ s56
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n164
+	build_u _ 1 2 n162
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
@@ -6195,12 +6241,12 @@ else.93
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n164
+n162
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea164
+ea162
 .o 2 2 ii
-s164
+s162
 	pushI 1
 	push_b 1
 	addI
@@ -6235,7 +6281,7 @@ s57
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n165
+	build_u _ 1 2 n163
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
@@ -6250,12 +6296,12 @@ else.94
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n165
+n163
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea165
+ea163
 .o 2 2 ii
-s165
+s163
 	pushI 1
 	push_b 1
 	addI
@@ -6352,14 +6398,14 @@ else.95
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n161
+	build _ 2 n159
 	push_a 4
 	build d_S.2 -1 n_S.2
 	push_a 5
 	build d_S.1 -1 n_S.1
-	build _ 2 n160
-	build _ 2 n159
 	build _ 2 n158
+	build _ 2 n157
+	build _ 2 n156
 	push_a 5
 	update_a 2 11
 	update_a 1 10
@@ -6390,14 +6436,14 @@ else.96
 	pop_b 1
 .d 2 0
 	rtn
-.n 2 _ ea161
+.n 2 _ ea159
 .o 1 0
-n161
+n159
 	push_node _cycle_in_spine 2
 .o 3 0
-ea161
+ea159
 .o 3 0
-s161
+s159
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -6413,14 +6459,14 @@ s161
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s55
-.n 2 _ ea160
+.n 2 _ ea158
 .o 1 0
-n160
+n158
 	push_node _cycle_in_spine 2
 .o 3 0
-ea160
+ea158
 .o 3 0
-s160
+s158
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -6436,14 +6482,14 @@ s160
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s54
-.n 2 _ ea159
+.n 2 _ ea157
 .o 1 0
-n159
+n157
 	push_node _cycle_in_spine 2
 .o 3 0
-ea159
+ea157
 .o 3 0
-s159
+s157
 	push_a 1
 	jsr_eval 0
 	push_a 1
@@ -6458,14 +6504,14 @@ s159
 	updatepop_a 0 2
 .d 2 1 i
 	jmp e_StdList_sdrop
-.n 2 _ ea158
+.n 2 _ ea156
 .o 1 0
-n158
+n156
 	push_node _cycle_in_spine 2
 .o 3 0
-ea158
+ea156
 .o 3 0
-s158
+s156
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -6515,7 +6561,7 @@ s54
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n162
+	build_u _ 1 2 n160
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
@@ -6530,12 +6576,12 @@ else.97
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n162
+n160
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea162
+ea160
 .o 2 2 ii
-s162
+s160
 	pushI 1
 	push_b 1
 	addI
@@ -6570,7 +6616,7 @@ s55
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n163
+	build_u _ 1 2 n161
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
@@ -6585,12 +6631,12 @@ else.98
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n163
+n161
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea163
+ea161
 .o 2 2 ii
-s163
+s161
 	pushI 1
 	push_b 1
 	addI
@@ -6606,7 +6652,7 @@ s163
 .d 2 2 ii
 	jmp s55
 .o 7 0
-s84
+s82
 	buildAC "\n"
 	push_a 5
 .d 2 0
@@ -6676,7 +6722,7 @@ else.101
 	update_a 1 8
 	updatepop_a 0 7
 .d 6 0
-	jmp s106
+	jmp s104
 else.102
 	pushI 10
 	pushI 0
@@ -6707,7 +6753,7 @@ else.102
 	update_a 1 8
 	updatepop_a 0 7
 .d 6 0
-	jmp s105
+	jmp s103
 else.103
 	pushI 12
 	pushI 0
@@ -6738,7 +6784,7 @@ else.103
 	update_a 1 8
 	updatepop_a 0 7
 .d 6 0
-	jmp s104
+	jmp s102
 else.104
 	pushI 9
 	pushI 0
@@ -6769,7 +6815,7 @@ else.104
 	update_a 1 8
 	updatepop_a 0 7
 .d 6 0
-	jmp s103
+	jmp s101
 else.105
 	pushI 8
 	pushI 0
@@ -6800,7 +6846,7 @@ else.105
 	update_a 1 8
 	updatepop_a 0 7
 .d 6 0
-	jmp s102
+	jmp s100
 else.106
 	pushI 8
 	pushI 0
@@ -6831,7 +6877,7 @@ else.106
 	update_a 1 8
 	updatepop_a 0 7
 .d 6 0
-	jmp s101
+	jmp s99
 else.107
 	pushI 8
 	pushI 0
@@ -6862,7 +6908,7 @@ else.107
 	update_a 1 8
 	updatepop_a 0 7
 .d 6 0
-	jmp s100
+	jmp s98
 else.108
 	pushI 9
 	pushI 0
@@ -6893,7 +6939,7 @@ else.108
 	update_a 1 8
 	updatepop_a 0 7
 .d 6 0
-	jmp s99
+	jmp s97
 else.109
 	pushI 11
 	pushI 0
@@ -6924,7 +6970,7 @@ else.109
 	update_a 1 8
 	updatepop_a 0 7
 .d 6 0
-	jmp s98
+	jmp s96
 else.110
 	pushI 8
 	pushI 0
@@ -6955,7 +7001,7 @@ else.110
 	update_a 1 8
 	updatepop_a 0 7
 .d 6 0
-	jmp s97
+	jmp s95
 else.111
 	pushI 7
 	pushI 0
@@ -6986,7 +7032,7 @@ else.111
 	update_a 1 8
 	updatepop_a 0 7
 .d 6 0
-	jmp s96
+	jmp s94
 else.112
 	pushI 7
 	pushI 0
@@ -7017,7 +7063,7 @@ else.112
 	update_a 1 8
 	updatepop_a 0 7
 .d 6 0
-	jmp s95
+	jmp s93
 else.113
 	pushI 7
 	pushI 0
@@ -7048,7 +7094,7 @@ else.113
 	update_a 1 8
 	updatepop_a 0 7
 .d 6 0
-	jmp s94
+	jmp s92
 else.114
 	pushI 2
 	pushI 0
@@ -7079,7 +7125,7 @@ else.114
 	update_a 1 8
 	updatepop_a 0 7
 .d 6 0
-	jmp s93
+	jmp s91
 else.115
 	pushI 2
 	pushI 0
@@ -7110,7 +7156,7 @@ else.115
 	update_a 1 8
 	updatepop_a 0 7
 .d 6 0
-	jmp s92
+	jmp s90
 else.116
 	pushI 2
 	pushI 0
@@ -7141,7 +7187,7 @@ else.116
 	update_a 1 8
 	updatepop_a 0 7
 .d 6 0
-	jmp s91
+	jmp s89
 else.117
 	pushI 2
 	pushI 0
@@ -7172,7 +7218,7 @@ else.117
 	update_a 1 8
 	updatepop_a 0 7
 .d 6 0
-	jmp s90
+	jmp s88
 else.118
 	pushI 1
 	pushI 0
@@ -7203,7 +7249,7 @@ else.118
 	update_a 1 8
 	updatepop_a 0 7
 .d 6 0
-	jmp s89
+	jmp s87
 else.119
 	pushI 2
 	pushI 0
@@ -7234,7 +7280,7 @@ else.119
 	update_a 1 8
 	updatepop_a 0 7
 .d 6 0
-	jmp s88
+	jmp s86
 else.120
 	pushI 1
 	pushI 0
@@ -7269,7 +7315,7 @@ else.120
 	update_a 1 8
 	updatepop_a 0 7
 .d 6 1 i
-	jmp s87
+	jmp s85
 else.121
 	pushI 1
 	pushI 0
@@ -7304,7 +7350,7 @@ else.121
 	update_a 1 8
 	updatepop_a 0 7
 .d 6 1 i
-	jmp s86
+	jmp s84
 else.122
 	pushI 1
 	pushI 0
@@ -7339,7 +7385,7 @@ else.122
 	update_a 1 8
 	updatepop_a 0 7
 .d 6 1 i
-	jmp s85
+	jmp s83
 else.123
 	push_a 6
 	pushB FALSE
@@ -7347,7 +7393,7 @@ else.123
 .d 1 1 b
 	rtn
 .o 6 1 i
-s85
+s83
 	push_a 5
 	buildI 2
 	push_a 3
@@ -7386,7 +7432,7 @@ else.124
 	push_arg 1 3 3
 	push_arg 2 3 2
 	push_a 2
-	build _ 2 n188
+	build _ 2 n186
 	push_a 4
 	pop_b 1
 	update_a 3 10
@@ -7421,14 +7467,14 @@ else.125
 	updatepop_b 0 1
 .d 1 1 b
 	rtn
-.n 2 _ ea188
+.n 2 _ ea186
 .o 1 0
-n188
+n186
 	push_node _cycle_in_spine 2
 .o 3 0
-ea188
+ea186
 .o 3 0
-s188
+s186
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -7486,7 +7532,7 @@ s188
 .d 1 0
 	rtn
 .o 6 1 i
-s86
+s84
 	push_a 5
 	buildI 2
 	push_a 3
@@ -7525,7 +7571,7 @@ else.126
 	push_arg 1 3 3
 	push_arg 2 3 2
 	push_a 2
-	build _ 2 n189
+	build _ 2 n187
 	push_a 4
 	pop_b 1
 	update_a 3 10
@@ -7560,14 +7606,14 @@ else.127
 	updatepop_b 0 1
 .d 1 1 b
 	rtn
-.n 2 _ ea189
+.n 2 _ ea187
 .o 1 0
-n189
+n187
 	push_node _cycle_in_spine 2
 .o 3 0
-ea189
+ea187
 .o 3 0
-s189
+s187
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -7625,7 +7671,7 @@ s189
 .d 1 0
 	rtn
 .o 6 1 i
-s87
+s85
 	push_a 5
 	buildI 2
 	push_a 3
@@ -7664,7 +7710,7 @@ else.128
 	push_arg 1 3 3
 	push_arg 2 3 2
 	push_a 2
-	build _ 2 n190
+	build _ 2 n188
 	push_a 4
 	pop_b 1
 	update_a 3 10
@@ -7699,14 +7745,14 @@ else.129
 	updatepop_b 0 1
 .d 1 1 b
 	rtn
-.n 2 _ ea190
+.n 2 _ ea188
 .o 1 0
-n190
+n188
 	push_node _cycle_in_spine 2
 .o 3 0
-ea190
+ea188
 .o 3 0
-s190
+s188
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -7764,7 +7810,7 @@ s190
 .d 1 0
 	rtn
 .o 6 0
-s88
+s86
 	push_a 5
 	buildI 2
 	push_a 3
@@ -7835,7 +7881,7 @@ else.131
 .d 1 1 b
 	rtn
 .o 6 0
-s89
+s87
 	push_a 5
 	buildI 2
 	push_a 3
@@ -7906,7 +7952,7 @@ else.133
 .d 1 1 b
 	rtn
 .o 6 0
-s90
+s88
 	push_a 5
 	buildI 2
 	push_a 3
@@ -7977,7 +8023,7 @@ else.135
 .d 1 1 b
 	rtn
 .o 6 0
-s91
+s89
 	push_a 5
 	buildI 2
 	push_a 3
@@ -8048,7 +8094,7 @@ else.137
 .d 1 1 b
 	rtn
 .o 6 0
-s92
+s90
 	push_a 5
 	buildI 2
 	push_a 3
@@ -8119,7 +8165,7 @@ else.139
 .d 1 1 b
 	rtn
 .o 6 0
-s93
+s91
 	push_a 5
 	buildI 2
 	push_a 3
@@ -8190,7 +8236,7 @@ else.141
 .d 1 1 b
 	rtn
 .o 6 0
-s94
+s92
 	push_a 5
 	buildI 2
 	push_a 3
@@ -8229,21 +8275,24 @@ else.142
 	push_a 6
 	buildh ARRAY 1
 	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
-	push_arg 2 3 3
-	push_arg 3 3 2
+	push_a 0
+	build d_S.2 -1 n_S.2
+	push_a 1
+	build d_S.1 -1 n_S.1
+	build _ 2 n191
 	push_a 2
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n194
-	push_a 4
-	build d_S.2 -1 n_S.2
-	push_a 5
-	build d_S.1 -1 n_S.1
-	build _ 2 n193
+	build _ 2 n190
+	build _ 2 n189
+	build e_StdList_dtoString;79 1 e_StdList_ntoString;79
+	push_arg 3 3 3
+	push_arg 4 3 2
+	push_a 2
 	build _ 2 n192
-	build _ 2 n191
-	push_a 5
+	push_a 6
+	update_a 3 12
 	update_a 2 11
 	update_a 1 10
 	updatepop_a 0 9
@@ -8256,7 +8305,7 @@ else.142
 	notB
 	jmp_false else.143
 	buildAC "failed to close"
-	updatepop_a 0 1
+	updatepop_a 0 2
 	pop_b 1
 .d 1 0
 	jsr print_string_
@@ -8271,56 +8320,10 @@ else.142
 else.143
 	push_arg 0 2 2
 	push_b 0
-	updatepop_a 0 1
+	updatepop_a 0 2
 	updatepop_b 0 1
 .d 1 1 b
 	rtn
-.n 2 _ ea194
-.o 1 0
-n194
-	push_node _cycle_in_spine 2
-.o 3 0
-ea194
-.o 3 0
-s194
-	push_a 0
-	jsr_eval 0
-	pushI_a 1
-	pop_a 1
-	pushI 1
-	push_b 1
-	update_b 1 2
-	update_b 0 1
-	pop_b 1
-	subI
-	push_a 1
-	pushI 0
-	updatepop_a 0 2
-.d 2 2 ii
-	jmp s79
-.n 2 _ ea193
-.o 1 0
-n193
-	push_node _cycle_in_spine 2
-.o 3 0
-ea193
-.o 3 0
-s193
-	push_a 0
-	jsr_eval 0
-	pushI_a 1
-	pop_a 1
-	pushI 1
-	push_b 1
-	update_b 1 2
-	update_b 0 1
-	pop_b 1
-	subI
-	push_a 1
-	pushI 0
-	updatepop_a 0 2
-.d 2 2 ii
-	jmp s78
 .n 2 _ ea192
 .o 1 0
 n192
@@ -8331,40 +8334,31 @@ ea192
 s192
 	push_a 1
 	jsr_eval 0
-	push_a 1
-	jsr_eval 0
-	buildh _Nil 0
-	update_a 0 3
-	update_a 0 4
-	pop_a 1
-.d 1 0
-	jsr e_StdList_slength;47
-.o 0 1 i
-	updatepop_a 0 2
-.d 2 1 i
-	jmp e_StdList_sdrop
-.n 2 _ ea191
-.o 1 0
-n191
-	push_node _cycle_in_spine 2
-.o 3 0
-ea191
-.o 3 0
-s191
-	push_a 1
-	jsr_eval 0
 	pushF_a 2
 	pop_a 1
 	push_a 0
 	jsr_eval 0
-	updatepop_a 0 2
-.d 1 0
-	jsr e_StdList_stoString;79
+	push_array 0
+	updatepop_a 0 1
+	update_a 1 2
+	updatepop_a 0 1
+	push_arraysize CHAR 0 1
+	pushI 2
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	subI
+	pushI 0
+	push_array 0
+	updatepop_a 0 1
+.d 1 2 ii
+	jsr sliceAC
 .o 1 0
 .d 1 0
 	jsr e_StdInt_stoInt;23
 .o 0 1 i
-	pushI 1
+	pushI 5
 	push_b 1
 	update_b 1 2
 	update_b 0 1
@@ -8392,8 +8386,76 @@ s191
 	pop_b 2
 .d 1 0
 	rtn
+.n 2 _ ea191
+.o 1 0
+n191
+	push_node _cycle_in_spine 2
+.o 3 0
+ea191
+.o 3 0
+s191
+	push_a 0
+	jsr_eval 0
+	pushI_a 1
+	pop_a 1
+	pushI 1
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	subI
+	push_a 1
+	pushI 0
+	updatepop_a 0 2
+.d 2 2 ii
+	jmp s79
+.n 2 _ ea190
+.o 1 0
+n190
+	push_node _cycle_in_spine 2
+.o 3 0
+ea190
+.o 3 0
+s190
+	push_a 0
+	jsr_eval 0
+	pushI_a 1
+	pop_a 1
+	pushI 1
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	subI
+	push_a 1
+	pushI 0
+	updatepop_a 0 2
+.d 2 2 ii
+	jmp s78
+.n 2 _ ea189
+.o 1 0
+n189
+	push_node _cycle_in_spine 2
+.o 3 0
+ea189
+.o 3 0
+s189
+	push_a 1
+	jsr_eval 0
+	push_a 1
+	jsr_eval 0
+	buildh _Nil 0
+	update_a 0 3
+	update_a 0 4
+	pop_a 1
+.d 1 0
+	jsr e_StdList_slength;47
+.o 0 1 i
+	updatepop_a 0 2
+.d 2 1 i
+	jmp e_StdList_sdrop
 .o 6 0
-s95
+s93
 	push_a 5
 	buildI 2
 	push_a 3
@@ -8438,14 +8500,14 @@ else.144
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n198
+	build _ 2 n196
 	push_a 4
 	build d_S.2 -1 n_S.2
 	push_a 5
 	build d_S.1 -1 n_S.1
-	build _ 2 n197
-	build _ 2 n196
 	build _ 2 n195
+	build _ 2 n194
+	build _ 2 n193
 	push_a 5
 	update_a 2 11
 	update_a 1 10
@@ -8478,14 +8540,14 @@ else.145
 	updatepop_b 0 1
 .d 1 1 b
 	rtn
-.n 2 _ ea198
+.n 2 _ ea196
 .o 1 0
-n198
+n196
 	push_node _cycle_in_spine 2
 .o 3 0
-ea198
+ea196
 .o 3 0
-s198
+s196
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -8501,14 +8563,14 @@ s198
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s77
-.n 2 _ ea197
+.n 2 _ ea195
 .o 1 0
-n197
+n195
 	push_node _cycle_in_spine 2
 .o 3 0
-ea197
+ea195
 .o 3 0
-s197
+s195
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -8524,14 +8586,14 @@ s197
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s76
-.n 2 _ ea196
+.n 2 _ ea194
 .o 1 0
-n196
+n194
 	push_node _cycle_in_spine 2
 .o 3 0
-ea196
+ea194
 .o 3 0
-s196
+s194
 	push_a 1
 	jsr_eval 0
 	push_a 1
@@ -8546,14 +8608,14 @@ s196
 	updatepop_a 0 2
 .d 2 1 i
 	jmp e_StdList_sdrop
-.n 2 _ ea195
+.n 2 _ ea193
 .o 1 0
-n195
+n193
 	push_node _cycle_in_spine 2
 .o 3 0
-ea195
+ea193
 .o 3 0
-s195
+s193
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -8564,7 +8626,7 @@ s195
 .d 1 0
 	jsr e_StdList_stoString;79
 .o 1 0
-	buildAC "\nD=A\n@THIS\nA=M+D\nD=A\n@13\nM=D\n@SP\nA=M-1\nD=M\n@13\nA=M\nM=D\n@SP\nM=M-1\n\n"
+	buildAC "\nD=A\n@THAT\nA=M+D\nD=A\n@13\nM=D\n@SP\nA=M-1\nD=M\n@13\nA=M\nM=D\n@SP\nM=M-1\n@13\nM=0\n\n"
 	push_a 1
 	update_a 1 2
 	update_a 0 1
@@ -8584,7 +8646,7 @@ s195
 .d 1 0
 	rtn
 .o 6 0
-s96
+s94
 	push_a 5
 	buildI 2
 	push_a 3
@@ -8629,14 +8691,14 @@ else.146
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n202
+	build _ 2 n200
 	push_a 4
 	build d_S.2 -1 n_S.2
 	push_a 5
 	build d_S.1 -1 n_S.1
-	build _ 2 n201
-	build _ 2 n200
 	build _ 2 n199
+	build _ 2 n198
+	build _ 2 n197
 	push_a 5
 	update_a 2 11
 	update_a 1 10
@@ -8669,14 +8731,14 @@ else.147
 	updatepop_b 0 1
 .d 1 1 b
 	rtn
-.n 2 _ ea202
+.n 2 _ ea200
 .o 1 0
-n202
+n200
 	push_node _cycle_in_spine 2
 .o 3 0
-ea202
+ea200
 .o 3 0
-s202
+s200
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -8692,14 +8754,14 @@ s202
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s75
-.n 2 _ ea201
+.n 2 _ ea199
 .o 1 0
-n201
+n199
 	push_node _cycle_in_spine 2
 .o 3 0
-ea201
+ea199
 .o 3 0
-s201
+s199
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -8715,14 +8777,14 @@ s201
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s74
-.n 2 _ ea200
+.n 2 _ ea198
 .o 1 0
-n200
+n198
 	push_node _cycle_in_spine 2
 .o 3 0
-ea200
+ea198
 .o 3 0
-s200
+s198
 	push_a 1
 	jsr_eval 0
 	push_a 1
@@ -8737,14 +8799,14 @@ s200
 	updatepop_a 0 2
 .d 2 1 i
 	jmp e_StdList_sdrop
-.n 2 _ ea199
+.n 2 _ ea197
 .o 1 0
-n199
+n197
 	push_node _cycle_in_spine 2
 .o 3 0
-ea199
+ea197
 .o 3 0
-s199
+s197
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -8755,7 +8817,7 @@ s199
 .d 1 0
 	jsr e_StdList_stoString;79
 .o 1 0
-	buildAC "\nD=A\n@THIS\nA=M+D\nD=A\n@13\nM=D\n@SP\nA=M-1\nD=M\n@13\nA=M\nM=D\n@SP\nM=M-1\n\n"
+	buildAC "\nD=A\n@THIS\nA=M+D\nD=A\n@13\nM=D\n@SP\nA=M-1\nD=M\n@13\nA=M\nM=D\n@SP\nM=M-1\n@13\nM=0\n\n"
 	push_a 1
 	update_a 1 2
 	update_a 0 1
@@ -8775,7 +8837,7 @@ s199
 .d 1 0
 	rtn
 .o 6 0
-s97
+s95
 	push_a 5
 	buildI 2
 	push_a 3
@@ -8820,14 +8882,14 @@ else.148
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n206
+	build _ 2 n204
 	push_a 4
 	build d_S.2 -1 n_S.2
 	push_a 5
 	build d_S.1 -1 n_S.1
-	build _ 2 n205
-	build _ 2 n204
 	build _ 2 n203
+	build _ 2 n202
+	build _ 2 n201
 	push_a 5
 	update_a 2 11
 	update_a 1 10
@@ -8860,14 +8922,14 @@ else.149
 	updatepop_b 0 1
 .d 1 1 b
 	rtn
-.n 2 _ ea206
+.n 2 _ ea204
 .o 1 0
-n206
+n204
 	push_node _cycle_in_spine 2
 .o 3 0
-ea206
+ea204
 .o 3 0
-s206
+s204
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -8883,14 +8945,14 @@ s206
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s73
-.n 2 _ ea205
+.n 2 _ ea203
 .o 1 0
-n205
+n203
 	push_node _cycle_in_spine 2
 .o 3 0
-ea205
+ea203
 .o 3 0
-s205
+s203
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -8906,14 +8968,14 @@ s205
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s72
-.n 2 _ ea204
+.n 2 _ ea202
 .o 1 0
-n204
+n202
 	push_node _cycle_in_spine 2
 .o 3 0
-ea204
+ea202
 .o 3 0
-s204
+s202
 	push_a 1
 	jsr_eval 0
 	push_a 1
@@ -8928,14 +8990,14 @@ s204
 	updatepop_a 0 2
 .d 2 1 i
 	jmp e_StdList_sdrop
-.n 2 _ ea203
+.n 2 _ ea201
 .o 1 0
-n203
+n201
 	push_node _cycle_in_spine 2
 .o 3 0
-ea203
+ea201
 .o 3 0
-s203
+s201
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -8946,7 +9008,7 @@ s203
 .d 1 0
 	jsr e_StdList_stoString;79
 .o 1 0
-	buildAC "\nD=A\n@LCL\nA=M+D\nD=A\n@13\nM=D\n@SP\nA=M-1\nD=M\n@13\nA=M\nM=D\n@SP\nM=M-1\n\n"
+	buildAC "\nD=A\n@LCL\nA=M+D\nD=A\n@13\nM=D\n@SP\nA=M-1\nD=M\n@13\nA=M\nM=D\n@SP\nM=M-1\n@13\nM=0\n\n"
 	push_a 1
 	update_a 1 2
 	update_a 0 1
@@ -8966,7 +9028,7 @@ s203
 .d 1 0
 	rtn
 .o 6 0
-s98
+s96
 	push_a 5
 	buildI 2
 	push_a 3
@@ -9011,14 +9073,14 @@ else.150
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n210
+	build _ 2 n208
 	push_a 4
 	build d_S.2 -1 n_S.2
 	push_a 5
 	build d_S.1 -1 n_S.1
-	build _ 2 n209
-	build _ 2 n208
 	build _ 2 n207
+	build _ 2 n206
+	build _ 2 n205
 	push_a 5
 	update_a 2 11
 	update_a 1 10
@@ -9051,14 +9113,14 @@ else.151
 	updatepop_b 0 1
 .d 1 1 b
 	rtn
-.n 2 _ ea210
+.n 2 _ ea208
 .o 1 0
-n210
+n208
 	push_node _cycle_in_spine 2
 .o 3 0
-ea210
+ea208
 .o 3 0
-s210
+s208
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -9074,14 +9136,14 @@ s210
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s71
-.n 2 _ ea209
+.n 2 _ ea207
 .o 1 0
-n209
+n207
 	push_node _cycle_in_spine 2
 .o 3 0
-ea209
+ea207
 .o 3 0
-s209
+s207
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -9097,14 +9159,14 @@ s209
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s70
-.n 2 _ ea208
+.n 2 _ ea206
 .o 1 0
-n208
+n206
 	push_node _cycle_in_spine 2
 .o 3 0
-ea208
+ea206
 .o 3 0
-s208
+s206
 	push_a 1
 	jsr_eval 0
 	push_a 1
@@ -9119,14 +9181,14 @@ s208
 	updatepop_a 0 2
 .d 2 1 i
 	jmp e_StdList_sdrop
-.n 2 _ ea207
+.n 2 _ ea205
 .o 1 0
-n207
+n205
 	push_node _cycle_in_spine 2
 .o 3 0
-ea207
+ea205
 .o 3 0
-s207
+s205
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -9137,7 +9199,7 @@ s207
 .d 1 0
 	jsr e_StdList_stoString;79
 .o 1 0
-	buildAC "\nD=A\n@ARG\nA=M+D\nD=A\n@13\nM=D\n@SP\nA=M-1\nD=M\n@13\nA=M\nM=D\n@SP\nM=M-1\n\n"
+	buildAC "\nD=A\n@ARG\nA=M+D\nD=A\n@13\nM=D\n@SP\nA=M-1\nD=M\n@13\nA=M\nM=D\n@SP\nM=M-1\n@13\nM=0\n\n"
 	push_a 1
 	update_a 1 2
 	update_a 0 1
@@ -9157,7 +9219,7 @@ s207
 .d 1 0
 	rtn
 .o 6 0
-s99
+s97
 	push_a 5
 	buildI 2
 	push_a 3
@@ -9202,14 +9264,14 @@ else.152
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n214
+	build _ 2 n212
 	push_a 4
 	build d_S.2 -1 n_S.2
 	push_a 5
 	build d_S.1 -1 n_S.1
-	build _ 2 n213
-	build _ 2 n212
 	build _ 2 n211
+	build _ 2 n210
+	build _ 2 n209
 	push_a 5
 	update_a 2 11
 	update_a 1 10
@@ -9242,14 +9304,14 @@ else.153
 	updatepop_b 0 1
 .d 1 1 b
 	rtn
-.n 2 _ ea214
+.n 2 _ ea212
 .o 1 0
-n214
+n212
 	push_node _cycle_in_spine 2
 .o 3 0
-ea214
+ea212
 .o 3 0
-s214
+s212
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -9265,14 +9327,14 @@ s214
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s69
-.n 2 _ ea213
+.n 2 _ ea211
 .o 1 0
-n213
+n211
 	push_node _cycle_in_spine 2
 .o 3 0
-ea213
+ea211
 .o 3 0
-s213
+s211
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -9288,14 +9350,14 @@ s213
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s68
-.n 2 _ ea212
+.n 2 _ ea210
 .o 1 0
-n212
+n210
 	push_node _cycle_in_spine 2
 .o 3 0
-ea212
+ea210
 .o 3 0
-s212
+s210
 	push_a 1
 	jsr_eval 0
 	push_a 1
@@ -9310,14 +9372,14 @@ s212
 	updatepop_a 0 2
 .d 2 1 i
 	jmp e_StdList_sdrop
-.n 2 _ ea211
+.n 2 _ ea209
 .o 1 0
-n211
+n209
 	push_node _cycle_in_spine 2
 .o 3 0
-ea211
+ea209
 .o 3 0
-s211
+s209
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -9348,7 +9410,7 @@ s211
 .d 1 0
 	rtn
 .o 6 0
-s100
+s98
 	push_a 5
 	buildI 2
 	push_a 3
@@ -9387,21 +9449,24 @@ else.154
 	push_a 6
 	buildh ARRAY 1
 	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
-	push_arg 2 3 3
-	push_arg 3 3 2
+	push_a 0
+	build d_S.2 -1 n_S.2
+	push_a 1
+	build d_S.1 -1 n_S.1
+	build _ 2 n215
 	push_a 2
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n218
-	push_a 4
-	build d_S.2 -1 n_S.2
-	push_a 5
-	build d_S.1 -1 n_S.1
-	build _ 2 n217
+	build _ 2 n214
+	build _ 2 n213
+	build e_StdList_dtoString;79 1 e_StdList_ntoString;79
+	push_arg 3 3 3
+	push_arg 4 3 2
+	push_a 2
 	build _ 2 n216
-	build _ 2 n215
-	push_a 5
+	push_a 6
+	update_a 3 12
 	update_a 2 11
 	update_a 1 10
 	updatepop_a 0 9
@@ -9414,7 +9479,7 @@ else.154
 	notB
 	jmp_false else.155
 	buildAC "failed to close"
-	updatepop_a 0 1
+	updatepop_a 0 2
 	pop_b 1
 .d 1 0
 	jsr print_string_
@@ -9429,56 +9494,10 @@ else.154
 else.155
 	push_arg 0 2 2
 	push_b 0
-	updatepop_a 0 1
+	updatepop_a 0 2
 	updatepop_b 0 1
 .d 1 1 b
 	rtn
-.n 2 _ ea218
-.o 1 0
-n218
-	push_node _cycle_in_spine 2
-.o 3 0
-ea218
-.o 3 0
-s218
-	push_a 0
-	jsr_eval 0
-	pushI_a 1
-	pop_a 1
-	pushI 1
-	push_b 1
-	update_b 1 2
-	update_b 0 1
-	pop_b 1
-	subI
-	push_a 1
-	pushI 0
-	updatepop_a 0 2
-.d 2 2 ii
-	jmp s67
-.n 2 _ ea217
-.o 1 0
-n217
-	push_node _cycle_in_spine 2
-.o 3 0
-ea217
-.o 3 0
-s217
-	push_a 0
-	jsr_eval 0
-	pushI_a 1
-	pop_a 1
-	pushI 1
-	push_b 1
-	update_b 1 2
-	update_b 0 1
-	pop_b 1
-	subI
-	push_a 1
-	pushI 0
-	updatepop_a 0 2
-.d 2 2 ii
-	jmp s66
 .n 2 _ ea216
 .o 1 0
 n216
@@ -9489,37 +9508,40 @@ ea216
 s216
 	push_a 1
 	jsr_eval 0
-	push_a 1
-	jsr_eval 0
-	buildh _Nil 0
-	update_a 0 3
-	update_a 0 4
-	pop_a 1
-.d 1 0
-	jsr e_StdList_slength;47
-.o 0 1 i
-	updatepop_a 0 2
-.d 2 1 i
-	jmp e_StdList_sdrop
-.n 2 _ ea215
-.o 1 0
-n215
-	push_node _cycle_in_spine 2
-.o 3 0
-ea215
-.o 3 0
-s215
-	push_a 1
-	jsr_eval 0
 	pushF_a 2
 	pop_a 1
 	push_a 0
 	jsr_eval 0
-	updatepop_a 0 2
-.d 1 0
-	jsr e_StdList_stoString;79
+	push_array 0
+	updatepop_a 0 1
+	update_a 1 2
+	updatepop_a 0 1
+	push_arraysize CHAR 0 1
+	pushI 2
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	subI
+	pushI 0
+	push_array 0
+	updatepop_a 0 1
+.d 1 2 ii
+	jsr sliceAC
 .o 1 0
-	buildAC "\nD=A\n@TEMP\nA=M+D\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n\n"
+.d 1 0
+	jsr e_StdInt_stoInt;23
+.o 0 1 i
+	pushI 5
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	addI
+.d 0 1 i
+	jsr ItoAC
+.o 1 0
+	buildAC "\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n\n"
 	push_a 1
 	update_a 1 2
 	update_a 0 1
@@ -9538,8 +9560,76 @@ s215
 	pop_b 2
 .d 1 0
 	rtn
+.n 2 _ ea215
+.o 1 0
+n215
+	push_node _cycle_in_spine 2
+.o 3 0
+ea215
+.o 3 0
+s215
+	push_a 0
+	jsr_eval 0
+	pushI_a 1
+	pop_a 1
+	pushI 1
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	subI
+	push_a 1
+	pushI 0
+	updatepop_a 0 2
+.d 2 2 ii
+	jmp s67
+.n 2 _ ea214
+.o 1 0
+n214
+	push_node _cycle_in_spine 2
+.o 3 0
+ea214
+.o 3 0
+s214
+	push_a 0
+	jsr_eval 0
+	pushI_a 1
+	pop_a 1
+	pushI 1
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	subI
+	push_a 1
+	pushI 0
+	updatepop_a 0 2
+.d 2 2 ii
+	jmp s66
+.n 2 _ ea213
+.o 1 0
+n213
+	push_node _cycle_in_spine 2
+.o 3 0
+ea213
+.o 3 0
+s213
+	push_a 1
+	jsr_eval 0
+	push_a 1
+	jsr_eval 0
+	buildh _Nil 0
+	update_a 0 3
+	update_a 0 4
+	pop_a 1
+.d 1 0
+	jsr e_StdList_slength;47
+.o 0 1 i
+	updatepop_a 0 2
+.d 2 1 i
+	jmp e_StdList_sdrop
 .o 6 0
-s101
+s99
 	push_a 5
 	buildI 2
 	push_a 3
@@ -9584,14 +9674,14 @@ else.156
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n222
+	build _ 2 n220
 	push_a 4
 	build d_S.2 -1 n_S.2
 	push_a 5
 	build d_S.1 -1 n_S.1
-	build _ 2 n221
-	build _ 2 n220
 	build _ 2 n219
+	build _ 2 n218
+	build _ 2 n217
 	push_a 5
 	update_a 2 11
 	update_a 1 10
@@ -9624,14 +9714,14 @@ else.157
 	updatepop_b 0 1
 .d 1 1 b
 	rtn
-.n 2 _ ea222
+.n 2 _ ea220
 .o 1 0
-n222
+n220
 	push_node _cycle_in_spine 2
 .o 3 0
-ea222
+ea220
 .o 3 0
-s222
+s220
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -9647,14 +9737,14 @@ s222
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s65
-.n 2 _ ea221
+.n 2 _ ea219
 .o 1 0
-n221
+n219
 	push_node _cycle_in_spine 2
 .o 3 0
-ea221
+ea219
 .o 3 0
-s221
+s219
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -9670,14 +9760,14 @@ s221
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s64
-.n 2 _ ea220
+.n 2 _ ea218
 .o 1 0
-n220
+n218
 	push_node _cycle_in_spine 2
 .o 3 0
-ea220
+ea218
 .o 3 0
-s220
+s218
 	push_a 1
 	jsr_eval 0
 	push_a 1
@@ -9692,14 +9782,14 @@ s220
 	updatepop_a 0 2
 .d 2 1 i
 	jmp e_StdList_sdrop
-.n 2 _ ea219
+.n 2 _ ea217
 .o 1 0
-n219
+n217
 	push_node _cycle_in_spine 2
 .o 3 0
-ea219
+ea217
 .o 3 0
-s219
+s217
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -9730,7 +9820,7 @@ s219
 .d 1 0
 	rtn
 .o 6 0
-s102
+s100
 	push_a 5
 	buildI 2
 	push_a 3
@@ -9775,14 +9865,14 @@ else.158
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n226
+	build _ 2 n224
 	push_a 4
 	build d_S.2 -1 n_S.2
 	push_a 5
 	build d_S.1 -1 n_S.1
-	build _ 2 n225
-	build _ 2 n224
 	build _ 2 n223
+	build _ 2 n222
+	build _ 2 n221
 	push_a 5
 	update_a 2 11
 	update_a 1 10
@@ -9815,14 +9905,14 @@ else.159
 	updatepop_b 0 1
 .d 1 1 b
 	rtn
-.n 2 _ ea226
+.n 2 _ ea224
 .o 1 0
-n226
+n224
 	push_node _cycle_in_spine 2
 .o 3 0
-ea226
+ea224
 .o 3 0
-s226
+s224
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -9838,14 +9928,14 @@ s226
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s63
-.n 2 _ ea225
+.n 2 _ ea223
 .o 1 0
-n225
+n223
 	push_node _cycle_in_spine 2
 .o 3 0
-ea225
+ea223
 .o 3 0
-s225
+s223
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -9861,14 +9951,14 @@ s225
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s62
-.n 2 _ ea224
+.n 2 _ ea222
 .o 1 0
-n224
+n222
 	push_node _cycle_in_spine 2
 .o 3 0
-ea224
+ea222
 .o 3 0
-s224
+s222
 	push_a 1
 	jsr_eval 0
 	push_a 1
@@ -9883,14 +9973,14 @@ s224
 	updatepop_a 0 2
 .d 2 1 i
 	jmp e_StdList_sdrop
-.n 2 _ ea223
+.n 2 _ ea221
 .o 1 0
-n223
+n221
 	push_node _cycle_in_spine 2
 .o 3 0
-ea223
+ea221
 .o 3 0
-s223
+s221
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -9921,7 +10011,7 @@ s223
 .d 1 0
 	rtn
 .o 6 0
-s103
+s101
 	push_a 5
 	buildI 2
 	push_a 3
@@ -9966,14 +10056,14 @@ else.160
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n230
+	build _ 2 n228
 	push_a 4
 	build d_S.2 -1 n_S.2
 	push_a 5
 	build d_S.1 -1 n_S.1
-	build _ 2 n229
-	build _ 2 n228
 	build _ 2 n227
+	build _ 2 n226
+	build _ 2 n225
 	push_a 5
 	update_a 2 11
 	update_a 1 10
@@ -10006,14 +10096,14 @@ else.161
 	updatepop_b 0 1
 .d 1 1 b
 	rtn
-.n 2 _ ea230
+.n 2 _ ea228
 .o 1 0
-n230
+n228
 	push_node _cycle_in_spine 2
 .o 3 0
-ea230
+ea228
 .o 3 0
-s230
+s228
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -10029,14 +10119,14 @@ s230
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s61
-.n 2 _ ea229
+.n 2 _ ea227
 .o 1 0
-n229
+n227
 	push_node _cycle_in_spine 2
 .o 3 0
-ea229
+ea227
 .o 3 0
-s229
+s227
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -10052,14 +10142,14 @@ s229
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s60
-.n 2 _ ea228
+.n 2 _ ea226
 .o 1 0
-n228
+n226
 	push_node _cycle_in_spine 2
 .o 3 0
-ea228
+ea226
 .o 3 0
-s228
+s226
 	push_a 1
 	jsr_eval 0
 	push_a 1
@@ -10074,14 +10164,14 @@ s228
 	updatepop_a 0 2
 .d 2 1 i
 	jmp e_StdList_sdrop
-.n 2 _ ea227
+.n 2 _ ea225
 .o 1 0
-n227
+n225
 	push_node _cycle_in_spine 2
 .o 3 0
-ea227
+ea225
 .o 3 0
-s227
+s225
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -10112,7 +10202,7 @@ s227
 .d 1 0
 	rtn
 .o 6 0
-s104
+s102
 	push_a 5
 	buildI 2
 	push_a 3
@@ -10157,14 +10247,14 @@ else.162
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n234
+	build _ 2 n232
 	push_a 4
 	build d_S.2 -1 n_S.2
 	push_a 5
 	build d_S.1 -1 n_S.1
-	build _ 2 n233
-	build _ 2 n232
 	build _ 2 n231
+	build _ 2 n230
+	build _ 2 n229
 	push_a 5
 	update_a 2 11
 	update_a 1 10
@@ -10197,14 +10287,14 @@ else.163
 	updatepop_b 0 1
 .d 1 1 b
 	rtn
-.n 2 _ ea234
+.n 2 _ ea232
 .o 1 0
-n234
+n232
 	push_node _cycle_in_spine 2
 .o 3 0
-ea234
+ea232
 .o 3 0
-s234
+s232
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -10220,14 +10310,14 @@ s234
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s59
-.n 2 _ ea233
+.n 2 _ ea231
 .o 1 0
-n233
+n231
 	push_node _cycle_in_spine 2
 .o 3 0
-ea233
+ea231
 .o 3 0
-s233
+s231
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -10243,14 +10333,14 @@ s233
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s58
-.n 2 _ ea232
+.n 2 _ ea230
 .o 1 0
-n232
+n230
 	push_node _cycle_in_spine 2
 .o 3 0
-ea232
+ea230
 .o 3 0
-s232
+s230
 	push_a 1
 	jsr_eval 0
 	push_a 1
@@ -10265,14 +10355,14 @@ s232
 	updatepop_a 0 2
 .d 2 1 i
 	jmp e_StdList_sdrop
-.n 2 _ ea231
+.n 2 _ ea229
 .o 1 0
-n231
+n229
 	push_node _cycle_in_spine 2
 .o 3 0
-ea231
+ea229
 .o 3 0
-s231
+s229
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -10303,7 +10393,7 @@ s231
 .d 1 0
 	rtn
 .o 6 0
-s105
+s103
 	push_a 5
 	buildI 2
 	push_a 3
@@ -10348,14 +10438,14 @@ else.164
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n238
+	build _ 2 n236
 	push_a 4
 	build d_S.2 -1 n_S.2
 	push_a 5
 	build d_S.1 -1 n_S.1
-	build _ 2 n237
-	build _ 2 n236
 	build _ 2 n235
+	build _ 2 n234
+	build _ 2 n233
 	push_a 5
 	update_a 2 11
 	update_a 1 10
@@ -10388,14 +10478,14 @@ else.165
 	updatepop_b 0 1
 .d 1 1 b
 	rtn
-.n 2 _ ea238
+.n 2 _ ea236
 .o 1 0
-n238
+n236
 	push_node _cycle_in_spine 2
 .o 3 0
-ea238
+ea236
 .o 3 0
-s238
+s236
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -10411,14 +10501,14 @@ s238
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s57
-.n 2 _ ea237
+.n 2 _ ea235
 .o 1 0
-n237
+n235
 	push_node _cycle_in_spine 2
 .o 3 0
-ea237
+ea235
 .o 3 0
-s237
+s235
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -10434,14 +10524,14 @@ s237
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s56
-.n 2 _ ea236
+.n 2 _ ea234
 .o 1 0
-n236
+n234
 	push_node _cycle_in_spine 2
 .o 3 0
-ea236
+ea234
 .o 3 0
-s236
+s234
 	push_a 1
 	jsr_eval 0
 	push_a 1
@@ -10456,14 +10546,14 @@ s236
 	updatepop_a 0 2
 .d 2 1 i
 	jmp e_StdList_sdrop
-.n 2 _ ea235
+.n 2 _ ea233
 .o 1 0
-n235
+n233
 	push_node _cycle_in_spine 2
 .o 3 0
-ea235
+ea233
 .o 3 0
-s235
+s233
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
@@ -10494,7 +10584,7 @@ s235
 .d 1 0
 	rtn
 .o 6 0
-s106
+s104
 	push_a 5
 	buildI 2
 	push_a 3
@@ -10539,14 +10629,14 @@ else.166
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n242
+	build _ 2 n240
 	push_a 4
 	build d_S.2 -1 n_S.2
 	push_a 5
 	build d_S.1 -1 n_S.1
-	build _ 2 n241
-	build _ 2 n240
 	build _ 2 n239
+	build _ 2 n238
+	build _ 2 n237
 	push_a 5
 	update_a 2 11
 	update_a 1 10
@@ -10579,14 +10669,14 @@ else.167
 	updatepop_b 0 1
 .d 1 1 b
 	rtn
-.n 2 _ ea242
+.n 2 _ ea240
 .o 1 0
-n242
+n240
 	push_node _cycle_in_spine 2
 .o 3 0
-ea242
+ea240
 .o 3 0
-s242
+s240
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -10602,14 +10692,14 @@ s242
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s55
-.n 2 _ ea241
+.n 2 _ ea239
 .o 1 0
-n241
+n239
 	push_node _cycle_in_spine 2
 .o 3 0
-ea241
+ea239
 .o 3 0
-s241
+s239
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -10625,14 +10715,14 @@ s241
 	updatepop_a 0 2
 .d 2 2 ii
 	jmp s54
-.n 2 _ ea240
+.n 2 _ ea238
 .o 1 0
-n240
+n238
 	push_node _cycle_in_spine 2
 .o 3 0
-ea240
+ea238
 .o 3 0
-s240
+s238
 	push_a 1
 	jsr_eval 0
 	push_a 1
@@ -10647,14 +10737,14 @@ s240
 	updatepop_a 0 2
 .d 2 1 i
 	jmp e_StdList_sdrop
-.n 2 _ ea239
+.n 2 _ ea237
 .o 1 0
-n239
+n237
 	push_node _cycle_in_spine 2
 .o 3 0
-ea239
+ea237
 .o 3 0
-s239
+s237
 	push_a 1
 	jsr_eval 0
 	pushF_a 2
