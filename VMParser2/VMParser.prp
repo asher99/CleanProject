@@ -24,10 +24,10 @@ OtherModules
 		Icl
 			WindowPosition
 				X:	385
-				Y:	182
+				Y:	72
 				SizeX:	800
 				SizeY:	680
-		IclOpen:	True
+		IclOpen:	False
 	Module
 		Name:	Parsing
 		Dir:	{Project}

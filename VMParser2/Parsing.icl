@@ -52,14 +52,15 @@ parseLine line filename num w
 
 																// pointer commands
 | line % (0,13) == "push pointer 0" = parsePushPointer0 line w	//  push pointer 0
-| line % (0,12) == "pop pointer 0" = parsePopPointer0 line w		//  pop pointer 0
+| line % (0,12) == "pop pointer 0" = parsePopPointer0 line w	//  pop pointer 0
 | line % (0,13) == "push pointer 1" = parsePushPointer1 line w	//  push pointer 1
-| line % (0,12) == "pop pointer 1" = parsePopPointer1 line w		//  pop pointer 1
+| line % (0,12) == "pop pointer 1" = parsePopPointer1 line w	//  pop pointer 1
 
 | line % (0,4) == "label" = parseLabel line filename w			// label c
 | line % (0,3) == "goto" = parseGoto line filename w			// goto c
 | line % (0,6) == "if-goto" = parseIfGoto line filename w		// if-goto c
 
+| line % (0,3) == "call" = parseCall line filename w			// call f n
 | line % (0,7) == "function" = parseFunction line filename w	// function f k
 | line % (0,5) == "return" = parseReturn line filename w		// return
 
@@ -419,6 +420,20 @@ parseIfGoto:: String String *f -> (Bool,*f) | FileSystem f
 parseIfGoto gotostr filename w
 # label = toString (drop (length [char \\ char <-: "if-goto "]) [char \\ char <-: gotostr])
 # instruction = "@SP\nM=M-1\nA=M\nD=M\n" +++ "@" +++ filename +++ "." +++ label +++ "\nD;JNE\n"
+# (ok_open,file ,w) = fopen "out.asm" FAppendText w
+| not ok_open = abort "failed to open file"
+# file = fwrites instruction file
+# (ok_close,w) = fclose file w
+| not ok_close = abort "failed to close"
+= (ok_close,w)
+
+//comment
+parseCall:: String String *f -> (Bool,*f) | FileSystem f  
+parseCall linestr filename w
+# list = split linestr
+# newARG = toString ((toInt (list!!2) - 5))
+# storestr = "D=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n"
+# instruction = "@" +++ filename +++ "." +++ list!!1 +++"ReturnAddress\n@LCL\n" +++ storestr +++ "@ARG\n" +++ storestr +++ "@THIS\n" +++ storestr +++ "@THAT\n@SP\nD=M\n@" +++ newARG +++ "\nD=D-A\n@ARG\nM=D\n@SP\nD=M\n@LCL\nM=D\n@" +++ list!!1 +++ "\n0;JMP\n(" +++ filename +++ "." +++ list!!1 +++ ".ReturnAddress)\n"
 # (ok_open,file ,w) = fopen "out.asm" FAppendText w
 | not ok_open = abort "failed to open file"
 # file = fwrites instruction file
