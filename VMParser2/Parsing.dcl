@@ -64,7 +64,9 @@ parseGoto:: String String *f -> (Bool,*f) | FileSystem f
 
 parseIfGoto:: String String *f -> (Bool,*f) | FileSystem f  
 
+parseFunction:: String String *f -> (Bool,*f) | FileSystem f  
 
+parseReturn:: String String *f -> (Bool,*f) | FileSystem f  
 
 
 

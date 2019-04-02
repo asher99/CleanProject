@@ -3,15 +3,28 @@ import StdEnv
 import StdFile
 
 /*
+*	Split
+*/
+split :: String -> [String]
+split s = scrape (fromString s)
+where
+    scrape :: [Char] -> [String]
+    scrape [] = []
+    scrape cs=:[c:_]
+    | isSpace c = scrape (dropWhile isSpace cs)
+    | otherwise = [toString word:scrape rest]
+    where
+        (word,rest) = span (not o isSpace) cs
+
+/*
 * Recursive parsing of the file. Parsing line by line untill list of lines is empty.
 */
 parse:: [String] String Int *f -> (Bool,*f) | FileSystem f
 parse [] filename num w = (True,w)
-parse [x:xs] num filename w
+parse [x:xs] filename num w
 # (ok,w) = parseLine x filename num w
 | not ok = abort ("failed to parse line " +++ x +++ "\n")
-//# num = inc num
-= parse xs filename(num+1) w
+= parse xs filename (num+1) w
 
 /*
 * Parse line. Uses a 'switch-case' template to prefrom the right parsing method.
@@ -43,9 +56,12 @@ parseLine line filename num w
 | line % (0,13) == "push pointer 1" = parsePushPointer1 line w	//  push pointer 1
 | line % (0,12) == "pop pointer 1" = parsePopPointer1 line w		//  pop pointer 1
 
-| line % (0,4) == "label" = parseLabel filename line w			// label c
-| line % (0,3) == "goto" = parseGoto filename line w			// goto c
-| line % (0,6) == "if-goto" = parseIfGoto filename line w		// if-goto c
+| line % (0,4) == "label" = parseLabel line filename w			// label c
+| line % (0,3) == "goto" = parseGoto line filename w			// goto c
+| line % (0,6) == "if-goto" = parseIfGoto line filename w		// if-goto c
+
+| line % (0,7) == "function" = parseFunction line filename w	// function f k
+| line % (0,5) == "return" = parseReturn line filename w		// return
 
 | line % (0,2) == "add" = parseAddCommand line w				//  add
 | line % (0,2) == "sub" = parseSubCommand line w				//  sub
@@ -376,7 +392,8 @@ parsePopPointer1 popstr w
 //comment
 parseLabel:: String String *f -> (Bool,*f) | FileSystem f  
 parseLabel label filename w
-# label = toString (drop (length [char \\ char <-: "label "]) [char \\ char <-: popstr])
+# label = toString (drop (length [char \\ char <-: "label "]) [char \\ char <-: label])
+# label = label % (0, size label - 2)
 # instruction = "(" +++ filename +++ "." +++ label +++ ")\n"
 # (ok_open,file ,w) = fopen "out.asm" FAppendText w
 | not ok_open = abort "failed to open file"
@@ -388,7 +405,7 @@ parseLabel label filename w
 //comment
 parseGoto:: String String *f -> (Bool,*f) | FileSystem f  
 parseGoto gotostr filename w
-# label = toString (drop (length [char \\ char <-: "goto "]) [char \\ char <-: popstr])
+# label = toString (drop (length [char \\ char <-: "goto "]) [char \\ char <-: gotostr])
 # instruction = "@" +++ filename +++ "." +++ label +++ "\n0;JMP\n"
 # (ok_open,file ,w) = fopen "out.asm" FAppendText w
 | not ok_open = abort "failed to open file"
@@ -400,8 +417,31 @@ parseGoto gotostr filename w
 //comment
 parseIfGoto:: String String *f -> (Bool,*f) | FileSystem f  
 parseIfGoto gotostr filename w
-# label = toString (drop (length [char \\ char <-: "if-goto "]) [char \\ char <-: popstr])
+# label = toString (drop (length [char \\ char <-: "if-goto "]) [char \\ char <-: gotostr])
 # instruction = "@SP\nM=M-1\nA=M\nD=M\n" +++ "@" +++ filename +++ "." +++ label +++ "\nD;JNE\n"
+# (ok_open,file ,w) = fopen "out.asm" FAppendText w
+| not ok_open = abort "failed to open file"
+# file = fwrites instruction file
+# (ok_close,w) = fclose file w
+| not ok_close = abort "failed to close"
+= (ok_close,w)
+
+//comment
+parseFunction:: String String *f -> (Bool,*f) | FileSystem f  
+parseFunction linestr filename w
+# list = split linestr
+# instruction = "(" +++ list!!1 +++ ")\n@" +++ list!!2 +++ "\nD=A\n@" +++ list!!1 +++ ".End\nD;JEQ\n(" +++ list!!1 +++ ".Loop)\n@SP\nA=M\nM=0\n@SP\nM=M+1\n@" +++ list!!1 +++ ".Loop\nD=D-1;JNE\n" +++ "(" +++ list!!1 +++ ".End)\n"
+# (ok_open,file ,w) = fopen "out.asm" FAppendText w
+| not ok_open = abort "failed to open file"
+# file = fwrites instruction file
+# (ok_close,w) = fclose file w
+| not ok_close = abort "failed to close"
+= (ok_close,w)
+
+//comment
+parseReturn:: String String *f -> (Bool,*f) | FileSystem f  
+parseReturn linestr filename w
+# instruction = "@LCL\nD=M\n@5\nA=D-A\nD=M\n@13\nM=D\n@SP\nM=M-1\nA=M\nD=M\n@ARG\nA=M\nM=D\n@ARG\nD=M\n@SP\nM=D+1\n@LCL\nM=M-1\nA=M\nD=M\n@THAT\nM=D\n@LCL\nM=M-1\nA=M\nD=M\n@THIS\nM=D\n@LCL\nM=M-1\nA=M\nD=M\n@ARG\nM=D\n@LCL\nM=M-1\nA=M\nD=M\n@LCL\nM=D\n@13\nA=M\n0;JMP\n"
 # (ok_open,file ,w) = fopen "out.asm" FAppendText w
 | not ok_open = abort "failed to open file"
 # file = fwrites instruction file

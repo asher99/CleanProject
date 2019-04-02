@@ -2,9 +2,9 @@ definition module Parsing
 import StdEnv
 import StdFile
 
-parse:: [String] String Int *f-> (Bool,*f) | FileSystem f
+parse:: [String] Int *f-> (Bool,*f) | FileSystem f
 
-parseLine:: String String Int *f-> (Bool,*f) | FileSystem f
+parseLine:: String Int *f-> (Bool,*f) | FileSystem f
 
 parsePushConstant:: String *f -> (Bool,*f) | FileSystem f  
 
@@ -58,11 +58,9 @@ parsePopPointer0:: String *f -> (Bool,*f) | FileSystem f
 
 parsePopPointer1:: String *f -> (Bool,*f) | FileSystem f  
 
-parseLabel:: String String *f -> (Bool,*f) | FileSystem f  
 
-parseGoto:: String String *f -> (Bool,*f) | FileSystem f  
 
-parseIfGoto:: String String *f -> (Bool,*f) | FileSystem f  
+
 
 
 

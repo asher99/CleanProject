@@ -37,7 +37,7 @@ Start w
 | not ok_close = abort "failed to close output file.\n"
 
 // 4. Parse the content of the file.
-= parse content name 1 w
+= parse content 1 w
 
 
 

@@ -5,21 +5,22 @@ import StdFile
 /*
 * Recursive parsing of the file. Parsing line by line untill list of lines is empty.
 */
-parse:: [String] String Int *f -> (Bool,*f) | FileSystem f
-parse [] filename num w = (True,w)
-parse [x:xs] num filename w
-# (ok,w) = parseLine x filename num w
+parse:: [String] Int *f -> (Bool,*f) | FileSystem f
+parse [] num w = (True,w)
+parse [x:xs] num w
+# (ok,w) = parseLine x num w
 | not ok = abort ("failed to parse line " +++ x +++ "\n")
 //# num = inc num
-= parse xs filename(num+1) w
+= parse xs (num+1) w
 
 /*
 * Parse line. Uses a 'switch-case' template to prefrom the right parsing method.
 */
-parseLine:: String String Int *f-> (Bool,*f) | FileSystem f 
-parseLine line filename num w
+parseLine:: String Int *f-> (Bool,*f) | FileSystem f 
+parseLine line num w
 | line == "\n" || line == "" = (True,w)							// Empty line
 | line % (0,1) == "//" = (True,w)								// Comment
+
 																// push commands					
 | line % (0,12) == "push constant" = parsePushConstant line w	//  push constant #
 | line % (0,10) == "push static" = parsePushStatic line w		//  push static #
@@ -42,10 +43,6 @@ parseLine line filename num w
 | line % (0,12) == "pop pointer 0" = parsePopPointer0 line w		//  pop pointer 0
 | line % (0,13) == "push pointer 1" = parsePushPointer1 line w	//  push pointer 1
 | line % (0,12) == "pop pointer 1" = parsePopPointer1 line w		//  pop pointer 1
-
-| line % (0,4) == "label" = parseLabel filename line w			// label c
-| line % (0,3) == "goto" = parseGoto filename line w			// goto c
-| line % (0,6) == "if-goto" = parseIfGoto filename line w		// if-goto c
 
 | line % (0,2) == "add" = parseAddCommand line w				//  add
 | line % (0,2) == "sub" = parseSubCommand line w				//  sub
@@ -370,47 +367,6 @@ parsePopPointer1 popstr w
 # (ok_close,w) = fclose file w
 | not ok_close = abort "failed to close"
 = (ok_close,w)
-
-// ********************  control flow *****************************//
-
-//comment
-parseLabel:: String String *f -> (Bool,*f) | FileSystem f  
-parseLabel label filename w
-# label = toString (drop (length [char \\ char <-: "label "]) [char \\ char <-: popstr])
-# instruction = "(" +++ filename +++ "." +++ label +++ ")\n"
-# (ok_open,file ,w) = fopen "out.asm" FAppendText w
-| not ok_open = abort "failed to open file"
-# file = fwrites instruction file
-# (ok_close,w) = fclose file w
-| not ok_close = abort "failed to close"
-= (ok_close,w)
-
-//comment
-parseGoto:: String String *f -> (Bool,*f) | FileSystem f  
-parseGoto gotostr filename w
-# label = toString (drop (length [char \\ char <-: "goto "]) [char \\ char <-: popstr])
-# instruction = "@" +++ filename +++ "." +++ label +++ "\n0;JMP\n"
-# (ok_open,file ,w) = fopen "out.asm" FAppendText w
-| not ok_open = abort "failed to open file"
-# file = fwrites instruction file
-# (ok_close,w) = fclose file w
-| not ok_close = abort "failed to close"
-= (ok_close,w)
-
-//comment
-parseIfGoto:: String String *f -> (Bool,*f) | FileSystem f  
-parseIfGoto gotostr filename w
-# label = toString (drop (length [char \\ char <-: "if-goto "]) [char \\ char <-: popstr])
-# instruction = "@SP\nM=M-1\nA=M\nD=M\n" +++ "@" +++ filename +++ "." +++ label +++ "\nD;JNE\n"
-# (ok_open,file ,w) = fopen "out.asm" FAppendText w
-| not ok_open = abort "failed to open file"
-# file = fwrites instruction file
-# (ok_close,w) = fclose file w
-| not ok_close = abort "failed to close"
-= (ok_close,w)
-
-// ********************  ALU *****************************//
-
 
 /*
 *	Parse a "add" command:
