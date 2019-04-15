@@ -75,6 +75,9 @@ parseLine line filename num w
 | line % (0,1) == "lt"  = parseLTCommand  line num w			//  lt
 | otherwise = (False,w)
 
+// ********************  bootstrap *****************************//
+
+
 
 // ********************  push *****************************//
 
@@ -393,9 +396,9 @@ parsePopPointer1 popstr w
 //comment
 parseLabel:: String String *f -> (Bool,*f) | FileSystem f  
 parseLabel label filename w
-# label = toString (drop (length [char \\ char <-: "label "]) [char \\ char <-: label])
-# label = label % (0, size label - 2)
-# instruction = "(" +++ filename +++ "." +++ label +++ ")\n"
+# list = split label
+# labelName = list!!1
+# instruction = "(" +++ filename +++ "." +++ labelName +++ ")\n"
 # (ok_open,file ,w) = fopen "out.asm" FAppendText w
 | not ok_open = abort "failed to open file"
 # file = fwrites instruction file
