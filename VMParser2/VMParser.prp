@@ -5,10 +5,17 @@ MainModule
 	DclOpen:	False
 	Icl
 		WindowPosition
+<<<<<<< Updated upstream
 			X:	42
 			Y:	-29
 			SizeX:	1516
 			SizeY:	730
+=======
+			X:	-8
+			Y:	-31
+			SizeX:	1349
+			SizeY:	634
+>>>>>>> Stashed changes
 	IclOpen:	True
 OtherModules
 	Module
@@ -23,11 +30,11 @@ OtherModules
 		DclOpen:	False
 		Icl
 			WindowPosition
-				X:	385
-				Y:	72
-				SizeX:	800
-				SizeY:	680
-		IclOpen:	False
+				X:	160
+				Y:	623
+				SizeX:	17
+				SizeY:	0
+		IclOpen:	True
 	Module
 		Name:	Parsing
 		Dir:	{Project}
@@ -40,10 +47,17 @@ OtherModules
 		DclOpen:	True
 		Icl
 			WindowPosition
+<<<<<<< Updated upstream
 				X:	5
 				Y:	-14
 				SizeX:	1519
 				SizeY:	730
+=======
+				X:	-8
+				Y:	-31
+				SizeX:	1349
+				SizeY:	634
+>>>>>>> Stashed changes
 		IclOpen:	True
 	Module
 		Name:	StdArray
