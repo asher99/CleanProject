@@ -1,11 +1,8 @@
-//Initial SP
-@255
+// BOOYTSTRAP
+@256
 D=A
-@0
+@SP
 M=D
-M=M+1
-
-//bootstrap
 @Sys.init.returnAdd
 D=A
 @SP
@@ -55,6 +52,7 @@ M=D
 0;JMP
 (Sys.init.returnAdd)//bootstrap-end
 
+//Function Instruction
 (Sys.init)
 @0
 D=A
@@ -78,6 +76,7 @@ M=D
 @SP
 M=M+1
 
+//Call Instruction
 @merged.vm.Main.fibonacciReturnAddress
 @LCL
 D=M
@@ -103,7 +102,9 @@ M=M+1
 @THAT
 @SP
 D=M
-@-4
+@1
+D=D-A
+@5
 D=D-A
 @ARG
 M=D
@@ -115,9 +116,11 @@ M=D
 0;JMP
 (merged.vm.Main.fibonacci.ReturnAddress)
 (merged.vm.WHILE)
+//Goto Instruction
 @merged.vm.WHILE              // Loop infinitely
 
 0;JMP
+//Function Instruction
 (Main.fibonacci)
 @0
 D=A
@@ -179,6 +182,7 @@ M=D
 @SP
 M=M-1
 
+//If-Goto Instructin
 @SP
 M=M-1
 A=M
@@ -186,6 +190,7 @@ D=M
 @merged.vm.IF_TRUE
 
 D;JNE
+//Goto Instruction
 @merged.vm.IF_FALSE
 
 0;JMP
@@ -203,6 +208,7 @@ M=D
 @SP
 M=M+1
 
+//Ret Instruction
 @LCL
 D=M
 @5
@@ -280,6 +286,7 @@ M=D
 @0
 M=M-1
 
+//Call Instruction
 @merged.vm.Main.fibonacciReturnAddress
 @LCL
 D=M
@@ -305,7 +312,9 @@ M=M+1
 @THAT
 @SP
 D=M
-@-4
+@1
+D=D-A
+@5
 D=D-A
 @ARG
 M=D
@@ -347,6 +356,7 @@ M=D
 @0
 M=M-1
 
+//Call Instruction
 @merged.vm.Main.fibonacciReturnAddress
 @LCL
 D=M
@@ -372,7 +382,9 @@ M=M+1
 @THAT
 @SP
 D=M
-@-4
+@1
+D=D-A
+@5
 D=D-A
 @ARG
 M=D
@@ -392,6 +404,7 @@ M=D
 @0
 M=M-1
 
+//Ret Instruction
 @LCL
 D=M
 @5

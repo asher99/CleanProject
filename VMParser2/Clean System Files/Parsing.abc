@@ -23,7 +23,7 @@
 .depend "StdBool" "20180913124337"
 .depend "StdEnv" "20180913124337"
 .depend "Parsing" "20190402183731"
-.module m_Parsing "Parsing" "20190415103746"
+.module m_Parsing "Parsing" "20190415125645"
 .endinfo
 .impmod _system
 .implab _cycle_in_spine
@@ -2667,7 +2667,7 @@ s34
 else.57
 	push_arg 0 3 3
 	push_arg 1 3 2
-	buildAC "@LCL\nD=M\n@5\nA=D-A\nD=M\n@13\nM=D\n@SP\nM=M-1\nA=M\nD=M\n@ARG\nA=M\nM=D\n@ARG\nD=M\n@SP\nM=D+1\n@LCL\nM=M-1\nA=M\nD=M\n@THAT\nM=D\n@LCL\nM=M-1\nA=M\nD=M\n@THIS\nM=D\n@LCL\nM=M-1\nA=M\nD=M\n@ARG\nM=D\n@LCL\nM=M-1\nA=M\nD=M\n@LCL\nM=D\n@13\nA=M\n0;JMP\n"
+	buildAC "//Ret Instruction\n@LCL\nD=M\n@5\nA=D-A\nD=M\n@13\nM=D\n@SP\nM=M-1\nA=M\nD=M\n@ARG\nA=M\nM=D\n@ARG\nD=M\n@SP\nM=D+1\n@LCL\nM=M-1\nA=M\nD=M\n@THAT\nM=D\n@LCL\nM=M-1\nA=M\nD=M\n@THIS\nM=D\n@LCL\nM=M-1\nA=M\nD=M\n@ARG\nM=D\n@LCL\nM=M-1\nA=M\nD=M\n@LCL\nM=D\n@13\nA=M\n0;JMP\n"
 	buildh ARRAY 1
 	build _ 2 e_StdFile_nfwrites
 	push_a 3
@@ -2930,7 +2930,7 @@ s141
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "("
+	buildAC "//Function Instruction\n("
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -3127,7 +3127,7 @@ s142
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "\nD=D-A\n@ARG\nM=D\n@SP\nD=M\n@LCL\nM=D\n@"
+	buildAC "\nD=D-A\n@5\nD=D-A\n@ARG\nM=D\n@SP\nD=M\n@LCL\nM=D\n@"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -3141,12 +3141,6 @@ s142
 .d 1 0
 	jsr e_StdInt_stoInt;23
 .o 0 1 i
-	pushI 5
-	push_b 1
-	update_b 1 2
-	update_b 0 1
-	pop_b 1
-	subI
 .d 0 1 i
 	jsr ItoAC
 .o 1 0
@@ -3211,7 +3205,7 @@ s142
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "@"
+	buildAC "//Call Instruction\n@"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -3464,7 +3458,7 @@ s143
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "@SP\nM=M-1\nA=M\nD=M\n"
+	buildAC "//If-Goto Instructin\n@SP\nM=M-1\nA=M\nD=M\n"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -3823,7 +3817,7 @@ s147
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "@"
+	buildAC "//Goto Instruction\n@"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -11077,7 +11071,7 @@ s115
 else.189
 	push_arg 0 3 3
 	push_arg 1 3 2
-	buildAC "@LCL\nD=M\n@5\nA=D-A\nD=M\n@13\nM=D\n@SP\nM=M-1\nA=M\nD=M\n@ARG\nA=M\nM=D\n@ARG\nD=M\n@SP\nM=D+1\n@LCL\nM=M-1\nA=M\nD=M\n@THAT\nM=D\n@LCL\nM=M-1\nA=M\nD=M\n@THIS\nM=D\n@LCL\nM=M-1\nA=M\nD=M\n@ARG\nM=D\n@LCL\nM=M-1\nA=M\nD=M\n@LCL\nM=D\n@13\nA=M\n0;JMP\n"
+	buildAC "//Ret Instruction\n@LCL\nD=M\n@5\nA=D-A\nD=M\n@13\nM=D\n@SP\nM=M-1\nA=M\nD=M\n@ARG\nA=M\nM=D\n@ARG\nD=M\n@SP\nM=D+1\n@LCL\nM=M-1\nA=M\nD=M\n@THAT\nM=D\n@LCL\nM=M-1\nA=M\nD=M\n@THIS\nM=D\n@LCL\nM=M-1\nA=M\nD=M\n@ARG\nM=D\n@LCL\nM=M-1\nA=M\nD=M\n@LCL\nM=D\n@13\nA=M\n0;JMP\n"
 	buildh ARRAY 1
 	build _ 2 e_StdFile_nfwrites
 	push_a 3
@@ -11295,7 +11289,7 @@ s237
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "("
+	buildAC "//Function Instruction\n("
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -11439,7 +11433,7 @@ s238
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "\nD=D-A\n@ARG\nM=D\n@SP\nD=M\n@LCL\nM=D\n@"
+	buildAC "\nD=D-A\n@5\nD=D-A\n@ARG\nM=D\n@SP\nD=M\n@LCL\nM=D\n@"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -11453,12 +11447,6 @@ s238
 .d 1 0
 	jsr e_StdInt_stoInt;23
 .o 0 1 i
-	pushI 5
-	push_b 1
-	update_b 1 2
-	update_b 0 1
-	pop_b 1
-	subI
 .d 0 1 i
 	jsr ItoAC
 .o 1 0
@@ -11523,7 +11511,7 @@ s238
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "@"
+	buildAC "//Call Instruction\n@"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -11730,7 +11718,7 @@ s239
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "@SP\nM=M-1\nA=M\nD=M\n"
+	buildAC "//If-Goto Instructin\n@SP\nM=M-1\nA=M\nD=M\n"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -11933,7 +11921,7 @@ s243
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "@"
+	buildAC "//Goto Instruction\n@"
 .d 2 0
 	jsr catAC
 .o 1 0

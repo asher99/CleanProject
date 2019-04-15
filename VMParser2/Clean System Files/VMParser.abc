@@ -24,7 +24,7 @@
 .depend "StdOverloaded" "20180913124337"
 .depend "StdBool" "20180913124337"
 .depend "StdEnv" "20180913124337"
-.module m_VMParser "VMParser" "20190415103752"
+.module m_VMParser "VMParser" "20190415115645"
 .endinfo
 .impmod _system
 .implab _cycle_in_spine
@@ -212,7 +212,7 @@ else.1
 else.2
 	push_b 2
 	push_b 2
-	buildAC "//Initial SP\n@255\nD=A\n@0\nM=D\nM=M+1\n\n//bootstrap\n@Sys.init.returnAdd\nD=A\n@SP\nA=M\nM=D\n@SP\nM=M+1\n@LCL\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n@ARG\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n@THIS\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n@THAT\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n@SP\nD=M\n@5\nD=D-A\n@ARG\nM=D\n@SP\nD=M\n@LCL\nM=D\n@Sys.init.returnAdd\n0;JMP\n(Sys.init.returnAdd)//bootstrap-end\n\n"
+	buildAC "// BOOYTSTRAP\n@256\nD=A\n@SP\nM=D\n@Sys.init.returnAdd\nD=A\n@SP\nA=M\nM=D\n@SP\nM=M+1\n@LCL\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n@ARG\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n@THIS\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n@THAT\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n@SP\nD=M\n@5\nD=D-A\n@ARG\nM=D\n@SP\nD=M\n@LCL\nM=D\n@Sys.init.returnAdd\n0;JMP\n(Sys.init.returnAdd)//bootstrap-end\n\n"
 	update_b 1 4
 	updatepop_b 0 3
 .d 1 2 f

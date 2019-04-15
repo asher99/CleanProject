@@ -32,7 +32,7 @@ Start w
 # (ok_open,file ,w) = fopen "out.asm" FWriteText w
 | not ok_open = abort "Failed to open output file.\n"
 //# file = fwrites "//Initial SP\n@0\nM=A\n\n" file
-# file = fwrites "//Initial SP\n@255\nD=A\n@0\nM=D\nM=M+1\n\n//bootstrap\n@Sys.init.returnAdd\nD=A\n@SP\nA=M\nM=D\n@SP\nM=M+1\n@LCL\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n@ARG\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n@THIS\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n@THAT\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n@SP\nD=M\n@5\nD=D-A\n@ARG\nM=D\n@SP\nD=M\n@LCL\nM=D\n@Sys.init.returnAdd\n0;JMP\n(Sys.init.returnAdd)//bootstrap-end\n\n" file
+# file = fwrites "// BOOYTSTRAP\n@256\nD=A\n@SP\nM=D\n@Sys.init.returnAdd\nD=A\n@SP\nA=M\nM=D\n@SP\nM=M+1\n@LCL\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n@ARG\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n@THIS\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n@THAT\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n@SP\nD=M\n@5\nD=D-A\n@ARG\nM=D\n@SP\nD=M\n@LCL\nM=D\n@Sys.init.returnAdd\n0;JMP\n(Sys.init.returnAdd)//bootstrap-end\n\n" file
 # (ok_close,w) = fclose file w
 | not ok_close = abort "failed to close output file.\n"
 

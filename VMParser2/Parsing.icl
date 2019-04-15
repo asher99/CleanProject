@@ -410,7 +410,7 @@ parseLabel label filename w
 parseGoto:: String String *f -> (Bool,*f) | FileSystem f  
 parseGoto gotostr filename w
 # label = toString (drop (length [char \\ char <-: "goto "]) [char \\ char <-: gotostr])
-# instruction = "@" +++ filename +++ "." +++ label +++ "\n0;JMP\n"
+# instruction = "//Goto Instruction\n@" +++ filename +++ "." +++ label +++ "\n0;JMP\n"
 # (ok_open,file ,w) = fopen "out.asm" FAppendText w
 | not ok_open = abort "failed to open file"
 # file = fwrites instruction file
@@ -422,7 +422,7 @@ parseGoto gotostr filename w
 parseIfGoto:: String String *f -> (Bool,*f) | FileSystem f  
 parseIfGoto gotostr filename w
 # label = toString (drop (length [char \\ char <-: "if-goto "]) [char \\ char <-: gotostr])
-# instruction = "@SP\nM=M-1\nA=M\nD=M\n" +++ "@" +++ filename +++ "." +++ label +++ "\nD;JNE\n"
+# instruction = "//If-Goto Instructin\n@SP\nM=M-1\nA=M\nD=M\n" +++ "@" +++ filename +++ "." +++ label +++ "\nD;JNE\n"
 # (ok_open,file ,w) = fopen "out.asm" FAppendText w
 | not ok_open = abort "failed to open file"
 # file = fwrites instruction file
@@ -434,9 +434,9 @@ parseIfGoto gotostr filename w
 parseCall:: String String *f -> (Bool,*f) | FileSystem f  
 parseCall linestr filename w
 # list = split linestr
-# newARG = toString ((toInt (list!!2) - 5))
+# newARG = toString (toInt (list!!2))
 # storestr = "D=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n"
-# instruction = "@" +++ filename +++ "." +++ list!!1 +++"ReturnAddress\n@LCL\n" +++ storestr +++ "@ARG\n" +++ storestr +++ "@THIS\n" +++ storestr +++ "@THAT\n@SP\nD=M\n@" +++ newARG +++ "\nD=D-A\n@ARG\nM=D\n@SP\nD=M\n@LCL\nM=D\n@" +++ list!!1 +++ "\n0;JMP\n(" +++ filename +++ "." +++ list!!1 +++ ".ReturnAddress)\n"
+# instruction = "//Call Instruction\n@" +++ filename +++ "." +++ list!!1 +++"ReturnAddress\n@LCL\n" +++ storestr +++ "@ARG\n" +++ storestr +++ "@THIS\n" +++ storestr +++ "@THAT\n@SP\nD=M\n@" +++ newARG +++ "\nD=D-A\n@5\nD=D-A\n@ARG\nM=D\n@SP\nD=M\n@LCL\nM=D\n@" +++ list!!1 +++ "\n0;JMP\n(" +++ filename +++ "." +++ list!!1 +++ ".ReturnAddress)\n"
 # (ok_open,file ,w) = fopen "out.asm" FAppendText w
 | not ok_open = abort "failed to open file"
 # file = fwrites instruction file
@@ -448,7 +448,7 @@ parseCall linestr filename w
 parseFunction:: String String *f -> (Bool,*f) | FileSystem f  
 parseFunction linestr filename w
 # list = split linestr
-# instruction = "(" +++ list!!1 +++ ")\n@" +++ list!!2 +++ "\nD=A\n@" +++ list!!1 +++ ".End\nD;JEQ\n(" +++ list!!1 +++ ".Loop)\n@SP\nA=M\nM=0\n@SP\nM=M+1\n@" +++ list!!1 +++ ".Loop\nD=D-1;JNE\n" +++ "(" +++ list!!1 +++ ".End)\n"
+# instruction = "//Function Instruction\n(" +++ list!!1 +++ ")\n@" +++ list!!2 +++ "\nD=A\n@" +++ list!!1 +++ ".End\nD;JEQ\n(" +++ list!!1 +++ ".Loop)\n@SP\nA=M\nM=0\n@SP\nM=M+1\n@" +++ list!!1 +++ ".Loop\nD=D-1;JNE\n" +++ "(" +++ list!!1 +++ ".End)\n"
 # (ok_open,file ,w) = fopen "out.asm" FAppendText w
 | not ok_open = abort "failed to open file"
 # file = fwrites instruction file
@@ -459,7 +459,7 @@ parseFunction linestr filename w
 //comment
 parseReturn:: String String *f -> (Bool,*f) | FileSystem f  
 parseReturn linestr filename w
-# instruction = "@LCL\nD=M\n@5\nA=D-A\nD=M\n@13\nM=D\n@SP\nM=M-1\nA=M\nD=M\n@ARG\nA=M\nM=D\n@ARG\nD=M\n@SP\nM=D+1\n@LCL\nM=M-1\nA=M\nD=M\n@THAT\nM=D\n@LCL\nM=M-1\nA=M\nD=M\n@THIS\nM=D\n@LCL\nM=M-1\nA=M\nD=M\n@ARG\nM=D\n@LCL\nM=M-1\nA=M\nD=M\n@LCL\nM=D\n@13\nA=M\n0;JMP\n"
+# instruction = "//Ret Instruction\n@LCL\nD=M\n@5\nA=D-A\nD=M\n@13\nM=D\n@SP\nM=M-1\nA=M\nD=M\n@ARG\nA=M\nM=D\n@ARG\nD=M\n@SP\nM=D+1\n@LCL\nM=M-1\nA=M\nD=M\n@THAT\nM=D\n@LCL\nM=M-1\nA=M\nD=M\n@THIS\nM=D\n@LCL\nM=M-1\nA=M\nD=M\n@ARG\nM=D\n@LCL\nM=M-1\nA=M\nD=M\n@LCL\nM=D\n@13\nA=M\n0;JMP\n"
 # (ok_open,file ,w) = fopen "out.asm" FAppendText w
 | not ok_open = abort "failed to open file"
 # file = fwrites instruction file
