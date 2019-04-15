@@ -78,6 +78,12 @@ M=M+1
 
 //Call Instruction
 @merged.vm.Main.fibonacciReturnAddress
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
 @LCL
 D=M
 @SP
@@ -100,6 +106,12 @@ M=D
 @SP
 M=M+1
 @THAT
+D=M
+@SP
+A=M
+M=D
+@SP
+M=M+1
 @SP
 D=M
 @1
@@ -288,6 +300,12 @@ M=M-1
 
 //Call Instruction
 @merged.vm.Main.fibonacciReturnAddress
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
 @LCL
 D=M
 @SP
@@ -310,6 +328,12 @@ M=D
 @SP
 M=M+1
 @THAT
+D=M
+@SP
+A=M
+M=D
+@SP
+M=M+1
 @SP
 D=M
 @1
@@ -358,6 +382,12 @@ M=M-1
 
 //Call Instruction
 @merged.vm.Main.fibonacciReturnAddress
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
 @LCL
 D=M
 @SP
@@ -380,6 +410,12 @@ M=D
 @SP
 M=M+1
 @THAT
+D=M
+@SP
+A=M
+M=D
+@SP
+M=M+1
 @SP
 D=M
 @1

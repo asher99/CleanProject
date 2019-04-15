@@ -436,7 +436,8 @@ parseCall linestr filename w
 # list = split linestr
 # newARG = toString (toInt (list!!2))
 # storestr = "D=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n"
-# instruction = "//Call Instruction\n@" +++ filename +++ "." +++ list!!1 +++"ReturnAddress\n@LCL\n" +++ storestr +++ "@ARG\n" +++ storestr +++ "@THIS\n" +++ storestr +++ "@THAT\n@SP\nD=M\n@" +++ newARG +++ "\nD=D-A\n@5\nD=D-A\n@ARG\nM=D\n@SP\nD=M\n@LCL\nM=D\n@" +++ list!!1 +++ "\n0;JMP\n(" +++ filename +++ "." +++ list!!1 +++ ".ReturnAddress)\n"
+# instruction = "//Call Instruction\n@" +++ filename +++ "." +++ list!!1 +++"ReturnAddress\nD=A\n@SP\nA=M\nM=D\n@SP\nM=M+1\n@LCL\n" +++ storestr +++ "@ARG\n" +++ storestr +++ "@THIS\n" +++ storestr +++ "@THAT\n" +++ storestr
+# instruction = instruction +++ "@SP\nD=M\n@" +++ newARG +++ "\nD=D-A\n@5\nD=D-A\n@ARG\nM=D\n@SP\nD=M\n@LCL\nM=D\n@" +++ list!!1 +++ "\n0;JMP\n(" +++ filename +++ "." +++ list!!1 +++ ".ReturnAddress)\n"
 # (ok_open,file ,w) = fopen "out.asm" FAppendText w
 | not ok_open = abort "failed to open file"
 # file = fwrites instruction file
