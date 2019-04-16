@@ -26,7 +26,7 @@ parseGTCommand:: String Int *f -> (Bool,*f) | FileSystem f
 
 parseLTCommand:: String Int *f -> (Bool,*f) | FileSystem f  
 
-parsePushStatic:: String *f -> (Bool,*f) | FileSystem f  
+parsePushStatic:: String String *f -> (Bool,*f) | FileSystem f  
 
 parsePushArgument:: String *f -> (Bool,*f) | FileSystem f  
  
@@ -38,7 +38,7 @@ parsePushThat :: String *f -> (Bool,*f) | FileSystem f
 
 parsePushTemp :: String *f -> (Bool,*f) | FileSystem f  
 
-parsePopStatic:: String *f -> (Bool,*f) | FileSystem f  
+parsePopStatic:: String String *f -> (Bool,*f) | FileSystem f  
 
 parsePopArgument:: String *f -> (Bool,*f) | FileSystem f  
 
@@ -64,7 +64,7 @@ parseGoto:: String String *f -> (Bool,*f) | FileSystem f
 
 parseIfGoto:: String String *f -> (Bool,*f) | FileSystem f 
 
-parseCall:: String String *f -> (Bool,*f) | FileSystem f 
+parseCall:: String String Int *f -> (Bool,*f) | FileSystem f 
 
 parseFunction:: String String *f -> (Bool,*f) | FileSystem f  
 

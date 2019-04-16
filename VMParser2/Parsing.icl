@@ -35,7 +35,7 @@ parseLine line filename num w
 | line % (0,1) == "//" = (True,w)								// Comment
 																// push commands					
 | line % (0,12) == "push constant" = parsePushConstant line w	//  push constant #
-| line % (0,10) == "push static" = parsePushStatic line w		//  push static #
+| line % (0,10) == "push static" = parsePushStatic line filename w		//  push static #
 | line % (0,12) == "push argument" = parsePushArgument line w	//  push argument #
 | line % (0,9) == "push local" = parsePushLocal line w			//  push local #
 | line % (0,8) == "push this" = parsePushThis line w			//  push this #
@@ -43,7 +43,7 @@ parseLine line filename num w
 | line % (0,8) == "push temp" = parsePushTemp line w			//  push temp #
 
 																// pop commands
-| line % (0,9) == "pop static" = parsePopStatic line w			//  pop static #
+| line % (0,9) == "pop static" = parsePopStatic line filename w			//  pop static #
 | line % (0,11) == "pop argument" = parsePopArgument line w		//  pop argument #
 | line % (0,8) == "pop local" = parsePopLocal line w			//  pop local #
 | line % (0,7) == "pop this" = parsePopThis line w				//  pop this #
@@ -60,7 +60,7 @@ parseLine line filename num w
 | line % (0,3) == "goto" = parseGoto line filename w			// goto c
 | line % (0,6) == "if-goto" = parseIfGoto line filename w		// if-goto c
 
-| line % (0,3) == "call" = parseCall line filename w			// call f n
+| line % (0,3) == "call" = parseCall line filename num w			// call f n
 | line % (0,7) == "function" = parseFunction line filename w	// function f k
 | line % (0,5) == "return" = parseReturn line filename w		// return
 
@@ -106,13 +106,12 @@ parsePushConstant pushstr w
 *	3. writes the command into file.
 *
 */
-parsePushStatic:: String *f -> (Bool,*f) | FileSystem f  
-parsePushStatic pushstr w
+parsePushStatic:: String String *f -> (Bool,*f) | FileSystem f  
+parsePushStatic pushstr filename w
 # offset = toString (drop (length [char \\ char <-: "push static "]) [char \\ char <-: pushstr])
 # offset = offset % (0, (size offset)-2)
-# addr = (toInt offset)+16
-# addstr = toString addr
-# instruction = "//push static instruction\n@" +++ addstr +++ "\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n\n"
+# addr = filename +++ "." +++ offset
+# instruction = "//push static instruction\n@" +++ addr +++ "\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n\n"
 # (ok_open,file ,w) = fopen "out.asm" FAppendText w
 | not ok_open = abort "failed to open file"
 # file = fwrites instruction file
@@ -262,13 +261,12 @@ parsePopConstant popstr w
 *	3. writes the command into file.
 *
 */
-parsePopStatic:: String *f -> (Bool,*f) | FileSystem f  
-parsePopStatic popstr w
+parsePopStatic:: String String *f -> (Bool,*f) | FileSystem f  
+parsePopStatic popstr filename w
 # offset = toString (drop (length [char \\ char <-: "pop static "]) [char \\ char <-: popstr])
 # offset = offset % (0, (size offset)-2)
-# addr = (toInt offset)+16
-# addstr = toString addr
-# instruction = "//pop static instruction\n@SP\nA=M-1\nD=M\n@"+++addstr+++"\nM=D\n@SP\nM=M-1\n\n"
+# addr = filename +++ "." +++ offset
+# instruction = "//pop static instruction\n@SP\nA=M-1\nD=M\n@"+++addr+++"\nM=D\n@SP\nM=M-1\n\n"
 # (ok_open,file ,w) = fopen "out.asm" FAppendText w
 | not ok_open = abort "failed to open file"
 # file = fwrites instruction file
@@ -431,13 +429,13 @@ parseIfGoto gotostr filename w
 = (ok_close,w)
 
 //comment
-parseCall:: String String *f -> (Bool,*f) | FileSystem f  
-parseCall linestr filename w
+parseCall:: String String Int *f -> (Bool,*f) | FileSystem f  
+parseCall linestr filename numberOfLine w
 # list = split linestr
 # newARG = toString (toInt (list!!2))
 # storestr = "D=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n"
-# instruction = "//Call Instruction\n@" +++ filename +++ "." +++ list!!1 +++"ReturnAddress\nD=A\n@SP\nA=M\nM=D\n@SP\nM=M+1\n@LCL\n" +++ storestr +++ "@ARG\n" +++ storestr +++ "@THIS\n" +++ storestr +++ "@THAT\n" +++ storestr
-# instruction = instruction +++ "@SP\nD=M\n@" +++ newARG +++ "\nD=D-A\n@5\nD=D-A\n@ARG\nM=D\n@SP\nD=M\n@LCL\nM=D\n@" +++ list!!1 +++ "\n0;JMP\n(" +++ filename +++ "." +++ list!!1 +++ ".ReturnAddress)\n"
+# instruction = "//Call Instruction\n@" +++ filename +++ "." +++ (toString numberOfLine) +++ "." +++ list!!1 +++".ReturnAddress\nD=A\n@SP\nA=M\nM=D\n@SP\nM=M+1\n@LCL\n" +++ storestr +++ "@ARG\n" +++ storestr +++ "@THIS\n" +++ storestr +++ "@THAT\n" +++ storestr
+# instruction = instruction +++ "@SP\nD=M\n@" +++ newARG +++ "\nD=D-A\n@5\nD=D-A\n@ARG\nM=D\n@SP\nD=M\n@LCL\nM=D\n@" +++ list!!1 +++ "\n0;JMP\n(" +++ filename +++ "." +++ (toString numberOfLine) +++ "." +++ list!!1 +++ ".ReturnAddress)\n"
 # (ok_open,file ,w) = fopen "out.asm" FAppendText w
 | not ok_open = abort "failed to open file"
 # file = fwrites instruction file
@@ -480,7 +478,7 @@ parseReturn linestr filename w
 parseAddCommand:: String *f -> (Bool,*f) | FileSystem f  
 parseAddCommand addstr w
 //# instruction = "//add instruction\nA=M\nD=M\nA=A-1\nD=M+D\nM=D\n\n"
-# instruction = "//add instruction\nA=M-1\nD=M\nA=A-1\nD=M+D\nM=D\n@0\nM=M-1\n\n"
+# instruction = "//add instruction\n@SP\nA=M-1\nD=M\nA=A-1\nD=M+D\nM=D\n@0\nM=M-1\n\n"
 # (ok_open,file ,w) = fopen "out.asm" FAppendText w
 | not ok_open = abort "failed to open file"
 # file = fwrites instruction file
@@ -498,7 +496,7 @@ parseAddCommand addstr w
 */
 parseSubCommand:: String *f -> (Bool,*f) | FileSystem f  
 parseSubCommand substr w
-# instruction = "//sub instruction\nA=M-1\nD=M\nA=A-1\nD=M-D\nM=D\n@0\nM=M-1\n\n"
+# instruction = "//sub instruction\n@SP\nA=M-1\nD=M\nA=A-1\nD=M-D\nM=D\n@0\nM=M-1\n\n"
 # (ok_open,file ,w) = fopen "out.asm" FAppendText w
 | not ok_open = abort "failed to open file"
 # file = fwrites instruction file
