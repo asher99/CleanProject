@@ -5,9 +5,14 @@ MainModule
 	DclOpen:	False
 	Icl
 		WindowPosition
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 			X:	42
 			Y:	-29
+=======
+			X:	3
+			Y:	0
+>>>>>>> master
 			SizeX:	1516
 			SizeY:	730
 =======
@@ -47,6 +52,7 @@ OtherModules
 		DclOpen:	True
 		Icl
 			WindowPosition
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 				X:	5
 				Y:	-14
@@ -58,6 +64,12 @@ OtherModules
 				SizeX:	1349
 				SizeY:	634
 >>>>>>> Stashed changes
+=======
+				X:	3
+				Y:	5
+				SizeX:	1516
+				SizeY:	725
+>>>>>>> master
 		IclOpen:	True
 	Module
 		Name:	StdArray
