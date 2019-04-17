@@ -2,6 +2,8 @@ definition module Parsing
 import StdEnv
 import StdFile
 
+parseMultipleFiles:: [String] *f -> (Bool,*f) | FileSystem f
+
 parse:: [String] String Int *f-> (Bool,*f) | FileSystem f
 
 parseLine:: String String Int *f-> (Bool,*f) | FileSystem f
@@ -69,6 +71,7 @@ parseCall:: String String Int *f -> (Bool,*f) | FileSystem f
 parseFunction:: String String *f -> (Bool,*f) | FileSystem f  
 
 parseReturn:: String String *f -> (Bool,*f) | FileSystem f  
+
 
 
 

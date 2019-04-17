@@ -1,7 +1,9 @@
 .comp 920 000111010
 .start __VMParser_Start
-.depend "FileOperations" "20190319175938"
-.depend "Parsing" "20190416160051"
+.depend "StdLibMisc" "20180913124337"
+.depend "Directory" "20180913124337"
+.depend "FileManipulation" "20190416203311"
+.depend "Parsing" "20190416213051"
 .depend "_SystemEnumStrict" "20180913124337"
 .depend "_SystemStrictLists" "20180913124337"
 .depend "StdStrictLists" "20180913124337"
@@ -24,7 +26,7 @@
 .depend "StdOverloaded" "20180913124337"
 .depend "StdBool" "20180913124337"
 .depend "StdEnv" "20180913124337"
-.module m_VMParser "VMParser" "20190416153318"
+.module m_VMParser "VMParser" "20190417132043"
 .endinfo
 .impmod _system
 .implab _cycle_in_spine
@@ -61,14 +63,21 @@
 .impdesc d_S.6
 .implab n_S.6 ea_S.6
 .implab _driver
-.impmod FileOperations
-.implab e_FileOperations_slistOfLinesInFile
+.impmod Directory
+.implab e_Directory_sgetDirectoryContents
+.impdesc e_Directory_dRelativePath
+.impdesc e_Directory_dPathDown
+.impmod FileManipulation
+.impdesc e_FileManipulation_dgetEntriesList
+.implab e_FileManipulation_ngetEntriesList e_FileManipulation_eagetEntriesList
+.impdesc e_FileManipulation_dgetNamesOfFilesInDirectory
+.implab e_FileManipulation_ngetNamesOfFilesInDirectory e_FileManipulation_eagetNamesOfFilesInDirectory
+.implab e_FileManipulation_sgetVmFiles
 .impmod Parsing
-.implab e_Parsing_sparse
+.implab e_Parsing_sparseMultipleFiles
 .impmod StdMisc
 .implab e_StdMisc_sabort
 .impmod StdFile
-.implab e_StdFile_sfreadline
 .implab e_StdFile_sfwrites
 .impdesc e_StdFile_dfclose;30
 .implab e_StdFile_sfclose;30
@@ -76,123 +85,168 @@
 .implab e_StdFile_sfopen;31
 .impdesc e_StdFile_dsfopen;32
 .impdesc e_StdFile_dstdio;33
-.implab e_StdFile_sstdio;33
+.implab e_StdFile_nstdio;33
 .impdesc e_StdFile_rFileSystem;
-.impmod StdString
-.implab e_StdString_s%;10
-.impmod _SystemArray
 .impmod StdInt
-.implab e_StdInt_s-;7
+.implab e_StdInt_s+;6
+.implab e_StdInt_s<;17
 .impmod StdBool
 .implab e_StdBool_snot
 .export __VMParser_Start
 .o 0 0
 __VMParser_Start
 	buildI 65536
-	build _ 1 n1
+	build _ 1 n5
 .d 1 0
 	jmp _driver
 .n 1 _
 .o 1 0
-n1
+n5
 	push_node _cycle_in_spine 1
 .d 1 0
-	jsr ea1
-.o 2 0
-	push_a 1
-	push_a 1
-	fillh _Tuple 2 4
-	pop_a 2
+	jsr ea5
+.o 0 1 b
+	fillB_b 0 0
+	pop_b 1
 .d 1 0
 	rtn
 .o 1 0
-ea1
+ea5
 	jsr_eval 0
 .o 1 0
-s1
+s5
 	push_a 0
-	updatepop_a 0 1
-.d 1 0
-	jsr e_StdFile_sstdio;33
-.o 1 2 f
-	push_b 1
-	push_b 1
-	buildAC "Enter name of VM file (with '.vm'):\n"
-	update_b 1 3
-	updatepop_b 0 2
+	build e_StdFile_dstdio;33 1 e_StdFile_nstdio;33
+	push_a 0
+	build d_S.2 -1 n_S.2
+	buildh _Nil 0
+	buildAC "InputFiles"
+	buildh ARRAY 1
+	buildh e_Directory_dPathDown 1
+	buildh _Cons 2
+	buildh e_Directory_dRelativePath 1
+	build _ 2 n10
+	push_a 0
+	build d_S.1 -1 n_S.1
+	build e_FileManipulation_dgetEntriesList 1 e_FileManipulation_ngetEntriesList
+	build e_FileManipulation_dgetNamesOfFilesInDirectory 1 e_FileManipulation_ngetNamesOfFilesInDirectory
+	create
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	buildh _Nil 0
+	update_a 0 5
+	pop_a 1
+.d 2 0
+	jsr e_FileManipulation_sgetVmFiles
+.o 1 0
+	pushI 0
+	push_a 0
+.d 1 1 i
+	jsr s2
+.o 0 1 b
+	jmp_false else.1
+	jsr_eval 1
+	push_arg 1 2 2
+	jsr_eval 0
+	jsr_eval 3
+	push_arg 3 2 1
+	jsr_eval 0
+	pushF_a 0
+	pop_a 1
+	buildAC "VM 2 HACK PARSER by Asher Alexander & Zvei Eliezer Nir\n"
+	buildh _Nil 0
+	update_a 0 5
+	update_a 0 4
+	pop_a 1
 .d 1 2 f
 	jsr writeFS
 .o 0 2 f
-.d 0 2 f
-	jsr readLineF
-.o 1 2 f
-	push_a 1
-	push_b 1
-	push_b 1
-	update_b 1 3
-	updatepop_b 0 2
-	update_a 1 2
-	updatepop_a 0 1
+	buildAC "The parser found the following .VM files: "
 .d 1 2 f
-	jsr e_StdFile_sfclose;30
-.o 1 1 b
-	push_b 0
-	notB
-	jmp_false else.1
-	buildAC "Couldn't close stdio"
-	updatepop_a 0 2
-	pop_b 1
-.d 1 0
-	jsr print_string_
-.o 0 0
-	halt
-	repl_args 2 2
-.d 2 0
-	rtn
+	jsr writeFS
+.o 0 2 f
+	push_a 1
+.d 1 2 f
+	jsr s1
+.o 0 2 f
+	push_a 1
+	update_a 1 5
+	updatepop_a 0 4
+.d 2 2 f
+	jmp s6
 else.1
+	jsr_eval 1
+	push_arg 1 2 2
+	jsr_eval 0
+	jsr_eval 3
+	push_arg 3 2 1
+	jsr_eval 0
+	pushF_a 0
+	pop_a 1
+	buildAC "VM 2 HACK PARSER by Asher Alexander & Zvei Eliezer Nir\n"
+	buildh _Nil 0
+	update_a 0 5
+	update_a 0 4
+	pop_a 1
+.d 1 2 f
+	jsr writeFS
+.o 0 2 f
+	buildAC "The parser found the following .VM files: "
+.d 1 2 f
+	jsr writeFS
+.o 0 2 f
 	push_a 1
-	pop_b 1
-	push_arraysize CHAR 0 1
-	pushI 2
-	push_b 1
-	update_b 1 2
-	update_b 0 1
-	pop_b 1
-	subI
-	pushI 0
+.d 1 2 f
+	jsr s1
+.o 0 2 f
 	push_a 1
-	update_a 1 2
-	updatepop_a 0 1
-.d 1 2 ii
-	jsr sliceAC
+	update_a 1 5
+	updatepop_a 0 4
+.d 2 2 f
+	jmp s7
+.n 2 _ ea10
 .o 1 0
+n10
+	push_node _cycle_in_spine 2
+.o 3 0
+ea10
+.o 3 0
+s10
 	push_a 1
-	pushI 0
+	jsr_eval 0
 	push_a 1
+	jsr_eval 0
+	buildh e_StdFile_dstdio;33 0
+	buildh e_StdFile_dsfopen;32 0
+	buildh e_StdFile_dfopen;31 0
+	buildh e_StdFile_dfclose;30 0
+	update_a 5 7
+	update_a 4 6
+	update_a 3 5
+	update_a 2 4
+	update_a 1 3
+	updatepop_a 0 2
+.d 6 0
+	jsr e_Directory_sgetDirectoryContents
+.o 3 0
+	push_a 2
+	push_a 2
+	push_a 2
+	buildh _Tuple 2
+	fillh _Tuple 2 5
+	pop_a 3
+.d 1 0
+	rtn
+.o 2 2 f
+s7
+	push_a 1
+	pushI 1
+	buildAC "out.asm"
 	update_a 2 3
 	update_a 1 2
 	updatepop_a 0 1
-.d 2 1 i
-	jsr e_StdFile_sfopen;31
-.o 1 3 bf
-	buildF_b 1
-	pop_b 3
-.d 1 0
-	jsr e_FileOperations_slistOfLinesInFile
-.o 2 0
-	push_a 1
-	jsr_eval 0
-	pushF_a 2
-	pop_a 1
-	push_a 2
-	update_a 1 3
-	updatepop_a 0 2
-.d 1 2 f
-	jsr e_StdFile_sfclose;30
-.o 1 1 b
-	pop_b 1
-	pushI 1
-	buildAC "out.asm"
 .d 2 1 i
 	jsr e_StdFile_sfopen;31
 .o 1 3 bf
@@ -200,19 +254,20 @@ else.1
 	notB
 	jmp_false else.2
 	buildAC "Failed to open output file.\n"
-	updatepop_a 0 3
-	pop_b 3
+	updatepop_a 0 2
+	pop_b 5
 .d 1 0
 	jsr print_string_
 .o 0 0
 	halt
-	repl_args 2 2
-.d 2 0
+	pushB_a 0
+	pop_a 1
+.d 0 1 b
 	rtn
 else.2
 	push_b 2
 	push_b 2
-	buildAC "// BOOTSTRAP\n@256\nD=A\n@SP\nM=D\n@Sys.init.returnAdd\nD=A\n@SP\nA=M\nM=D\n@SP\nM=M+1\n@LCL\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n@ARG\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n@THIS\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n@THAT\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n@SP\nD=M\n@5\nD=D-A\n@ARG\nM=D\n@SP\nD=M\n@LCL\nM=D\n@Sys.init.returnAdd\n0;JMP\n(Sys.init.returnAdd)//bootstrap-end\n\n"
+	buildAC "// initial SP\n@256\nD=A\n@SP\nM=D\n\n"
 	update_b 1 4
 	updatepop_b 0 3
 .d 1 2 f
@@ -227,14 +282,15 @@ else.2
 	notB
 	jmp_false else.3
 	buildAC "failed to close output file.\n"
-	updatepop_a 0 3
-	pop_b 1
+	updatepop_a 0 2
+	pop_b 3
 .d 1 0
 	jsr print_string_
 .o 0 0
 	halt
-	repl_args 2 2
-.d 2 0
+	pushB_a 0
+	pop_a 1
+.d 0 1 b
 	rtn
 else.3
 	buildh e_StdFile_dstdio;33 0
@@ -242,31 +298,293 @@ else.3
 	buildh e_StdFile_dfopen;31 0
 	buildh e_StdFile_dfclose;30 0
 	push_a 4
-	buildI 1
-	push_a 8
-	buildh ARRAY 1
-	push_a 8
-	push_a 7
-	update_a 4 8
-	update_a 0 4
-	update_a 7 0
-	update_a 3 7
-	update_a 0 3
-	update_a 6 0
+	push_a 6
+	push_a 5
 	update_a 2 6
-	update_a 0 2
+	update_a 4 2
+	update_a 0 4
 	update_a 5 0
 	update_a 1 5
-	update_a 0 1
+	update_a 3 1
+	update_a 0 3
 	pop_a 1
-	update_a 7 10
-	update_a 6 9
-	update_a 5 8
-	update_a 4 7
-	update_a 3 6
-	update_a 2 5
-	update_a 1 4
-	updatepop_a 0 3
 	pop_b 1
-.d 8 0
-	jmp e_Parsing_sparse
+	update_a 5 7
+	update_a 4 6
+	update_a 3 5
+	update_a 2 4
+	update_a 1 3
+	updatepop_a 0 2
+.d 6 0
+	jsr e_Parsing_sparseMultipleFiles
+.o 2 0
+	push_a 0
+	jsr_eval 0
+	pushB_a 1
+	pop_a 1
+	notB
+	jmp_false else.4
+	buildAC "Parsing failed :-(\n"
+	updatepop_a 0 2
+	pop_b 2
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	pushB_a 0
+	pop_a 1
+.d 0 1 b
+	rtn
+else.4
+	push_a 1
+	jsr_eval 0
+	push_b 1
+	push_b 1
+	buildAC "Parsing completed. No bootstrap was added since there is only one file.\nlook for the \"out.asm\" file in the working directory.\n"
+	update_b 1 3
+	updatepop_b 0 2
+	buildh _Nil 0
+	update_a 0 4
+	pop_a 1
+.d 1 2 f
+	jsr writeFS
+.o 0 2 f
+	updatepop_a 0 2
+.d 1 2 f
+	jsr e_StdFile_sfclose;30
+.o 1 1 b
+	pop_a 1
+	notB
+	jmp_false else.5
+	buildAC "Couldn't close stdio"
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	pushB_a 0
+	pop_a 1
+.d 0 1 b
+	rtn
+else.5
+	pushB TRUE
+.d 0 1 b
+	rtn
+.o 2 2 f
+s6
+	push_a 1
+	pushI 1
+	buildAC "out.asm"
+	update_a 2 3
+	update_a 1 2
+	updatepop_a 0 1
+.d 2 1 i
+	jsr e_StdFile_sfopen;31
+.o 1 3 bf
+	push_b 0
+	notB
+	jmp_false else.6
+	buildAC "Failed to open output file.\n"
+	updatepop_a 0 2
+	pop_b 5
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	pushB_a 0
+	pop_a 1
+.d 0 1 b
+	rtn
+else.6
+	push_b 2
+	push_b 2
+	buildAC "// BOOTSTRAP\n@256\nD=A\n@SP\nM=D\n@Sys.init.returnAdd\nD=A\n@SP\nA=M\nM=D\n@SP\nM=M+1\n@LCL\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n@ARG\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n@THIS\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n@THAT\nD=M\n@SP\nA=M\nM=D\n@SP\nM=M+1\n@SP\nD=M\n@5\nD=D-A\n@ARG\nM=D\n@SP\nD=M\n@LCL\nM=D\n@Sys.init\n0;JMP\n(Sys.init.returnAdd)//bootstrap-end\n\n"
+	update_b 1 4
+	updatepop_b 0 3
+.d 1 2 f
+	jsr writeFS
+.o 0 2 f
+	push_a 0
+	updatepop_a 0 1
+.d 1 2 f
+	jsr e_StdFile_sfclose;30
+.o 1 1 b
+	push_b 0
+	notB
+	jmp_false else.7
+	buildAC "failed to close output file.\n"
+	updatepop_a 0 2
+	pop_b 3
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	pushB_a 0
+	pop_a 1
+.d 0 1 b
+	rtn
+else.7
+	buildh e_StdFile_dstdio;33 0
+	buildh e_StdFile_dsfopen;32 0
+	buildh e_StdFile_dfopen;31 0
+	buildh e_StdFile_dfclose;30 0
+	push_a 4
+	push_a 6
+	push_a 5
+	update_a 2 6
+	update_a 4 2
+	update_a 0 4
+	update_a 5 0
+	update_a 1 5
+	update_a 3 1
+	update_a 0 3
+	pop_a 1
+	pop_b 1
+	update_a 5 7
+	update_a 4 6
+	update_a 3 5
+	update_a 2 4
+	update_a 1 3
+	updatepop_a 0 2
+.d 6 0
+	jsr e_Parsing_sparseMultipleFiles
+.o 2 0
+	push_a 0
+	jsr_eval 0
+	pushB_a 1
+	pop_a 1
+	notB
+	jmp_false else.8
+	buildAC "Parsing failed :-(\n"
+	updatepop_a 0 2
+	pop_b 2
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	pushB_a 0
+	pop_a 1
+.d 0 1 b
+	rtn
+else.8
+	push_a 1
+	jsr_eval 0
+	push_b 1
+	push_b 1
+	buildAC "Parsing completed, look for the \"out.asm\" file in the working directory.\n"
+	update_b 1 3
+	updatepop_b 0 2
+	buildh _Nil 0
+	update_a 0 4
+	pop_a 1
+.d 1 2 f
+	jsr writeFS
+.o 0 2 f
+	updatepop_a 0 2
+.d 1 2 f
+	jsr e_StdFile_sfclose;30
+.o 1 1 b
+	pop_a 1
+	notB
+	jmp_false else.9
+	buildAC "Couldn't close stdio"
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	pushB_a 0
+	pop_a 1
+.d 0 1 b
+	rtn
+else.9
+	pushB TRUE
+.d 0 1 b
+	rtn
+.o 1 1 i
+s2
+	eq_desc _Nil 0 0
+	jmp_true case.10
+	jmp case.11
+case.10
+	push_b 0
+	pushI 1
+	ltI
+	jmp_false else.12
+	pop_a 1
+	pop_b 1
+	pushB TRUE
+.d 0 1 b
+	rtn
+else.12
+	pop_a 1
+	pop_b 1
+	pushB FALSE
+.d 0 1 b
+	rtn
+case.11
+	repl_args 2 2
+	pop_a 1
+	pushI 1
+	push_b 1
+	addI
+	push_a 0
+	jsr_eval 0
+	updatepop_a 0 1
+	updatepop_b 0 1
+.d 1 1 i
+	jmp s2
+.o 1 2 f
+s1
+	eq_desc _Nil 0 0
+	jmp_true case.13
+	jmp case.14
+case.13
+	pop_a 1
+.d 0 2 f
+	rtn
+case.14
+	repl_args 2 2
+	jsr_eval 1
+	eq_desc _Nil 0 1
+	jmp_true case.15
+	jmp case.16
+case.15
+	push_a 0
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	push_b 1
+	push_b 1
+	update_b 1 3
+	updatepop_b 0 2
+	updatepop_a 0 2
+.d 1 2 f
+	jsr writeFS
+.o 0 2 f
+	buildAC ".\n"
+.d 1 2 f
+	jsr writeFS
+.o 0 2 f
+	buildh _Nil 0
+.d 1 2 f
+	jmp s1
+case.16
+	push_a 0
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	push_b 1
+	push_b 1
+	update_b 1 3
+	updatepop_b 0 2
+	updatepop_a 0 1
+.d 1 2 f
+	jsr writeFS
+.o 0 2 f
+	buildAC ", "
+.d 1 2 f
+	jsr writeFS
+.o 0 2 f
+	push_a 0
+	updatepop_a 0 1
+.d 1 2 f
+	jmp s1
