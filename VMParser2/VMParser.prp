@@ -5,72 +5,44 @@ MainModule
 	DclOpen:	False
 	Icl
 		WindowPosition
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-			X:	42
-			Y:	-29
-=======
-			X:	3
+			X:	0
 			Y:	0
->>>>>>> master
 			SizeX:	1516
 			SizeY:	730
-=======
-			X:	-8
-			Y:	-31
-			SizeX:	1349
-			SizeY:	634
->>>>>>> Stashed changes
 	IclOpen:	True
 OtherModules
 	Module
-		Name:	FileOperations
+		Name:	FileManipulation
 		Dir:	{Project}
-		Dcl
-			WindowPosition
-				X:	10
-				Y:	10
-				SizeX:	800
-				SizeY:	680
 		DclOpen:	False
-		Icl
-			WindowPosition
-				X:	160
-				Y:	623
-				SizeX:	17
-				SizeY:	0
-		IclOpen:	True
+		IclOpen:	False
 	Module
 		Name:	Parsing
 		Dir:	{Project}
 		Dcl
 			WindowPosition
-				X:	736
-				Y:	33
-				SizeX:	783
+				X:	65
+				Y:	543
+				SizeX:	1104
 				SizeY:	680
 		DclOpen:	True
 		Icl
 			WindowPosition
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-				X:	5
-				Y:	-14
-				SizeX:	1519
-				SizeY:	730
-=======
-				X:	-8
-				Y:	-31
-				SizeX:	1349
-				SizeY:	634
->>>>>>> Stashed changes
-=======
 				X:	3
 				Y:	5
 				SizeX:	1516
 				SizeY:	725
->>>>>>> master
 		IclOpen:	True
+	Module
+		Name:	Directory
+		Dir:	{Application}*Libraries*Directory
+		DclOpen:	False
+		IclOpen:	False
+	Module
+		Name:	StdLibMisc
+		Dir:	{Application}*Libraries*StdLib
+		DclOpen:	False
+		IclOpen:	False
 	Module
 		Name:	StdArray
 		Dir:	{Application}*Libraries*StdEnv
@@ -123,6 +95,11 @@ OtherModules
 		IclOpen:	False
 	Module
 		Name:	StdList
+		Dir:	{Application}*Libraries*StdEnv
+		DclOpen:	False
+		IclOpen:	False
+	Module
+		Name:	StdMaybe
 		Dir:	{Application}*Libraries*StdEnv
 		DclOpen:	False
 		IclOpen:	False

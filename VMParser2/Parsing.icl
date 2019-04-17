@@ -1,6 +1,7 @@
 implementation module Parsing
 import StdEnv
 import StdFile
+import FileManipulation
 
 /*
 *	Split
@@ -15,6 +16,25 @@ where
     | otherwise = [toString word:scrape rest]
     where
         (word,rest) = span (not o isSpace) cs
+
+
+/*
+ Parsing multiple files.
+ This function receives list of ".vm" files and apply the parsing method for each file.
+*/
+parseMultipleFiles:: [String] *f -> (Bool,*f) | FileSystem f
+parseMultipleFiles [] w = (True,w)
+parseMultipleFiles [x:xs] w
+// read all lines of current file to list of strings:
+
+# currentFile = "InputFiles\\" +++ x
+# (ok_read_open,inputfile,w) = fopen currentFile FReadText w
+# (content,inputfile) = listOfLinesInFile inputfile
+# (ok_read_close,w) = fclose inputfile w
+// parse the file:
+# (ok,w) = parse content x 1 w
+| not ok = abort ("Failed to parse file " +++ x +++ ", execution terminated\n")
+= parseMultipleFiles xs w
 
 /*
 * Recursive parsing of the file. Parsing line by line untill list of lines is empty.
