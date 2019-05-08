@@ -7,7 +7,7 @@ MainModule
 		WindowPosition
 			X:	0
 			Y:	0
-			SizeX:	1516
+			SizeX:	1519
 			SizeY:	730
 	IclOpen:	True
 OtherModules
@@ -21,8 +21,8 @@ OtherModules
 		Dir:	{Project}
 		Dcl
 			WindowPosition
-				X:	65
-				Y:	543
+				X:	145
+				Y:	400
 				SizeX:	1104
 				SizeY:	680
 		DclOpen:	True
