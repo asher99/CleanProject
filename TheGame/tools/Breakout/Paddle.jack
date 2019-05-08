@@ -1,0 +1,58 @@
+class Paddle{
+
+	field int placement,x_size,y_size,hight;
+	
+	constructor Paddle new(){
+		let placement = 155;
+		let x_size = 200;
+		let y_size = 20;
+		let hight = 50;
+		return this;
+	}
+	
+	/** Deallocates the object's memory. */
+    method void dispose() {
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    /** Draws the square on the screen. */
+    method void draw() {
+        do Screen.setColor(true);
+        do Screen.drawRectgle(placement, hight , placement + x_size, hight + y_size);
+        return;
+    }
+
+    /** Erases the square from the screen. */
+    method void erase() {
+        do Screen.setColor(false);
+        do Screen.drawRectgle(placement, hight , placement + x_size, hight + y_size);
+        return;
+    }
+    
+
+    /** Moves left by 2. */
+    method void moveLeft() {
+        if (placement > 1) {
+            do Screen.setColor(false);
+            do Screen.drawRectangle((placement + x_size) - 1, hight, placement + x_size, hight + y_size);
+            let placement = placement - 2;
+            do Screen.setColor(true);
+            do Screen.drawRectangle(placement, hight, placement + x_size, hight + y_size);
+        }
+        return;
+    }
+
+    /** Moves right by 2. */
+    method void moveRight() {
+        if ((placement + x_size) < 510) {
+            do Screen.setColor(false);
+            do Screen.drawRectangle(placement, hight, placement + x_size, hight + y_size);
+            let placement = placement + 2;
+            do Screen.setColor(true);
+            do Screen.drawRectangle((placement + x_size) - 1, hight, placement + x_size, hight + y_size);
+        }
+        return;
+    }
+	
+}

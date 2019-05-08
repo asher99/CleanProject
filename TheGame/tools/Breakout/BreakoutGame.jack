@@ -1,0 +1,89 @@
+class BreakoutGame {
+
+    // The paddle
+    field Paddle paddle;
+
+    // The paddle's movement direction
+    field int p_direction; // 0=none,1=up,2=down,3=left,4=right
+
+    /** Constructs a new Breakout Game. */
+    constructor BreakoutGame new() {
+        let paddle = Paddle.new();
+        let p_direction = 0;
+
+        return this;
+    }
+
+    /** Deallocates the object's memory. */
+    method void dispose() {
+        do paddle.dispose();
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    /** Starts the game. Handles inputs from the user that controls
+     *  the square movement direction and size. */
+    method void run() {
+        var char key;
+        var boolean exit;
+
+        let exit = false;
+
+        while (~exit) {
+            // waits for a key to be pressed.
+            while (key = 0) {
+                let key = Keyboard.keyPressed();
+                do movePaddle();
+            }
+
+            if (key = 81) {
+                let exit = true;
+            }
+            /*if (key = 90) {
+                do paddle.decSize();
+            }
+            if (key = 88) {
+                do paddle.incSize();
+            }*/
+            if (key = 131) {
+                let p_direction = 1;
+            }
+            if (key = 133) {
+                let p_direction = 2;
+            }
+            if (key = 130) {
+                let p_direction = 3;
+            }
+            if (key = 132) {
+                let p_direction = 4;
+            }
+
+            // waits for the key to be released.
+            while (~(key = 0)) {
+                let key = Keyboard.keyPressed();
+                do movePaddle();
+            }
+        }
+            
+        return;
+	}
+
+    /** Moves the square by 2 in the current direction. */
+    method void movePaddle() {
+        //if (direction = 1) {
+        //    do paddle.moveUp();
+        //}
+        //if (direction = 2) {
+        //    do paddle.moveDown();
+        //}
+        if (p_direction = 3) {
+            do paddle.moveLeft();
+        }
+        if (p_direction = 4) {
+            do paddle.moveRight();
+        }
+
+        do Sys.wait(5); // Delays the next movement.
+        return;
+    }
+}
