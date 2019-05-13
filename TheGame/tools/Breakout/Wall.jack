@@ -2,33 +2,44 @@ class Wall{
 
 	field int rows,columns;
 	field Array wall;
-	
 	constructor Wall new(){
-		let wall = Array.new(24);
-		let wall[0] =  Brick.new(0,40);
-		let wall[1] = Brick.new(0,80);
-		let wall[2] = Brick.new(0,120);
-		let wall[3] = Brick.new(0,160);
-		let wall[4] = Brick.new(0,200);
-		let wall[5] = Brick.new(36,40);
-		let wall[6] = Brick.new(36,80);
-		let wall[7] = Brick.new(36,120);
-		let wall[8] = Brick.new(36,160);
-		let wall[9] = Brick.new(36,200);
-		let wall[10] = Brick.new(71,40);
-		let wall[11] = Brick.new(71,80);
-		let wall[12] = Brick.new(71,120);
-		let wall[13] = Brick.new(71,160);
-		let wall[14] = Brick.new(71,200);
-		let wall[15] = Brick.new(106,40);
-		let wall[16] = Brick.new(106,80);
-		let wall[17] = Brick.new(106,120);
-		let wall[18] = Brick.new(106,160);
-		let wall[19] = Brick.new(106,200);
-		let wall[20] = Brick.new(1,0);
-		let wall[21] = Brick.new(36,0);
-		let wall[22] = Brick.new(71,0);
-		let wall[23] = Brick.new(106,0);		
+		let wall = Array.new(36);
+		let wall[0] =  Brick.new(10,5);
+		let wall[1] = Brick.new(50,5);
+		let wall[2] = Brick.new(90,5);
+		let wall[3] = Brick.new(130,5);
+		let wall[4] = Brick.new(170,5);
+		let wall[5] = Brick.new(210,5);
+		let wall[6] = Brick.new(250,5);
+		let wall[7] = Brick.new(290,5);
+		let wall[8] = Brick.new(330,5);
+		let wall[9] = Brick.new(370,5);
+		let wall[10] = Brick.new(410,5);
+		let wall[11] = Brick.new(450,5);
+		let wall[12] =  Brick.new(10,40);
+		let wall[13] = Brick.new(50,40);
+		let wall[14] = Brick.new(90,40);
+		let wall[15] = Brick.new(130,40);
+		let wall[16] = Brick.new(170,40);
+		let wall[17] = Brick.new(210,40);
+		let wall[18] = Brick.new(250,40);
+		let wall[19] = Brick.new(290,40);
+		let wall[20] = Brick.new(330,40);
+		let wall[21] = Brick.new(370,40);
+		let wall[22] = Brick.new(410,40);
+		let wall[23] = Brick.new(450,40);
+		let wall[24] =  Brick.new(10,75);
+		let wall[25] = Brick.new(50,75);
+		let wall[26] = Brick.new(90,75);
+		let wall[27] = Brick.new(130,75);
+		let wall[28] = Brick.new(170,75);
+		let wall[29] = Brick.new(210,75);
+		let wall[30] = Brick.new(250,75);
+		let wall[31] = Brick.new(290,75);
+		let wall[32] = Brick.new(330,75);
+		let wall[33] = Brick.new(370,75);
+		let wall[34] = Brick.new(410,75);
+		let wall[35] = Brick.new(450,75);		
 		return this;
 	}
 	
@@ -41,12 +52,16 @@ class Wall{
     /** Draws the wall on the screen. */
     method void draw() {
         var int i;
+		var boolean destroyed;
 		var Brick brick;
 		let i = 0;
-		while(i < 25)
+		while(i < 37)
 		{
 			let brick = wall[i];
-			do brick.draw();
+			let destroyed = brick.getIsDestroyed();
+			if (~(destroyed)){
+				do brick.draw();
+				}			
 			let i = i + 1;
 		}
         return;
@@ -57,7 +72,7 @@ class Wall{
         var int i;
 		var Brick brick;
 		let i = 0;
-		while(i < 25){
+		while(i < 37){
 			let brick = wall[i];
 			do brick.erase();
 			let i = i + 1;
@@ -73,12 +88,12 @@ class Wall{
 		var Brick brick;		
 		let flag = true;
 		let i = 0;
-		while(i < 25){
+		while(i < 37 ){
 			let brick = wall[i];
 			let destroyed = brick.getIsDestroyed();
-			//if (destroyed = false){
-			//	let flag = false;
-			//	}
+			if (~(destroyed )){
+				let flag = false;
+				}
 			let i = i + 1;
 		}
 		return flag;

@@ -7,13 +7,16 @@ class BreakoutGame {
 	
 	field Ball ball;
 
+	field Wall brickWall;
+	
     /** Constructs a new Breakout Game. */
     constructor BreakoutGame new() {
         let paddle = Paddle.new();
         let p_direction = 0;
 		
 		let ball = Ball.new();
-
+		
+		let brickWall = Wall.new();
         return this;
     }
 
@@ -73,8 +76,7 @@ class BreakoutGame {
 	}
 
     /** Moves the square by 2 in the current direction. */
-    method void calculate_frame() {
-		
+    method void calculate_frame() {		
 		var int paddle_start;
 		var int paddle_end;
 		var int paddle_edge;
@@ -87,6 +89,10 @@ class BreakoutGame {
 		let ball_edge = ball.get_center_y() + ball.get_radius();
 		let ball_center = ball.get_center_x();
 
+		/*do showCredits();
+		do Sys.wait(2000);
+		do eraseMessage();*/
+		
 		if (ball_edge > paddle_edge){
 			if(ball_center > paddle_start){
 				if(ball_center < paddle_edge){
@@ -95,6 +101,8 @@ class BreakoutGame {
 				}
 			}
 		}
+		
+		//do brickWall.draw();
 		
 		do ball.movement();
         if (p_direction = 3) {
@@ -107,4 +115,23 @@ class BreakoutGame {
         do Sys.wait(5); // Delays the next movement.
         return;
     }
+	
+	method void showCredits() {
+		do Output.moveCursor(20,16);
+		do Output.printString("Atari Breakout");
+		do Output.moveCursor(21,22);
+		do Output.printString("By Asher & Zvei");
+		return;
+	}
+	
+	method void eraseMessage() {
+		var String s;
+		do Output.moveCursor(20,16);
+		let s = "                                                 ";
+		do Output.printString(s);
+		do Output.moveCursor(21,22);
+		do Output.printString(s);
+		do s.dispose();
+		return;
+	}
 }
