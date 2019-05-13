@@ -1,0 +1,89 @@
+class Wall{
+
+	field int rows,columns;
+	field Array wall;
+	
+	constructor Wall new(){
+		let wall = Array.new(24);
+		let wall[0] =  Brick.new(0,40);
+		let wall[1] = Brick.new(0,80);
+		let wall[2] = Brick.new(0,120);
+		let wall[3] = Brick.new(0,160);
+		let wall[4] = Brick.new(0,200);
+		let wall[5] = Brick.new(36,40);
+		let wall[6] = Brick.new(36,80);
+		let wall[7] = Brick.new(36,120);
+		let wall[8] = Brick.new(36,160);
+		let wall[9] = Brick.new(36,200);
+		let wall[10] = Brick.new(71,40);
+		let wall[11] = Brick.new(71,80);
+		let wall[12] = Brick.new(71,120);
+		let wall[13] = Brick.new(71,160);
+		let wall[14] = Brick.new(71,200);
+		let wall[15] = Brick.new(106,40);
+		let wall[16] = Brick.new(106,80);
+		let wall[17] = Brick.new(106,120);
+		let wall[18] = Brick.new(106,160);
+		let wall[19] = Brick.new(106,200);
+		let wall[20] = Brick.new(1,0);
+		let wall[21] = Brick.new(36,0);
+		let wall[22] = Brick.new(71,0);
+		let wall[23] = Brick.new(106,0);		
+		return this;
+	}
+	
+	/** Deallocates the object's memory. */
+    method void dispose() {
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    /** Draws the wall on the screen. */
+    method void draw() {
+        var int i;
+		var Brick brick;
+		let i = 0;
+		while(i < 25)
+		{
+			let brick = wall[i];
+			do brick.draw();
+			let i = i + 1;
+		}
+        return;
+    }
+
+    /** Erases the wall from the screen. */
+    method void erase() {
+        var int i;
+		var Brick brick;
+		let i = 0;
+		while(i < 25){
+			let brick = wall[i];
+			do brick.erase();
+			let i = i + 1;
+		}
+        return;
+    }
+    
+	/* win condition is that all the wall is broken*/
+	method boolean isCompletlyBroken(){
+		var boolean flag;
+		var boolean destroyed;
+		var int i;
+		var Brick brick;		
+		let flag = true;
+		let i = 0;
+		while(i < 25){
+			let brick = wall[i];
+			let destroyed = brick.getIsDestroyed();
+			//if (destroyed = false){
+			//	let flag = false;
+			//	}
+			let i = i + 1;
+		}
+		return flag;
+	}	
+   
+   
+	
+}

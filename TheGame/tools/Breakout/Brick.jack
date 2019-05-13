@@ -1,0 +1,49 @@
+class Brick{
+
+	field int width,hight,x,y;
+	field boolean isDestroyed;
+	
+	constructor Brick new(int _x, int _y){
+		let width = 40;
+		let hight = 35;
+		let x = _x;
+		let y = _y;
+		let isDestroyed = false;
+		return this;
+	}
+	
+	/** Deallocates the object's memory. */
+    method void dispose() {
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    /** Draws the square on the screen. */
+    method void draw() {
+        do Screen.setColor(true);
+        do Screen.drawRectgle(width, hight , width + x, hight + y);
+        return;
+    }
+
+    /** Erases the square from the screen. */
+    method void erase() {
+        do Screen.setColor(false);
+        do Screen.drawRectgle(width, hight , width + x, hight + y);
+        return;
+    }
+	
+	method boolean getIsDestroyed(){
+		return isDestroyed;
+	}
+	
+	method void setIsDestroyed(boolean value){
+		let isDestroyed = value;
+		return;
+	}
+	
+    
+	
+
+    
+	
+}

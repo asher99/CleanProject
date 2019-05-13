@@ -1,0 +1,73 @@
+function Brick.new 0
+push constant 5
+call Memory.alloc 1
+pop pointer 0
+push constant 40
+pop this 0
+push constant 35
+pop this 1
+push argument 0
+pop this 2
+push argument 1
+pop this 3
+push constant 0
+pop this 4
+push pointer 0
+return
+function Brick.dispose 0
+push argument 0
+pop pointer 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return
+function Brick.draw 0
+push argument 0
+pop pointer 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push this 0
+push this 1
+push this 0
+push this 2
+add
+push this 1
+push this 3
+add
+call Screen.drawRectgle 4
+pop temp 0
+push constant 0
+return
+function Brick.erase 0
+push argument 0
+pop pointer 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push this 0
+push this 1
+push this 0
+push this 2
+add
+push this 1
+push this 3
+add
+call Screen.drawRectgle 4
+pop temp 0
+push constant 0
+return
+function Brick.getIsDestroyed 0
+push argument 0
+pop pointer 0
+push this 4
+return
+function Brick.setIsDestroyed 0
+push argument 0
+pop pointer 0
+push argument 1
+pop this 4
+push constant 0
+return
