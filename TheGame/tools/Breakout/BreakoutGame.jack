@@ -2,14 +2,17 @@ class BreakoutGame {
 
     // The paddle
     field Paddle paddle;
-
     // The paddle's movement direction
     field int p_direction; // 0=none,1=up,2=down,3=left,4=right
+	
+	field Ball ball;
 
     /** Constructs a new Breakout Game. */
     constructor BreakoutGame new() {
         let paddle = Paddle.new();
         let p_direction = 0;
+		
+		let ball = Ball.new();
 
         return this;
     }
@@ -17,6 +20,7 @@ class BreakoutGame {
     /** Deallocates the object's memory. */
     method void dispose() {
         do paddle.dispose();
+		do ball.dispose();
         do Memory.deAlloc(this);
         return;
     }
@@ -33,7 +37,7 @@ class BreakoutGame {
             // waits for a key to be pressed.
             while (key = 0) {
                 let key = Keyboard.keyPressed();
-                do movePaddle();
+                do calculate_frame();
             }
 
             if (key = 81) {
@@ -61,7 +65,7 @@ class BreakoutGame {
             // waits for the key to be released.
             while (~(key = 0)) {
                 let key = Keyboard.keyPressed();
-                do movePaddle();
+                do calculate_frame();
             }
         }
             
@@ -69,13 +73,30 @@ class BreakoutGame {
 	}
 
     /** Moves the square by 2 in the current direction. */
-    method void movePaddle() {
-        //if (direction = 1) {
-        //    do paddle.moveUp();
-        //}
-        //if (direction = 2) {
-        //    do paddle.moveDown();
-        //}
+    method void calculate_frame() {
+		
+		var int paddle_start;
+		var int paddle_end;
+		var int paddle_edge;
+		var int ball_edge;
+		var int ball_center;
+		
+		let paddle_start = paddle.get_placement();
+		let paddle_end = paddle.get_placement() + paddle.get_x_size();
+		let paddle_edge = paddle.get_hight();// - paddle.get_y_size();
+		let ball_edge = ball.get_center_y() + ball.get_radius();
+		let ball_center = ball.get_center_x();
+
+		if (ball_edge > paddle_edge){
+			if(ball_center > paddle_start){
+				if(ball_center < paddle_edge){
+					do ball.flip_direction_y();
+					do Sys.wait(100);
+				}
+			}
+		}
+		
+		do ball.movement();
         if (p_direction = 3) {
             do paddle.moveLeft();
         }

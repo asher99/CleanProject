@@ -3,12 +3,29 @@ class Paddle{
 	field int placement,x_size,y_size,hight;
 	
 	constructor Paddle new(){
-		let placement = 155;
-		let x_size = 200;
-		let y_size = 20;
-		let hight = 50;
+		let placement = 255;
+		let x_size = 80;
+		let y_size = 10;
+		let hight = 240;
 		return this;
 	}
+	
+	method int get_placement(){
+		return placement;
+	}
+	
+	method int get_x_size(){
+		return x_size;
+	}
+	
+	method int get_y_size(){
+		return y_size;
+	}
+	
+	method int get_hight(){
+		return hight;
+	}
+	
 	
 	/** Deallocates the object's memory. */
     method void dispose() {
@@ -50,9 +67,11 @@ class Paddle{
             do Screen.drawRectangle(placement, hight, placement + x_size, hight + y_size);
             let placement = placement + 2;
             do Screen.setColor(true);
-            do Screen.drawRectangle((placement + x_size) - 1, hight, placement + x_size, hight + y_size);
+            do Screen.drawRectangle(placement, hight, placement + x_size, hight + y_size);
         }
         return;
     }
+	
+	
 	
 }
