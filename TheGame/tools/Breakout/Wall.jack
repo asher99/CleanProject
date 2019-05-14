@@ -2,7 +2,9 @@ class Wall{
 
 	field int rows,columns;
 	field Array wall;
+	field int size;
 	constructor Wall new(){
+		let size = 36;
 		let wall = Array.new(36);
 		let wall[0] =  Brick.new(10,5);
 		let wall[1] = Brick.new(50,5);
@@ -39,10 +41,23 @@ class Wall{
 		let wall[32] = Brick.new(330,75);
 		let wall[33] = Brick.new(370,75);
 		let wall[34] = Brick.new(410,75);
-		let wall[35] = Brick.new(450,75);		
+		let wall[35] = Brick.new(450,75);
+		do initWall();		
 		return this;
 	}
 	
+	method void initWall(){
+		var int i;
+		var Brick brick;
+		let i = 0;
+		while(i < size)
+		{
+			let brick = wall[i];
+			do brick.draw();
+			let i = i + 1;
+		}
+		return;
+	}
 	/** Deallocates the object's memory. */
     method void dispose() {
         do Memory.deAlloc(this);
@@ -55,13 +70,13 @@ class Wall{
 		var boolean destroyed;
 		var Brick brick;
 		let i = 0;
-		while(i < 37)
+		while(i < size)
 		{
 			let brick = wall[i];
 			let destroyed = brick.getIsDestroyed();
-			if (~(destroyed)){
-				do brick.draw();
-				}			
+			if ((destroyed)){
+				do brick.erase();
+			}
 			let i = i + 1;
 		}
         return;
@@ -72,7 +87,7 @@ class Wall{
         var int i;
 		var Brick brick;
 		let i = 0;
-		while(i < 37){
+		while(i < size){
 			let brick = wall[i];
 			do brick.erase();
 			let i = i + 1;
@@ -88,7 +103,7 @@ class Wall{
 		var Brick brick;		
 		let flag = true;
 		let i = 0;
-		while(i < 37 ){
+		while(i < size ){
 			let brick = wall[i];
 			let destroyed = brick.getIsDestroyed();
 			if (~(destroyed )){
@@ -99,6 +114,27 @@ class Wall{
 		return flag;
 	}	
    
+   /** checks if the ball hits a brick in the wall */
+   method void checkHit(int pointX,int pointY,Ball ball){
+		var int i;
+		var Brick brick;
+		var boolean isDestroyed;
+		var boolean doesHitBrick;				
+		let i = 0;
+		while(i < size ){
+			let brick = wall[i];
+			let doesHitBrick = brick.isIncluded(pointX,pointY);
+			let isDestroyed = brick.getIsDestroyed();
+			if(~(isDestroyed)){
+				if (doesHitBrick){
+					do brick.setIsDestroyed(true);
+					do ball.flipDirection();
+				}	
+			}				
+			let i = i + 1;
+		}
+		return;
+   }
    
 	
 }

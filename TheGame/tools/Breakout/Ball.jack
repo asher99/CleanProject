@@ -8,7 +8,7 @@ class Ball{
 	constructor Ball new(){
 	
 		let center_x = 255;
-		let center_y = 100;
+		let center_y = 150;
 		let radius = 5;
 		let ball_direction_x = 1;
 		let ball_direction_y = 1;
@@ -33,6 +33,12 @@ class Ball{
 		return;
 	}
 	
+	/** flips the direction of the ball this method is used for a collision with a brick */
+	method void flipDirection(){
+		let ball_direction_x = -ball_direction_x;
+		let ball_direction_y = -ball_direction_y;
+		return;
+	}
 	/** Deallocates the object's memory. */
     method void dispose() {
         do Memory.deAlloc(this);

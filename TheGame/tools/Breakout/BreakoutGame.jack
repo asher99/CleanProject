@@ -17,6 +17,10 @@ class BreakoutGame {
 		let ball = Ball.new();
 		
 		let brickWall = Wall.new();
+		/*do DisplayUtils.showCredits();
+		do Sys.wait(3400);
+		do DisplayUtils.eraseMessage();
+		do DisplayUtils.countDown();*/
         return this;
     }
 
@@ -24,6 +28,7 @@ class BreakoutGame {
     method void dispose() {
         do paddle.dispose();
 		do ball.dispose();
+		do brickWall.dispose();
         do Memory.deAlloc(this);
         return;
     }
@@ -35,7 +40,7 @@ class BreakoutGame {
         var boolean exit;
 
         let exit = false;
-
+		let exit = brickWall.isCompletlyBroken();
         while (~exit) {
             // waits for a key to be pressed.
             while (key = 0) {
@@ -70,6 +75,7 @@ class BreakoutGame {
                 let key = Keyboard.keyPressed();
                 do calculate_frame();
             }
+		let exit = brickWall.isCompletlyBroken();
         }
             
         return;
@@ -83,16 +89,15 @@ class BreakoutGame {
 		var int ball_edge;
 		var int ball_center;
 		
+		var int pointX;
+		var int pointY;
+		
 		let paddle_start = paddle.get_placement();
 		let paddle_end = paddle.get_placement() + paddle.get_x_size();
 		let paddle_edge = paddle.get_hight();// - paddle.get_y_size();
 		let ball_edge = ball.get_center_y() + ball.get_radius();
 		let ball_center = ball.get_center_x();
 
-		/*do showCredits();
-		do Sys.wait(2000);
-		do eraseMessage();*/
-		
 		if (ball_edge > paddle_edge){
 			if(ball_center > paddle_start){
 				if(ball_center < paddle_edge){
@@ -102,7 +107,12 @@ class BreakoutGame {
 			}
 		}
 		
-		//do brickWall.draw();
+		// sets wall display 
+		let pointX = ball.get_center_x();
+		let pointY = ball.get_center_y();
+		do brickWall.checkHit(pointX,pointY,ball);
+		do brickWall.draw();
+		
 		
 		do ball.movement();
         if (p_direction = 3) {
@@ -111,27 +121,9 @@ class BreakoutGame {
         if (p_direction = 4) {
             do paddle.moveRight();
         }
-
+		
+		
         do Sys.wait(5); // Delays the next movement.
         return;
-    }
-	
-	method void showCredits() {
-		do Output.moveCursor(20,16);
-		do Output.printString("Atari Breakout");
-		do Output.moveCursor(21,22);
-		do Output.printString("By Asher & Zvei");
-		return;
-	}
-	
-	method void eraseMessage() {
-		var String s;
-		do Output.moveCursor(20,16);
-		let s = "                                                 ";
-		do Output.printString(s);
-		do Output.moveCursor(21,22);
-		do Output.printString(s);
-		do s.dispose();
-		return;
-	}
+    }	
 }

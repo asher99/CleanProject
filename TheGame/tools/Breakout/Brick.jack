@@ -1,7 +1,8 @@
 class Brick{
 
 	field int width, hight, x, y;
-	field boolean isDestroyed;
+	
+	field boolean isDestroyed; // if the brick is hit it will change to true
 	
 	constructor Brick new(int _x, int _y){
 		let width = 37;
@@ -18,20 +19,56 @@ class Brick{
         return;
     }
 
-    /** Draws the square on the screen. */
+    /** Draws the brick on the screen. */
     method void draw() {
         do Screen.setColor(true);
         do Screen.drawRectangle(x, y , width + x, hight + y);
         return;
     }
 
-    /** Erases the square from the screen. */
+    /** Erases the brick from the screen. */
     method void erase() {
         do Screen.setColor(false);
         do Screen.drawRectangle(x, y , width + x, hight + y);
         return;
     }
 	
+	/** this method checks if the ball is inside the area of the brick */
+	method boolean isIncluded(int pointX, int pointY){
+		var int a;
+		var int b;
+		let a = y + hight;
+		let b = x + width;
+		if(x < pointX){
+			if(y < pointY){
+				if(pointX < b){
+					if(pointY < a){				
+						return true;						
+					}
+				}
+			}
+		}	
+		return false;
+	}
+	
+	//******** GETTERS & SETTERS ***********/
+	method int getX(){
+		return x;
+	}
+	
+	method int getY(){
+		return y;
+	}
+	
+	method int getWidth(){
+		return width;
+	}
+	
+	method int getHight(){
+		return hight;
+	}
+	
+	/** returns the boolean field that says if the brick was hit */
 	method boolean getIsDestroyed(){
 		return isDestroyed;
 	}
@@ -40,10 +77,5 @@ class Brick{
 		let isDestroyed = value;
 		return;
 	}
-	
-    
-	
-
-    
 	
 }

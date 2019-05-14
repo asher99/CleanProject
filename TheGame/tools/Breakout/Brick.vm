@@ -59,6 +59,70 @@ call Screen.drawRectangle 4
 pop temp 0
 push constant 0
 return
+function Brick.isIncluded 2
+push argument 0
+pop pointer 0
+push this 3
+push this 1
+add
+pop local 0
+push this 2
+push this 0
+add
+pop local 1
+push this 2
+push argument 1
+lt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push this 3
+push argument 2
+lt
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push argument 1
+push local 1
+lt
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push argument 2
+push local 0
+lt
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push constant 0
+not
+return
+label IF_FALSE3
+label IF_FALSE2
+label IF_FALSE1
+label IF_FALSE0
+push constant 0
+return
+function Brick.getX 0
+push argument 0
+pop pointer 0
+push this 2
+return
+function Brick.getY 0
+push argument 0
+pop pointer 0
+push this 3
+return
+function Brick.getWidth 0
+push argument 0
+pop pointer 0
+push this 0
+return
+function Brick.getHight 0
+push argument 0
+pop pointer 0
+push this 1
+return
 function Brick.getIsDestroyed 0
 push argument 0
 pop pointer 0

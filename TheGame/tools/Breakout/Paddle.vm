@@ -55,7 +55,7 @@ add
 push this 3
 push this 2
 add
-call Screen.drawRectgle 4
+call Screen.drawRectangle 4
 pop temp 0
 push constant 0
 return
@@ -73,7 +73,7 @@ add
 push this 3
 push this 2
 add
-call Screen.drawRectgle 4
+call Screen.drawRectangle 4
 pop temp 0
 push constant 0
 return

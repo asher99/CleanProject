@@ -36,14 +36,14 @@ class Paddle{
     /** Draws the square on the screen. */
     method void draw() {
         do Screen.setColor(true);
-        do Screen.drawRectgle(placement, hight , placement + x_size, hight + y_size);
+        do Screen.drawRectangle(placement, hight , placement + x_size, hight + y_size);
         return;
     }
 
     /** Erases the square from the screen. */
     method void erase() {
         do Screen.setColor(false);
-        do Screen.drawRectgle(placement, hight , placement + x_size, hight + y_size);
+        do Screen.drawRectangle(placement, hight , placement + x_size, hight + y_size);
         return;
     }
     

@@ -1,0 +1,66 @@
+class DisplayUtils{
+
+
+	
+	function void showCredits() {
+		do Output.moveCursor(18,22);
+		do Output.printString("Atari Breakout");
+		do Output.moveCursor(19,22);
+		do Output.printString("By Asher & Zvei");
+		return;
+	}
+	
+	function void eraseMessage() {
+		var String s;
+		do Output.moveCursor(18,22);
+		let s = "                                                 ";
+		do Output.printString(s);
+		do Output.moveCursor(19,22);
+		do Output.printString(s);
+		do s.dispose();
+		return;
+	}
+	
+	function void countDown(){
+		var String s;
+		let s = "                                                 ";
+		do Output.moveCursor(18,32);
+		do Output.printString("3");
+		do Sys.wait(1000);		
+		do Output.moveCursor(18,32);
+		do Output.printString(s);
+		
+		do Output.moveCursor(18,32);
+		do Output.printString("2");
+		do Sys.wait(1000);		
+		do Output.moveCursor(18,32);
+		do Output.printString(s);
+		
+		do Output.moveCursor(18,32);
+		do Output.printString("1");
+		do Sys.wait(1000);		
+		do Output.moveCursor(18,32);
+		do Output.printString(s);	
+		return;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
