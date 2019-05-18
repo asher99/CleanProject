@@ -1,7 +1,5 @@
 class DisplayUtils{
 
-
-	
 	function void showCredits() {
 		do Output.moveCursor(18,22);
 		do Output.printString("Atari Breakout");
@@ -41,6 +39,30 @@ class DisplayUtils{
 		do Sys.wait(1000);		
 		do Output.moveCursor(18,32);
 		do Output.printString(s);	
+		return;
+	}
+	
+	function void printGameOver(){
+		var String s;
+		let s = "                                                 ";
+		do Output.moveCursor(18,24);
+		do Output.printString("Game Over!");
+		do Output.moveCursor(19,18);
+		do Output.printString("Press Space to start again!");
+		
+		
+		return;
+	}
+	
+	function void printWin(){
+		var String s;
+		let s = "                                                 ";
+		do Output.moveCursor(18,24);
+		do Output.printString("You Won!");
+		do Output.moveCursor(19,18);
+		do Output.printString("Press Space to start again!");
+		
+		
 		return;
 	}
 }

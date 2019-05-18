@@ -1,5 +1,5 @@
 function BreakoutGame.new 0
-push constant 4
+push constant 5
 call Memory.alloc 1
 pop pointer 0
 call Paddle.new 0
@@ -10,7 +10,23 @@ call Ball.new 0
 pop this 2
 call Wall.new 0
 pop this 3
+push constant 3
+pop this 4
 push pointer 0
+return
+function BreakoutGame.erase 0
+push argument 0
+pop pointer 0
+push this 2
+call Ball.erase 1
+pop temp 0
+push this 0
+call Paddle.erase 1
+pop temp 0
+push this 3
+call Wall.erase 1
+pop temp 0
+push constant 0
 return
 function BreakoutGame.dispose 0
 push argument 0
@@ -115,9 +131,30 @@ call BreakoutGame.calculate_frame 1
 pop temp 0
 goto WHILE_EXP2
 label WHILE_END2
+push this 4
+push constant 0
+eq
+if-goto IF_TRUE5
+goto IF_FALSE5
+label IF_TRUE5
+push constant 0
+not
+pop local 1
+push pointer 0
+call BreakoutGame.gameOver 1
+pop temp 0
+label IF_FALSE5
 push this 3
 call Wall.isCompletlyBroken 1
 pop local 1
+push local 1
+if-goto IF_TRUE6
+goto IF_FALSE6
+label IF_TRUE6
+push pointer 0
+call BreakoutGame.win 1
+pop temp 0
+label IF_FALSE6
 goto WHILE_EXP0
 label WHILE_END0
 push constant 0
@@ -283,6 +320,26 @@ call Ball.set_ball_direction_x 2
 pop temp 0
 push argument 1
 call Ball.flip_direction_y 1
+pop temp 0
+push constant 0
+return
+function BreakoutGame.gameOver 0
+push argument 0
+pop pointer 0
+push pointer 0
+call BreakoutGame.erase 1
+pop temp 0
+call DisplayUtils.printGameOver 0
+pop temp 0
+push constant 0
+return
+function BreakoutGame.win 0
+push argument 0
+pop pointer 0
+push pointer 0
+call BreakoutGame.erase 1
+pop temp 0
+call DisplayUtils.printWin 0
 pop temp 0
 push constant 0
 return

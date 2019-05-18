@@ -9,6 +9,8 @@ class BreakoutGame {
 
 	field Wall brickWall;
 	
+	field int numOfLives;
+	
     /** Constructs a new Breakout Game. */
     constructor BreakoutGame new() {
         let paddle = Paddle.new();
@@ -21,9 +23,18 @@ class BreakoutGame {
 		do Sys.wait(3400);
 		do DisplayUtils.eraseMessage();
 		do DisplayUtils.countDown();*/
+		let numOfLives = 3;
         return this;
     }
-
+	/** erases all object in main screen */
+	method void erase(){
+			do ball.erase();
+			do paddle.erase();
+			do brickWall.erase();
+			return;
+		}
+		
+	
     /** Deallocates the object's memory. */
     method void dispose() {
         do paddle.dispose();
@@ -41,6 +52,7 @@ class BreakoutGame {
 
         let exit = false;
 		let exit = brickWall.isCompletlyBroken();
+		
         while (~exit) {
             // waits for a key to be pressed.
             while (key = 0) {
@@ -75,7 +87,15 @@ class BreakoutGame {
                 let key = Keyboard.keyPressed();
                 do calculate_frame();
             }
+		if(numOfLives = 0){
+			let exit = true;
+			do gameOver();
+			
+		}
 		let exit = brickWall.isCompletlyBroken();
+		if(exit){
+			do win();
+		}
         }
             
         return;
@@ -127,29 +147,45 @@ class BreakoutGame {
         return;
     }
 
-		method void ball_hit_paddle(Ball ball, int center_x, int pad_start, int pad_end)
-		{
-			var int pad_len;
-			var int x_direction;
+	method void ball_hit_paddle(Ball ball, int center_x, int pad_start, int pad_end)
+	{
+		var int pad_len;
+		var int x_direction;
 
-			let pad_len = pad_end - pad_start;
-			let x_direction = -2;
+		let pad_len = pad_end - pad_start;
+		let x_direction = -2;
 			
-			if (center_x > pad_start + (1/4)*pad_len)
-			{
-				let x_direction = x_direction + 1;
-			}
-			if (center_x > pad_start + (1/2)*pad_len)
-			{
-				let x_direction = x_direction + 2;
-			}
-			if (center_x > pad_start + (3/4)*pad_len)
-			{
-				let x_direction = x_direction + 1;
-			}
+		if (center_x > pad_start + (1/4)*pad_len)
+		{
+			let x_direction = x_direction + 1;
+		}
+		if (center_x > pad_start + (1/2)*pad_len)
+		{
+			let x_direction = x_direction + 2;
+		}
+		if (center_x > pad_start + (3/4)*pad_len)
+		{
+			let x_direction = x_direction + 1;
+		}
+		
+		do ball.set_ball_direction_x(x_direction);
+		do ball.flip_direction_y();
+		return;
+		}	
+		
+		method void gameOver(){
 			
-			do ball.set_ball_direction_x(x_direction);
-			do ball.flip_direction_y();
+			do erase();
+			do DisplayUtils.printGameOver();
+			    
+			return;
+		}
+		
+		method void win(){
+			
+			do erase();
+			do DisplayUtils.printWin();
+			
 			return;
 		}
 }

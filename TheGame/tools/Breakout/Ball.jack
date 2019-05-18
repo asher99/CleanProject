@@ -63,6 +63,12 @@ class Ball{
         return;
     }
 	
+	method void erase(){
+		do Screen.setColor(false);
+        do Screen.drawCircle(center_x, center_y,radius);
+        return;
+	}
+	
 	method void movement()
 	{
 		if (center_x + radius < 511){
