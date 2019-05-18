@@ -28,6 +28,18 @@ class Ball{
 		return radius;
 	}
 	
+	method void set_ball_direction_x(int val)
+	{
+		let ball_direction_x = val;
+		return;
+	}
+	
+	method void set_ball_direction_y(int val)
+	{
+		let ball_direction_y = val;
+		return;
+	}
+	
 	method void flip_direction_y(){
 		let ball_direction_y = -ball_direction_y;
 		return;

@@ -87,22 +87,22 @@ class BreakoutGame {
 		var int paddle_end;
 		var int paddle_edge;
 		var int ball_edge;
-		var int ball_center;
-		
+		var int ball_center_x;
+		var int ball_center_y;
 		var int pointX;
 		var int pointY;
 		
 		let paddle_start = paddle.get_placement();
 		let paddle_end = paddle.get_placement() + paddle.get_x_size();
-		let paddle_edge = paddle.get_hight();// - paddle.get_y_size();
-		let ball_edge = ball.get_center_y() + ball.get_radius();
-		let ball_center = ball.get_center_x();
+		let paddle_edge = paddle.get_hight() - 8;// - paddle.get_y_size();
+		let ball_center_x = ball.get_center_x();
+		let ball_center_y = ball.get_center_y();
 
-		if (ball_edge > paddle_edge){
-			if(ball_center > paddle_start){
-				if(ball_center < paddle_edge){
-					do ball.flip_direction_y();
-					do Sys.wait(100);
+
+		if (ball_center_x < paddle_end){
+			if(ball_center_x > paddle_start){
+				if(ball_center_y > paddle_edge){
+					do ball_hit_paddle(ball,ball_center_x,paddle_start,paddle_end);
 				}
 			}
 		}
@@ -125,5 +125,31 @@ class BreakoutGame {
 		
         do Sys.wait(5); // Delays the next movement.
         return;
-    }	
+    }
+
+		method void ball_hit_paddle(Ball ball, int center_x, int pad_start, int pad_end)
+		{
+			var int pad_len;
+			var int x_direction;
+
+			let pad_len = pad_end - pad_start;
+			let x_direction = -2;
+			
+			if (center_x > pad_start + (1/4)*pad_len)
+			{
+				let x_direction = x_direction + 1;
+			}
+			if (center_x > pad_start + (1/2)*pad_len)
+			{
+				let x_direction = x_direction + 2;
+			}
+			if (center_x > pad_start + (3/4)*pad_len)
+			{
+				let x_direction = x_direction + 1;
+			}
+			
+			do ball.set_ball_direction_x(x_direction);
+			do ball.flip_direction_y();
+			return;
+		}
 }

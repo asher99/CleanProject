@@ -29,6 +29,20 @@ push argument 0
 pop pointer 0
 push this 2
 return
+function Ball.set_ball_direction_x 0
+push argument 0
+pop pointer 0
+push argument 1
+pop this 3
+push constant 0
+return
+function Ball.set_ball_direction_y 0
+push argument 0
+pop pointer 0
+push argument 1
+pop this 4
+push constant 0
+return
 function Ball.flip_direction_y 0
 push argument 0
 pop pointer 0
