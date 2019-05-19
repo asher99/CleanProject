@@ -42,13 +42,23 @@ class DisplayUtils{
 		return;
 	}
 	
+	function void DisplayNumOfLives(int num){
+		var String s;
+		let s = "                                                 ";
+		do Output.moveCursor(18,32);
+		do Output.printInt(num);
+		do Sys.wait(2000);
+		do Output.moveCursor(18,32);
+		do Output.printString(s);
+		return;
+	}
+	
 	function void printGameOver(){
 		var String s;
 		let s = "                                                 ";
 		do Output.moveCursor(18,24);
 		do Output.printString("Game Over!");
-		do Output.moveCursor(19,18);
-		do Output.printString("Press Space to start again!");
+
 		
 		
 		return;
@@ -59,8 +69,7 @@ class DisplayUtils{
 		let s = "                                                 ";
 		do Output.moveCursor(18,24);
 		do Output.printString("You Won!");
-		do Output.moveCursor(19,18);
-		do Output.printString("Press Space to start again!");
+
 		
 		
 		return;

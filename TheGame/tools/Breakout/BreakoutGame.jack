@@ -85,16 +85,19 @@ class BreakoutGame {
             // waits for the key to be released.
             while (~(key = 0)) {
                 let key = Keyboard.keyPressed();
-                do calculate_frame();
+                do calculate_frame();							
             }
+		
 		if(numOfLives = 0){
 			let exit = true;
 			do gameOver();
-			
+			return;
 		}
+		
 		let exit = brickWall.isCompletlyBroken();
 		if(exit){
 			do win();
+			return;
 		}
         }
             
@@ -111,6 +114,8 @@ class BreakoutGame {
 		var int ball_center_y;
 		var int pointX;
 		var int pointY;
+		var int rad;
+		var int touchDown;
 		
 		let paddle_start = paddle.get_placement();
 		let paddle_end = paddle.get_placement() + paddle.get_x_size();
@@ -130,6 +135,7 @@ class BreakoutGame {
 		// sets wall display 
 		let pointX = ball.get_center_x();
 		let pointY = ball.get_center_y();
+			
 		do brickWall.checkHit(pointX,pointY,ball);
 		do brickWall.draw();
 		
@@ -142,6 +148,16 @@ class BreakoutGame {
             do paddle.moveRight();
         }
 		
+		/** in case of ball missing paddle in hiting the floor you lose a life */
+		
+		/*let rad = ball.get_radius();
+		let touchDown = rad + pointY;
+		if(touchDown > 254){
+			let numOfLives = numOfLives - 1;
+			do ball.erase();
+			let ball = Ball.new(); 
+			do DisplayUtils.DisplayNumOfLives(numOfLives);
+		}*/
 		
         do Sys.wait(5); // Delays the next movement.
         return;

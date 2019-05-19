@@ -143,6 +143,8 @@ pop local 1
 push pointer 0
 call BreakoutGame.gameOver 1
 pop temp 0
+push constant 0
+return
 label IF_FALSE5
 push this 3
 call Wall.isCompletlyBroken 1
@@ -154,12 +156,14 @@ label IF_TRUE6
 push pointer 0
 call BreakoutGame.win 1
 pop temp 0
+push constant 0
+return
 label IF_FALSE6
 goto WHILE_EXP0
 label WHILE_END0
 push constant 0
 return
-function BreakoutGame.calculate_frame 8
+function BreakoutGame.calculate_frame 10
 push argument 0
 pop pointer 0
 push this 0
