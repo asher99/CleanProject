@@ -19,10 +19,10 @@ class BreakoutGame {
 		let ball = Ball.new();
 		
 		let brickWall = Wall.new();
-		/*do DisplayUtils.showCredits();
+		do DisplayUtils.showCredits();
 		do Sys.wait(3400);
 		do DisplayUtils.eraseMessage();
-		do DisplayUtils.countDown();*/
+		do DisplayUtils.countDown();
 		let numOfLives = 3;
         return this;
     }
@@ -150,14 +150,17 @@ class BreakoutGame {
 		
 		/** in case of ball missing paddle in hiting the floor you lose a life */
 		
-		/*let rad = ball.get_radius();
+		let rad = ball.get_radius();
 		let touchDown = rad + pointY;
 		if(touchDown > 254){
 			let numOfLives = numOfLives - 1;
 			do ball.erase();
-			let ball = Ball.new(); 
+			let ball = Ball.new();
+			do paddle.erase();
+			do paddle.set_placement(255);
+			do paddle.draw();
 			do DisplayUtils.DisplayNumOfLives(numOfLives);
-		}*/
+		}
 		
         do Sys.wait(5); // Delays the next movement.
         return;

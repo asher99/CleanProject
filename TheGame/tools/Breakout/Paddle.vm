@@ -11,6 +11,9 @@ pop this 2
 push constant 240
 pop this 3
 push pointer 0
+call Paddle.draw 1
+pop temp 0
+push pointer 0
 return
 function Paddle.get_placement 0
 push argument 0
@@ -31,6 +34,13 @@ function Paddle.get_hight 0
 push argument 0
 pop pointer 0
 push this 3
+return
+function Paddle.set_placement 0
+push argument 0
+pop pointer 0
+push argument 1
+pop this 0
+push constant 0
 return
 function Paddle.dispose 0
 push argument 0

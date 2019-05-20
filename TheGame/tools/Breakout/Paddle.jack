@@ -7,6 +7,7 @@ class Paddle{
 		let x_size = 80;
 		let y_size = 10;
 		let hight = 240;
+		do draw();
 		return this;
 	}
 	
@@ -26,6 +27,12 @@ class Paddle{
 		return hight;
 	}
 	
+	method void set_placement(int val)
+	{
+		let placement = val;
+		return;
+	}
+		
 	
 	/** Deallocates the object's memory. */
     method void dispose() {
