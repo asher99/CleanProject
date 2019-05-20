@@ -28,6 +28,11 @@ class Ball{
 		return radius;
 	}
 	
+	method int get_ball_direction_x()
+	{
+		return ball_direction_x;
+	}
+	
 	method void set_ball_direction_x(int val)
 	{
 		let ball_direction_x = val;
@@ -37,6 +42,11 @@ class Ball{
 	method void set_ball_direction_y(int val)
 	{
 		let ball_direction_y = val;
+		return;
+	}
+	
+	method void flip_direction_x(){
+		let ball_direction_x = -ball_direction_x;
 		return;
 	}
 	
@@ -77,8 +87,24 @@ class Ball{
 					if (center_y - radius > 1){
 						do Screen.setColor(false);
 						do Screen.drawCircle(center_x, center_y,radius+1);
-						let center_x = center_x + ball_direction_x;
+						
+						if(center_x + ball_direction_x > 505)
+						{
+							do flip_direction_x();
+						}
+						if(center_x + ball_direction_x < 6)
+						{
+							do flip_direction_x();
+						}
+
+						if(center_x > 6 | center_x < 505)
+						{
+							let center_x = center_x + ball_direction_x;
+						}
+						
 						let center_y = center_y + ball_direction_y;
+
+						
 						do Screen.setColor(true);
 						do Screen.drawCircle(center_x, center_y,radius);
 					}

@@ -29,6 +29,11 @@ push argument 0
 pop pointer 0
 push this 2
 return
+function Ball.get_ball_direction_x 0
+push argument 0
+pop pointer 0
+push this 3
+return
 function Ball.set_ball_direction_x 0
 push argument 0
 pop pointer 0
@@ -41,6 +46,14 @@ push argument 0
 pop pointer 0
 push argument 1
 pop this 4
+push constant 0
+return
+function Ball.flip_direction_x 0
+push argument 0
+pop pointer 0
+push this 3
+neg
+pop this 3
 push constant 0
 return
 function Ball.flip_direction_y 0
@@ -145,7 +158,42 @@ pop temp 0
 push this 0
 push this 3
 add
+push constant 505
+gt
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push pointer 0
+call Ball.flip_direction_x 1
+pop temp 0
+label IF_FALSE4
+push this 0
+push this 3
+add
+push constant 6
+lt
+if-goto IF_TRUE5
+goto IF_FALSE5
+label IF_TRUE5
+push pointer 0
+call Ball.flip_direction_x 1
+pop temp 0
+label IF_FALSE5
+push this 0
+push constant 6
+gt
+push this 0
+or
+push constant 505
+lt
+if-goto IF_TRUE6
+goto IF_FALSE6
+label IF_TRUE6
+push this 0
+push this 3
+add
 pop this 0
+label IF_FALSE6
 push this 1
 push this 4
 add

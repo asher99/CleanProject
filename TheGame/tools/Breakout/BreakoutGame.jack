@@ -167,21 +167,28 @@ class BreakoutGame {
 	{
 		var int pad_len;
 		var int x_direction;
-
+		var int current_direction;
+		
 		let pad_len = pad_end - pad_start;
-		let x_direction = -2;
-			
-		if (center_x > pad_start + (1/4)*pad_len)
+		//let x_direction = 0;
+		let current_direction = ball.get_ball_direction_x();
+		
+		if(current_direction < 0)
 		{
-			let x_direction = x_direction + 1;
+			let x_direction = -1;
+			if(center_x < pad_start + (1/4)*pad_len)
+			{
+				let x_direction = -2;
+			}
 		}
-		if (center_x > pad_start + (1/2)*pad_len)
+		
+		if(current_direction > 0)
 		{
-			let x_direction = x_direction + 2;
-		}
-		if (center_x > pad_start + (3/4)*pad_len)
-		{
-			let x_direction = x_direction + 1;
+			let x_direction = 1;
+			if(center_x > pad_start + (3/4)*pad_len)
+			{
+				let x_direction = 2;
+			}
 		}
 		
 		do ball.set_ball_direction_x(x_direction);

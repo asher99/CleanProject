@@ -257,38 +257,30 @@ call Sys.wait 1
 pop temp 0
 push constant 0
 return
-function BreakoutGame.ball_hit_paddle 2
+function BreakoutGame.ball_hit_paddle 3
 push argument 0
 pop pointer 0
 push argument 4
 push argument 3
 sub
 pop local 0
-push constant 2
+push argument 1
+call Ball.get_ball_direction_x 1
+pop local 2
+push local 2
+push constant 0
+lt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 1
 neg
 pop local 1
 push argument 2
 push argument 3
-gt
+lt
 push constant 1
 push constant 4
-call Math.divide 2
-add
-push local 0
-call Math.multiply 2
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
-push local 1
-push constant 1
-add
-pop local 1
-label IF_FALSE0
-push argument 2
-push argument 3
-gt
-push constant 1
-push constant 2
 call Math.divide 2
 add
 push local 0
@@ -296,11 +288,19 @@ call Math.multiply 2
 if-goto IF_TRUE1
 goto IF_FALSE1
 label IF_TRUE1
-push local 1
 push constant 2
-add
+neg
 pop local 1
 label IF_FALSE1
+label IF_FALSE0
+push local 2
+push constant 0
+gt
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push constant 1
+pop local 1
 push argument 2
 push argument 3
 gt
@@ -310,13 +310,12 @@ call Math.divide 2
 add
 push local 0
 call Math.multiply 2
-if-goto IF_TRUE2
-goto IF_FALSE2
-label IF_TRUE2
-push local 1
-push constant 1
-add
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push constant 2
 pop local 1
+label IF_FALSE3
 label IF_FALSE2
 push argument 1
 push local 1
