@@ -56,13 +56,24 @@ class BreakoutGame {
         while (~exit) {
             // waits for a key to be pressed.
             while (key = 0) {
+if(numOfLives < 1){
+			let exit = true;
+			do gameOver();
+			return;
+		}
+		
+		let exit = brickWall.isCompletlyBroken();
+		if(exit){
+			do win();
+			return;
+		}			
                 let key = Keyboard.keyPressed();
                 do calculate_frame();
             }
 
             if (key = 81) {
                 let exit = true;
-            }
+            }	
             /*if (key = 90) {
                 do paddle.decSize();
             }
@@ -84,11 +95,7 @@ class BreakoutGame {
 
             // waits for the key to be released.
             while (~(key = 0)) {
-                let key = Keyboard.keyPressed();
-                do calculate_frame();							
-            }
-		
-		if(numOfLives = 0){
+			if(numOfLives < 1){
 			let exit = true;
 			do gameOver();
 			return;
@@ -99,6 +106,11 @@ class BreakoutGame {
 			do win();
 			return;
 		}
+                let key = Keyboard.keyPressed();
+                do calculate_frame();							
+            }
+		
+		
         }
             
         return;

@@ -119,16 +119,24 @@ class Wall{
 		var int i;
 		var Brick brick;
 		var boolean isDestroyed;
-		var boolean doesHitBrick;				
+		var boolean doesHitBrick;
+		var int x;
+		var int y;
 		let i = 0;
 		while(i < size ){
 			let brick = wall[i];
+			let y = brick.getY() + 30;
 			let doesHitBrick = brick.isIncluded(pointX,pointY);
 			let isDestroyed = brick.getIsDestroyed();
 			if(~(isDestroyed)){
 				if (doesHitBrick){
 					do brick.setIsDestroyed(true);
-					do ball.flipDirection();
+					if(pointY > y){
+						do ball.flip_direction_y();
+					}
+					else{
+						do ball.flip_direction_x();
+					}
 				}	
 			}				
 			let i = i + 1;
