@@ -4,34 +4,42 @@ import StdFile
 import FileManipulation
 
 /*
-*	Split
+*	TokenizeMultipleFiles.
+*	foreach file in the files list:
+*	1. read the input file to list of lines.
+*	2. initial the output file.
+*	3. start compilation of the input file, using recursion on the list of the file lines.
 */
-split :: String -> [String]
-split s = scrape (fromString s)
-where
-    scrape :: [Char] -> [String]
-    scrape [] = []
-    scrape cs=:[c:_]
-    | isSpace c = scrape (dropWhile isSpace cs)
-    | otherwise = [toString word:scrape rest]
-    where
-        (word,rest) = span (not o isSpace) cs
-
-
-
 TokenizeMultipleFiles:: [String] *f -> (Bool,*f) | FileSystem f
 TokenizeMultipleFiles [] w = (True,w)
 TokenizeMultipleFiles [x:xs] w
+// get the file name without '.jack' postfix
+# charlist = [ e \\ e <-: x ]
+# len = length charlist
+# reslist = take (len-5) charlist
+# filename = { e \\ e <- reslist }
+// Initial the output file content:
+# outFile = "OutputFiles\\" +++ filename +++ "T.xml"
+# (ok_open,outFile,w) = fopen outFile FWriteText w
+| not ok_open = abort("failed to open file")
+# outFile = fwrites "" outFile
+# (ok_read_close,w) = fclose outFile w
+| not ok_read_close = abort("failed to close file")
 // read all lines of current file to list of strings:
 # currentFile = "InputFiles\\" +++ x
 # (ok_read_open,inputfile,w) = fopen currentFile FReadText w
 # (content,inputfile) = listOfLinesInFile inputfile
 # (ok_read_close,w) = fclose inputfile w
 // parse the file:
-# (ok,w) = Tokenize content x 1 w
+# (ok,w) = Tokenize content filename 1 w
 | not ok = abort ("Failed to parse file " +++ x +++ ", execution terminated\n")
 = TokenizeMultipleFiles xs w
 
+/*
+*	Tokenize:
+*	1. cast the line form String to list of Chars.
+*	2. and enter state zero of the automaton.
+*/
 Tokenize:: [String] String Int *f -> (Bool,*f) | FileSystem f
 Tokenize [] filename num w = (True,w)
 Tokenize [x:xs] filename num w
@@ -40,7 +48,13 @@ Tokenize [x:xs] filename num w
 | not ok = abort ("failed to tokenize line " +++ x +++ "\n")
 = Tokenize xs filename (num+1) w
 
-
+/*
+*	FDAutomaton_state_0:
+*	currently support only constantStrings tokens.
+*	the automaton enter to this state every time we look for another token.
+*	5. if we found '\"' it means stringConstant token, goto state five.
+*
+*/
 FDAutomaton_state_0:: [Char] String Int *f -> (Bool,*f) | FileSystem f
 FDAutomaton_state_0 [] filename num w = (True,w)
 FDAutomaton_state_0 input filename num w
@@ -48,9 +62,14 @@ FDAutomaton_state_0 input filename num w
 # input_ = drop 1 input
 | ch == '\"' = FDAutomaton_transit_0_5 input_ filename num w
 | ch == ' ' = FDAutomaton_state_0 (drop 1 input) filename num w
-
+| ch == '\n' = (True,w)
 | otherwise = (False,w)
 
+/*
+*	FDAutomaton_transit_0_5
+*	when we find the token '\"' in state zero we go to state five.
+*	along the way - we can print the '<stringConstant>' opening tag.
+*/
 FDAutomaton_transit_0_5:: [Char] String Int *f -> (Bool,*f) | FileSystem f
 FDAutomaton_transit_0_5 input filename num w
 # outFile = "OutputFiles\\" +++ filename +++ "T.xml"
@@ -62,6 +81,11 @@ FDAutomaton_transit_0_5 input filename num w
 | not ok_read_close = abort("failed to close file")
 = FDAutomaton_state_5 input filename num w
 
+/*
+*	FDAutomaton_state_5:
+*	in this state we keep reading the string till we got another '\"' character.
+*	when that happend, goto state six.
+*/
 FDAutomaton_state_5:: [Char] String Int *f -> (Bool,*f) | FileSystem f
 FDAutomaton_state_5 [] filename num w = (True,w)
 FDAutomaton_state_5 input filename num w
@@ -76,6 +100,11 @@ FDAutomaton_state_5 input filename num w
 # input_ = drop 1 input
 = FDAutomaton_state_5 input_ filename num w
 
+/*
+*	FDAutomaton_transit_5_6
+*	when we find the token '\"' in state five we go to state six.
+*	the string is complete - we can print the '</stringConstant>' closing tag.
+*/
 FDAutomaton_transit_5_6:: [Char] String Int *f -> (Bool,*f) | FileSystem f
 FDAutomaton_transit_5_6 input filename num w
 # outFile = "OutputFiles\\" +++ filename +++ "T.xml"
@@ -87,6 +116,10 @@ FDAutomaton_transit_5_6 input filename num w
 | not ok_read_close = abort("failed to close file")
 = FDAutomaton_state_6 input filename num w
 
+/*
+*	FDAutomaton_state_6
+*	the stringConstant token is complete, return to state zero.
+*/
 FDAutomaton_state_6:: [Char] String Int *f -> (Bool,*f) | FileSystem f
 FDAutomaton_state_6 [] filename num w = (True,w)
 FDAutomaton_state_6 input filename num w

@@ -1,6 +1,6 @@
 .comp 920 000111010
 .start __JackCompiler_Start
-.depend "Tokenizer" "20190521172819"
+.depend "Tokenizer" "20190521232801"
 .depend "FileManipulation" "20190521184418"
 .depend "StdLibMisc" "20180913124337"
 .depend "Directory" "20180913124337"
@@ -26,7 +26,7 @@
 .depend "StdOverloaded" "20180913124337"
 .depend "StdBool" "20180913124337"
 .depend "StdEnv" "20180913124337"
-.module m_JackCompiler "JackCompiler" "20190521184452"
+.module m_JackCompiler "JackCompiler" "20190521200109"
 .endinfo
 .impmod _system
 .implab _cycle_in_spine
