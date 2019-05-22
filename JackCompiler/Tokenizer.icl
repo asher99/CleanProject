@@ -52,6 +52,7 @@ Tokenize [x:xs] filename num w
 *	FDAutomaton_state_0:
 *	currently support only constantStrings tokens.
 *	the automaton enter to this state every time we look for another token.
+*	3. if we found digit it means integerConstant token, goto state three.
 *	5. if we found '\"' it means stringConstant token, goto state five.
 *
 */
@@ -60,14 +61,32 @@ FDAutomaton_state_0 [] filename num w = (True,w)
 FDAutomaton_state_0 input filename num w
 # ch = input !! 0
 # input_ = drop 1 input
+| isDigit ch = FDAutomaton_transit_0_3 input filename num w
 | ch == '\"' = FDAutomaton_transit_0_5 input_ filename num w
-| ch == ' ' = FDAutomaton_state_0 (drop 1 input) filename num w
+| ch == ' '	 = FDAutomaton_state_0 (drop 1 input) filename num w
 | ch == '\n' = (True,w)
-| otherwise = (False,w)
+| otherwise	 = (False,w)
+
+
+/*
+*	FDAutomaton_transit_0_3
+*	when we find digit in state zero we go to state three.
+*	along the way - we can print the '<integerConstant>' opening tag.
+*/
+FDAutomaton_transit_0_3:: [Char] String Int *f -> (Bool,*f) | FileSystem f
+FDAutomaton_transit_0_3 input filename num w
+# outFile = "OutputFiles\\" +++ filename +++ "T.xml"
+# (ok_open,outFile,w) = fopen outFile FAppendText w
+| not ok_open = abort("failed to open file")
+# string_to_print = "<integerConstant> "
+# outFile = fwrites string_to_print outFile
+# (ok_read_close,w) = fclose outFile w
+| not ok_read_close = abort("failed to close file")
+= FDAutomaton_state_3 input filename num w
 
 /*
 *	FDAutomaton_transit_0_5
-*	when we find the token '\"' in state zero we go to state five.
+*	when we find the character '\"' in state zero we go to state five.
 *	along the way - we can print the '<stringConstant>' opening tag.
 */
 FDAutomaton_transit_0_5:: [Char] String Int *f -> (Bool,*f) | FileSystem f
@@ -80,6 +99,26 @@ FDAutomaton_transit_0_5 input filename num w
 # (ok_read_close,w) = fclose outFile w
 | not ok_read_close = abort("failed to close file")
 = FDAutomaton_state_5 input filename num w
+
+/*
+*	FDAutomaton_state_3:
+*	in this state we keep reading the string till we got another '\"' character.
+*	when that happend, goto state six.
+*/
+FDAutomaton_state_3:: [Char] String Int *f -> (Bool,*f) | FileSystem f
+FDAutomaton_state_3 [] filename num w = (True,w)
+FDAutomaton_state_3 input filename num w
+# ch = input !! 0
+| not (isDigit ch) = FDAutomaton_transit_3_0 input filename num w
+# outFile = "OutputFiles\\" +++ filename +++ "T.xml"
+# (ok_open,outFile,w) = fopen outFile FAppendText w
+| not ok_open = abort("failed to open file")
+# outFile = fwritec ch outFile
+# (ok_read_close,w) = fclose outFile w
+| not ok_read_close = abort("failed to close file")
+# input_ = drop 1 input
+= FDAutomaton_state_3 input_ filename num w
+
 
 /*
 *	FDAutomaton_state_5:
@@ -99,6 +138,23 @@ FDAutomaton_state_5 input filename num w
 | not ok_read_close = abort("failed to close file")
 # input_ = drop 1 input
 = FDAutomaton_state_5 input_ filename num w
+
+
+/*
+*	FDAutomaton_transit_3_0
+*	when in state three and the next character is no longer a digit, goto state zero.
+*	the integer is complete - we can print the '</integerConstant>' closing tag.
+*/
+FDAutomaton_transit_3_0:: [Char] String Int *f -> (Bool,*f) | FileSystem f
+FDAutomaton_transit_3_0 input filename num w
+# outFile = "OutputFiles\\" +++ filename +++ "T.xml"
+# (ok_open,outFile,w) = fopen outFile FAppendText w
+| not ok_open = abort("failed to open file")
+# string_to_print = " </integerConstant>\n"
+# outFile = fwrites string_to_print outFile
+# (ok_read_close,w) = fclose outFile w
+| not ok_read_close = abort("failed to close file")
+= FDAutomaton_state_0 input filename num w
 
 /*
 *	FDAutomaton_transit_5_6
