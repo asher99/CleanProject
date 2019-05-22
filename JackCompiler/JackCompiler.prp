@@ -28,9 +28,9 @@ OtherModules
 		DclOpen:	True
 		Icl
 			WindowPosition
-				X:	19
-				Y:	12
-				SizeX:	1000
+				X:	10
+				Y:	10
+				SizeX:	1304
 				SizeY:	680
 		IclOpen:	True
 	Module
