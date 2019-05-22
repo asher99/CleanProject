@@ -53,6 +53,7 @@ Tokenize [x:xs] filename num w
 *	currently support only constantStrings tokens.
 *	the automaton enter to this state every time we look for another token.
 *	3. if we found digit it means integerConstant token, goto state three.
+*	4. if we found symbol it means symbol token, goto state four.
 *	5. if we found '\"' it means stringConstant token, goto state five.
 *
 */
@@ -61,11 +62,12 @@ FDAutomaton_state_0 [] filename num w = (True,w)
 FDAutomaton_state_0 input filename num w
 # ch = input !! 0
 # input_ = drop 1 input
-| isDigit ch = FDAutomaton_transit_0_3 input filename num w
-| ch == '\"' = FDAutomaton_transit_0_5 input_ filename num w
-| ch == ' '	 = FDAutomaton_state_0 (drop 1 input) filename num w
-| ch == '\n' = (True,w)
-| otherwise	 = (False,w)
+| isDigit ch  = FDAutomaton_transit_0_3 input filename num w
+| isSymbol ch = FDAutomaton_transit_0_4 input filename num w
+| ch == '\"'  = FDAutomaton_transit_0_5 input_ filename num w
+| ch == ' '	  = FDAutomaton_state_0 (drop 1 input) filename num w
+| ch == '\n'  = (True,w)
+| otherwise	  = (False,w)
 
 
 /*
@@ -83,6 +85,22 @@ FDAutomaton_transit_0_3 input filename num w
 # (ok_read_close,w) = fclose outFile w
 | not ok_read_close = abort("failed to close file")
 = FDAutomaton_state_3 input filename num w
+
+/*
+*	FDAutomaton_transit_0_4
+*	when we find symbol in state zero we go to state four.
+*	along the way - we can print the '<symbol>' opening tag.
+*/
+FDAutomaton_transit_0_4:: [Char] String Int *f -> (Bool,*f) | FileSystem f
+FDAutomaton_transit_0_4 input filename num w
+# outFile = "OutputFiles\\" +++ filename +++ "T.xml"
+# (ok_open,outFile,w) = fopen outFile FAppendText w
+| not ok_open = abort("failed to open file")
+# string_to_print = "<symbol> "
+# outFile = fwrites string_to_print outFile
+# (ok_read_close,w) = fclose outFile w
+| not ok_read_close = abort("failed to close file")
+= FDAutomaton_state_4 input filename num w
 
 /*
 *	FDAutomaton_transit_0_5
@@ -118,6 +136,27 @@ FDAutomaton_state_3 input filename num w
 | not ok_read_close = abort("failed to close file")
 # input_ = drop 1 input
 = FDAutomaton_state_3 input_ filename num w
+
+
+/*
+*	FDAutomaton_state_4:
+*	in this state we print the symbol to the .xml file.
+*	TODO: handle special characters.
+*	goto state zero.
+*/
+FDAutomaton_state_4:: [Char] String Int *f -> (Bool,*f) | FileSystem f
+FDAutomaton_state_4 [] filename num w = (True,w)
+FDAutomaton_state_4 input filename num w
+# ch = input !! 0
+//| ch == '\"' = FDAutomaton_transit_5_6 (drop 1 input) filename num w
+# outFile = "OutputFiles\\" +++ filename +++ "T.xml"
+# (ok_open,outFile,w) = fopen outFile FAppendText w
+| not ok_open = abort("failed to open file")
+# outFile = fwritec ch outFile
+# (ok_read_close,w) = fclose outFile w
+| not ok_read_close = abort("failed to close file")
+# input_ = drop 1 input
+= FDAutomaton_transit_4_0 (drop 1 input) filename num w
 
 
 /*
@@ -157,6 +196,22 @@ FDAutomaton_transit_3_0 input filename num w
 = FDAutomaton_state_0 input filename num w
 
 /*
+*	FDAutomaton_transit_4_0
+*	after printing the symbol in state four, goto state zero.
+*   we can print the '</symbol>' closing tag.
+*/
+FDAutomaton_transit_4_0:: [Char] String Int *f -> (Bool,*f) | FileSystem f
+FDAutomaton_transit_4_0 input filename num w
+# outFile = "OutputFiles\\" +++ filename +++ "T.xml"
+# (ok_open,outFile,w) = fopen outFile FAppendText w
+| not ok_open = abort("failed to open file")
+# string_to_print = " </symbol>\n"
+# outFile = fwrites string_to_print outFile
+# (ok_read_close,w) = fclose outFile w
+| not ok_read_close = abort("failed to close file")
+= FDAutomaton_state_0 input filename num w
+
+/*
 *	FDAutomaton_transit_5_6
 *	when we find the token '\"' in state five we go to state six.
 *	the string is complete - we can print the '</stringConstant>' closing tag.
@@ -180,6 +235,34 @@ FDAutomaton_state_6:: [Char] String Int *f -> (Bool,*f) | FileSystem f
 FDAutomaton_state_6 [] filename num w = (True,w)
 FDAutomaton_state_6 input filename num w
 = FDAutomaton_state_0 input filename num w
+
+/*
+* isSymbol
+* check if a character is an identified symbol in 'jack' language
+*/
+isSymbol :: Char -> Bool
+isSymbol ch 
+| ch == '{' = True
+| ch == '}' = True
+| ch == '(' = True
+| ch == ')' = True
+| ch == '[' = True
+| ch == ']' = True
+| ch == '.' = True
+| ch == ',' = True
+| ch == ';' = True
+| ch == '+' = True
+| ch == '-' = True
+| ch == '*' = True
+| ch == '/' = True
+| ch == '&' = True
+| ch == '|' = True
+| ch == '<' = True
+| ch == '>' = True
+| ch == '=' = True
+| ch == '~' = True
+| otherwise = False
+
 
 /*
 TokenizeLine:: [String] String Int *f-> (Bool,*f) | FileSystem f 
