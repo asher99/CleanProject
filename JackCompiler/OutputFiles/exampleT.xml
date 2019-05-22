@@ -4,11 +4,9 @@
 <stringConstant> Ahser look = its working! </stringConstant>
 <integerConstant> 789 </integerConstant>
 <integerConstant> 42 </integerConstant>
-<symbol> & </symbol>
-<integerConstant> 8 </integerConstant>
+<symbol> &amp </symbol>
 <stringConstant> look this is equal to 3... </stringConstant>
-<symbol> < </symbol>
-<symbol> > </symbol>
+<symbol> &gt </symbol>
 <symbol> ] </symbol>
 <integerConstant> 1 </integerConstant>
 <integerConstant> 1 </integerConstant>

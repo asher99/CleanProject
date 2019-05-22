@@ -148,7 +148,7 @@ FDAutomaton_state_4:: [Char] String Int *f -> (Bool,*f) | FileSystem f
 FDAutomaton_state_4 [] filename num w = (True,w)
 FDAutomaton_state_4 input filename num w
 # ch = input !! 0
-//| ch == '\"' = FDAutomaton_transit_5_6 (drop 1 input) filename num w
+| isSpecialSymbol ch = handleSpecialCharacter ch filename num w
 # outFile = "OutputFiles\\" +++ filename +++ "T.xml"
 # (ok_open,outFile,w) = fopen outFile FAppendText w
 | not ok_open = abort("failed to open file")
@@ -262,6 +262,91 @@ isSymbol ch
 | ch == '=' = True
 | ch == '~' = True
 | otherwise = False
+
+/*
+*	isSpecialSymbol
+*	there are four special symbols need special handling.
+*/
+isSpecialSymbol:: Char -> Bool
+isSpecialSymbol ch
+| ch == '<' = True
+| ch == '>' = True
+| ch == '"' = True
+| ch == '&' = True
+| otherwise = False
+
+/*
+*	handleSpecialCharacter
+*	handle special character by printing the right expression for each special symbol.
+*/
+handleSpecialCharacter:: Char String Int *f -> (Bool,*f) | FileSystem f
+handleSpecialCharacter ch filename num w
+| ch == '&' = printAmp ch filename num w
+| ch == '<' = printGt  ch filename num w
+| ch == '>' = printLt  ch filename num w
+| ch == 'W' = printQut ch filename num w
+
+/*
+*	printAmp
+*	print the equivalent expression to &
+*/
+printAmp:: Char String Int *f -> (Bool,*f) | FileSystem f
+printAmp ch filename num w
+# outFile = "OutputFiles\\" +++ filename +++ "T.xml"
+# (ok_open,outFile,w) = fopen outFile FAppendText w
+| not ok_open = abort("failed to open file")
+# string_to_print = "&amp </symbol>\n"
+# outFile = fwrites string_to_print outFile
+# (ok_read_close,w) = fclose outFile w
+| not ok_read_close = abort("failed to close file")
+= (True,w)
+
+/*
+*	printGt
+*	print the equivalent expression to &
+*/
+printGt :: Char String Int *f -> (Bool,*f) | FileSystem f
+printGt ch filename num w
+# outFile = "OutputFiles\\" +++ filename +++ "T.xml"
+# (ok_open,outFile,w) = fopen outFile FAppendText w
+| not ok_open = abort("failed to open file")
+# string_to_print = "&gt </symbol>\n"
+# outFile = fwrites string_to_print outFile
+# (ok_read_close,w) = fclose outFile w
+| not ok_read_close = abort("failed to close file")
+= (True,w)
+
+/*
+*	printLt
+*	print the equivalent expression to &
+*/
+printLt :: Char String Int *f -> (Bool,*f) | FileSystem f
+printLt ch filename num w
+# outFile = "OutputFiles\\" +++ filename +++ "T.xml"
+# (ok_open,outFile,w) = fopen outFile FAppendText w
+| not ok_open = abort("failed to open file")
+# string_to_print = "&lt </symbol>\n"
+# outFile = fwrites string_to_print outFile
+# (ok_read_close,w) = fclose outFile w
+| not ok_read_close = abort("failed to close file")
+= (True,w)
+
+/*
+*	printQut
+*	print the equivalent expression to &
+*/
+printQut:: Char String Int *f -> (Bool,*f) | FileSystem f
+printQut ch filename num w
+# outFile = "OutputFiles\\" +++ filename +++ "T.xml"
+# (ok_open,outFile,w) = fopen outFile FAppendText w
+| not ok_open = abort("failed to open file")
+# string_to_print = "&quot </symbol>\n"
+# outFile = fwrites string_to_print outFile
+# (ok_read_close,w) = fclose outFile w
+| not ok_read_close = abort("failed to close file")
+= (True,w)
+
+
 
 
 /*
