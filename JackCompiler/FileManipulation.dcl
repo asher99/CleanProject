@@ -24,6 +24,11 @@ getJackFiles:: [String] -> [String]
 
 isJack:: String -> Bool
 
+getTxmlFiles:: [String] -> [String]
+
+isTxml:: String -> Bool
+
+
 //copyToAsm:: *File !*f -> Bool | FileSystem f
 
 //writeToAsm:: [String] *File *f -> Bool

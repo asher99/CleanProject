@@ -5,17 +5,40 @@ MainModule
 	DclOpen:	False
 	Icl
 		WindowPosition
-			X:	10
-			Y:	10
-			SizeX:	800
+			X:	214
+			Y:	25
+			SizeX:	1385
 			SizeY:	680
 	IclOpen:	True
 OtherModules
 	Module
 		Name:	FileManipulation
 		Dir:	{Project}
+		Dcl
+			WindowPosition
+				X:	680
+				Y:	23
+				SizeX:	783
+				SizeY:	680
 		DclOpen:	False
-		IclOpen:	False
+		Icl
+			WindowPosition
+				X:	10
+				Y:	10
+				SizeX:	800
+				SizeY:	680
+		IclOpen:	True
+	Module
+		Name:	ParserToXML
+		Dir:	{Project}
+		DclOpen:	False
+		Icl
+			WindowPosition
+				X:	199
+				Y:	704
+				SizeX:	0
+				SizeY:	0
+		IclOpen:	True
 	Module
 		Name:	Tokenizer
 		Dir:	{Project}
@@ -25,14 +48,14 @@ OtherModules
 				Y:	5
 				SizeX:	800
 				SizeY:	680
-		DclOpen:	True
+		DclOpen:	False
 		Icl
 			WindowPosition
 				X:	10
 				Y:	10
 				SizeX:	1304
 				SizeY:	680
-		IclOpen:	True
+		IclOpen:	False
 	Module
 		Name:	Directory
 		Dir:	{Application}*Libraries*Directory

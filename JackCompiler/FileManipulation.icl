@@ -27,6 +27,9 @@ getVmFiles listOfFiles = filter isVm listOfFiles
 getJackFiles:: [String] -> [String]
 getJackFiles listOfFiles = filter isJack listOfFiles
 
+getTxmlFiles:: [String] -> [String]
+getTxmlFiles listOfFiles = filter isTxml listOfFiles
+
 isVm:: String -> Bool
 isVm fileName
 	| take 3 (reverse nameAsList) == vm 	= True
@@ -42,6 +45,15 @@ isJack fileName
 where
 	nameAsList = [ e \\ e <-: fileName ]
 	jack = ['k','c','a', 'j', '.']
+
+
+isTxml:: String -> Bool
+isTxml fileName
+	| take 5 (reverse nameAsList) == jack 	= True
+	| otherwise								= False
+where
+	nameAsList = [ e \\ e <-: fileName ]
+	jack = ['l','m', 'x', '.','T']
 
 
 // read file content to list of Stringd, each String is a line.	

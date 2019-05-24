@@ -19,14 +19,14 @@ TokenizeMultipleFiles [x:xs] w
 # reslist = take (len-5) charlist
 # filename = { e \\ e <- reslist }
 // Initial the output file content:
-# outFile = "OutputFiles\\" +++ filename +++ "T.xml"
+# outFile = "TxmlFiles\\" +++ filename +++ "T.xml"
 # (ok_open,outFile,w) = fopen outFile FWriteText w
 | not ok_open = abort("failed to open file")
 # outFile = fwrites "<tokens>\n" outFile
 # (ok_read_close,w) = fclose outFile w
 | not ok_read_close = abort("failed to close file")
 // read all lines of current file to list of strings:
-# currentFile = "InputFiles\\" +++ x
+# currentFile = "jackFiles\\" +++ x
 # (ok_read_open,inputfile,w) = fopen currentFile FReadText w
 # (content,inputfile) = listOfLinesInFile inputfile
 # (ok_read_close,w) = fclose inputfile w
@@ -36,7 +36,7 @@ TokenizeMultipleFiles [x:xs] w
 # (tokenized,w) = TokenizeMultipleFiles xs w
 | not tokenized = abort("failed to tokenize file " +++ filename +++ ".jack\n")
 // Finish the output file content:
-# outFile2 = "OutputFiles\\" +++ filename +++ "T.xml"
+# outFile2 = "TxmlFiles\\" +++ filename +++ "T.xml"
 # (ok_open2,outFile2,w) = fopen outFile2 FAppendText w
 | not ok_open2 = abort("failed to open file")
 # outFile2 = fwrites "</tokens>\n" outFile2
@@ -74,6 +74,7 @@ FDAutomaton_state_0:: [Char] String Int *f -> (Bool,*f) | FileSystem f
 FDAutomaton_state_0 [] filename num w = (True,w)
 FDAutomaton_state_0 input filename num w
 # ch = input !! 0
+# ch2 = input !! 1
 # input_ = drop 1 input
 | (ch == '_') || (isAlpha ch)	= FDAutomaton_transit_0_1 input filename num w
 | isDigit ch  	= FDAutomaton_transit_0_3 input filename num w
@@ -81,6 +82,7 @@ FDAutomaton_state_0 input filename num w
 | ch == '\"'  	= FDAutomaton_transit_0_5 input_ filename num w
 | isSpace ch  	= FDAutomaton_state_0 (drop 1 input) filename num w
 | ch == '\n'  	= (True,w)
+| (ch == '/') && (ch2 == '/') = (True,w)
 | otherwise	  	= (False,w)
 
 
@@ -99,7 +101,7 @@ FDAutomaton_transit_0_1 input filename num w
 */
 FDAutomaton_transit_0_3:: [Char] String Int *f -> (Bool,*f) | FileSystem f
 FDAutomaton_transit_0_3 input filename num w
-# outFile = "OutputFiles\\" +++ filename +++ "T.xml"
+# outFile = "TxmlFiles\\" +++ filename +++ "T.xml"
 # (ok_open,outFile,w) = fopen outFile FAppendText w
 | not ok_open = abort("failed to open file")
 # string_to_print = "<integerConstant> "
@@ -115,7 +117,7 @@ FDAutomaton_transit_0_3 input filename num w
 */
 FDAutomaton_transit_0_4:: [Char] String Int *f -> (Bool,*f) | FileSystem f
 FDAutomaton_transit_0_4 input filename num w
-# outFile = "OutputFiles\\" +++ filename +++ "T.xml"
+# outFile = "TxmlFiles\\" +++ filename +++ "T.xml"
 # (ok_open,outFile,w) = fopen outFile FAppendText w
 | not ok_open = abort("failed to open file")
 # string_to_print = "<symbol> "
@@ -131,7 +133,7 @@ FDAutomaton_transit_0_4 input filename num w
 */
 FDAutomaton_transit_0_5:: [Char] String Int *f -> (Bool,*f) | FileSystem f
 FDAutomaton_transit_0_5 input filename num w
-# outFile = "OutputFiles\\" +++ filename +++ "T.xml"
+# outFile = "TxmlFiles\\" +++ filename +++ "T.xml"
 # (ok_open,outFile,w) = fopen outFile FAppendText w
 | not ok_open = abort("failed to open file")
 # string_to_print = "<stringConstant> "
@@ -168,7 +170,7 @@ FDAutomaton_state_11 input buff filename num w
 */
 FDAutomaton_state_12:: [Char] [Char] String Int *f -> (Bool,*f) | FileSystem f
 FDAutomaton_state_12 input buff filename num w
-# outFile = "OutputFiles\\" +++ filename +++ "T.xml"
+# outFile = "TxmlFiles\\" +++ filename +++ "T.xml"
 # (ok_open,outFile,w) = fopen outFile FAppendText w
 | not ok_open = abort("failed to open file")
 # string_to_print = "<keyword> " +++ { ch \\ ch <- buff } +++ " </keyword>\n"
@@ -183,7 +185,7 @@ FDAutomaton_state_12 input buff filename num w
 */
 FDAutomaton_state_13:: [Char] [Char] String Int *f -> (Bool,*f) | FileSystem f
 FDAutomaton_state_13 input buff filename num w
-# outFile = "OutputFiles\\" +++ filename +++ "T.xml"
+# outFile = "TxmlFiles\\" +++ filename +++ "T.xml"
 # (ok_open,outFile,w) = fopen outFile FAppendText w
 | not ok_open = abort("failed to open file")
 # string_to_print = "<identifier> " +++ { ch \\ ch <- buff } +++ " </identifier>\n"
@@ -202,7 +204,7 @@ FDAutomaton_state_3 [] filename num w = (True,w)
 FDAutomaton_state_3 input filename num w
 # ch = input !! 0
 | not (isDigit ch) = FDAutomaton_transit_3_0 input filename num w
-# outFile = "OutputFiles\\" +++ filename +++ "T.xml"
+# outFile = "TxmlFiles\\" +++ filename +++ "T.xml"
 # (ok_open,outFile,w) = fopen outFile FAppendText w
 | not ok_open = abort("failed to open file")
 # outFile = fwritec ch outFile
@@ -223,7 +225,7 @@ FDAutomaton_state_4 [] filename num w = (True,w)
 FDAutomaton_state_4 input filename num w
 # ch = input !! 0
 | isSpecialSymbol ch = handleSpecialCharacter ch input filename num w
-# outFile = "OutputFiles\\" +++ filename +++ "T.xml"
+# outFile = "TxmlFiles\\" +++ filename +++ "T.xml"
 # (ok_open,outFile,w) = fopen outFile FAppendText w
 | not ok_open = abort("failed to open file")
 # outFile = fwritec ch outFile
@@ -243,7 +245,7 @@ FDAutomaton_state_5 [] filename num w = (True,w)
 FDAutomaton_state_5 input filename num w
 # ch = input !! 0
 | ch == '\"' = FDAutomaton_transit_5_6 (drop 1 input) filename num w
-# outFile = "OutputFiles\\" +++ filename +++ "T.xml"
+# outFile = "TxmlFiles\\" +++ filename +++ "T.xml"
 # (ok_open,outFile,w) = fopen outFile FAppendText w
 | not ok_open = abort("failed to open file")
 # outFile = fwritec ch outFile
@@ -260,7 +262,7 @@ FDAutomaton_state_5 input filename num w
 */
 FDAutomaton_transit_3_0:: [Char] String Int *f -> (Bool,*f) | FileSystem f
 FDAutomaton_transit_3_0 input filename num w
-# outFile = "OutputFiles\\" +++ filename +++ "T.xml"
+# outFile = "TxmlFiles\\" +++ filename +++ "T.xml"
 # (ok_open,outFile,w) = fopen outFile FAppendText w
 | not ok_open = abort("failed to open file")
 # string_to_print = " </integerConstant>\n"
@@ -276,7 +278,7 @@ FDAutomaton_transit_3_0 input filename num w
 */
 FDAutomaton_transit_4_0:: [Char] String Int *f -> (Bool,*f) | FileSystem f
 FDAutomaton_transit_4_0 input filename num w
-# outFile = "OutputFiles\\" +++ filename +++ "T.xml"
+# outFile = "TxmlFiles\\" +++ filename +++ "T.xml"
 # (ok_open,outFile,w) = fopen outFile FAppendText w
 | not ok_open = abort("failed to open file")
 # string_to_print = " </symbol>\n"
@@ -292,7 +294,7 @@ FDAutomaton_transit_4_0 input filename num w
 */
 FDAutomaton_transit_5_6:: [Char] String Int *f -> (Bool,*f) | FileSystem f
 FDAutomaton_transit_5_6 input filename num w
-# outFile = "OutputFiles\\" +++ filename +++ "T.xml"
+# outFile = "TxmlFiles\\" +++ filename +++ "T.xml"
 # (ok_open,outFile,w) = fopen outFile FAppendText w
 | not ok_open = abort("failed to open file")
 # string_to_print = " </stringConstant>\n"
@@ -366,7 +368,7 @@ handleSpecialCharacter ch input filename num w
 */
 printAmp:: Char [Char] String Int *f -> (Bool,*f) | FileSystem f
 printAmp ch input filename num w
-# outFile = "OutputFiles\\" +++ filename +++ "T.xml"
+# outFile = "TxmlFiles\\" +++ filename +++ "T.xml"
 # (ok_open,outFile,w) = fopen outFile FAppendText w
 | not ok_open = abort("failed to open file")
 # string_to_print = "&amp; </symbol>\n"
@@ -381,7 +383,7 @@ printAmp ch input filename num w
 */
 printGt :: Char [Char] String Int *f -> (Bool,*f) | FileSystem f
 printGt ch input filename num w
-# outFile = "OutputFiles\\" +++ filename +++ "T.xml"
+# outFile = "TxmlFiles\\" +++ filename +++ "T.xml"
 # (ok_open,outFile,w) = fopen outFile FAppendText w
 | not ok_open = abort("failed to open file")
 # string_to_print = "&gt; </symbol>\n"
@@ -396,7 +398,7 @@ printGt ch input filename num w
 */
 printLt :: Char [Char] String Int *f -> (Bool,*f) | FileSystem f
 printLt ch input filename num w
-# outFile = "OutputFiles\\" +++ filename +++ "T.xml"
+# outFile = "TxmlFiles\\" +++ filename +++ "T.xml"
 # (ok_open,outFile,w) = fopen outFile FAppendText w
 | not ok_open = abort("failed to open file")
 # string_to_print = "&lt; </symbol>\n"
@@ -411,7 +413,7 @@ printLt ch input filename num w
 */
 printQut:: Char [Char] String Int *f -> (Bool,*f) | FileSystem f
 printQut ch input filename num w
-# outFile = "OutputFiles\\" +++ filename +++ "T.xml"
+# outFile = "TxmlFiles\\" +++ filename +++ "T.xml"
 # (ok_open,outFile,w) = fopen outFile FAppendText w
 | not ok_open = abort("failed to open file")
 # string_to_print = "&quot; </symbol>\n"

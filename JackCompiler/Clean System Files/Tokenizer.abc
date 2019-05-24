@@ -2,7 +2,7 @@
 .start _nostart_
 .depend "StdLibMisc" "20180913124337"
 .depend "Directory" "20180913124337"
-.depend "FileManipulation" "20190521184418"
+.depend "FileManipulation" "20190524120125"
 .depend "_SystemEnumStrict" "20180913124337"
 .depend "_SystemStrictLists" "20180913124337"
 .depend "StdStrictLists" "20180913124337"
@@ -26,7 +26,7 @@
 .depend "StdBool" "20180913124337"
 .depend "StdEnv" "20180913124337"
 .depend "Tokenizer" "20190521232801"
-.module m_Tokenizer "Tokenizer" "20190522221331"
+.module m_Tokenizer "Tokenizer" "20190524141221"
 .endinfo
 .impmod _system
 .implab _cycle_in_spine
@@ -228,7 +228,7 @@ else.3
 else.4
 	push_arg 0 2 2
 	push_a 6
-	buildAC "InputFiles\\"
+	buildAC "jackFiles\\"
 	buildh ARRAY 1
 	build _ 2 e_StdString_n+++;11
 	push_a 10
@@ -467,7 +467,7 @@ s92
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "OutputFiles\\"
+	buildAC "TxmlFiles\\"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -575,7 +575,7 @@ s88
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "OutputFiles\\"
+	buildAC "TxmlFiles\\"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -1195,7 +1195,7 @@ s93
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "OutputFiles\\"
+	buildAC "TxmlFiles\\"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -1407,7 +1407,7 @@ s94
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "OutputFiles\\"
+	buildAC "TxmlFiles\\"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -1555,7 +1555,7 @@ s95
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "OutputFiles\\"
+	buildAC "TxmlFiles\\"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -1649,7 +1649,7 @@ s98
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "OutputFiles\\"
+	buildAC "TxmlFiles\\"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -1758,7 +1758,7 @@ s99
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "OutputFiles\\"
+	buildAC "TxmlFiles\\"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -1867,7 +1867,7 @@ s100
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "OutputFiles\\"
+	buildAC "TxmlFiles\\"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -1976,7 +1976,7 @@ s101
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "OutputFiles\\"
+	buildAC "TxmlFiles\\"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -2085,7 +2085,7 @@ s102
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "OutputFiles\\"
+	buildAC "TxmlFiles\\"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -2353,7 +2353,7 @@ s97
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "OutputFiles\\"
+	buildAC "TxmlFiles\\"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -2446,7 +2446,7 @@ s96
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "OutputFiles\\"
+	buildAC "TxmlFiles\\"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -2540,7 +2540,7 @@ s105
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "OutputFiles\\"
+	buildAC "TxmlFiles\\"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -2696,7 +2696,7 @@ s104
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "OutputFiles\\"
+	buildAC "TxmlFiles\\"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -2789,7 +2789,7 @@ s103
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "OutputFiles\\"
+	buildAC "TxmlFiles\\"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -2882,7 +2882,7 @@ s107
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "OutputFiles\\"
+	buildAC "TxmlFiles\\"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -3027,7 +3027,7 @@ s110
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "OutputFiles\\"
+	buildAC "TxmlFiles\\"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -3509,6 +3509,40 @@ else.74
 .d 2 0
 	rtn
 else.75
+	pushC '/'
+	pushC_a 0
+	eqC
+	jmp_false else.76
+	pushI 1
+	push_a 5
+	updatepop_a 0 8
+.d 1 1 i
+	jsr e_StdList_s!!
+.o 1 0
+	pushC_a 0
+	pop_a 1
+	pushC '/'
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	eqC
+	buildh _Nil 0
+	push_a 0
+	push_a 1
+	push_a 2
+	push_a 3
+	push_a 4
+	push_a 5
+	push_a 6
+	jmp_false else.76
+	push_a 8
+	buildB TRUE
+	update_a 1 10
+	updatepop_a 0 9
+.d 2 0
+	rtn
+else.76
 	push_a 8
 	buildB FALSE
 	update_a 1 10
@@ -3526,9 +3560,9 @@ s40
 .o 1 1 i
 s57
 	eq_desc _Cons 2 0
-	jmp_true case.76
-	jmp case.77
-case.76
+	jmp_true case.78
+	jmp case.79
+case.78
 	repl_args 2 2
 	pop_a 1
 	push_a 0
@@ -3540,7 +3574,7 @@ case.76
 	updatepop_b 0 1
 .d 1 1 i
 	jmp s40
-case.77
+case.79
 	pop_a 1
 .d 0 1 i
 	rtn
@@ -3555,9 +3589,9 @@ s39
 .o 1 1 i
 s56
 	eq_desc _Cons 2 0
-	jmp_true case.78
-	jmp case.79
-case.78
+	jmp_true case.80
+	jmp case.81
+case.80
 	repl_args 2 2
 	pop_a 1
 	push_a 0
@@ -3569,7 +3603,7 @@ case.78
 	updatepop_b 0 1
 .d 1 1 i
 	jmp s39
-case.79
+case.81
 	pop_a 1
 .d 0 1 i
 	rtn
@@ -3586,9 +3620,9 @@ s38
 .o 3 0
 s55
 	eq_desc _Cons 2 0
-	jmp_true case.80
-	jmp case.81
-case.80
+	jmp_true case.82
+	jmp case.83
+case.82
 	repl_args 2 2
 	push_a 1
 	jsr_eval 0
@@ -3615,7 +3649,7 @@ case.80
 	updatepop_a 0 4
 .d 3 0
 	jmp s38
-case.81
+case.83
 	updatepop_a 1 2
 .d 1 0
 	rtn
@@ -3651,9 +3685,9 @@ s36
 .o 3 0
 s53
 	eq_desc _Cons 2 0
-	jmp_true case.82
-	jmp case.83
-case.82
+	jmp_true case.84
+	jmp case.85
+case.84
 	repl_args 2 2
 	push_a 1
 	jsr_eval 0
@@ -3680,7 +3714,7 @@ case.82
 	updatepop_a 0 4
 .d 3 0
 	jmp s36
-case.83
+case.85
 	updatepop_a 1 2
 .d 1 0
 	rtn
@@ -3708,31 +3742,13 @@ s20
 	pushC '<'
 	push_b 1
 	eqC
-	jmp_false else.84
-	pop_b 1
-	pushB TRUE
-.d 0 1 b
-	rtn
-else.84
-	pushC '>'
-	push_b 1
-	eqC
-	jmp_false else.85
-	pop_b 1
-	pushB TRUE
-.d 0 1 b
-	rtn
-else.85
-	pushC '"'
-	push_b 1
-	eqC
 	jmp_false else.86
 	pop_b 1
 	pushB TRUE
 .d 0 1 b
 	rtn
 else.86
-	pushC '&'
+	pushC '>'
 	push_b 1
 	eqC
 	jmp_false else.87
@@ -3741,6 +3757,24 @@ else.86
 .d 0 1 b
 	rtn
 else.87
+	pushC '"'
+	push_b 1
+	eqC
+	jmp_false else.88
+	pop_b 1
+	pushB TRUE
+.d 0 1 b
+	rtn
+else.88
+	pushC '&'
+	push_b 1
+	eqC
+	jmp_false else.89
+	pop_b 1
+	pushB TRUE
+.d 0 1 b
+	rtn
+else.89
 	pop_b 1
 	pushB FALSE
 .d 0 1 b
@@ -3752,35 +3786,13 @@ s26
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.88
-	pop_a 1
-	pushB TRUE
-.d 0 1 b
-	rtn
-else.88
-	buildAC "constructor"
-	push_a 1
-.d 2 0
-	jsr eqAC
-.o 0 1 b	
-	jmp_false else.89
-	pop_a 1
-	pushB TRUE
-.d 0 1 b
-	rtn
-else.89
-	buildAC "function"
-	push_a 1
-.d 2 0
-	jsr eqAC
-.o 0 1 b	
 	jmp_false else.90
 	pop_a 1
 	pushB TRUE
 .d 0 1 b
 	rtn
 else.90
-	buildAC "method"
+	buildAC "constructor"
 	push_a 1
 .d 2 0
 	jsr eqAC
@@ -3791,7 +3803,7 @@ else.90
 .d 0 1 b
 	rtn
 else.91
-	buildAC "field"
+	buildAC "function"
 	push_a 1
 .d 2 0
 	jsr eqAC
@@ -3802,7 +3814,7 @@ else.91
 .d 0 1 b
 	rtn
 else.92
-	buildAC "static"
+	buildAC "method"
 	push_a 1
 .d 2 0
 	jsr eqAC
@@ -3813,7 +3825,7 @@ else.92
 .d 0 1 b
 	rtn
 else.93
-	buildAC "var"
+	buildAC "field"
 	push_a 1
 .d 2 0
 	jsr eqAC
@@ -3824,7 +3836,7 @@ else.93
 .d 0 1 b
 	rtn
 else.94
-	buildAC "int"
+	buildAC "static"
 	push_a 1
 .d 2 0
 	jsr eqAC
@@ -3835,7 +3847,7 @@ else.94
 .d 0 1 b
 	rtn
 else.95
-	buildAC "char"
+	buildAC "var"
 	push_a 1
 .d 2 0
 	jsr eqAC
@@ -3846,7 +3858,7 @@ else.95
 .d 0 1 b
 	rtn
 else.96
-	buildAC "boolean"
+	buildAC "int"
 	push_a 1
 .d 2 0
 	jsr eqAC
@@ -3857,7 +3869,7 @@ else.96
 .d 0 1 b
 	rtn
 else.97
-	buildAC "void"
+	buildAC "char"
 	push_a 1
 .d 2 0
 	jsr eqAC
@@ -3868,7 +3880,7 @@ else.97
 .d 0 1 b
 	rtn
 else.98
-	buildAC "true"
+	buildAC "boolean"
 	push_a 1
 .d 2 0
 	jsr eqAC
@@ -3879,7 +3891,7 @@ else.98
 .d 0 1 b
 	rtn
 else.99
-	buildAC "false"
+	buildAC "void"
 	push_a 1
 .d 2 0
 	jsr eqAC
@@ -3890,7 +3902,7 @@ else.99
 .d 0 1 b
 	rtn
 else.100
-	buildAC "null"
+	buildAC "true"
 	push_a 1
 .d 2 0
 	jsr eqAC
@@ -3901,7 +3913,7 @@ else.100
 .d 0 1 b
 	rtn
 else.101
-	buildAC "this"
+	buildAC "false"
 	push_a 1
 .d 2 0
 	jsr eqAC
@@ -3912,7 +3924,7 @@ else.101
 .d 0 1 b
 	rtn
 else.102
-	buildAC "let"
+	buildAC "null"
 	push_a 1
 .d 2 0
 	jsr eqAC
@@ -3923,7 +3935,7 @@ else.102
 .d 0 1 b
 	rtn
 else.103
-	buildAC "do"
+	buildAC "this"
 	push_a 1
 .d 2 0
 	jsr eqAC
@@ -3934,7 +3946,7 @@ else.103
 .d 0 1 b
 	rtn
 else.104
-	buildAC "if"
+	buildAC "let"
 	push_a 1
 .d 2 0
 	jsr eqAC
@@ -3945,7 +3957,7 @@ else.104
 .d 0 1 b
 	rtn
 else.105
-	buildAC "else"
+	buildAC "do"
 	push_a 1
 .d 2 0
 	jsr eqAC
@@ -3956,7 +3968,7 @@ else.105
 .d 0 1 b
 	rtn
 else.106
-	buildAC "while"
+	buildAC "if"
 	push_a 1
 .d 2 0
 	jsr eqAC
@@ -3967,6 +3979,28 @@ else.106
 .d 0 1 b
 	rtn
 else.107
+	buildAC "else"
+	push_a 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_false else.108
+	pop_a 1
+	pushB TRUE
+.d 0 1 b
+	rtn
+else.108
+	buildAC "while"
+	push_a 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_false else.109
+	pop_a 1
+	pushB TRUE
+.d 0 1 b
+	rtn
+else.109
 	buildAC "return"
 	push_a 1
 	update_a 1 2
@@ -3974,11 +4008,11 @@ else.107
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.108
+	jmp_false else.110
 	pushB TRUE
 .d 0 1 b
 	rtn
-else.108
+else.110
 	pushB FALSE
 .d 0 1 b
 	rtn
@@ -3987,31 +4021,13 @@ s19
 	pushC '{'
 	push_b 1
 	eqC
-	jmp_false else.109
-	pop_b 1
-	pushB TRUE
-.d 0 1 b
-	rtn
-else.109
-	pushC '}'
-	push_b 1
-	eqC
-	jmp_false else.110
-	pop_b 1
-	pushB TRUE
-.d 0 1 b
-	rtn
-else.110
-	pushC '('
-	push_b 1
-	eqC
 	jmp_false else.111
 	pop_b 1
 	pushB TRUE
 .d 0 1 b
 	rtn
 else.111
-	pushC ')'
+	pushC '}'
 	push_b 1
 	eqC
 	jmp_false else.112
@@ -4020,7 +4036,7 @@ else.111
 .d 0 1 b
 	rtn
 else.112
-	pushC '['
+	pushC '('
 	push_b 1
 	eqC
 	jmp_false else.113
@@ -4029,7 +4045,7 @@ else.112
 .d 0 1 b
 	rtn
 else.113
-	pushC ']'
+	pushC ')'
 	push_b 1
 	eqC
 	jmp_false else.114
@@ -4038,7 +4054,7 @@ else.113
 .d 0 1 b
 	rtn
 else.114
-	pushC '.'
+	pushC '['
 	push_b 1
 	eqC
 	jmp_false else.115
@@ -4047,7 +4063,7 @@ else.114
 .d 0 1 b
 	rtn
 else.115
-	pushC ','
+	pushC ']'
 	push_b 1
 	eqC
 	jmp_false else.116
@@ -4056,7 +4072,7 @@ else.115
 .d 0 1 b
 	rtn
 else.116
-	pushC ';'
+	pushC '.'
 	push_b 1
 	eqC
 	jmp_false else.117
@@ -4065,7 +4081,7 @@ else.116
 .d 0 1 b
 	rtn
 else.117
-	pushC '+'
+	pushC ','
 	push_b 1
 	eqC
 	jmp_false else.118
@@ -4074,7 +4090,7 @@ else.117
 .d 0 1 b
 	rtn
 else.118
-	pushC '-'
+	pushC ';'
 	push_b 1
 	eqC
 	jmp_false else.119
@@ -4083,7 +4099,7 @@ else.118
 .d 0 1 b
 	rtn
 else.119
-	pushC '*'
+	pushC '+'
 	push_b 1
 	eqC
 	jmp_false else.120
@@ -4092,7 +4108,7 @@ else.119
 .d 0 1 b
 	rtn
 else.120
-	pushC '/'
+	pushC '-'
 	push_b 1
 	eqC
 	jmp_false else.121
@@ -4101,7 +4117,7 @@ else.120
 .d 0 1 b
 	rtn
 else.121
-	pushC '&'
+	pushC '*'
 	push_b 1
 	eqC
 	jmp_false else.122
@@ -4110,7 +4126,7 @@ else.121
 .d 0 1 b
 	rtn
 else.122
-	pushC '|'
+	pushC '/'
 	push_b 1
 	eqC
 	jmp_false else.123
@@ -4119,7 +4135,7 @@ else.122
 .d 0 1 b
 	rtn
 else.123
-	pushC '<'
+	pushC '&'
 	push_b 1
 	eqC
 	jmp_false else.124
@@ -4128,7 +4144,7 @@ else.123
 .d 0 1 b
 	rtn
 else.124
-	pushC '>'
+	pushC '|'
 	push_b 1
 	eqC
 	jmp_false else.125
@@ -4137,7 +4153,7 @@ else.124
 .d 0 1 b
 	rtn
 else.125
-	pushC '='
+	pushC '<'
 	push_b 1
 	eqC
 	jmp_false else.126
@@ -4146,7 +4162,7 @@ else.125
 .d 0 1 b
 	rtn
 else.126
-	pushC '~'
+	pushC '>'
 	push_b 1
 	eqC
 	jmp_false else.127
@@ -4155,6 +4171,24 @@ else.126
 .d 0 1 b
 	rtn
 else.127
+	pushC '='
+	push_b 1
+	eqC
+	jmp_false else.128
+	pop_b 1
+	pushB TRUE
+.d 0 1 b
+	rtn
+else.128
+	pushC '~'
+	push_b 1
+	eqC
+	jmp_false else.129
+	pop_b 1
+	pushB TRUE
+.d 0 1 b
+	rtn
+else.129
 	pop_b 1
 	pushB FALSE
 .d 0 1 b
@@ -4162,15 +4196,15 @@ else.127
 .o 8 0
 s63
 	eq_desc _Nil 0 4
-	jmp_true case.128
-	jmp case.129
-case.128
+	jmp_true case.130
+	jmp case.131
+case.130
 	push_a 7
 	pushB TRUE
 	updatepop_a 0 8
 .d 1 1 b
 	rtn
-case.129
+case.131
 	pushI 0
 	push_a 4
 .d 1 1 i
@@ -4179,13 +4213,13 @@ case.129
 	pushC '_'
 	pushC_a 0
 	eqC
-	jmp_true then.130
+	jmp_true then.132
 	pushC_a 0
 .d 0 1 c
 	jsr e_StdChar_sisAlpha
 .o 0 1 b
-	jmp_false else.130
-then.130
+	jmp_false else.132
+then.132
 	push_a 8
 	jsr_eval 0
 	push_a 7
@@ -4212,12 +4246,12 @@ then.130
 	updatepop_a 0 9
 .d 8 0
 	jmp s69
-else.130
+else.132
 	pushC_a 0
 .d 0 1 c
 	jsr e_StdChar_sisDigit
 .o 0 1 b
-	jmp_false else.132
+	jmp_false else.134
 	push_a 8
 	jsr_eval 0
 	push_a 7
@@ -4244,12 +4278,12 @@ else.130
 	updatepop_a 0 9
 .d 8 0
 	jmp s68
-else.132
+else.134
 	pushC_a 0
 .d 0 1 c
 	jsr s19
 .o 0 1 b
-	jmp_false else.133
+	jmp_false else.135
 	push_a 8
 	jsr_eval 0
 	push_a 7
@@ -4276,11 +4310,11 @@ else.132
 	updatepop_a 0 9
 .d 8 0
 	jmp s67
-else.133
+else.135
 	pushC '\"'
 	pushC_a 0
 	eqC
-	jmp_false else.134
+	jmp_false else.136
 	push_a 8
 	jsr_eval 0
 	push_a 7
@@ -4319,12 +4353,12 @@ else.133
 	updatepop_a 0 9
 .d 8 0
 	jmp s66
-else.134
+else.136
 	pushC_a 0
 .d 0 1 c
 	jsr e_StdChar_sisSpace
 .o 0 1 b
-	jmp_false else.135
+	jmp_false else.137
 	create
 	push_a 6
 	pushI 1
@@ -4359,17 +4393,50 @@ else.134
 	updatepop_a 0 8
 .d 8 0
 	jmp s63
-else.135
+else.137
 	pushC '\n'
 	pushC_a 0
 	eqC
-	jmp_false else.136
+	jmp_false else.138
 	push_a 8
 	pushB TRUE
 	updatepop_a 0 9
 .d 1 1 b
 	rtn
-else.136
+else.138
+	pushC '/'
+	pushC_a 0
+	eqC
+	jmp_false else.139
+	pushI 1
+	push_a 5
+	updatepop_a 0 8
+.d 1 1 i
+	jsr e_StdList_s!!
+.o 1 0
+	pushC_a 0
+	pop_a 1
+	pushC '/'
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	eqC
+	buildh _Nil 0
+	push_a 0
+	push_a 1
+	push_a 2
+	push_a 3
+	push_a 4
+	push_a 5
+	push_a 6
+	jmp_false else.139
+	push_a 8
+	pushB TRUE
+	updatepop_a 0 9
+.d 1 1 b
+	rtn
+else.139
 	push_a 8
 	pushB FALSE
 	updatepop_a 0 9
@@ -4378,15 +4445,15 @@ else.136
 .o 8 0
 s64
 	eq_desc _Nil 0 4
-	jmp_true case.137
-	jmp case.138
-case.137
+	jmp_true case.141
+	jmp case.142
+case.141
 	push_a 7
 	pushB TRUE
 	updatepop_a 0 8
 .d 1 1 b
 	rtn
-case.138
+case.142
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
@@ -4432,7 +4499,7 @@ case.138
 .o 1 1 b
 	push_b 0
 	notB
-	jmp_false else.139
+	jmp_false else.143
 	buildAC "\n"
 	push_array 2
 	pop_b 1
@@ -4455,7 +4522,7 @@ case.138
 	pop_a 1
 .d 1 1 b
 	rtn
-else.139
+else.143
 	buildI 1
 	push_a 10
 	build _ 2 e_StdInt_n+;6
@@ -4487,15 +4554,15 @@ else.139
 .o 6 0
 s65
 	eq_desc _Nil 0 4
-	jmp_true case.140
-	jmp case.141
-case.140
+	jmp_true case.144
+	jmp case.145
+case.144
 	push_a 5
 	pushB TRUE
 	updatepop_a 0 6
 .d 1 1 b
 	rtn
-case.141
+case.145
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
@@ -4526,7 +4593,7 @@ case.141
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.142
+	jmp_false else.146
 	buildAC "failed to open file"
 	updatepop_a 0 13
 .d 1 0
@@ -4539,7 +4606,7 @@ case.141
 	pop_a 1
 .d 1 1 b
 	rtn
-else.142
+else.146
 	push_arg 0 3 3
 	push_arg 1 3 2
 	buildAC "<tokens>\n"
@@ -4555,7 +4622,7 @@ else.142
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.143
+	jmp_false else.147
 	buildAC "failed to close file"
 	updatepop_a 0 13
 .d 1 0
@@ -4568,10 +4635,10 @@ else.142
 	pop_a 1
 .d 1 1 b
 	rtn
-else.143
+else.147
 	push_arg 0 2 2
 	push_a 6
-	buildAC "InputFiles\\"
+	buildAC "jackFiles\\"
 	buildh ARRAY 1
 	build _ 2 e_StdString_n+++;11
 	push_a 10
@@ -4620,7 +4687,7 @@ else.143
 .o 1 1 b
 	push_b 0
 	notB
-	jmp_false else.144
+	jmp_false else.148
 	push_a 5
 	jsr_eval 0
 	push_array 0
@@ -4653,7 +4720,7 @@ else.143
 	pop_a 1
 .d 1 1 b
 	rtn
-else.144
+else.148
 	push_a 6
 	jsr_eval 0
 	push_a 1
@@ -4680,7 +4747,7 @@ else.144
 .o 1 1 b
 	push_b 0
 	notB
-	jmp_false else.145
+	jmp_false else.149
 	push_a 1
 	jsr_eval 0
 	push_array 0
@@ -4713,7 +4780,7 @@ else.144
 	pop_a 1
 .d 1 1 b
 	rtn
-else.145
+else.149
 	push_a 0
 	buildI 2
 	push_a 3
@@ -4730,7 +4797,7 @@ else.145
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.146
+	jmp_false else.150
 	buildAC "failed to open file"
 	updatepop_a 0 12
 .d 1 0
@@ -4743,7 +4810,7 @@ else.145
 	pop_a 1
 .d 1 1 b
 	rtn
-else.146
+else.150
 	push_arg 0 3 3
 	push_arg 1 3 2
 	buildAC "</tokens>\n"
@@ -4766,7 +4833,7 @@ else.146
 	pop_a 1
 	push_b 0
 	notB
-	jmp_false else.147
+	jmp_false else.151
 	buildAC "failed to close file"
 	updatepop_a 0 12
 	pop_b 1
@@ -4780,16 +4847,16 @@ else.146
 	pop_a 1
 .d 1 1 b
 	rtn
-else.147
+else.151
 	push_b 0
-	jmp_false else.148
+	jmp_false else.152
 	push_arg 0 2 2
 	pushB TRUE
 	updatepop_a 0 12
 	updatepop_b 0 1
 .d 1 1 b
 	rtn
-else.148
+else.152
 	pop_a 6
 	pop_b 1
 	jmp s65.1
@@ -4822,7 +4889,7 @@ s138
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "OutputFiles\\"
+	buildAC "TxmlFiles\\"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -4930,7 +4997,7 @@ s134
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "OutputFiles\\"
+	buildAC "TxmlFiles\\"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -5003,204 +5070,6 @@ s66
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.149
-	buildAC "failed to open file"
-	updatepop_a 0 9
-.d 1 0
-	jsr print_string_
-.o 0 0
-	halt
-	repl_args 2 2
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-.d 1 1 b
-	rtn
-else.149
-	push_arg 0 3 3
-	push_arg 1 3 2
-	buildAC "<stringConstant> "
-	buildh ARRAY 1
-	build _ 2 e_StdFile_nfwrites
-	push_a 3
-	update_a 2 3
-	update_a 1 2
-	updatepop_a 0 1
-	jsr_ap 2
-	push_arg 0 2 1
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-	notB
-	jmp_false else.150
-	buildAC "failed to close file"
-	updatepop_a 0 9
-.d 1 0
-	jsr print_string_
-.o 0 0
-	halt
-	repl_args 2 2
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-.d 1 1 b
-	rtn
-else.150
-	push_arg 0 2 2
-	push_a 8
-	push_a 8
-	push_a 8
-	push_a 8
-	push_a 8
-	push_a 8
-	push_a 8
-	update_a 7 16
-	update_a 6 15
-	update_a 5 14
-	update_a 4 13
-	update_a 3 12
-	update_a 2 11
-	update_a 1 10
-	updatepop_a 0 9
-.d 8 0
-	jmp s73
-.n 1 _ ea113
-.o 1 0
-n113
-	push_node _cycle_in_spine 1
-.o 2 0
-ea113
-.o 2 0
-s113
-	buildAC "T.xml"
-	push_a 1
-	update_a 1 2
-	updatepop_a 0 1
-.d 2 0
-	jsr catAC
-.o 1 0
-	buildAC "OutputFiles\\"
-.d 2 0
-	jsr catAC
-.o 1 0
-	fillh ARRAY 1 1
-.d 1 0
-	rtn
-.o 8 0
-s67
-	push_a 7
-	buildI 2
-	push_a 7
-	build _ 1 n116
-	push_a 4
-	buildh _Nil 0
-	update_a 0 12
-	pop_a 1
-	jsr_ap 3
-	push_arg 0 3 1
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-	notB
-	jmp_false else.151
-	buildAC "failed to open file"
-	updatepop_a 0 9
-.d 1 0
-	jsr print_string_
-.o 0 0
-	halt
-	repl_args 2 2
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-.d 1 1 b
-	rtn
-else.151
-	push_arg 0 3 3
-	push_arg 1 3 2
-	buildAC "<symbol> "
-	buildh ARRAY 1
-	build _ 2 e_StdFile_nfwrites
-	push_a 3
-	update_a 2 3
-	update_a 1 2
-	updatepop_a 0 1
-	jsr_ap 2
-	push_arg 0 2 1
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-	notB
-	jmp_false else.152
-	buildAC "failed to close file"
-	updatepop_a 0 9
-.d 1 0
-	jsr print_string_
-.o 0 0
-	halt
-	repl_args 2 2
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-.d 1 1 b
-	rtn
-else.152
-	push_arg 0 2 2
-	push_a 8
-	push_a 8
-	push_a 8
-	push_a 8
-	push_a 8
-	push_a 8
-	push_a 8
-	update_a 7 16
-	update_a 6 15
-	update_a 5 14
-	update_a 4 13
-	update_a 3 12
-	update_a 2 11
-	update_a 1 10
-	updatepop_a 0 9
-.d 8 0
-	jmp s72
-.n 1 _ ea116
-.o 1 0
-n116
-	push_node _cycle_in_spine 1
-.o 2 0
-ea116
-.o 2 0
-s116
-	buildAC "T.xml"
-	push_a 1
-	update_a 1 2
-	updatepop_a 0 1
-.d 2 0
-	jsr catAC
-.o 1 0
-	buildAC "OutputFiles\\"
-.d 2 0
-	jsr catAC
-.o 1 0
-	fillh ARRAY 1 1
-.d 1 0
-	rtn
-.o 8 0
-s68
-	push_a 7
-	buildI 2
-	push_a 7
-	build _ 1 n123
-	push_a 4
-	buildh _Nil 0
-	update_a 0 12
-	pop_a 1
-	jsr_ap 3
-	push_arg 0 3 1
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-	notB
 	jmp_false else.153
 	buildAC "failed to open file"
 	updatepop_a 0 9
@@ -5217,7 +5086,7 @@ s68
 else.153
 	push_arg 0 3 3
 	push_arg 1 3 2
-	buildAC "<integerConstant> "
+	buildAC "<stringConstant> "
 	buildh ARRAY 1
 	build _ 2 e_StdFile_nfwrites
 	push_a 3
@@ -5261,6 +5130,204 @@ else.154
 	update_a 1 10
 	updatepop_a 0 9
 .d 8 0
+	jmp s73
+.n 1 _ ea113
+.o 1 0
+n113
+	push_node _cycle_in_spine 1
+.o 2 0
+ea113
+.o 2 0
+s113
+	buildAC "T.xml"
+	push_a 1
+	update_a 1 2
+	updatepop_a 0 1
+.d 2 0
+	jsr catAC
+.o 1 0
+	buildAC "TxmlFiles\\"
+.d 2 0
+	jsr catAC
+.o 1 0
+	fillh ARRAY 1 1
+.d 1 0
+	rtn
+.o 8 0
+s67
+	push_a 7
+	buildI 2
+	push_a 7
+	build _ 1 n116
+	push_a 4
+	buildh _Nil 0
+	update_a 0 12
+	pop_a 1
+	jsr_ap 3
+	push_arg 0 3 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.155
+	buildAC "failed to open file"
+	updatepop_a 0 9
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 1 1 b
+	rtn
+else.155
+	push_arg 0 3 3
+	push_arg 1 3 2
+	buildAC "<symbol> "
+	buildh ARRAY 1
+	build _ 2 e_StdFile_nfwrites
+	push_a 3
+	update_a 2 3
+	update_a 1 2
+	updatepop_a 0 1
+	jsr_ap 2
+	push_arg 0 2 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.156
+	buildAC "failed to close file"
+	updatepop_a 0 9
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 1 1 b
+	rtn
+else.156
+	push_arg 0 2 2
+	push_a 8
+	push_a 8
+	push_a 8
+	push_a 8
+	push_a 8
+	push_a 8
+	push_a 8
+	update_a 7 16
+	update_a 6 15
+	update_a 5 14
+	update_a 4 13
+	update_a 3 12
+	update_a 2 11
+	update_a 1 10
+	updatepop_a 0 9
+.d 8 0
+	jmp s72
+.n 1 _ ea116
+.o 1 0
+n116
+	push_node _cycle_in_spine 1
+.o 2 0
+ea116
+.o 2 0
+s116
+	buildAC "T.xml"
+	push_a 1
+	update_a 1 2
+	updatepop_a 0 1
+.d 2 0
+	jsr catAC
+.o 1 0
+	buildAC "TxmlFiles\\"
+.d 2 0
+	jsr catAC
+.o 1 0
+	fillh ARRAY 1 1
+.d 1 0
+	rtn
+.o 8 0
+s68
+	push_a 7
+	buildI 2
+	push_a 7
+	build _ 1 n123
+	push_a 4
+	buildh _Nil 0
+	update_a 0 12
+	pop_a 1
+	jsr_ap 3
+	push_arg 0 3 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.157
+	buildAC "failed to open file"
+	updatepop_a 0 9
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 1 1 b
+	rtn
+else.157
+	push_arg 0 3 3
+	push_arg 1 3 2
+	buildAC "<integerConstant> "
+	buildh ARRAY 1
+	build _ 2 e_StdFile_nfwrites
+	push_a 3
+	update_a 2 3
+	update_a 1 2
+	updatepop_a 0 1
+	jsr_ap 2
+	push_arg 0 2 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.158
+	buildAC "failed to close file"
+	updatepop_a 0 9
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 1 1 b
+	rtn
+else.158
+	push_arg 0 2 2
+	push_a 8
+	push_a 8
+	push_a 8
+	push_a 8
+	push_a 8
+	push_a 8
+	push_a 8
+	update_a 7 16
+	update_a 6 15
+	update_a 5 14
+	update_a 4 13
+	update_a 3 12
+	update_a 2 11
+	update_a 1 10
+	updatepop_a 0 9
+.d 8 0
 	jmp s71
 .n 1 _ ea123
 .o 1 0
@@ -5277,7 +5344,7 @@ s123
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "OutputFiles\\"
+	buildAC "TxmlFiles\\"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -5323,13 +5390,13 @@ s70
 .d 0 1 c
 	jsr e_StdChar_sisSpace
 .o 0 1 b
-	jmp_true then.155
+	jmp_true then.159
 	pushC_a 0
 .d 0 1 c
 	jsr s19
 .o 0 1 b
-	jmp_false else.155
-then.155
+	jmp_false else.159
+then.159
 	push_a 9
 	push_a 9
 	push_a 9
@@ -5350,7 +5417,7 @@ then.155
 	updatepop_a 0 10
 .d 9 0
 	jmp s78
-else.155
+else.159
 	buildh _Nil 0
 	push_a 1
 	buildh _Cons 2
@@ -5406,15 +5473,15 @@ else.155
 .o 8 0
 s71
 	eq_desc _Nil 0 4
-	jmp_true case.157
-	jmp case.158
-case.157
+	jmp_true case.161
+	jmp case.162
+case.161
 	push_a 7
 	pushB TRUE
 	updatepop_a 0 8
 .d 1 1 b
 	rtn
-case.158
+case.162
 	pushI 0
 	push_a 4
 .d 1 1 i
@@ -5425,7 +5492,7 @@ case.158
 	jsr e_StdChar_sisDigit
 .o 0 1 b
 	notB
-	jmp_false else.159
+	jmp_false else.163
 	push_a 8
 	jsr_eval 0
 	push_a 8
@@ -5445,7 +5512,7 @@ case.158
 	updatepop_a 0 9
 .d 8 0
 	jmp s77
-else.159
+else.163
 	push_a 8
 	buildI 2
 	push_a 8
@@ -5461,7 +5528,7 @@ else.159
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.160
+	jmp_false else.164
 	buildAC "failed to open file"
 	updatepop_a 0 10
 .d 1 0
@@ -5474,7 +5541,7 @@ else.159
 	pop_a 1
 .d 1 1 b
 	rtn
-else.160
+else.164
 	push_arg 0 3 3
 	push_arg 1 3 2
 	push_a 3
@@ -5489,7 +5556,7 @@ else.160
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.161
+	jmp_false else.165
 	buildAC "failed to close file"
 	updatepop_a 0 9
 .d 1 0
@@ -5502,7 +5569,7 @@ else.160
 	pop_a 1
 .d 1 1 b
 	rtn
-else.161
+else.165
 	push_arg 0 2 2
 	create
 	push_a 7
@@ -5557,7 +5624,7 @@ s124
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "OutputFiles\\"
+	buildAC "TxmlFiles\\"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -5567,15 +5634,15 @@ s124
 .o 8 0
 s72
 	eq_desc _Nil 0 4
-	jmp_true case.162
-	jmp case.163
-case.162
+	jmp_true case.166
+	jmp case.167
+case.166
 	push_a 7
 	pushB TRUE
 	updatepop_a 0 8
 .d 1 1 b
 	rtn
-case.163
+case.167
 	pushI 0
 	push_a 4
 .d 1 1 i
@@ -5585,7 +5652,7 @@ case.163
 .d 0 1 c
 	jsr s20
 .o 0 1 b
-	jmp_false else.164
+	jmp_false else.168
 	push_a 8
 	jsr_eval 0
 	push_a 8
@@ -5606,7 +5673,7 @@ case.163
 	updatepop_a 0 9
 .d 8 1 c
 	jmp s76
-else.164
+else.168
 	push_a 8
 	buildI 2
 	push_a 8
@@ -5622,7 +5689,7 @@ else.164
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.165
+	jmp_false else.169
 	buildAC "failed to open file"
 	updatepop_a 0 10
 .d 1 0
@@ -5635,7 +5702,7 @@ else.164
 	pop_a 1
 .d 1 1 b
 	rtn
-else.165
+else.169
 	push_arg 0 3 3
 	push_arg 1 3 2
 	push_a 3
@@ -5650,7 +5717,7 @@ else.165
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.166
+	jmp_false else.170
 	buildAC "failed to close file"
 	updatepop_a 0 9
 .d 1 0
@@ -5663,7 +5730,7 @@ else.165
 	pop_a 1
 .d 1 1 b
 	rtn
-else.166
+else.170
 	push_arg 0 2 2
 	jsr_eval 0
 	create
@@ -5719,7 +5786,7 @@ s117
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "OutputFiles\\"
+	buildAC "TxmlFiles\\"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -5729,15 +5796,15 @@ s117
 .o 8 0
 s73
 	eq_desc _Nil 0 4
-	jmp_true case.167
-	jmp case.168
-case.167
+	jmp_true case.171
+	jmp case.172
+case.171
 	push_a 7
 	pushB TRUE
 	updatepop_a 0 8
 .d 1 1 b
 	rtn
-case.168
+case.172
 	pushI 0
 	push_a 4
 .d 1 1 i
@@ -5746,7 +5813,7 @@ case.168
 	pushC '\"'
 	pushC_a 0
 	eqC
-	jmp_false else.169
+	jmp_false else.173
 	push_a 8
 	jsr_eval 0
 	create
@@ -5781,7 +5848,7 @@ case.168
 	updatepop_a 0 9
 .d 8 0
 	jmp s74
-else.169
+else.173
 	push_a 8
 	buildI 2
 	push_a 8
@@ -5797,7 +5864,7 @@ else.169
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.170
+	jmp_false else.174
 	buildAC "failed to open file"
 	updatepop_a 0 10
 .d 1 0
@@ -5810,7 +5877,7 @@ else.169
 	pop_a 1
 .d 1 1 b
 	rtn
-else.170
+else.174
 	push_arg 0 3 3
 	push_arg 1 3 2
 	push_a 3
@@ -5825,7 +5892,7 @@ else.170
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.171
+	jmp_false else.175
 	buildAC "failed to close file"
 	updatepop_a 0 9
 .d 1 0
@@ -5838,7 +5905,7 @@ else.170
 	pop_a 1
 .d 1 1 b
 	rtn
-else.171
+else.175
 	push_arg 0 2 2
 	create
 	push_a 7
@@ -5893,7 +5960,7 @@ s114
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "OutputFiles\\"
+	buildAC "TxmlFiles\\"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -5916,7 +5983,7 @@ s74
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.172
+	jmp_false else.176
 	buildAC "failed to open file"
 	updatepop_a 0 9
 .d 1 0
@@ -5929,7 +5996,7 @@ s74
 	pop_a 1
 .d 1 1 b
 	rtn
-else.172
+else.176
 	push_arg 0 3 3
 	push_arg 1 3 2
 	buildAC " </stringConstant>\n"
@@ -5945,7 +6012,7 @@ else.172
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.173
+	jmp_false else.177
 	buildAC "failed to close file"
 	updatepop_a 0 9
 .d 1 0
@@ -5958,7 +6025,7 @@ else.172
 	pop_a 1
 .d 1 1 b
 	rtn
-else.173
+else.177
 	push_arg 0 2 2
 	push_a 8
 	push_a 8
@@ -5992,7 +6059,7 @@ s115
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "OutputFiles\\"
+	buildAC "TxmlFiles\\"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -6015,7 +6082,7 @@ s75
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.174
+	jmp_false else.178
 	buildAC "failed to open file"
 	updatepop_a 0 9
 .d 1 0
@@ -6028,7 +6095,7 @@ s75
 	pop_a 1
 .d 1 1 b
 	rtn
-else.174
+else.178
 	push_arg 0 3 3
 	push_arg 1 3 2
 	buildAC " </symbol>\n"
@@ -6044,7 +6111,7 @@ else.174
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.175
+	jmp_false else.179
 	buildAC "failed to close file"
 	updatepop_a 0 9
 .d 1 0
@@ -6057,7 +6124,7 @@ else.174
 	pop_a 1
 .d 1 1 b
 	rtn
-else.175
+else.179
 	push_arg 0 2 2
 	push_a 8
 	push_a 8
@@ -6092,7 +6159,7 @@ s118
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "OutputFiles\\"
+	buildAC "TxmlFiles\\"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -6104,7 +6171,7 @@ s76
 	pushC '&'
 	push_b 1
 	eqC
-	jmp_false else.176
+	jmp_false else.180
 	push_a 7
 	push_a 7
 	push_a 7
@@ -6125,11 +6192,11 @@ s76
 	updatepop_b 0 1
 .d 8 1 c
 	jmp s84
-else.176
+else.180
 	pushC '<'
 	push_b 1
 	eqC
-	jmp_false else.177
+	jmp_false else.181
 	push_a 7
 	push_a 7
 	push_a 7
@@ -6150,11 +6217,11 @@ else.176
 	updatepop_b 0 1
 .d 8 1 c
 	jmp s83
-else.177
+else.181
 	pushC '>'
 	push_b 1
 	eqC
-	jmp_false else.178
+	jmp_false else.182
 	push_a 7
 	push_a 7
 	push_a 7
@@ -6175,11 +6242,11 @@ else.177
 	updatepop_b 0 1
 .d 8 1 c
 	jmp s82
-else.178
+else.182
 	pushC 'W'
 	push_b 1
 	eqC
-	jmp_false else.179
+	jmp_false else.183
 	push_a 7
 	push_a 7
 	push_a 7
@@ -6200,7 +6267,7 @@ else.178
 	updatepop_b 0 1
 .d 8 1 c
 	jmp s81
-else.179
+else.183
 	jmp s76.1
 s76.1
 	pop_a 8
@@ -6226,7 +6293,7 @@ s77
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.180
+	jmp_false else.184
 	buildAC "failed to open file"
 	updatepop_a 0 9
 .d 1 0
@@ -6239,7 +6306,7 @@ s77
 	pop_a 1
 .d 1 1 b
 	rtn
-else.180
+else.184
 	push_arg 0 3 3
 	push_arg 1 3 2
 	buildAC " </integerConstant>\n"
@@ -6255,7 +6322,7 @@ else.180
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.181
+	jmp_false else.185
 	buildAC "failed to close file"
 	updatepop_a 0 9
 .d 1 0
@@ -6268,7 +6335,7 @@ else.180
 	pop_a 1
 .d 1 1 b
 	rtn
-else.181
+else.185
 	push_arg 0 2 2
 	push_a 8
 	push_a 8
@@ -6303,7 +6370,7 @@ s125
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "OutputFiles\\"
+	buildAC "TxmlFiles\\"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -6319,7 +6386,7 @@ s78
 .d 1 0
 	jsr s26
 .o 0 1 b
-	jmp_false else.182
+	jmp_false else.186
 	push_a 8
 	push_a 8
 	push_a 8
@@ -6340,7 +6407,7 @@ s78
 	updatepop_a 0 9
 .d 9 0
 	jmp s80
-else.182
+else.186
 	push_a 8
 	push_a 8
 	push_a 8
@@ -6377,7 +6444,7 @@ s79
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.183
+	jmp_false else.187
 	buildAC "failed to open file"
 	updatepop_a 0 10
 .d 1 0
@@ -6390,7 +6457,7 @@ s79
 	pop_a 1
 .d 1 1 b
 	rtn
-else.183
+else.187
 	push_arg 0 3 3
 	push_arg 1 3 2
 	push_a 8
@@ -6405,7 +6472,7 @@ else.183
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.184
+	jmp_false else.188
 	buildAC "failed to close file"
 	updatepop_a 0 10
 .d 1 0
@@ -6418,7 +6485,7 @@ else.183
 	pop_a 1
 .d 1 1 b
 	rtn
-else.184
+else.188
 	push_arg 0 2 2
 	push_a 9
 	push_a 9
@@ -6453,7 +6520,7 @@ s127
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "OutputFiles\\"
+	buildAC "TxmlFiles\\"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -6528,7 +6595,7 @@ s80
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.185
+	jmp_false else.189
 	buildAC "failed to open file"
 	updatepop_a 0 10
 .d 1 0
@@ -6541,7 +6608,7 @@ s80
 	pop_a 1
 .d 1 1 b
 	rtn
-else.185
+else.189
 	push_arg 0 3 3
 	push_arg 1 3 2
 	push_a 8
@@ -6556,7 +6623,7 @@ else.185
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.186
+	jmp_false else.190
 	buildAC "failed to close file"
 	updatepop_a 0 10
 .d 1 0
@@ -6569,7 +6636,7 @@ else.185
 	pop_a 1
 .d 1 1 b
 	rtn
-else.186
+else.190
 	push_arg 0 2 2
 	push_a 9
 	push_a 9
@@ -6604,7 +6671,7 @@ s129
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "OutputFiles\\"
+	buildAC "TxmlFiles\\"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -6680,236 +6747,6 @@ s81
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.187
-	buildAC "failed to open file"
-	updatepop_a 0 9
-.d 1 0
-	jsr print_string_
-.o 0 0
-	halt
-	repl_args 2 2
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-.d 1 1 b
-	rtn
-else.187
-	push_arg 0 3 3
-	push_arg 1 3 2
-	buildAC "&quot; </symbol>\n"
-	buildh ARRAY 1
-	build _ 2 e_StdFile_nfwrites
-	push_a 3
-	update_a 2 3
-	update_a 1 2
-	updatepop_a 0 1
-	jsr_ap 2
-	push_arg 0 2 1
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-	notB
-	jmp_false else.188
-	buildAC "failed to close file"
-	updatepop_a 0 9
-.d 1 0
-	jsr print_string_
-.o 0 0
-	halt
-	repl_args 2 2
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-.d 1 1 b
-	rtn
-else.188
-	push_arg 0 2 2
-	create
-	push_a 7
-	pushI 1
-	buildh _Nil 0
-	update_a 0 9
-	update_a 0 4
-	pop_a 1
-.d 2 1 i
-	jsr e_StdList_sdrop
-.o 1 0
-	push_a 9
-	push_a 9
-	buildh ARRAY 1
-	push_a 8
-	push_a 8
-	push_a 8
-	push_a 8
-	push_a 6
-	update_a 6 7
-	update_a 5 6
-	update_a 0 5
-	pop_a 1
-	update_a 7 16
-	update_a 6 15
-	update_a 5 14
-	update_a 4 13
-	update_a 3 12
-	update_a 2 11
-	update_a 1 10
-	updatepop_a 0 9
-.d 8 0
-	jmp s63
-.n 1 _ ea119
-.o 1 0
-n119
-	push_node _cycle_in_spine 1
-.o 2 0
-ea119
-.o 2 0
-s119
-	buildAC "T.xml"
-	push_a 1
-	update_a 1 2
-	updatepop_a 0 1
-.d 2 0
-	jsr catAC
-.o 1 0
-	buildAC "OutputFiles\\"
-.d 2 0
-	jsr catAC
-.o 1 0
-	fillh ARRAY 1 1
-.d 1 0
-	rtn
-.o 8 1 c
-s82
-	push_a 7
-	buildI 2
-	push_a 7
-	build _ 1 n120
-	push_a 4
-	pop_b 1
-	buildh _Nil 0
-	update_a 0 12
-	pop_a 1
-	jsr_ap 3
-	push_arg 0 3 1
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-	notB
-	jmp_false else.189
-	buildAC "failed to open file"
-	updatepop_a 0 9
-.d 1 0
-	jsr print_string_
-.o 0 0
-	halt
-	repl_args 2 2
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-.d 1 1 b
-	rtn
-else.189
-	push_arg 0 3 3
-	push_arg 1 3 2
-	buildAC "&gt; </symbol>\n"
-	buildh ARRAY 1
-	build _ 2 e_StdFile_nfwrites
-	push_a 3
-	update_a 2 3
-	update_a 1 2
-	updatepop_a 0 1
-	jsr_ap 2
-	push_arg 0 2 1
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-	notB
-	jmp_false else.190
-	buildAC "failed to close file"
-	updatepop_a 0 9
-.d 1 0
-	jsr print_string_
-.o 0 0
-	halt
-	repl_args 2 2
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-.d 1 1 b
-	rtn
-else.190
-	push_arg 0 2 2
-	create
-	push_a 7
-	pushI 1
-	buildh _Nil 0
-	update_a 0 9
-	update_a 0 4
-	pop_a 1
-.d 2 1 i
-	jsr e_StdList_sdrop
-.o 1 0
-	push_a 9
-	push_a 9
-	buildh ARRAY 1
-	push_a 8
-	push_a 8
-	push_a 8
-	push_a 8
-	push_a 6
-	update_a 6 7
-	update_a 5 6
-	update_a 0 5
-	pop_a 1
-	update_a 7 16
-	update_a 6 15
-	update_a 5 14
-	update_a 4 13
-	update_a 3 12
-	update_a 2 11
-	update_a 1 10
-	updatepop_a 0 9
-.d 8 0
-	jmp s63
-.n 1 _ ea120
-.o 1 0
-n120
-	push_node _cycle_in_spine 1
-.o 2 0
-ea120
-.o 2 0
-s120
-	buildAC "T.xml"
-	push_a 1
-	update_a 1 2
-	updatepop_a 0 1
-.d 2 0
-	jsr catAC
-.o 1 0
-	buildAC "OutputFiles\\"
-.d 2 0
-	jsr catAC
-.o 1 0
-	fillh ARRAY 1 1
-.d 1 0
-	rtn
-.o 8 1 c
-s83
-	push_a 7
-	buildI 2
-	push_a 7
-	build _ 1 n121
-	push_a 4
-	pop_b 1
-	buildh _Nil 0
-	update_a 0 12
-	pop_a 1
-	jsr_ap 3
-	push_arg 0 3 1
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-	notB
 	jmp_false else.191
 	buildAC "failed to open file"
 	updatepop_a 0 9
@@ -6926,7 +6763,7 @@ s83
 else.191
 	push_arg 0 3 3
 	push_arg 1 3 2
-	buildAC "&lt; </symbol>\n"
+	buildAC "&quot; </symbol>\n"
 	buildh ARRAY 1
 	build _ 2 e_StdFile_nfwrites
 	push_a 3
@@ -6986,14 +6823,14 @@ else.192
 	updatepop_a 0 9
 .d 8 0
 	jmp s63
-.n 1 _ ea121
+.n 1 _ ea119
 .o 1 0
-n121
+n119
 	push_node _cycle_in_spine 1
 .o 2 0
-ea121
+ea119
 .o 2 0
-s121
+s119
 	buildAC "T.xml"
 	push_a 1
 	update_a 1 2
@@ -7001,7 +6838,7 @@ s121
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "OutputFiles\\"
+	buildAC "TxmlFiles\\"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -7009,11 +6846,11 @@ s121
 .d 1 0
 	rtn
 .o 8 1 c
-s84
+s82
 	push_a 7
 	buildI 2
 	push_a 7
-	build _ 1 n122
+	build _ 1 n120
 	push_a 4
 	pop_b 1
 	buildh _Nil 0
@@ -7041,7 +6878,7 @@ s84
 else.193
 	push_arg 0 3 3
 	push_arg 1 3 2
-	buildAC "&amp; </symbol>\n"
+	buildAC "&gt; </symbol>\n"
 	buildh ARRAY 1
 	build _ 2 e_StdFile_nfwrites
 	push_a 3
@@ -7101,6 +6938,236 @@ else.194
 	updatepop_a 0 9
 .d 8 0
 	jmp s63
+.n 1 _ ea120
+.o 1 0
+n120
+	push_node _cycle_in_spine 1
+.o 2 0
+ea120
+.o 2 0
+s120
+	buildAC "T.xml"
+	push_a 1
+	update_a 1 2
+	updatepop_a 0 1
+.d 2 0
+	jsr catAC
+.o 1 0
+	buildAC "TxmlFiles\\"
+.d 2 0
+	jsr catAC
+.o 1 0
+	fillh ARRAY 1 1
+.d 1 0
+	rtn
+.o 8 1 c
+s83
+	push_a 7
+	buildI 2
+	push_a 7
+	build _ 1 n121
+	push_a 4
+	pop_b 1
+	buildh _Nil 0
+	update_a 0 12
+	pop_a 1
+	jsr_ap 3
+	push_arg 0 3 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.195
+	buildAC "failed to open file"
+	updatepop_a 0 9
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 1 1 b
+	rtn
+else.195
+	push_arg 0 3 3
+	push_arg 1 3 2
+	buildAC "&lt; </symbol>\n"
+	buildh ARRAY 1
+	build _ 2 e_StdFile_nfwrites
+	push_a 3
+	update_a 2 3
+	update_a 1 2
+	updatepop_a 0 1
+	jsr_ap 2
+	push_arg 0 2 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.196
+	buildAC "failed to close file"
+	updatepop_a 0 9
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 1 1 b
+	rtn
+else.196
+	push_arg 0 2 2
+	create
+	push_a 7
+	pushI 1
+	buildh _Nil 0
+	update_a 0 9
+	update_a 0 4
+	pop_a 1
+.d 2 1 i
+	jsr e_StdList_sdrop
+.o 1 0
+	push_a 9
+	push_a 9
+	buildh ARRAY 1
+	push_a 8
+	push_a 8
+	push_a 8
+	push_a 8
+	push_a 6
+	update_a 6 7
+	update_a 5 6
+	update_a 0 5
+	pop_a 1
+	update_a 7 16
+	update_a 6 15
+	update_a 5 14
+	update_a 4 13
+	update_a 3 12
+	update_a 2 11
+	update_a 1 10
+	updatepop_a 0 9
+.d 8 0
+	jmp s63
+.n 1 _ ea121
+.o 1 0
+n121
+	push_node _cycle_in_spine 1
+.o 2 0
+ea121
+.o 2 0
+s121
+	buildAC "T.xml"
+	push_a 1
+	update_a 1 2
+	updatepop_a 0 1
+.d 2 0
+	jsr catAC
+.o 1 0
+	buildAC "TxmlFiles\\"
+.d 2 0
+	jsr catAC
+.o 1 0
+	fillh ARRAY 1 1
+.d 1 0
+	rtn
+.o 8 1 c
+s84
+	push_a 7
+	buildI 2
+	push_a 7
+	build _ 1 n122
+	push_a 4
+	pop_b 1
+	buildh _Nil 0
+	update_a 0 12
+	pop_a 1
+	jsr_ap 3
+	push_arg 0 3 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.197
+	buildAC "failed to open file"
+	updatepop_a 0 9
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 1 1 b
+	rtn
+else.197
+	push_arg 0 3 3
+	push_arg 1 3 2
+	buildAC "&amp; </symbol>\n"
+	buildh ARRAY 1
+	build _ 2 e_StdFile_nfwrites
+	push_a 3
+	update_a 2 3
+	update_a 1 2
+	updatepop_a 0 1
+	jsr_ap 2
+	push_arg 0 2 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.198
+	buildAC "failed to close file"
+	updatepop_a 0 9
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 1 1 b
+	rtn
+else.198
+	push_arg 0 2 2
+	create
+	push_a 7
+	pushI 1
+	buildh _Nil 0
+	update_a 0 9
+	update_a 0 4
+	pop_a 1
+.d 2 1 i
+	jsr e_StdList_sdrop
+.o 1 0
+	push_a 9
+	push_a 9
+	buildh ARRAY 1
+	push_a 8
+	push_a 8
+	push_a 8
+	push_a 8
+	push_a 6
+	update_a 6 7
+	update_a 5 6
+	update_a 0 5
+	pop_a 1
+	update_a 7 16
+	update_a 6 15
+	update_a 5 14
+	update_a 4 13
+	update_a 3 12
+	update_a 2 11
+	update_a 1 10
+	updatepop_a 0 9
+.d 8 0
+	jmp s63
 .n 1 _ ea122
 .o 1 0
 n122
@@ -7116,7 +7183,7 @@ s122
 .d 2 0
 	jsr catAC
 .o 1 0
-	buildAC "OutputFiles\\"
+	buildAC "TxmlFiles\\"
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -7126,15 +7193,15 @@ s122
 .o 8 0
 s85
 	eq_desc _Nil 0 4
-	jmp_true case.195
-	jmp case.196
-case.195
+	jmp_true case.199
+	jmp case.200
+case.199
 	push_a 7
 	pushB TRUE
 	updatepop_a 0 8
 .d 1 1 b
 	rtn
-case.196
+case.200
 	push_a 7
 	push_a 7
 	push_a 7

@@ -1,7 +1,8 @@
 .comp 920 000111010
 .start __JackCompiler_Start
+.depend "ParserToXML" "20190524122747"
 .depend "Tokenizer" "20190521232801"
-.depend "FileManipulation" "20190521184418"
+.depend "FileManipulation" "20190524120125"
 .depend "StdLibMisc" "20180913124337"
 .depend "Directory" "20180913124337"
 .depend "_SystemEnumStrict" "20180913124337"
@@ -26,7 +27,7 @@
 .depend "StdOverloaded" "20180913124337"
 .depend "StdBool" "20180913124337"
 .depend "StdEnv" "20180913124337"
-.module m_JackCompiler "JackCompiler" "20190521200109"
+.module m_JackCompiler "JackCompiler" "20190524141025"
 .endinfo
 .impmod _system
 .implab _cycle_in_spine
@@ -111,7 +112,7 @@ s3
 	build e_StdFile_dstdio;33 1 e_StdFile_nstdio;33
 	build d_S.2 -1 n_S.2
 	buildh _Nil 0
-	buildAC "InputFiles"
+	buildAC "jackFiles"
 	buildh ARRAY 1
 	buildh e_Directory_dPathDown 1
 	buildh _Cons 2

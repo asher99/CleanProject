@@ -4,6 +4,7 @@ import StdFile
 import Directory
 import FileManipulation
 import Tokenizer
+import ParserToXML
 
 printList:: [String] *File -> *File
 printList [] io = io
@@ -29,8 +30,11 @@ Start w
 # (io,w) = stdio w                                				// open stdio
 # io = fwrites "JACK COMPILER by Asher Alexander & Zvei Eliezer Nir\n" io
 
+
+// Tokenizer:
+
 // 2. Import the content of InputFiles directory
-# (dir,w) = getDirectoryContents (RelativePath [PathDown "InputFiles"]) w
+# (dir,w) = getDirectoryContents (RelativePath [PathDown "jackFiles"]) w
 # filesList = getJackFiles (getNamesOfFilesInDirectory (getEntriesList dir))
 # io = fwrites "The compiler found the following .VM files: " io
 # io = printList filesList io
@@ -38,3 +42,25 @@ Start w
 // 3. 
 //| moreThanOneFile filesList 1 = TokenizeMultipleFiles filesList w
 //| otherwise = False
+
+
+/* 
+// Parser:
+# (dir,w) = getDirectoryContents (RelativePath [PathDown "TxmlFiles"]) w 
+# filesList = getTxmlFiles (getNamesOfFilesInDirectory (getEntriesList dir))
+# io = fwrites "The compiler found the following .Txml files: " io
+# io = printList filesList io
+= ParseMultipleFiles filesList w
+*/
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,6 +1,7 @@
 implementation module ParserToXML
 import StdEnv
 import StdFile
+import Directory
 import FileManipulation
 
 /*
@@ -19,12 +20,14 @@ ParseMultipleFiles [x:xs] w
 # reslist = take (len-5) charlist
 # filename = { e \\ e <- reslist }
 // Initial the output file content:
-# outFile = "OutputFiles\\" +++ filename +++ ".xml"
+# outFile = "xmlFiles\\" +++ filename +++ ".xml"
 # (ok_open,outFile,w) = fopen outFile FWriteText w
 | not ok_open = abort("failed to open file")
-
+# outFile = fwrites "" outFile
+# (ok_read_close,w) = fclose outFile w
+| not ok_read_close = abort("failed to close file")
 // read all lines of current file to list of strings:
-# currentFile = "InputFiles\\" +++ x
+# currentFile = "TxmlFiles\\" +++ x 
 # (ok_read_open,inputfile,w) = fopen currentFile FReadText w
 # (content,inputfile) = listOfLinesInFile inputfile
 # (ok_read_close,w) = fclose inputfile w
@@ -35,6 +38,8 @@ ParseMultipleFiles [x:xs] w
 # (parsed,w) = ParseMultipleFiles xs w
 | not parsed = abort("failed to parse file " +++ filename +++ "T.xml\n")
 
+
+
 /*
 *	parse:
 *	1. cast the line form String to list of Chars.
@@ -43,10 +48,10 @@ ParseMultipleFiles [x:xs] w
 startParsing ::  [String] String Int *f -> (Bool,*f) | FileSystem f
 startParsing [] filename num w = (True,w)
 startParsing [x:xs] filename num w
-# xstr = [ ch \\ ch <-: x ]
-| xstr == "<keyword> class </keyword>" = parseClass xs filename num w
-|
-| otherwise = 
+# xstr = toString [ ch \\ ch <-: x ]
+| xstr == "<tokens>\n" = startParsing xs filename num w
+| xstr == "<keyword> class </keyword>\n" = parseClass xs filename num w
+| otherwise = abort("This is why you fail")//(False,w)
 
 
 
@@ -56,21 +61,42 @@ startParsing [x:xs] filename num w
 /************* PROGRAM STRUCTURE ***************/
 
 parseClass :: [String] String Int *f -> (Bool,*f) | FileSystem f
-parseClass input filename num w 
-# outFile = "OutputFiles\\" +++ filename +++ ".xml"
+parseClass [class_name,sym:xs] filename num w 
+# outFile = "xmlFiles\\" +++ filename +++ ".xml"
 # (ok_open,outFile,w) = fopen outFile FAppendText w
 | not ok_open = abort("failed to open file")
-# string_to_print = "<class> \n" +++ input
+# string_to_print_start = "<class>\n" +++ "<keyword> class </keyword>" +++ "\n" +++ class_name +++ sym //+++ input
+# outFile = fwrites string_to_print_start outFile
+# (ok_read_close,w) = fclose outFile w
+| not ok_read_close = abort("failed to close file")
+#(ok_parse_subroutine,w) = parseSubroutineDec xs filename num w
+| not ok_parse_subroutine = abort("failed to parse subroutine")
+
+# outFile2 = "xmlFiles\\" +++ filename +++ ".xml"
+# (ok_open2,outFile2,w) = fopen outFile2 FAppendText w
+| not ok_open2 = abort("failed to open file")
+# string_to_print_end = "<symbol> } </symbol>\n</class>\n"
+# outFile2 = fwrites string_to_print_end outFile2
+# (ok_read_close2,w) = fclose outFile2 w
+| not ok_read_close2 = abort("failed to close file")
+= (True,w)
+
+parseSubroutineDec :: [String] String Int *f -> (Bool,*f) | FileSystem f
+parseSubroutineDec [subroutine_kw, subroutine_type ,subroutine_name, sym:xs] filename num w
+| not ((subroutine_kw == "<keyword> function </keyword>\n") || (subroutine_kw == "<keyword> function </keyword>\n") || (subroutine_kw == "<keyword> function </keyword>\n")) = (True,w)
+# outFile = "xmlFiles\\" +++ filename +++ ".xml"
+# (ok_open,outFile,w) = fopen outFile FAppendText w
+| not ok_open = abort("failed to open file")
+# string_to_print = "<subroutineDec>\n" +++ subroutine_kw +++ subroutine_type +++ subroutine_name +++ sym //+++ input
 # outFile = fwrites string_to_print outFile
 # (ok_read_close,w) = fclose outFile w
 | not ok_read_close = abort("failed to close file")
-
-
+= parseSubroutineDec xs filename num w
+/*
 parseClassVarDec ::
 
 parseType :: 
 
-parseSubroutineDec ::
 
 parseParameterList ::
 
@@ -126,8 +152,15 @@ parseUnaryOp ::
 parseKeywordConstant ::
 
 
+/************* GETTERS ***************/
+getKeyword:: String -> String
 
 
+getIdentifier:: 
+
+getSymbol:: 
+
+*/
 
 
 

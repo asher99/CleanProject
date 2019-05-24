@@ -1,5 +1,7 @@
 .comp 920 000111010
 .start _nostart_
+.depend "StdLibMisc" "20180913124337"
+.depend "Directory" "20180913124337"
 .depend "_SystemEnumStrict" "20180913124337"
 .depend "_SystemStrictLists" "20180913124337"
 .depend "StdStrictLists" "20180913124337"
@@ -12,20 +14,18 @@
 .depend "StdOrdList" "20180913124337"
 .depend "StdList" "20180913124337"
 .depend "StdClass" "20180913124337"
+.depend "StdFile" "20180913124337"
 .depend "StdString" "20180913124337"
-.depend "StdChar" "20180913124337"
-.depend "StdReal" "20180913124337"
-.depend "StdBool" "20180913124337"
-.depend "StdEnv" "20180913124337"
 .depend "_SystemArray" "20180913124337"
 .depend "StdArray" "20180913124337"
+.depend "StdChar" "20180913124337"
+.depend "StdReal" "20180913124337"
 .depend "StdInt" "20180913124337"
-.depend "StdLibMisc" "20180913124337"
 .depend "StdOverloaded" "20180913124337"
-.depend "StdFile" "20180913124337"
-.depend "Directory" "20180913124337"
-.depend "FileManipulation" "20190521184418"
-.module m_FileManipulation "FileManipulation" "20190521184502"
+.depend "StdBool" "20180913124337"
+.depend "StdEnv" "20180913124337"
+.depend "FileManipulation" "20190524120125"
+.module m_FileManipulation "FileManipulation" "20190524120119"
 .endinfo
 .impmod _system
 .implab _cycle_in_spine
@@ -62,6 +62,9 @@
 .impdesc d_S.6
 .implab n_S.6 ea_S.6
 .implab _driver
+.impmod Directory
+.impdesc e_Directory_dDirEntry.fileName
+.implab e_Directory_nDirEntry.fileName
 .impmod StdMisc
 .implab e_StdMisc_sabort
 .impmod StdList
@@ -70,12 +73,14 @@
 .impdesc e_StdList_dreverse
 .implab e_StdList_nreverse e_StdList_eareverse
 .implab e_StdList_s==;84
+.impmod StdFile
+.implab e_StdFile_sfreadline
+.impdesc e_StdFile_dfwritei
+.implab e_StdFile_nfwritei
+.implab e_StdFile_sferror
 .impmod StdString
 .implab e_StdString_s==;2
 .implab e_StdString_s+++;11
-.impmod StdBool
-.implab e_StdBool_snot
-.implab e_StdBool_s==;3
 .impmod _SystemArray
 .impdesc e__SystemArray_dusize;23
 .implab e__SystemArray_nusize;23
@@ -84,14 +89,193 @@
 .implab e_StdInt_s-;7
 .implab e_StdInt_sone;11
 .implab e_StdInt_s<;17
-.impmod StdFile
-.implab e_StdFile_sfreadline
-.impdesc e_StdFile_dfwritei
-.implab e_StdFile_nfwritei
-.implab e_StdFile_sferror
-.impmod Directory
-.impdesc e_Directory_dDirEntry.fileName
-.implab e_Directory_nDirEntry.fileName
+.impmod StdBool
+.implab e_StdBool_snot
+.implab e_StdBool_s==;3
+.export e_FileManipulation_sgetTxmlFiles
+.export e_FileManipulation_eagetTxmlFiles
+.descexp e_FileManipulation_dgetTxmlFiles e_FileManipulation_ngetTxmlFiles e_FileManipulation_lgetTxmlFiles 1 0 "getTxmlFiles"
+.o 2 0
+e_FileManipulation_lgetTxmlFiles
+	update_a 1 0
+	create
+	update_a 0 2
+	pop_a 1
+.d 2 0
+	jmp e_FileManipulation_eagetTxmlFiles
+.n 1 e_FileManipulation_dgetTxmlFiles e_FileManipulation_eagetTxmlFiles
+.o 1 0
+e_FileManipulation_ngetTxmlFiles
+	push_node _cycle_in_spine 1
+.o 2 0
+e_FileManipulation_sgetTxmlFiles
+.o 2 0
+e_FileManipulation_eagetTxmlFiles
+	jsr_eval 0
+.o 2 0
+s12
+	buildh e_FileManipulation_disTxml 0
+	push_a 1
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	update_a 1 2
+	updatepop_a 0 1
+.d 3 0
+	jmp e_StdList_sfilter
+.export e_FileManipulation_sisTxml
+.descexp e_FileManipulation_disTxml e_FileManipulation_nisTxml e_FileManipulation_lisTxml 1 0 "isTxml"
+.o 2 0
+e_FileManipulation_lisTxml
+	pop_a 1
+.d 1 0
+	jsr ea13
+.o 0 1 b
+	buildB_b 0
+	pop_b 1
+.d 1 0
+	rtn
+.n 1 e_FileManipulation_disTxml
+.o 1 0
+e_FileManipulation_nisTxml
+	push_node _cycle_in_spine 1
+.d 1 0
+	jsr ea13
+.o 0 1 b
+	fillB_b 0 0
+	pop_b 1
+.d 1 0
+	rtn
+.o 1 0
+ea13
+.o 1 0
+e_FileManipulation_sisTxml
+.o 1 0
+s13
+	push_a 0
+	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
+	buildh _Nil 0
+	buildC 'T'
+	buildh _Cons 2
+	buildC '.'
+	buildh _Cons 2
+	buildC 'x'
+	buildh _Cons 2
+	buildC 'm'
+	buildh _Cons 2
+	buildC 'l'
+	buildh _Cons 2
+	push_a 1
+	build d_S.2 -1 n_S.2
+	push_a 2
+	build d_S.1 -1 n_S.1
+	build _ 2 n22
+	build e_StdList_dreverse 1 e_StdList_nreverse
+	create
+	pushI 5
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	buildh _Nil 0
+	update_a 0 4
+	update_a 0 5
+	pop_a 1
+.d 2 1 i
+	jsr e_StdList_stake
+.o 1 0
+	update_a 1 3
+	updatepop_a 0 2
+.d 2 0
+	jsr e_StdList_s==;84
+.o 0 1 b
+	jmp_false else.1
+	pushB TRUE
+.d 0 1 b
+	rtn
+else.1
+	pushB FALSE
+.d 0 1 b
+	rtn
+.n 2 _ ea22
+.o 1 0
+n22
+	push_node _cycle_in_spine 2
+.o 3 0
+ea22
+.o 3 0
+s22
+	push_a 0
+	jsr_eval 0
+	pushI_a 1
+	pop_a 1
+	pushI 1
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	subI
+	push_a 1
+	pushI 0
+	updatepop_a 0 2
+.d 2 2 ii
+	jmp s19
+.o 2 2 ii
+s19
+	push_b 0
+	push_b 2
+	ltI
+	notB
+	jmp_false else.2
+	push_a 0
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	push_b 0
+	updatepop_a 0 1
+	push_a 0
+	select CHAR 0 1
+	push_a 0
+	buildh ARRAY 1
+	push_a 0
+	push_b 2
+	push_b 2
+	build_u _ 1 2 n29
+	buildC_b 0
+	fillh _Cons 2 4
+	pop_a 2
+	pop_b 3
+.d 1 0
+	rtn
+else.2
+	fillh _Nil 0 1
+	pop_a 1
+	pop_b 2
+.d 1 0
+	rtn
+.nu 1 2 _ _
+.o 1 0
+n29
+	push_node_u _cycle_in_spine 1 2
+.o 2 2 ii
+ea29
+.o 2 2 ii
+s29
+	pushI 1
+	push_b 1
+	addI
+	push_a 0
+	push_b 2
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	updatepop_a 0 1
+	update_b 1 3
+	updatepop_b 0 2
+.d 2 2 ii
+	jmp s19
 .export e_FileManipulation_sgetJackFiles
 .export e_FileManipulation_eagetJackFiles
 .descexp e_FileManipulation_dgetJackFiles e_FileManipulation_ngetJackFiles e_FileManipulation_lgetJackFiles 1 0 "getJackFiles"
@@ -170,7 +354,7 @@ s11
 	build d_S.2 -1 n_S.2
 	push_a 2
 	build d_S.1 -1 n_S.1
-	build _ 2 n18
+	build _ 2 n23
 	build e_StdList_dreverse 1 e_StdList_nreverse
 	create
 	pushI 5
@@ -190,22 +374,22 @@ s11
 .d 2 0
 	jsr e_StdList_s==;84
 .o 0 1 b
-	jmp_false else.1
+	jmp_false else.3
 	pushB TRUE
 .d 0 1 b
 	rtn
-else.1
+else.3
 	pushB FALSE
 .d 0 1 b
 	rtn
-.n 2 _ ea18
+.n 2 _ ea23
 .o 1 0
-n18
+n23
 	push_node _cycle_in_spine 2
 .o 3 0
-ea18
+ea23
 .o 3 0
-s18
+s23
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -220,14 +404,14 @@ s18
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s15
+	jmp s18
 .o 2 2 ii
-s15
+s18
 	push_b 0
 	push_b 2
 	ltI
 	notB
-	jmp_false else.2
+	jmp_false else.4
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -241,14 +425,14 @@ s15
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n23
+	build_u _ 1 2 n28
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
 	pop_b 3
 .d 1 0
 	rtn
-else.2
+else.4
 	fillh _Nil 0 1
 	pop_a 1
 	pop_b 2
@@ -256,12 +440,12 @@ else.2
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n23
+n28
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea23
+ea28
 .o 2 2 ii
-s23
+s28
 	pushI 1
 	push_b 1
 	addI
@@ -275,7 +459,7 @@ s23
 	update_b 1 3
 	updatepop_b 0 2
 .d 2 2 ii
-	jmp s15
+	jmp s18
 .export e_FileManipulation_slistOfLinesInFile
 .descexp e_FileManipulation_dlistOfLinesInFile e_FileManipulation_nlistOfLinesInFile e_FileManipulation_llistOfLinesInFile 1 0 "listOfLinesInFile"
 .o 2 0
@@ -365,23 +549,23 @@ ea8
 .o 8 0
 s8
 	eq_desc _Nil 0 4
-	jmp_true case.3
-	jmp case.4
-case.3
+	jmp_true case.5
+	jmp case.6
+case.5
 	push_a 6
 	buildB TRUE
 	update_a 1 9
 	updatepop_a 0 8
 .d 2 0
 	rtn
-case.4
+case.6
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
 	pop_a 1
 	push_a 0
 	push_a 8
-	build _ 2 n20
+	build _ 2 n25
 	push_a 9
 	buildI 2
 	push_a 6
@@ -404,7 +588,7 @@ case.4
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.5
+	jmp_false else.7
 	push_a 1
 	jsr_eval 0
 	push_array 0
@@ -422,7 +606,7 @@ case.4
 	repl_args 2 2
 .d 2 0
 	rtn
-else.5
+else.7
 	push_arg 0 3 3
 	push_arg 1 3 2
 	push_a 12
@@ -437,7 +621,7 @@ else.5
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.6
+	jmp_false else.8
 	buildAC "failed"
 	updatepop_a 0 10
 .d 1 0
@@ -447,9 +631,9 @@ else.5
 	repl_args 2 2
 .d 2 0
 	rtn
-else.6
+else.8
 	push_a 9
-	build _ 1 n19
+	build _ 1 n24
 	push_arg 1 2 2
 	jsr_eval 0
 	push_a 3
@@ -473,14 +657,14 @@ else.6
 	updatepop_a 0 10
 .d 8 0
 	jmp s8
-.n 2 _ ea20
+.n 2 _ ea25
 .o 1 0
-n20
+n25
 	push_node _cycle_in_spine 2
 .o 3 0
-ea20
+ea25
 .o 3 0
-s20
+s25
 	push_a 1
 	jsr_eval 0
 	push_array 0
@@ -504,14 +688,14 @@ s20
 	fillh ARRAY 1 1
 .d 1 0
 	rtn
-.n 1 _ ea19
+.n 1 _ ea24
 .o 1 0
-n19
+n24
 	push_node _cycle_in_spine 1
 .o 2 0
-ea19
+ea24
 .o 2 0
-s19
+s24
 	pushI 1
 	push_a 0
 	jsr_eval 0
@@ -632,7 +816,7 @@ s7
 	jsr errorF
 .o 0 3 b f
 	push_b 0
-	jmp_false else.7
+	jmp_false else.9
 	buildh _Nil 0
 	buildAC "Error Happend"
 	buildh ARRAY 1
@@ -644,14 +828,14 @@ s7
 	updatepop_b 0 3
 .d 1 2 f
 	rtn
-else.7
+else.9
 	buildAC ""
 	push_a 1
 	pop_b 1
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.8
+	jmp_false else.10
 	push_b 1
 	push_b 1
 	push_a 1
@@ -660,7 +844,7 @@ else.7
 	updatepop_b 0 2
 .d 1 2 f
 	rtn
-else.8
+else.10
 	push_a 1
 	push_a 1
 	buildh ARRAY 1
@@ -746,7 +930,7 @@ s5
 	build d_S.2 -1 n_S.2
 	push_a 2
 	build d_S.1 -1 n_S.1
-	build _ 2 n21
+	build _ 2 n26
 	build e_StdList_dreverse 1 e_StdList_nreverse
 	create
 	pushI 3
@@ -766,22 +950,22 @@ s5
 .d 2 0
 	jsr e_StdList_s==;84
 .o 0 1 b
-	jmp_false else.9
+	jmp_false else.11
 	pushB TRUE
 .d 0 1 b
 	rtn
-else.9
+else.11
 	pushB FALSE
 .d 0 1 b
 	rtn
-.n 2 _ ea21
+.n 2 _ ea26
 .o 1 0
-n21
+n26
 	push_node _cycle_in_spine 2
 .o 3 0
-ea21
+ea26
 .o 3 0
-s21
+s26
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -796,14 +980,14 @@ s21
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s14
+	jmp s17
 .o 2 2 ii
-s14
+s17
 	push_b 0
 	push_b 2
 	ltI
 	notB
-	jmp_false else.10
+	jmp_false else.12
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -817,14 +1001,14 @@ s14
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n22
+	build_u _ 1 2 n27
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
 	pop_b 3
 .d 1 0
 	rtn
-else.10
+else.12
 	fillh _Nil 0 1
 	pop_a 1
 	pop_b 2
@@ -832,12 +1016,12 @@ else.10
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n22
+n27
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea22
+ea27
 .o 2 2 ii
-s22
+s27
 	pushI 1
 	push_b 1
 	addI
@@ -851,7 +1035,7 @@ s22
 	update_b 1 3
 	updatepop_b 0 2
 .d 2 2 ii
-	jmp s14
+	jmp s17
 .export e_FileManipulation_sgetTheFileField
 .descexp e_FileManipulation_dgetTheFileField e_FileManipulation_ngetTheFileField e_FileManipulation_lgetTheFileField 1 0 "getTheFileField"
 .o 2 0
@@ -893,7 +1077,7 @@ s3
 	pushB TRUE
 	push_b 1
 	eqB
-	jmp_false else.11
+	jmp_false else.13
 	push_a 1
 	push_a 1
 	update_a 1 3
@@ -901,7 +1085,7 @@ s3
 	pop_b 1
 .d 2 0
 	rtn
-else.11
+else.13
 	buildAC "Failed to open the file..."
 	updatepop_a 0 2
 	pop_b 1
@@ -935,15 +1119,15 @@ e_FileManipulation_eagetNamesOfFilesInDirectory
 .o 2 0
 s2
 	eq_desc _Cons 2 0
-	jmp_true case.12
+	jmp_true case.14
 	jmp s2.1
-case.12
+case.14
 	repl_args 2 2
 	jsr_eval 1
 	eq_desc _Nil 0 1
-	jmp_true case.13
-	jmp case.14
-case.13
+	jmp_true case.15
+	jmp case.16
+case.15
 	buildh _Nil 0
 	push_a 1
 	build e_Directory_dDirEntry.fileName 1 e_Directory_nDirEntry.fileName
@@ -951,7 +1135,7 @@ case.13
 	pop_a 2
 .d 1 0
 	rtn
-case.14
+case.16
 	push_a 1
 	build e_FileManipulation_dgetNamesOfFilesInDirectory 1 e_FileManipulation_ngetNamesOfFilesInDirectory
 	push_a 1
