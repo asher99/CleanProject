@@ -2,7 +2,7 @@ implementation module Tokenizer
 import StdEnv
 import StdFile
 import FileManipulation
-
+import ClearComments
 /*
 *	TokenizeMultipleFiles.
 *	foreach file in the files list:
@@ -18,6 +18,26 @@ TokenizeMultipleFiles [x:xs] w
 # len = length charlist
 # reslist = take (len-5) charlist
 # filename = { e \\ e <- reslist }
+// read all lines of current file to list of strings:
+# currentFile = "jackFiles\\" +++ x
+# (ok_read_open,inputfile,w) = fopen currentFile FReadText w
+# (content,inputfile) = listOfLinesInFile inputfile
+# (ok_read_close,w) = fclose inputfile w
+// Initial the No-Comment file content:
+# outFile = "NoCommentFiles\\" +++ x
+# (ok_open,outFile,w) = fopen outFile FWriteText w
+| not ok_open = abort("failed to open file")
+# outFile = fwrites "" outFile
+# (ok_read_close,w) = fclose outFile w
+| not ok_read_close = abort("failed to close file")
+// remove all comments
+# (comments_removed,w) = clearComments content filename w
+| not comments_removed = abort("problem with the comments")
+// read all lines of No-Comment version of the file to list of strings:
+# currentFile_NC = "NoCommentFiles\\" +++ x
+# (ok_read_NC,inputfile_NC,w) = fopen currentFile_NC FReadText w
+# (content_NC,inputfile_NC) = listOfLinesInFile inputfile_NC
+# (ok_read_NC_close,w) = fclose inputfile_NC w
 // Initial the output file content:
 # outFile = "TxmlFiles\\" +++ filename +++ "T.xml"
 # (ok_open,outFile,w) = fopen outFile FWriteText w
@@ -25,13 +45,8 @@ TokenizeMultipleFiles [x:xs] w
 # outFile = fwrites "<tokens>\n" outFile
 # (ok_read_close,w) = fclose outFile w
 | not ok_read_close = abort("failed to close file")
-// read all lines of current file to list of strings:
-# currentFile = "jackFiles\\" +++ x
-# (ok_read_open,inputfile,w) = fopen currentFile FReadText w
-# (content,inputfile) = listOfLinesInFile inputfile
-# (ok_read_close,w) = fclose inputfile w
-// parse the file:
-# (ok,w) = Tokenize content filename 1 w
+// Tokenize the file:
+# (ok,w) = Tokenize content_NC filename 1 w
 | not ok = abort ("Failed to parse file " +++ x +++ ", execution terminated\n")
 # (tokenized,w) = TokenizeMultipleFiles xs w
 | not tokenized = abort("failed to tokenize file " +++ filename +++ ".jack\n")
@@ -42,7 +57,7 @@ TokenizeMultipleFiles [x:xs] w
 # outFile2 = fwrites "</tokens>\n" outFile2
 # (ok_read_close2,w) = fclose outFile2 w
 | not ok_read_close2 = abort("failed to close file")
-| ok_read_close2 = (True,w) 
+| ok_read_close2 = (True,w)
 
 
 /*

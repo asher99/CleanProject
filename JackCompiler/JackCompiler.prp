@@ -5,12 +5,29 @@ MainModule
 	DclOpen:	False
 	Icl
 		WindowPosition
-			X:	214
+			X:	134
 			Y:	25
 			SizeX:	1385
 			SizeY:	680
 	IclOpen:	True
 OtherModules
+	Module
+		Name:	ClearComments
+		Dir:	{Project}
+		Dcl
+			WindowPosition
+				X:	82
+				Y:	180
+				SizeX:	800
+				SizeY:	680
+		DclOpen:	False
+		Icl
+			WindowPosition
+				X:	0
+				Y:	713
+				SizeX:	0
+				SizeY:	0
+		IclOpen:	True
 	Module
 		Name:	FileManipulation
 		Dir:	{Project}
@@ -51,8 +68,8 @@ OtherModules
 		DclOpen:	False
 		Icl
 			WindowPosition
-				X:	10
-				Y:	10
+				X:	-237
+				Y:	59
 				SizeX:	1304
 				SizeY:	680
 		IclOpen:	False
