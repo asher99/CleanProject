@@ -65,12 +65,15 @@ parseClass [class_name,sym:xs] filename num w
 # outFile = "xmlFiles\\" +++ filename +++ ".xml"
 # (ok_open,outFile,w) = fopen outFile FAppendText w
 | not ok_open = abort("failed to open file")
-# string_to_print_start = "<class>\n" +++ "<keyword> class </keyword>" +++ "\n" +++ class_name +++ sym //+++ input
+# string_to_print_start = "<class>\n" +++ "<keyword> class </keyword>" +++ "\n" +++ class_name +++ sym 
 # outFile = fwrites string_to_print_start outFile
 # (ok_read_close,w) = fclose outFile w
 | not ok_read_close = abort("failed to close file")
+//#(ok_parse_classVarDec,xs,w) = parseClassVarDec xs filename num w
+//| not ok_parse_classVarDec = abort("failed to parse subroutine")
 #(ok_parse_subroutine,w) = parseSubroutineDec xs filename num w
 | not ok_parse_subroutine = abort("failed to parse subroutine")
+
 
 # outFile2 = "xmlFiles\\" +++ filename +++ ".xml"
 # (ok_open2,outFile2,w) = fopen outFile2 FAppendText w
@@ -87,15 +90,60 @@ parseSubroutineDec [subroutine_kw, subroutine_type ,subroutine_name, sym:xs] fil
 # outFile = "xmlFiles\\" +++ filename +++ ".xml"
 # (ok_open,outFile,w) = fopen outFile FAppendText w
 | not ok_open = abort("failed to open file")
-# string_to_print = "<subroutineDec>\n" +++ subroutine_kw +++ subroutine_type +++ subroutine_name +++ sym //+++ input
+# string_to_print = "<subroutineDec>\n" +++ subroutine_kw +++ subroutine_type +++ subroutine_name +++ sym
 # outFile = fwrites string_to_print outFile
 # (ok_read_close,w) = fclose outFile w
 | not ok_read_close = abort("failed to close file")
 = parseSubroutineDec xs filename num w
-/*
-parseClassVarDec ::
 
-parseType :: 
+/*
+parseClassVarDec :: [String] String Int *f -> (Bool,[String],*f) | FileSystem f
+parseClassVarDec [classVarDec_kw,classVarDec_type,classVarName:xs] filename num w
+| not ((classVarDec_kw == "<keyword> static </keyword>\n") || (classVarDec_kw == "<keyword> field </keyword>\n")  = (True,w)
+# outFile = "xmlFiles\\" +++ filename +++ ".xml"
+# (ok_open,outFile,w) = fopen outFile FAppendText w
+| not ok_open = abort("failed to open file")
+# string_to_print = "<classVarDec>\n" +++ classVarDec_kw 
+
+# outFile = fwrites string_to_print outFile
+# (ok_read_close,w) = fclose outFile w
+| not ok_read_close = abort("failed to close file")
+# (ok_parsed_all_sym,xs,w) = parseAllVars xs filename num w // calls a method that will write to file all the : type varName, type varName ... 
+
+# outFile2 = "xmlFiles\\" +++ filename +++ ".xml"
+# (ok_open2,outFile2,w) = fopen outFile2 FAppendText w
+| not ok_open2 = abort("failed to open file")
+# string_to_print_end = "</classVarDec>\n"
+# outFile2 = fwrites string_to_print_end outFile2
+# (ok_read_close2,w) = fclose outFile2 w
+| not ok_read_close2 = abort("failed to close file")
+= (True,xs,w)
+
+/* parses all the symicollons in ClassVarDec */
+parseAllVars :: [String] String Int *f -> (Bool,[String],*f) | FileSystem f
+parseAllVars [type,varName,sym:xs] filename num w
+
+# outFile = "xmlFiles\\" +++ filename +++ ".xml"
+# (ok_open,outFile,w) = fopen outFile FAppendText w
+| not ok_open = abort("failed to open file")
+# string_to_print = type +++ varName +++ sym
+# outFile = fwrites string_to_print outFile
+# (ok_read_close,w) = fclose outFile w
+| not ok_read_close = abort("failed to close file")
+| sym == "<symbol> , </symbol>\n" = parseAllVars xs filename num w // until we get a symbol of ;
+= (True,xs,w)
+
+parseType :: [String] String Int *f -> (Bool,*f) | FileSystem f
+parseType [x:xs] filename num w
+| not ((x == "<keyword> int </keyword>\n") || (x == "<keyword> int </keyword>\n") || (x == "<keyword> int </keyword>\n") || (x == "<keyword> int </keyword>\n")) = parseClassName [x,xs] filename num w
+# outFile = "xmlFiles\\" +++ filename +++ ".xml"
+# (ok_open,outFile,w) = fopen outFile FAppendText w
+| not ok_open = abort("failed to open file")
+# string_to_print = x
+# outFile = fwrites string_to_print outFile
+# (ok_read_close,w) = fclose outFile w
+| not ok_read_close = abort("failed to close file") 
+= (True,w)
 
 
 parseParameterList ::
@@ -105,13 +153,34 @@ parseSubroutineBody ::
 parseVarDec :: 
 
 /* terminal of identifier */
-parseClassName :: 
+parseClassName :: [String] String Int *f -> (Bool,*f) | FileSystem f
+parseClassName [x:xs] filename num w
+# outFile = "xmlFiles\\" +++ filename +++ ".xml"
+# (ok_open,outFile,w) = fopen outFile FAppendText w
+| not ok_open = abort("failed to open file")
+# string_to_print = x
+# outFile = fwrites string_to_print outFile
+# (ok_read_close,w) = fclose outFile w
+| not ok_read_close = abort("failed to close file") 
+= (True,w)
+
+
 
 /* terminal of identifier */
 parseSubroutineName ::
 
 /* terminal of identifier */
-parseVarName ::
+parseVarName :: [String] String Int *f -> (Bool,*f) | FileSystem f
+parseVarName [x:xs] filename num w
+# outFile = "xmlFiles\\" +++ filename +++ ".xml"
+# (ok_open,outFile,w) = fopen outFile FAppendText w
+| not ok_open = abort("failed to open file")
+# string_to_print = x
+# outFile = fwrites string_to_print outFile
+# (ok_read_close,w) = fclose outFile w
+| not ok_read_close = abort("failed to close file")
+= (True,w)
+
 
 /************* STATEMENTS ***************/
 
