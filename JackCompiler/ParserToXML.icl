@@ -252,13 +252,15 @@ parseStatements [first:xs] filename num w
 = (True,xs_,w)
 
 
+
+
 parseStatement:: [String] String Int *f -> (Bool,[String],*f) | FileSystem f
 parseStatement [first:xs] filename num w
-| (first == "<keyword> let </keyword>\n") 	= parseLetStatement [first:xs] filename num w
-| (first == "<keyword> if </keyword>\n") 	= parseIfStatement [first:xs] filename num w
-| (first == "<keyword> while </keyword>\n") = parseWhileStatement [first:xs] filename num w
-| (first == "<keyword> do </keyword>\n") 	= parseDoStatement [first:xs] filename num w
-| (first == "<keyword> return </keyword>\n")= parseReturnStatement [first:xs] filename num w
+| first == "<keyword> let </keyword>\n"	= parseLetStatement [first:xs] filename num w/*
+| (first == "<keyword> if </keyword>\n") 	= parseIfStatement [first:xs] filename w
+| (first == "<keyword> while </keyword>\n") = parseWhileStatement [first:xs] filename w
+| (first == "<keyword> do </keyword>\n") 	= parseDoStatement [first:xs] filename w
+| (first == "<keyword> return </keyword>\n")= parseReturnStatement [first:xs] filename w*/
 = (True,[first:xs],w)
 
 /*
@@ -301,29 +303,68 @@ parseVarName [x:xs] filename num w
 
 //parseStatement :: [String] String Int *f -> (Bool,[String],*f) | FileSystem f
 
-parseLetStatement :: [String] String Int *f -> (Bool,[String],*f) | FileSystem f
-parseLetStatement [let_,name,sym:xs] filename num w = (True,xs,w)
+parseLetStatement:: [String] String Int *f -> (Bool,[String],*f) | FileSystem f
+parseLetStatement [] filename num w = (True,[],w)
+parseLetStatement [tel,name,sym:xs] filename num w
+# string2print = "<letStatement>\n" +++ tel +++ name +++ sym
 
+# outFile = "xmlFiles\\" +++ filename +++ ".xml"
+# (ok_open,outFile,w) = fopen outFile FAppendText w
+| not ok_open = abort("failed to open file")
+# outFile = fwrites string2print outFile
+# (ok_read_close,w) = fclose outFile w
+| not ok_read_close = abort("failed to close file")
 
-parseIfStatement :: [String] String Int *f -> (Bool,[String],*f) | FileSystem f
-parseIfStatement [let_,name,sym:xs] filename num w = (True,xs,w)
+//| sym == "<symbol> [ </symbol>\n" = parseArrayLetStatement xs filename w
+// sc - semi colmun (;)
+# (ok_expr,[sc:xs_],w) = parseExpression xs filename w
+# string2print2 = sc +++ "</letStatement>\n"
 
+# outFile2 = "xmlFiles\\" +++ filename +++ ".xml"
+# (ok_open2,outFile2,w) = fopen outFile2 FAppendText w
+| not ok_open2 = abort("failed to open file")
+# outFile2 = fwrites string2print2 outFile2
+# (ok_read_close,w) = fclose outFile2 w
+| not ok_read_close = abort("failed to close file")
 
-parseWhileStatement :: [String] String Int *f -> (Bool,[String],*f) | FileSystem f
-parseWhileStatement [let_,name,sym:xs] filename num w = (True,xs,w)
-
-parseDoStatement :: [String] String Int *f -> (Bool,[String],*f) | FileSystem f
-parseDoStatement [let_,name,sym:xs] filename num w = (True,xs,w)
-
-parseReturnStatement :: [String] String Int *f -> (Bool,[String],*f) | FileSystem f
-parseReturnStatement [let_,name,sym:xs] filename num w = (True,xs,w)
-
+//# (ok_st,xs__,w) = parseStatement xs_ filename w
+//| not ok_st = abort("")
+= (True,xs_,w)
 
 /*
+parseArrayLetStatement :: [String] String *f -> (Bool,[String],*f) | FileSystem f
+parseArrayLetStatement input filename w
+# (ok_expr1,[closing,assign:xs],w) = parseExpression input filename w
+# string2print = closing +++ assign
+# (ok_w,w) = write2file string2print filename w
+| not ok_w = abort("error in array let statemeny")
+// sc - semi colmun (;)
+# (ok_expr2,[sc:xs_],w) = parseExpression xs filename w
+# string2print2 = sc +++ "</letStatement>\n"
+# (ok_tag2,w) = write2file string2print filename w
+| not ok_tag2 = abort("error in let statemeny")
+= parseStatement xs_ filename w
+*/
+parseIfStatement :: [String] String *f -> (Bool,[String],*f) | FileSystem f
+parseIfStatement [let_,name,sym:xs] filename w = (True,xs,w)
+
+
+parseWhileStatement :: [String] String *f -> (Bool,[String],*f) | FileSystem f
+parseWhileStatement [let_,name,sym:xs] filename w = (True,xs,w)
+
+parseDoStatement :: [String] String *f -> (Bool,[String],*f) | FileSystem f
+parseDoStatement [let_,name,sym:xs] filename w = (True,xs,w)
+
+parseReturnStatement :: [String] String *f -> (Bool,[String],*f) | FileSystem f
+parseReturnStatement [let_,name,sym:xs] filename w = (True,xs,w)
+
+
+
 /************* EXPRESSIONS ***************/
 
-parseExpression ::
-
+parseExpression :: [String] String *f -> (Bool,[String],*f) | FileSystem f
+parseExpression [x:xs] name w = (True,xs,w)
+/*
 parseTerm ::
 
 parseSubroutineCall ::
@@ -353,9 +394,15 @@ getSymbol::
 
 */
 
-
-
-
+write2file:: String String *f -> (Bool,*f) | FileSystem f
+write2file string filename w
+# outFile = "xmlFiles\\" +++ filename +++ ".xml"
+# (ok_open,outFile,w) = fopen outFile FAppendText w
+| not ok_open = abort("failed to open file")
+# outFile = fwrites string outFile
+# (ok_read_close,w) = fclose outFile w
+| not ok_read_close = abort("failed to close file")
+= (True,w)
 
 
 
