@@ -5,11 +5,11 @@ MainModule
 	DclOpen:	False
 	Icl
 		WindowPosition
-			X:	3
-			Y:	25
-			SizeX:	1346
+			X:	127
+			Y:	164
+			SizeX:	1385
 			SizeY:	680
-	IclOpen:	False
+	IclOpen:	True
 OtherModules
 	Module
 		Name:	ClearComments
@@ -48,19 +48,13 @@ OtherModules
 	Module
 		Name:	ParserToXML
 		Dir:	{Project}
-		Dcl
-			WindowPosition
-				X:	526
-				Y:	20
-				SizeX:	800
-				SizeY:	576
-		DclOpen:	True
+		DclOpen:	False
 		Icl
 			WindowPosition
-				X:	199
-				Y:	704
-				SizeX:	48
-				SizeY:	0
+				X:	47
+				Y:	0
+				SizeX:	1448
+				SizeY:	596
 		IclOpen:	True
 	Module
 		Name:	Tokenizer

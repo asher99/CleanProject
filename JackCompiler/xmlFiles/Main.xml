@@ -7,5 +7,19 @@
 <keyword> void </keyword>
 <identifier> main </identifier>
 <symbol> ( </symbol>
+<parameterList>
+</parameterList>
+<symbol> ) </symbol>
+<subroutineBody>
+<symbol> { </symbol>
+<varDec>
+<keyword> var </keyword>
+<identifier> Array </identifier>
+<identifier> a </identifier>
+<symbol> ; </symbol>
+<keyword> var </keyword>
+</varDec>
+<keyword> int </keyword>
+</subroutineBody>
 <symbol> } </symbol>
 </class>

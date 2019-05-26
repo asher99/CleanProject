@@ -26,7 +26,7 @@
 .depend "StdBool" "20180913124337"
 .depend "StdEnv" "20180913124337"
 .depend "ParserToXML" "20190524122747"
-.module m_ParserToXML "ParserToXML" "20190524135040"
+.module m_ParserToXML "ParserToXML" "20190526221612"
 .endinfo
 .impmod _system
 .implab _cycle_in_spine
@@ -157,15 +157,15 @@ case.2
 	build d_S.2 -1 n_S.2
 	push_a 1
 	build d_S.1 -1 n_S.1
-	build _ 2 n28
+	build _ 2 n56
 	push_a 0
-	build _ 1 n29
+	build _ 1 n57
 	push_a 0
-	build _ 1 n30
+	build _ 1 n58
 	push_a 11
 	buildI 1
 	push_a 2
-	build _ 1 n31
+	build _ 1 n59
 	push_a 10
 	buildh _Nil 0
 	update_a 0 16
@@ -220,7 +220,7 @@ else.4
 	buildh ARRAY 1
 	build _ 2 e_StdString_n+++;11
 	push_a 10
-	build _ 3 n26
+	build _ 3 n54
 	push_a 0
 	build d_S.2 -1 n_S.2
 	buildh _Nil 0
@@ -237,7 +237,7 @@ else.4
 	update_a 1 2
 	update_a 0 1
 	pop_a 1
-	build _ 3 n27
+	build _ 3 n55
 	build d_S.2 -1 n_S.2
 	push_a 1
 	jsr_eval 0
@@ -261,7 +261,7 @@ else.4
 	update_a 1 5
 	updatepop_a 0 4
 .d 8 0
-	jsr s23
+	jsr s45
 .o 1 1 b
 	push_b 0
 	notB
@@ -322,7 +322,7 @@ else.5
 	update_a 0 12
 	pop_a 1
 .d 6 0
-	jsr s24
+	jsr s46
 .o 1 1 b
 	pop_a 1
 	notB
@@ -362,14 +362,14 @@ s1.1
 	pushD e_ParserToXML_dParseMultipleFiles
 .d 0 2 ii
 	jmp _match_error
-.n 1 _ ea31
+.n 1 _ ea59
 .o 1 0
-n31
+n59
 	push_node _cycle_in_spine 1
 .o 2 0
-ea31
+ea59
 .o 2 0
-s31
+s59
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -391,14 +391,14 @@ s31
 	fillh ARRAY 1 1
 .d 1 0
 	rtn
-.n 1 _ ea30
+.n 1 _ ea58
 .o 1 0
-n30
+n58
 	push_node _cycle_in_spine 1
 .o 2 0
-ea30
+ea58
 .o 2 0
-s30
+s58
 	push_a 0
 	jsr_eval 0
 	push_a 1
@@ -407,7 +407,7 @@ s30
 	update_a 0 3
 	pop_a 1
 .d 1 1 i
-	jsr s13
+	jsr s26
 .o 0 1 i
 	create_array_ CHAR 0 1
 	buildI 0
@@ -419,19 +419,19 @@ s30
 	update_a 1 2
 	updatepop_a 0 1
 .d 3 0
-	jsr s12
+	jsr s25
 .o 1 0
 	fillh ARRAY 1 1
 .d 1 0
 	rtn
-.n 1 _ ea29
+.n 1 _ ea57
 .o 1 0
-n29
+n57
 	push_node _cycle_in_spine 1
 .o 2 0
-ea29
+ea57
 .o 2 0
-s29
+s57
 	push_a 0
 	jsr_eval 0
 .d 1 0
@@ -447,14 +447,14 @@ s29
 	updatepop_a 0 1
 .d 2 1 i
 	jmp e_StdList_stake
-.n 2 _ ea28
+.n 2 _ ea56
 .o 1 0
-n28
+n56
 	push_node _cycle_in_spine 2
 .o 3 0
-ea28
+ea56
 .o 3 0
-s28
+s56
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -469,15 +469,15 @@ s28
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s10
-.n 3 _ ea27
+	jmp s23
+.n 3 _ ea55
 .o 1 0
-n27
+n55
 	push_node _cycle_in_spine 3
 .o 4 0
-ea27
+ea55
 .o 4 0
-s27
+s55
 	push_a 2
 	push_a 1
 	jsr_eval 0
@@ -494,14 +494,14 @@ s27
 	pop_a 1
 .d 1 0
 	rtn
-.n 3 _ ea26
+.n 3 _ ea54
 .o 1 0
-n26
+n54
 	push_node _cycle_in_spine 3
 .o 4 0
-ea26
+ea54
 .o 4 0
-s26
+s54
 	push_a 2
 	buildI 0
 	push_a 2
@@ -521,15 +521,15 @@ s26
 .d 1 0
 	rtn
 .o 1 1 i
-s13
+s26
 	push_b 0
 	push_a 0
 	updatepop_a 0 1
 	updatepop_b 0 1
 .d 1 1 i
-	jmp s19
+	jmp s34
 .o 1 1 i
-s19
+s34
 	eq_desc _Cons 2 0
 	jmp_true case.7
 	jmp case.8
@@ -544,13 +544,13 @@ case.7
 	updatepop_a 0 1
 	updatepop_b 0 1
 .d 1 1 i
-	jmp s13
+	jmp s26
 case.8
 	pop_a 1
 .d 0 1 i
 	rtn
 .o 3 0
-s12
+s25
 	push_a 1
 	push_a 1
 	push_a 4
@@ -558,9 +558,9 @@ s12
 	update_a 1 4
 	updatepop_a 0 3
 .d 3 0
-	jmp s18
+	jmp s33
 .o 3 0
-s18
+s33
 	eq_desc _Cons 2 0
 	jmp_true case.9
 	jmp case.10
@@ -569,7 +569,7 @@ case.9
 	push_a 1
 	jsr_eval 0
 	push_a 4
-	build _ 1 n39
+	build _ 1 n89
 	push_a 2
 	jsr_eval 0
 	pushC_a 3
@@ -590,19 +590,19 @@ case.9
 	update_a 1 5
 	updatepop_a 0 4
 .d 3 0
-	jmp s12
+	jmp s25
 case.10
 	updatepop_a 1 2
 .d 1 0
 	rtn
-.n 1 _ ea39
+.n 1 _ ea89
 .o 1 0
-n39
+n89
 	push_node _cycle_in_spine 1
 .o 2 0
-ea39
+ea89
 .o 2 0
-s39
+s89
 	pushI 1
 	push_a 0
 	jsr_eval 0
@@ -615,7 +615,7 @@ s39
 .d 1 0
 	rtn
 .o 2 2 ii
-s10
+s23
 	push_b 0
 	push_b 2
 	ltI
@@ -634,7 +634,7 @@ s10
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n38
+	build_u _ 1 2 n88
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
@@ -649,12 +649,12 @@ else.11
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n38
+n88
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea38
+ea88
 .o 2 2 ii
-s38
+s88
 	pushI 1
 	push_b 1
 	addI
@@ -668,7 +668,7 @@ s38
 	update_b 1 3
 	updatepop_b 0 2
 .d 2 2 ii
-	jmp s10
+	jmp s23
 .export e_ParserToXML_sstartParsing
 .descexp e_ParserToXML_dstartParsing e_ParserToXML_nstartParsing e_ParserToXML_lstartParsing 5 0 "startParsing"
 .a 0 a2
@@ -745,7 +745,7 @@ case.13
 	update_a 1 2
 	updatepop_a 0 1
 .d 2 2 ii
-	jsr s9
+	jsr s22
 .o 1 0
 .d 1 0
 	jsr e_StdList_stoString;79
@@ -829,7 +829,7 @@ else.15
 .d 2 0
 	rtn
 .o 2 2 ii
-s9
+s22
 	push_b 0
 	push_b 2
 	ltI
@@ -848,7 +848,7 @@ s9
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n37
+	build_u _ 1 2 n87
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
@@ -863,12 +863,12 @@ else.16
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n37
+n87
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea37
+ea87
 .o 2 2 ii
-s37
+s87
 	pushI 1
 	push_b 1
 	addI
@@ -882,7 +882,7 @@ s37
 	update_b 1 3
 	updatepop_b 0 2
 .d 2 2 ii
-	jmp s9
+	jmp s22
 .o 8 0
 s3
 	eq_desc _Cons 2 4
@@ -906,7 +906,7 @@ case.18
 	push_a 11
 	buildI 2
 	push_a 11
-	build _ 1 n34
+	build _ 1 n62
 	push_a 8
 	buildh _Nil 0
 	update_a 0 16
@@ -932,7 +932,7 @@ else.19
 	push_arg 1 3 2
 	push_a 3
 	push_a 6
-	build _ 3 n32
+	build _ 3 n60
 	push_a 7
 	update_a 5 7
 	update_a 2 6
@@ -978,17 +978,14 @@ else.20
 	update_a 2 4
 	update_a 1 3
 	updatepop_a 0 2
-	buildh _Nil 0
-	update_a 0 15
-	pop_a 1
 .d 8 0
-	jsr s22
-.o 1 1 b
+	jsr s43
+.o 2 1 b
 	push_b 0
 	notB
 	jmp_false else.21
-	buildAC "failed to parse subroutine"
-	updatepop_a 0 9
+	buildAC "failed to parse vardec"
+	updatepop_a 0 10
 	pop_b 1
 .d 1 0
 	jsr print_string_
@@ -999,26 +996,71 @@ else.20
 	rtn
 else.21
 	push_a 0
-	buildI 2
-	push_a 8
-	build _ 1 n33
-	push_a 5
+	jsr_eval 0
+	push_a 2
+	push_a 10
+	push_a 10
+	buildh ARRAY 1
+	push_a 9
+	push_a 9
+	push_a 9
+	push_a 9
+	push_a 7
+	update_a 7 8
+	update_a 6 7
+	update_a 5 6
+	update_a 0 5
+	pop_a 1
 	pop_b 1
+	update_a 7 9
+	update_a 6 8
+	update_a 5 7
+	update_a 4 6
+	update_a 3 5
+	update_a 2 4
+	update_a 1 3
+	updatepop_a 0 2
+	buildh _Nil 0
+	update_a 0 15
+	pop_a 1
+.d 8 0
+	jsr s44
+.o 2 1 b
+	push_b 0
+	notB
+	jmp_false else.22
+	buildAC "failed to parse subroutine"
+	updatepop_a 0 10
+	pop_b 1
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+.d 2 0
+	rtn
+else.22
+	push_a 1
+	buildI 2
+	push_a 9
+	build _ 1 n61
+	push_a 6
+	pop_b 1
+	update_a 9 13
 	update_a 8 12
 	update_a 7 11
 	update_a 6 10
-	update_a 5 9
-	update_a 3 8
-	update_a 2 7
-	update_a 1 6
-	updatepop_a 0 5
+	update_a 3 9
+	update_a 2 8
+	update_a 1 7
+	updatepop_a 0 6
 	jsr_ap 3
 	push_arg 0 3 1
 	jsr_eval 0
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.22
+	jmp_false else.23
 	buildAC "failed to open file"
 	updatepop_a 0 5
 .d 1 0
@@ -1028,7 +1070,7 @@ else.21
 	repl_args 2 2
 .d 2 0
 	rtn
-else.22
+else.23
 	push_arg 0 3 3
 	push_arg 1 3 2
 	buildAC "<symbol> } </symbol>\n</class>\n"
@@ -1044,7 +1086,7 @@ else.22
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.23
+	jmp_false else.24
 	buildAC "failed to close file"
 	updatepop_a 0 1
 .d 1 0
@@ -1054,7 +1096,7 @@ else.22
 	repl_args 2 2
 .d 2 0
 	rtn
-else.23
+else.24
 	push_arg 0 2 2
 	buildB TRUE
 	update_a 1 2
@@ -1068,14 +1110,14 @@ s3.1
 .d 0 2 ii
 	jmp _match_error
 .string x_3 "parseClass"
-.n 1 _ ea34
+.n 1 _ ea62
 .o 1 0
-n34
+n62
 	push_node _cycle_in_spine 1
 .o 2 0
-ea34
+ea62
 .o 2 0
-s34
+s62
 	buildAC ".xml"
 	push_a 1
 	update_a 1 2
@@ -1090,14 +1132,14 @@ s34
 	fillh ARRAY 1 1
 .d 1 0
 	rtn
-.n 1 _ ea33
+.n 1 _ ea61
 .o 1 0
-n33
+n61
 	push_node _cycle_in_spine 1
 .o 2 0
-ea33
+ea61
 .o 2 0
-s33
+s61
 	buildAC ".xml"
 	push_a 1
 	update_a 1 2
@@ -1112,14 +1154,14 @@ s33
 	fillh ARRAY 1 1
 .d 1 0
 	rtn
-.n 3 _ ea32
+.n 3 _ ea60
 .o 1 0
-n32
+n60
 	push_node _cycle_in_spine 3
 .o 4 0
-ea32
+ea60
 .o 4 0
-s32
+s60
 	push_a 2
 	jsr_eval 0
 	pushF_a 3
@@ -1157,22 +1199,22 @@ s32
 .d 1 0
 	rtn
 .o 1 1 b
-s16
+s31
 	eqB_b TRUE 0
-	jmp_true case.24
-	jmp case.25
-case.24
+	jmp_true case.25
+	jmp case.26
+case.25
 	pop_a 1
 	pop_b 1
 	pushB TRUE
 .d 0 1 b
 	rtn
-case.25
+case.26
 	push_a 0
 	jsr_eval 0
 	push_array 0
 	updatepop_a 0 1
-	buildAC "<keyword> function </keyword>\n"
+	buildAC "<keyword> method </keyword>\n"
 	push_a 1
 	update_a 1 2
 	update_a 0 1
@@ -1181,13 +1223,13 @@ case.25
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.26
+	jmp_false else.27
 	pop_a 1
 	pushB TRUE
 .d 0 1 b
 	rtn
-else.26
-	buildAC "<keyword> function </keyword>\n"
+else.27
+	buildAC "<keyword> constructor </keyword>\n"
 	push_array 1
 	update_a 1 2
 	updatepop_a 0 1
@@ -1196,77 +1238,151 @@ else.26
 .o 0 1 b	
 .d 0 1 b
 	rtn
+.o 1 1 b
+s30
+	eqB_b TRUE 0
+	jmp_true case.28
+	jmp case.29
+case.28
+	pop_a 1
+	pop_b 1
+	pushB TRUE
+.d 0 1 b
+	rtn
+case.29
+	push_a 0
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	buildAC "<keyword> if </keyword>\n"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	pop_b 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_false else.30
+	pop_a 1
+	pushB TRUE
+.d 0 1 b
+	rtn
+else.30
+	buildAC "<keyword> while </keyword>\n"
+	push_array 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_false else.31
+	pop_a 1
+	pushB TRUE
+.d 0 1 b
+	rtn
+else.31
+	buildAC "<keyword> do </keyword>\n"
+	push_array 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_false else.32
+	pop_a 1
+	pushB TRUE
+.d 0 1 b
+	rtn
+else.32
+	buildAC "<keyword> return </keyword>\n"
+	push_array 1
+	update_a 1 2
+	updatepop_a 0 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+.d 0 1 b
+	rtn
+.o 1 1 b
+s29
+	eqB_b TRUE 0
+	jmp_true case.33
+	jmp case.34
+case.33
+	pop_a 1
+	pop_b 1
+	pushB TRUE
+.d 0 1 b
+	rtn
+case.34
+	push_a 0
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	buildAC "<keyword> field </keyword>\n"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	update_a 1 2
+	updatepop_a 0 1
+	pop_b 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+.d 0 1 b
+	rtn
+.n 5 _
+.o 1 0
+n6
+	push_node _cycle_in_spine 5
+.d 5 0
+	jsr ea6
+.o 3 0
+	push_a 2
+	push_a 2
+	push_a 2
+	fillh _Tuple 3 6
+	pop_a 3
+.d 1 0
+	rtn
+.o 5 0
+ea6
+	jsr_eval 4
+	jsr_eval 2
+	jsr_eval 1
+	push_array 2
+	push_r_args 1 4 0
+	update_a 4 7
+	update_a 2 4
+	update_a 0 2
+	update_a 3 5
+	update_a 1 3
+	pop_a 2
 .o 8 0
-s22
+s6
 	eq_desc _Cons 2 4
-	jmp_true case.27
-	jmp s22.1
-case.27
+	jmp_true case.35
+	jmp s6.1
+case.35
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
 	pop_a 1
 	jsr_eval 1
 	eq_desc _Cons 2 1
-	jmp_true case.28
+	jmp_true case.36
 	pop_a 2
-	jmp s22.1
-case.28
+	jmp s6.1
+case.36
 	push_args 1 2 2
 	buildh _Nil 0
 	update_a 0 4
 	pop_a 1
-	jsr_eval 1
-	eq_desc _Cons 2 1
-	jmp_true case.29
-	pop_a 4
-	jmp s22.1
-case.29
-	push_args 1 2 2
-	buildh _Nil 0
-	update_a 0 4
-	pop_a 1
-	jsr_eval 1
-	eq_desc _Cons 2 1
-	jmp_true case.30
-	pop_a 6
-	jmp s22.1
-case.30
-	push_args 1 2 2
-	buildh _Nil 0
-	update_a 0 4
-	pop_a 1
-	push_a 6
-	jsr_eval 0
-	push_array 0
-	updatepop_a 0 1
-	buildAC "<keyword> function </keyword>\n"
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-.d 2 0
-	jsr eqAC
-.o 0 1 b	
-	push_a 6
-.d 1 1 b
-	jsr s16
-.o 0 1 b
-	notB
-	jmp_false else.31
-	push_a 15
-	pushB TRUE
-	updatepop_a 0 16
-.d 1 1 b
-	rtn
-else.31
-	push_a 15
+	push_a 11
 	buildI 2
-	push_a 15
-	build _ 1 n35
-	push_a 12
+	push_a 11
+	build _ 1 n86
+	push_a 8
 	buildh _Nil 0
-	update_a 0 20
+	update_a 0 16
 	pop_a 1
 	jsr_ap 3
 	push_arg 0 3 1
@@ -1274,52 +1390,1360 @@ else.31
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.32
+	jmp_false else.37
 	buildAC "failed to open file"
-	updatepop_a 0 17
+	updatepop_a 0 13
 .d 1 0
 	jsr print_string_
 .o 0 0
 	halt
-	repl_args 2 2
-	jsr_eval 0
-	pushB_a 0
-	pop_a 1
-.d 1 1 b
+	repl_args 3 3
+.d 3 0
 	rtn
-else.32
+else.37
 	push_arg 0 3 3
 	push_arg 1 3 2
 	push_a 3
 	push_a 6
-	push_a 9
-	push_a 12
-	build _ 5 n36
-	push_a 11
-	update_a 5 11
-	update_a 2 10
-	update_a 1 9
-	updatepop_a 0 8
+	build _ 3 n85
+	push_a 7
+	update_a 5 7
+	update_a 4 6
+	update_a 2 5
+	update_a 1 4
+	updatepop_a 0 3
 	jsr_ap 2
 	push_arg 0 2 1
 	jsr_eval 0
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.33
+	jmp_false else.38
+	buildAC "failed to close file"
+	updatepop_a 0 11
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 3 3
+.d 3 0
+	rtn
+else.38
+	push_a 1
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	buildAC "<symbol> , </symbol>\n"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	update_a 2 3
+	update_a 1 2
+	updatepop_a 0 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_false else.39
+	push_arg 0 2 2
+	jsr_eval 0
+	push_a 2
+	jsr_eval 0
+	push_a 10
+	push_a 10
+	push_a 9
+	push_a 9
+	push_a 9
+	push_a 9
+	push_a 6
+	update_a 6 7
+	update_a 5 6
+	update_a 0 5
+	pop_a 1
+	update_a 7 17
+	update_a 6 16
+	update_a 5 15
+	update_a 4 14
+	update_a 3 13
+	update_a 2 12
+	update_a 1 11
+	updatepop_a 0 10
+.d 8 0
+	jmp s6
+else.39
+	push_arg 0 2 2
+	push_a 2
+	buildB TRUE
+	update_a 2 12
+	update_a 1 11
+	updatepop_a 0 10
+.d 3 0
+	rtn
+s6.1
+	pop_a 8
+	pushD m_ParserToXML
+	pushD x_6
+.d 0 2 ii
+	jmp _match_error
+.string x_6 "parseAllVars"
+.n 1 _ ea86
+.o 1 0
+n86
+	push_node _cycle_in_spine 1
+.o 2 0
+ea86
+.o 2 0
+s86
+	buildAC ".xml"
+	push_a 1
+	update_a 1 2
+	updatepop_a 0 1
+.d 2 0
+	jsr catAC
+.o 1 0
+	buildAC "xmlFiles\\"
+.d 2 0
+	jsr catAC
+.o 1 0
+	fillh ARRAY 1 1
+.d 1 0
+	rtn
+.n 3 _ ea85
+.o 1 0
+n85
+	push_node _cycle_in_spine 3
+.o 4 0
+ea85
+.o 4 0
+s85
+	push_a 2
+	jsr_eval 0
+	pushF_a 3
+	pop_a 1
+	push_a 1
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	push_a 1
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	update_a 1 4
+	updatepop_a 0 3
+.d 2 0
+	jsr catAC
+.o 1 0
+.d 1 2 f
+	jsr writeFS
+.o 0 2 f
+	fillF_b 0 0
+	pop_b 2
+.d 1 0
+	rtn
+.o 8 0
+s37
+	eq_desc _Cons 2 4
+	jmp_true case.40
+	jmp s37.1
+case.40
+	push_args 4 2 2
+	buildh _Nil 0
+	update_a 0 7
+	pop_a 1
+	jsr_eval 1
+	eq_desc _Cons 2 1
+	jmp_true case.41
+	pop_a 2
+	jmp s37.1
+case.41
+	push_args 1 2 2
+	buildh _Nil 0
+	update_a 0 4
+	pop_a 1
+	push_a 11
+	buildI 2
+	push_a 11
+	build _ 1 n77
+	push_a 8
+	buildh _Nil 0
+	update_a 0 16
+	pop_a 1
+	jsr_ap 3
+	push_arg 0 3 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.42
+	buildAC "failed to open file"
+	updatepop_a 0 13
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 3 3
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 2 1 b
+	rtn
+else.42
+	push_arg 0 3 3
+	push_arg 1 3 2
+	push_a 3
+	push_a 6
+	build _ 3 n76
+	push_a 7
+	update_a 5 7
+	update_a 4 6
+	update_a 2 5
+	update_a 1 4
+	updatepop_a 0 3
+	jsr_ap 2
+	push_arg 0 2 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.43
+	buildAC "failed to close file"
+	updatepop_a 0 11
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 3 3
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 2 1 b
+	rtn
+else.43
+	push_a 1
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	buildAC "<symbol> , </symbol>\n"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	update_a 2 3
+	update_a 1 2
+	updatepop_a 0 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_false else.44
+	push_arg 0 2 2
+	jsr_eval 0
+	push_a 2
+	jsr_eval 0
+	push_a 10
+	push_a 10
+	push_a 9
+	push_a 9
+	push_a 9
+	push_a 9
+	push_a 6
+	update_a 6 7
+	update_a 5 6
+	update_a 0 5
+	pop_a 1
+	update_a 7 17
+	update_a 6 16
+	update_a 5 15
+	update_a 4 14
+	update_a 3 13
+	update_a 2 12
+	update_a 1 11
+	updatepop_a 0 10
+.d 8 0
+	jmp s37
+else.44
+	push_arg 0 2 2
+	push_a 2
+	pushB TRUE
+	update_a 1 11
+	updatepop_a 0 10
+.d 2 1 b
+	rtn
+s37.1
+	pop_a 8
+	pushD m_ParserToXML
+	pushD x_37
+.d 0 2 ii
+	jmp _match_error
+.string x_37 "parseAllVars"
+.n 1 _ ea77
+.o 1 0
+n77
+	push_node _cycle_in_spine 1
+.o 2 0
+ea77
+.o 2 0
+s77
+	buildAC ".xml"
+	push_a 1
+	update_a 1 2
+	updatepop_a 0 1
+.d 2 0
+	jsr catAC
+.o 1 0
+	buildAC "xmlFiles\\"
+.d 2 0
+	jsr catAC
+.o 1 0
+	fillh ARRAY 1 1
+.d 1 0
+	rtn
+.n 3 _ ea76
+.o 1 0
+n76
+	push_node _cycle_in_spine 3
+.o 4 0
+ea76
+.o 4 0
+s76
+	push_a 2
+	jsr_eval 0
+	pushF_a 3
+	pop_a 1
+	push_a 1
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	push_a 1
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	update_a 1 4
+	updatepop_a 0 3
+.d 2 0
+	jsr catAC
+.o 1 0
+.d 1 2 f
+	jsr writeFS
+.o 0 2 f
+	fillF_b 0 0
+	pop_b 2
+.d 1 0
+	rtn
+.o 8 0
+s38
+	eq_desc _Cons 2 4
+	jmp_true case.45
+	jmp s38.1
+case.45
+	push_args 4 2 2
+	buildh _Nil 0
+	update_a 0 7
+	pop_a 1
+	push_a 0
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	buildAC "<keyword> let </keyword>\n"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_false else.46
+	push_a 1
+	push_a 1
+	buildh _Cons 2
+	push_a 10
+	push_a 10
+	push_a 10
+	push_a 9
+	push_a 9
+	push_a 9
+	push_a 9
+	push_a 7
+	update_a 7 8
+	update_a 6 7
+	update_a 5 6
+	update_a 0 5
+	pop_a 1
+	update_a 7 17
+	update_a 6 16
+	update_a 5 15
+	update_a 4 14
+	update_a 3 13
+	update_a 2 12
+	update_a 1 11
+	updatepop_a 0 10
+.d 8 0
+	jmp s53
+else.46
+	buildAC "<keyword> if </keyword>\n"
+	push_array 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_false else.47
+	push_a 1
+	push_a 1
+	buildh _Cons 2
+	push_a 10
+	push_a 10
+	push_a 10
+	push_a 9
+	push_a 9
+	push_a 9
+	push_a 9
+	push_a 7
+	update_a 7 8
+	update_a 6 7
+	update_a 5 6
+	update_a 0 5
+	pop_a 1
+	update_a 7 17
+	update_a 6 16
+	update_a 5 15
+	update_a 4 14
+	update_a 3 13
+	update_a 2 12
+	update_a 1 11
+	updatepop_a 0 10
+.d 8 0
+	jmp s52
+else.47
+	buildAC "<keyword> while </keyword>\n"
+	push_array 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_false else.48
+	push_a 1
+	push_a 1
+	buildh _Cons 2
+	push_a 10
+	push_a 10
+	push_a 10
+	push_a 9
+	push_a 9
+	push_a 9
+	push_a 9
+	push_a 7
+	update_a 7 8
+	update_a 6 7
+	update_a 5 6
+	update_a 0 5
+	pop_a 1
+	update_a 7 17
+	update_a 6 16
+	update_a 5 15
+	update_a 4 14
+	update_a 3 13
+	update_a 2 12
+	update_a 1 11
+	updatepop_a 0 10
+.d 8 0
+	jmp s51
+else.48
+	buildAC "<keyword> do </keyword>\n"
+	push_array 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_false else.49
+	push_a 1
+	push_a 1
+	buildh _Cons 2
+	push_a 10
+	push_a 10
+	push_a 10
+	push_a 9
+	push_a 9
+	push_a 9
+	push_a 9
+	push_a 7
+	update_a 7 8
+	update_a 6 7
+	update_a 5 6
+	update_a 0 5
+	pop_a 1
+	update_a 7 17
+	update_a 6 16
+	update_a 5 15
+	update_a 4 14
+	update_a 3 13
+	update_a 2 12
+	update_a 1 11
+	updatepop_a 0 10
+.d 8 0
+	jmp s50
+else.49
+	buildAC "<keyword> return </keyword>\n"
+	push_array 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_false else.50
+	push_a 1
+	push_a 1
+	buildh _Cons 2
+	push_a 10
+	push_a 10
+	push_a 10
+	push_a 9
+	push_a 9
+	push_a 9
+	push_a 9
+	push_a 7
+	update_a 7 8
+	update_a 6 7
+	update_a 5 6
+	update_a 0 5
+	pop_a 1
+	update_a 7 17
+	update_a 6 16
+	update_a 5 15
+	update_a 4 14
+	update_a 3 13
+	update_a 2 12
+	update_a 1 11
+	updatepop_a 0 10
+.d 8 0
+	jmp s49
+else.50
+	push_a 1
+	push_a 1
+	buildh _Cons 2
+	push_a 10
+	pushB TRUE
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	update_a 1 11
+	updatepop_a 0 10
+.d 2 1 b
+	rtn
+s38.1
+	pop_a 8
+	pushD m_ParserToXML
+	pushD x_38
+.d 0 2 ii
+	jmp _match_error
+.string x_38 "parseStatement"
+.o 8 0
+s39
+	eq_desc _Cons 2 4
+	jmp_true case.51
+	jmp s39.1
+case.51
+	push_args 4 2 2
+	buildh _Nil 0
+	update_a 0 7
+	pop_a 1
+	jsr_eval 1
+	eq_desc _Cons 2 1
+	jmp_true case.52
+	pop_a 2
+	jmp s39.1
+case.52
+	push_args 1 2 2
+	buildh _Nil 0
+	update_a 0 4
+	pop_a 1
+	jsr_eval 1
+	eq_desc _Cons 2 1
+	jmp_true case.53
+	pop_a 4
+	jmp s39.1
+case.53
+	push_args 1 2 2
+	buildh _Nil 0
+	update_a 0 4
+	pop_a 1
+	push_a 4
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	buildAC "<keyword> var </keyword>\n"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	notB
+	jmp_false else.54
+	push_a 1
+	push_a 5
+	buildh _Cons 2
+	push_a 14
+	pushB TRUE
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	update_a 1 15
+	updatepop_a 0 14
+.d 2 1 b
+	rtn
+else.54
+	push_a 13
+	buildI 2
+	push_a 13
+	buildh ARRAY 1
+	build _ 1 n73
+	push_a 10
+	buildh _Nil 0
+	update_a 0 18
+	pop_a 1
+	jsr_ap 3
+	push_arg 0 3 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.55
+	buildAC "failed to open file"
+	updatepop_a 0 15
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 3 3
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 2 1 b
+	rtn
+else.55
+	push_arg 0 3 3
+	push_arg 1 3 2
+	push_a 3
+	push_a 6
+	push_a 9
+	build _ 4 n74
+	push_a 9
+	update_a 5 9
+	update_a 2 8
+	update_a 1 7
+	updatepop_a 0 6
+	jsr_ap 2
+	push_arg 0 2 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.56
 	buildAC "failed to close file"
 	updatepop_a 0 10
 .d 1 0
 	jsr print_string_
 .o 0 0
 	halt
-	repl_args 2 2
+	repl_args 3 3
 	jsr_eval 0
 	pushB_a 0
 	pop_a 1
-.d 1 1 b
+.d 2 1 b
 	rtn
-else.33
+else.56
+	push_arg 0 2 2
+	jsr_eval 0
+	push_a 2
+	jsr_eval 0
+	push_a 10
+	push_a 10
+	push_a 9
+	push_a 9
+	push_a 9
+	push_a 9
+	push_a 6
+	update_a 6 7
+	update_a 5 6
+	update_a 0 5
+	pop_a 1
+	update_a 7 9
+	update_a 6 8
+	update_a 5 7
+	update_a 4 6
+	update_a 3 5
+	update_a 2 4
+	update_a 1 3
+	updatepop_a 0 2
+	buildh _Nil 0
+	update_a 0 15
+	pop_a 1
+.d 8 0
+	jsr s37
+.o 2 1 b
+	push_b 0
+	notB
+	jmp_false else.57
+	buildAC "failed vardec"
+	updatepop_a 0 10
+	pop_b 1
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 3 3
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 2 1 b
+	rtn
+else.57
+	push_a 1
+	buildI 2
+	push_a 9
+	buildh ARRAY 1
+	build _ 1 n75
+	push_a 6
+	pop_b 1
+	update_a 9 13
+	update_a 8 12
+	update_a 7 11
+	update_a 6 10
+	update_a 4 9
+	update_a 3 8
+	update_a 2 7
+	update_a 1 6
+	updatepop_a 0 5
+	jsr_ap 3
+	push_arg 0 3 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.58
+	buildAC "failed to open file"
+	updatepop_a 0 6
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 3 3
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 2 1 b
+	rtn
+else.58
+	push_arg 0 3 3
+	push_arg 1 3 2
+	buildAC "</varDec>\n"
+	buildh ARRAY 1
+	build _ 2 e_StdFile_nfwrites
+	push_a 4
+	update_a 4 8
+	update_a 2 7
+	update_a 1 6
+	updatepop_a 0 5
+	jsr_ap 2
+	push_arg 0 2 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.59
+	buildAC "failed to close file"
+	updatepop_a 0 2
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 3 3
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 2 1 b
+	rtn
+else.59
+	push_arg 0 2 2
+	push_a 2
+	pushB TRUE
+	update_a 1 3
+	updatepop_a 0 2
+.d 2 1 b
+	rtn
+s39.1
+	pop_a 8
+	pushD m_ParserToXML
+	pushD x_39
+.d 0 2 ii
+	jmp _match_error
+.string x_39 "parseVarDec"
+.n 1 _ ea75
+.o 1 0
+n75
+	push_node _cycle_in_spine 1
+.o 2 0
+ea75
+.o 2 0
+s75
+	push_a 0
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	buildAC ".xml"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	update_a 1 2
+	updatepop_a 0 1
+.d 2 0
+	jsr catAC
+.o 1 0
+	buildAC "xmlFiles\\"
+.d 2 0
+	jsr catAC
+.o 1 0
+	fillh ARRAY 1 1
+.d 1 0
+	rtn
+.n 4 _ ea74
+.o 1 0
+n74
+	push_node _cycle_in_spine 4
+.o 5 0
+ea74
+.o 5 0
+s74
+	push_a 3
+	jsr_eval 0
+	pushF_a 4
+	pop_a 1
+	push_a 2
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	push_a 2
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	update_a 2 5
+	update_a 1 4
+	updatepop_a 0 3
+.d 2 0
+	jsr catAC
+.o 1 0
+	push_a 1
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	update_a 1 2
+	updatepop_a 0 1
+.d 2 0
+	jsr catAC
+.o 1 0
+	buildAC "<varDec>\n"
+.d 2 0
+	jsr catAC
+.o 1 0
+.d 1 2 f
+	jsr writeFS
+.o 0 2 f
+	fillF_b 0 0
+	pop_b 2
+.d 1 0
+	rtn
+.n 1 _ ea73
+.o 1 0
+n73
+	push_node _cycle_in_spine 1
+.o 2 0
+ea73
+.o 2 0
+s73
+	push_a 0
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	buildAC ".xml"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	update_a 1 2
+	updatepop_a 0 1
+.d 2 0
+	jsr catAC
+.o 1 0
+	buildAC "xmlFiles\\"
+.d 2 0
+	jsr catAC
+.o 1 0
+	fillh ARRAY 1 1
+.d 1 0
+	rtn
+.o 8 0
+s40
+	eq_desc _Cons 2 4
+	jmp_true case.60
+	jmp s40.1
+case.60
+	push_args 4 2 2
+	buildh _Nil 0
+	update_a 0 7
+	pop_a 1
+	push_a 0
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	buildAC "<keyword> let </keyword>\n"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	push_a 0
+.d 1 1 b
+	jsr s30
+.o 0 1 b
+	notB
+	jmp_false else.61
+	push_a 1
+	push_a 1
+	buildh _Cons 2
+	push_a 10
+	pushB TRUE
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	update_a 1 11
+	updatepop_a 0 10
+.d 2 1 b
+	rtn
+else.61
+	push_a 9
+	buildI 2
+	push_a 9
+	buildh ARRAY 1
+	build _ 1 n71
+	push_a 6
+	update_a 3 4
+	update_a 2 3
+	update_a 1 2
+	updatepop_a 0 1
+	buildh _Nil 0
+	update_a 0 13
+	pop_a 1
+	jsr_ap 3
+	push_arg 0 3 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.62
+	buildAC "failed to open file"
+	updatepop_a 0 10
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 3 3
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 2 1 b
+	rtn
+else.62
+	push_arg 0 3 3
+	push_arg 1 3 2
+	buildAC "<statements>\n"
+	buildh ARRAY 1
+	build _ 2 e_StdFile_nfwrites
+	push_a 4
+	update_a 2 3
+	update_a 1 2
+	updatepop_a 0 1
+	jsr_ap 2
+	push_arg 0 2 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.63
+	buildAC "failed to close file"
+	updatepop_a 0 10
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 3 3
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 2 1 b
+	rtn
+else.63
+	push_arg 0 2 2
+	push_a 2
+	jsr_eval 0
+	push_a 10
+	push_a 10
+	buildh ARRAY 1
+	push_a 9
+	push_a 9
+	push_a 9
+	push_a 9
+	push_a 6
+	update_a 6 7
+	update_a 5 6
+	update_a 0 5
+	pop_a 1
+	update_a 7 9
+	update_a 6 8
+	update_a 5 7
+	update_a 4 6
+	update_a 3 5
+	update_a 2 4
+	update_a 1 3
+	updatepop_a 0 2
+	buildh _Nil 0
+	update_a 0 15
+	pop_a 1
+.d 8 0
+	jsr s38
+.o 2 1 b
+	push_b 0
+	notB
+	jmp_false else.64
+	buildAC "failed statments"
+	updatepop_a 0 10
+	pop_b 1
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 3 3
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 2 1 b
+	rtn
+else.64
+	push_a 1
+	buildI 2
+	push_a 9
+	buildh ARRAY 1
+	build _ 1 n72
+	push_a 6
+	pop_b 1
+	update_a 9 13
+	update_a 8 12
+	update_a 7 11
+	update_a 6 10
+	update_a 4 9
+	update_a 3 8
+	update_a 2 7
+	update_a 1 6
+	updatepop_a 0 5
+	jsr_ap 3
+	push_arg 0 3 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.65
+	buildAC "failed to open file"
+	updatepop_a 0 6
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 3 3
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 2 1 b
+	rtn
+else.65
+	push_arg 0 3 3
+	push_arg 1 3 2
+	buildAC "</statements>\n"
+	buildh ARRAY 1
+	build _ 2 e_StdFile_nfwrites
+	push_a 4
+	update_a 4 8
+	update_a 2 7
+	update_a 1 6
+	updatepop_a 0 5
+	jsr_ap 2
+	push_arg 0 2 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.66
+	buildAC "failed to close file"
+	updatepop_a 0 2
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 3 3
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 2 1 b
+	rtn
+else.66
+	push_arg 0 2 2
+	push_a 2
+	pushB TRUE
+	update_a 1 3
+	updatepop_a 0 2
+.d 2 1 b
+	rtn
+s40.1
+	pop_a 8
+	pushD m_ParserToXML
+	pushD x_40
+.d 0 2 ii
+	jmp _match_error
+.string x_40 "parseStatements"
+.n 1 _ ea72
+.o 1 0
+n72
+	push_node _cycle_in_spine 1
+.o 2 0
+ea72
+.o 2 0
+s72
+	push_a 0
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	buildAC ".xml"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	update_a 1 2
+	updatepop_a 0 1
+.d 2 0
+	jsr catAC
+.o 1 0
+	buildAC "xmlFiles\\"
+.d 2 0
+	jsr catAC
+.o 1 0
+	fillh ARRAY 1 1
+.d 1 0
+	rtn
+.n 1 _ ea71
+.o 1 0
+n71
+	push_node _cycle_in_spine 1
+.o 2 0
+ea71
+.o 2 0
+s71
+	push_a 0
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	buildAC ".xml"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	update_a 1 2
+	updatepop_a 0 1
+.d 2 0
+	jsr catAC
+.o 1 0
+	buildAC "xmlFiles\\"
+.d 2 0
+	jsr catAC
+.o 1 0
+	fillh ARRAY 1 1
+.d 1 0
+	rtn
+.o 8 0
+s41
+	eq_desc _Cons 2 4
+	jmp_true case.67
+	jmp s41.1
+case.67
+	push_args 4 2 2
+	buildh _Nil 0
+	update_a 0 7
+	pop_a 1
+	jsr_eval 1
+	eq_desc _Cons 2 1
+	jmp_true case.68
+	pop_a 2
+	jmp s41.1
+case.68
+	push_args 1 2 2
+	buildh _Nil 0
+	update_a 0 4
+	pop_a 1
+	jsr_eval 1
+	eq_desc _Cons 2 1
+	jmp_true case.69
+	pop_a 4
+	jmp s41.1
+case.69
+	push_args 1 2 2
+	buildh _Nil 0
+	update_a 0 4
+	pop_a 1
+	push_a 4
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	buildAC "<symbol> ) </symbol>\n"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_false else.70
+	push_a 1
+	push_a 1
+	buildh _Cons 2
+	push_a 3
+	buildh _Cons 2
+	push_a 5
+	buildh _Cons 2
+	push_a 14
+	pushB TRUE
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	update_a 1 15
+	updatepop_a 0 14
+.d 2 1 b
+	rtn
+else.70
+	push_a 0
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	buildAC "<symbol> ) </symbol>\n"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_false else.71
+	push_a 13
+	jsr_eval 0
+	push_a 12
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	push_a 3
+	push_a 3
+	buildh _Cons 2
+	push_a 5
+	buildh _Cons 2
+	push_a 7
+	buildh _Cons 2
+	push_a 15
+	push_a 13
+	push_a 13
+	push_a 13
+	push_a 13
+	push_a 6
+	update_a 5 7
+	update_a 6 5
+	update_a 0 6
+	pop_a 1
+	update_a 7 21
+	update_a 6 20
+	update_a 5 19
+	update_a 4 18
+	update_a 3 17
+	update_a 2 16
+	update_a 1 15
+	updatepop_a 0 14
+.d 8 0
+	jmp s48
+else.71
+	push_a 13
+	buildI 2
+	push_a 13
+	build _ 1 n78
+	push_a 10
+	buildh _Nil 0
+	update_a 0 18
+	pop_a 1
+	jsr_ap 3
+	push_arg 0 3 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.72
+	buildAC "failed to open file"
+	updatepop_a 0 15
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 3 3
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 2 1 b
+	rtn
+else.72
+	push_arg 0 3 3
+	push_arg 1 3 2
+	push_a 3
+	push_a 6
+	push_a 9
+	build _ 4 n79
+	push_a 9
+	update_a 5 9
+	update_a 4 8
+	update_a 2 7
+	update_a 1 6
+	updatepop_a 0 5
+	jsr_ap 2
+	push_arg 0 2 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.73
+	buildAC "failed to close file"
+	updatepop_a 0 11
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 3 3
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 2 1 b
+	rtn
+else.73
+	buildAC "<symbol> , </symbol>\n"
+	push_array 2
+	update_a 2 3
+	update_a 1 2
+	updatepop_a 0 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_false else.74
 	push_arg 0 2 2
 	push_a 2
 	jsr_eval 0
@@ -1343,22 +2767,1181 @@ else.33
 	update_a 1 11
 	updatepop_a 0 10
 .d 8 0
-	jmp s22
-s22.1
+	jmp s41
+else.74
+	push_arg 0 2 2
+	push_a 2
+	pushB TRUE
+	update_a 1 11
+	updatepop_a 0 10
+.d 2 1 b
+	rtn
+s41.1
 	pop_a 8
 	pushD m_ParserToXML
-	pushD x_22
+	pushD x_41
 .d 0 2 ii
 	jmp _match_error
-.string x_22 "parseSubroutineDec"
-.n 5 _ ea36
+.string x_41 "parseParameterList"
+.n 4 _ ea79
 .o 1 0
-n36
+n79
+	push_node _cycle_in_spine 4
+.o 5 0
+ea79
+.o 5 0
+s79
+	push_a 3
+	jsr_eval 0
+	pushF_a 4
+	pop_a 1
+	push_a 2
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	push_a 2
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	update_a 2 5
+	update_a 1 4
+	updatepop_a 0 3
+.d 2 0
+	jsr catAC
+.o 1 0
+	push_a 1
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	update_a 1 2
+	updatepop_a 0 1
+.d 2 0
+	jsr catAC
+.o 1 0
+.d 1 2 f
+	jsr writeFS
+.o 0 2 f
+	fillF_b 0 0
+	pop_b 2
+.d 1 0
+	rtn
+.n 1 _ ea78
+.o 1 0
+n78
+	push_node _cycle_in_spine 1
+.o 2 0
+ea78
+.o 2 0
+s78
+	push_a 0
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	buildAC ".xml"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	update_a 1 2
+	updatepop_a 0 1
+.d 2 0
+	jsr catAC
+.o 1 0
+	buildAC "xmlFiles\\"
+.d 2 0
+	jsr catAC
+.o 1 0
+	fillh ARRAY 1 1
+.d 1 0
+	rtn
+.o 8 0
+s42
+	eq_desc _Cons 2 4
+	jmp_true case.75
+	jmp s42.1
+case.75
+	push_args 4 2 2
+	buildh _Nil 0
+	update_a 0 7
+	pop_a 1
+	push_a 9
+	buildI 2
+	push_a 9
+	build _ 1 n70
+	push_a 6
+	buildh _Nil 0
+	update_a 0 14
+	pop_a 1
+	jsr_ap 3
+	push_arg 0 3 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.76
+	buildAC "failed to open file"
+	updatepop_a 0 11
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 3 3
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 2 1 b
+	rtn
+else.76
+	push_arg 0 3 3
+	push_arg 1 3 2
+	push_a 3
+	build _ 2 n67
+	push_a 5
+	update_a 2 4
+	update_a 1 3
+	updatepop_a 0 2
+	jsr_ap 2
+	push_arg 0 2 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.77
+	buildAC "failed to close file"
+	updatepop_a 0 10
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 3 3
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 2 1 b
+	rtn
+else.77
+	push_arg 0 2 2
+	push_a 2
+	jsr_eval 0
+	push_a 10
+	push_a 10
+	push_a 9
+	push_a 9
+	push_a 9
+	push_a 9
+	push_a 6
+	update_a 6 7
+	update_a 5 6
+	update_a 0 5
+	pop_a 1
+	update_a 7 9
+	update_a 6 8
+	update_a 5 7
+	update_a 4 6
+	update_a 3 5
+	update_a 2 4
+	update_a 1 3
+	updatepop_a 0 2
+.d 8 0
+	jsr s39
+.o 2 1 b
+	push_b 0
+	notB
+	jmp_false else.78
+	buildAC "failed to parse vardec"
+	updatepop_a 0 10
+	pop_b 1
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 3 3
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 2 1 b
+	rtn
+else.78
+	push_a 0
+	jsr_eval 0
+	push_a 2
+	push_a 10
+	push_a 10
+	push_a 3
+	push_a 10
+	push_a 10
+	push_a 10
+	push_a 10
+	pop_b 1
+	update_a 8 10
+	update_a 7 9
+	update_a 6 8
+	update_a 5 7
+	update_a 4 6
+	update_a 3 5
+	update_a 2 4
+	update_a 1 3
+	updatepop_a 0 2
+.d 8 0
+	jsr s40
+.o 2 1 b
+	push_b 0
+	notB
+	jmp_false else.79
+	buildAC "failed to parse statements"
+	updatepop_a 0 11
+	pop_b 1
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 3 3
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 2 1 b
+	rtn
+else.79
+	push_a 1
+	buildI 2
+	push_a 10
+	build _ 1 n68
+	push_a 7
+	pop_b 1
+	update_a 4 5
+	update_a 3 4
+	update_a 2 3
+	update_a 1 2
+	updatepop_a 0 1
+	jsr_ap 3
+	push_arg 0 3 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.80
+	buildAC "failed to open file"
+	updatepop_a 0 11
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 3 3
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 2 1 b
+	rtn
+else.80
+	push_arg 0 3 3
+	push_arg 1 3 2
+	push_a 3
+	build _ 1 n99
+	build d_S.1 -1 n_S.1
+	build _ 2 n69
+	push_a 5
+	update_a 2 4
+	update_a 1 3
+	updatepop_a 0 2
+	jsr_ap 2
+	push_arg 0 2 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.81
+	buildAC "failed to close file"
+	updatepop_a 0 10
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 3 3
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 2 1 b
+	rtn
+else.81
+	push_arg 0 2 2
+	push_a 9
+	push_a 9
+	buildh ARRAY 1
+	push_a 4
+	push_a 9
+	push_a 9
+	push_a 9
+	push_a 9
+	update_a 7 17
+	update_a 6 16
+	update_a 5 15
+	update_a 4 14
+	update_a 3 13
+	update_a 2 12
+	update_a 1 11
+	updatepop_a 0 10
+.d 8 0
+	jmp s43
+s42.1
+	pop_a 8
+	pushD m_ParserToXML
+	pushD x_42
+.d 0 2 ii
+	jmp _match_error
+.string x_42 "parseSubroutineBody"
+.n 1 _ ea99
+.o 1 0
+n99
+	push_node _cycle_in_spine 1
+.o 2 0
+ea99
+	jsr_eval 0
+.o 2 0
+s99
+	eq_desc _Cons 2 0
+	jmp_true case.82
+	jmp s99.1
+case.82
+	push_args 0 2 2
+	pop_a 2
+	fill_a 0 1
+	pop_a 1
+.d 1 0
+	rtn
+s99.1
+	pop_a 2
+	pushD m_ParserToXML
+	pushD x_99
+.d 0 2 ii
+	jmp _match_error
+.string x_99 "_match0"
+.n 1 _ ea70
+.o 1 0
+n70
+	push_node _cycle_in_spine 1
+.o 2 0
+ea70
+.o 2 0
+s70
+	buildAC ".xml"
+	push_a 1
+	update_a 1 2
+	updatepop_a 0 1
+.d 2 0
+	jsr catAC
+.o 1 0
+	buildAC "xmlFiles\\"
+.d 2 0
+	jsr catAC
+.o 1 0
+	fillh ARRAY 1 1
+.d 1 0
+	rtn
+.n 2 _ ea69
+.o 1 0
+n69
+	push_node _cycle_in_spine 2
+.o 3 0
+ea69
+.o 3 0
+s69
+	push_a 1
+	jsr_eval 0
+	pushF_a 2
+	pop_a 1
+	push_a 0
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	buildAC "</subroutineBody>\n"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	update_a 1 3
+	updatepop_a 0 2
+.d 2 0
+	jsr catAC
+.o 1 0
+.d 1 2 f
+	jsr writeFS
+.o 0 2 f
+	fillF_b 0 0
+	pop_b 2
+.d 1 0
+	rtn
+.n 1 _ ea68
+.o 1 0
+n68
+	push_node _cycle_in_spine 1
+.o 2 0
+ea68
+.o 2 0
+s68
+	buildAC ".xml"
+	push_a 1
+	update_a 1 2
+	updatepop_a 0 1
+.d 2 0
+	jsr catAC
+.o 1 0
+	buildAC "xmlFiles\\"
+.d 2 0
+	jsr catAC
+.o 1 0
+	fillh ARRAY 1 1
+.d 1 0
+	rtn
+.n 2 _ ea67
+.o 1 0
+n67
+	push_node _cycle_in_spine 2
+.o 3 0
+ea67
+.o 3 0
+s67
+	push_a 1
+	jsr_eval 0
+	pushF_a 2
+	pop_a 1
+	push_a 0
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	buildAC "<subroutineBody>\n"
+	update_a 1 3
+	updatepop_a 0 2
+.d 2 0
+	jsr catAC
+.o 1 0
+.d 1 2 f
+	jsr writeFS
+.o 0 2 f
+	fillF_b 0 0
+	pop_b 2
+.d 1 0
+	rtn
+.o 8 0
+s43
+	eq_desc _Cons 2 4
+	jmp_true case.83
+	jmp s43.1
+case.83
+	push_args 4 2 2
+	buildh _Nil 0
+	update_a 0 7
+	pop_a 1
+	jsr_eval 1
+	eq_desc _Cons 2 1
+	jmp_true case.84
+	pop_a 2
+	jmp s43.1
+case.84
+	push_args 1 2 2
+	buildh _Nil 0
+	update_a 0 4
+	pop_a 1
+	push_a 2
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	buildAC "<keyword> static </keyword>\n"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	push_a 2
+.d 1 1 b
+	jsr s29
+.o 0 1 b
+	notB
+	jmp_false else.85
+	push_a 1
+	push_a 1
+	buildh _Cons 2
+	push_a 3
+	buildh _Cons 2
+	push_a 12
+	pushB TRUE
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	update_a 1 13
+	updatepop_a 0 12
+.d 2 1 b
+	rtn
+else.85
+	push_a 11
+	buildI 2
+	push_a 11
+	build _ 1 n82
+	push_a 8
+	buildh _Nil 0
+	update_a 0 16
+	pop_a 1
+	jsr_ap 3
+	push_arg 0 3 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.86
+	buildAC "failed to open file"
+	updatepop_a 0 13
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 3 3
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 2 1 b
+	rtn
+else.86
+	push_arg 0 3 3
+	push_arg 1 3 2
+	push_a 3
+	push_a 6
+	build _ 3 n83
+	push_a 7
+	update_a 5 7
+	update_a 2 6
+	update_a 1 5
+	updatepop_a 0 4
+	jsr_ap 2
+	push_arg 0 2 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.87
+	buildAC "failed to close file"
+	updatepop_a 0 10
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 3 3
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 2 1 b
+	rtn
+else.87
+	push_arg 0 2 2
+.impmod StdFile
+.impdesc e_StdFile_rFileSystem;
+	build_r e_StdFile_rFileSystem; 4 0 3 0
+	push_a 10
+	push_a 10
+	push_a 5
+	push_a 3
+	update_a 3 4
+	update_a 2 3
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	build _ 5 n6
+	push_a 0
+	build d_S.3 -1 n_S.3
+	buildI 2
+	push_a 10
+	build _ 1 n84
+	push_a 7
+	update_a 4 6
+	update_a 3 5
+	update_a 2 4
+	update_a 1 3
+	updatepop_a 0 2
+	jsr_ap 3
+	push_arg 0 3 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.88
+	buildAC "failed to open file"
+	updatepop_a 0 10
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 3 3
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 2 1 b
+	rtn
+else.88
+	push_arg 0 3 3
+	push_arg 1 3 2
+	buildAC "</classVarDec>\n"
+	buildh ARRAY 1
+	build _ 2 e_StdFile_nfwrites
+	push_a 4
+	update_a 2 3
+	update_a 1 2
+	updatepop_a 0 1
+	jsr_ap 2
+	push_arg 0 2 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.89
+	buildAC "failed to close file"
+	updatepop_a 0 10
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 3 3
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 2 1 b
+	rtn
+else.89
+	push_arg 0 2 2
+	jsr_eval 2
+	push_arg 2 3 2
+	jsr_eval 0
+	push_a 10
+	push_a 10
+	push_a 9
+	push_a 9
+	push_a 9
+	push_a 9
+	push_a 6
+	update_a 6 7
+	update_a 5 6
+	update_a 0 5
+	pop_a 1
+	update_a 7 17
+	update_a 6 16
+	update_a 5 15
+	update_a 4 14
+	update_a 3 13
+	update_a 2 12
+	update_a 1 11
+	updatepop_a 0 10
+.d 8 0
+	jmp s43
+s43.1
+	pop_a 8
+	pushD m_ParserToXML
+	pushD x_43
+.d 0 2 ii
+	jmp _match_error
+.string x_43 "parseClassVarDec"
+.n 1 _ ea84
+.o 1 0
+n84
+	push_node _cycle_in_spine 1
+.o 2 0
+ea84
+.o 2 0
+s84
+	push_a 0
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	buildAC ".xml"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	update_a 1 2
+	updatepop_a 0 1
+.d 2 0
+	jsr catAC
+.o 1 0
+	buildAC "xmlFiles\\"
+.d 2 0
+	jsr catAC
+.o 1 0
+	fillh ARRAY 1 1
+.d 1 0
+	rtn
+.n 3 _ ea83
+.o 1 0
+n83
+	push_node _cycle_in_spine 3
+.o 4 0
+ea83
+.o 4 0
+s83
+	push_a 2
+	jsr_eval 0
+	pushF_a 3
+	pop_a 1
+	push_a 1
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	push_a 1
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	update_a 1 4
+	updatepop_a 0 3
+.d 2 0
+	jsr catAC
+.o 1 0
+	buildAC "<classVarDec>\n"
+.d 2 0
+	jsr catAC
+.o 1 0
+.d 1 2 f
+	jsr writeFS
+.o 0 2 f
+	fillF_b 0 0
+	pop_b 2
+.d 1 0
+	rtn
+.n 1 _ ea82
+.o 1 0
+n82
+	push_node _cycle_in_spine 1
+.o 2 0
+ea82
+.o 2 0
+s82
+	push_a 0
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	buildAC ".xml"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	update_a 1 2
+	updatepop_a 0 1
+.d 2 0
+	jsr catAC
+.o 1 0
+	buildAC "xmlFiles\\"
+.d 2 0
+	jsr catAC
+.o 1 0
+	fillh ARRAY 1 1
+.d 1 0
+	rtn
+.o 8 0
+s44
+	eq_desc _Cons 2 4
+	jmp_true case.90
+	jmp s44.1
+case.90
+	push_args 4 2 2
+	buildh _Nil 0
+	update_a 0 7
+	pop_a 1
+	jsr_eval 1
+	eq_desc _Cons 2 1
+	jmp_true case.91
+	pop_a 2
+	jmp s44.1
+case.91
+	push_args 1 2 2
+	buildh _Nil 0
+	update_a 0 4
+	pop_a 1
+	jsr_eval 1
+	eq_desc _Cons 2 1
+	jmp_true case.92
+	pop_a 4
+	jmp s44.1
+case.92
+	push_args 1 2 2
+	buildh _Nil 0
+	update_a 0 4
+	pop_a 1
+	jsr_eval 1
+	eq_desc _Cons 2 1
+	jmp_true case.93
+	pop_a 6
+	jmp s44.1
+case.93
+	push_args 1 2 2
+	buildh _Nil 0
+	update_a 0 4
+	pop_a 1
+	push_a 6
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	buildAC "<keyword> function </keyword>\n"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	push_a 6
+.d 1 1 b
+	jsr s31
+.o 0 1 b
+	notB
+	jmp_false else.94
+	push_a 1
+	push_a 1
+	buildh _Cons 2
+	push_a 3
+	buildh _Cons 2
+	push_a 5
+	buildh _Cons 2
+	push_a 7
+	buildh _Cons 2
+	push_a 16
+	pushB TRUE
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	update_a 1 17
+	updatepop_a 0 16
+.d 2 1 b
+	rtn
+else.94
+	push_a 15
+	buildI 2
+	push_a 15
+	build _ 1 n63
+	push_a 12
+	buildh _Nil 0
+	update_a 0 20
+	pop_a 1
+	jsr_ap 3
+	push_arg 0 3 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.95
+	buildAC "failed to open file"
+	updatepop_a 0 17
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 3 3
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 2 1 b
+	rtn
+else.95
+	push_arg 0 3 3
+	push_arg 1 3 2
+	push_a 3
+	push_a 6
+	push_a 9
+	push_a 12
+	build _ 5 n64
+	push_a 11
+	update_a 5 11
+	update_a 2 10
+	update_a 1 9
+	updatepop_a 0 8
+	jsr_ap 2
+	push_arg 0 2 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.96
+	buildAC "failed to close file"
+	updatepop_a 0 10
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 3 3
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 2 1 b
+	rtn
+else.96
+	push_arg 0 2 2
+	push_a 2
+	jsr_eval 0
+	push_a 10
+	push_a 10
+	push_a 9
+	push_a 9
+	push_a 9
+	push_a 9
+	push_a 6
+	update_a 6 7
+	update_a 5 6
+	update_a 0 5
+	pop_a 1
+	update_a 7 9
+	update_a 6 8
+	update_a 5 7
+	update_a 4 6
+	update_a 3 5
+	update_a 2 4
+	update_a 1 3
+	updatepop_a 0 2
+.d 8 0
+	jsr s41
+.o 2 1 b
+	push_b 0
+	notB
+	jmp_false else.97
+	buildAC "failed to parse params list"
+	updatepop_a 0 10
+	pop_b 1
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 3 3
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 2 1 b
+	rtn
+else.97
+	push_a 1
+	buildI 2
+	push_a 9
+	build _ 1 n65
+	push_a 6
+	pop_b 1
+	update_a 4 5
+	update_a 3 4
+	update_a 2 3
+	update_a 1 2
+	updatepop_a 0 1
+	jsr_ap 3
+	push_arg 0 3 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.98
+	buildAC "failed to open file"
+	updatepop_a 0 10
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 3 3
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 2 1 b
+	rtn
+else.98
+	push_a 1
+	build _ 1 n100
+	push_arg 1 3 3
+	push_arg 2 3 2
+	push_a 2
+	build d_S.1 -1 n_S.1
+	build _ 2 n66
+	push_a 5
+	update_a 3 5
+	update_a 2 4
+	update_a 1 3
+	updatepop_a 0 2
+	jsr_ap 2
+	push_arg 0 2 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.99
+	buildAC "failed to close file"
+	updatepop_a 0 10
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 3 3
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 2 1 b
+	rtn
+else.99
+	jsr_eval 1
+	push_arg 1 2 2
+	jsr_eval 0
+	push_arg 1 2 2
+	jsr_eval 0
+	push_a 9
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	push_a 11
+	push_a 3
+	push_a 10
+	push_a 10
+	push_a 10
+	push_a 10
+	push_a 6
+	update_a 6 7
+	update_a 0 6
+	pop_a 1
+	update_a 8 10
+	update_a 7 9
+	update_a 6 8
+	update_a 5 7
+	update_a 4 6
+	update_a 3 5
+	update_a 2 4
+	update_a 1 3
+	updatepop_a 0 2
+.d 8 0
+	jsr s42
+.o 2 1 b
+	push_b 0
+	notB
+	jmp_false else.100
+	buildAC "failed to parse subroutine body"
+	updatepop_a 0 11
+	pop_b 1
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 3 3
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 2 1 b
+	rtn
+else.100
+	push_a 1
+	push_a 10
+	push_a 10
+	push_a 5
+	push_a 10
+	push_a 10
+	push_a 10
+	push_a 10
+	update_a 7 18
+	update_a 6 17
+	update_a 5 16
+	update_a 4 15
+	update_a 3 14
+	update_a 2 13
+	update_a 1 12
+	updatepop_a 0 11
+	pop_b 1
+.d 8 0
+	jmp s44
+s44.1
+	pop_a 8
+	pushD m_ParserToXML
+	pushD x_44
+.d 0 2 ii
+	jmp _match_error
+.string x_44 "parseSubroutineDec"
+.n 1 _ ea100
+.o 1 0
+n100
+	push_node _cycle_in_spine 1
+.o 2 0
+ea100
+	jsr_eval 0
+.o 2 0
+s100
+	eq_desc _Cons 2 0
+	jmp_true case.101
+	jmp s100.1
+case.101
+	push_args 0 2 2
+	pop_a 2
+	fill_a 0 1
+	pop_a 1
+.d 1 0
+	rtn
+s100.1
+	pop_a 2
+	pushD m_ParserToXML
+	pushD x_100
+.d 0 2 ii
+	jmp _match_error
+.string x_100 "_match1"
+.n 2 _ ea66
+.o 1 0
+n66
+	push_node _cycle_in_spine 2
+.o 3 0
+ea66
+.o 3 0
+s66
+	push_a 1
+	jsr_eval 0
+	pushF_a 2
+	pop_a 1
+	push_a 0
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	buildAC "</parameterList>\n"
+	update_a 1 3
+	updatepop_a 0 2
+.d 2 0
+	jsr catAC
+.o 1 0
+.d 1 2 f
+	jsr writeFS
+.o 0 2 f
+	fillF_b 0 0
+	pop_b 2
+.d 1 0
+	rtn
+.n 1 _ ea65
+.o 1 0
+n65
+	push_node _cycle_in_spine 1
+.o 2 0
+ea65
+.o 2 0
+s65
+	push_a 0
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	buildAC ".xml"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	update_a 1 2
+	updatepop_a 0 1
+.d 2 0
+	jsr catAC
+.o 1 0
+	buildAC "xmlFiles\\"
+.d 2 0
+	jsr catAC
+.o 1 0
+	fillh ARRAY 1 1
+.d 1 0
+	rtn
+.n 5 _ ea64
+.o 1 0
+n64
 	push_node _cycle_in_spine 5
 .o 6 0
-ea36
+ea64
 .o 6 0
-s36
+s64
 	push_a 4
 	jsr_eval 0
 	pushF_a 5
@@ -1367,6 +3950,18 @@ s36
 	jsr_eval 0
 	push_array 0
 	updatepop_a 0 1
+	buildAC "<parameterList>\n"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	buildh _Nil 0
+	update_a 0 6
+	update_a 0 7
+	pop_a 1
+.d 2 0
+	jsr catAC
+.o 1 0
 	push_a 3
 	jsr_eval 0
 	push_array 0
@@ -1408,14 +4003,14 @@ s36
 	pop_b 2
 .d 1 0
 	rtn
-.n 1 _ ea35
+.n 1 _ ea63
 .o 1 0
-n35
+n63
 	push_node _cycle_in_spine 1
 .o 2 0
-ea35
+ea63
 .o 2 0
-s35
+s63
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -1438,17 +4033,17 @@ s35
 .d 1 0
 	rtn
 .o 8 0
-s23
+s45
 	eq_desc _Nil 0 4
-	jmp_true case.34
-	jmp case.35
-case.34
+	jmp_true case.102
+	jmp case.103
+case.102
 	push_a 7
 	pushB TRUE
 	updatepop_a 0 8
 .d 1 1 b
 	rtn
-case.35
+case.103
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
@@ -1472,7 +4067,7 @@ case.35
 	update_a 1 2
 	updatepop_a 0 1
 .d 2 2 ii
-	jsr s9
+	jsr s22
 .o 1 0
 .d 1 0
 	jsr e_StdList_stoString;79
@@ -1482,7 +4077,7 @@ case.35
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.36
+	jmp_false else.104
 	push_a 1
 	jsr_eval 0
 	push_a 10
@@ -1507,8 +4102,8 @@ case.35
 	update_a 1 11
 	updatepop_a 0 10
 .d 8 0
-	jmp s23
-else.36
+	jmp s45
+else.104
 	buildAC "<keyword> class </keyword>\n"
 	push_a 1
 	update_a 1 2
@@ -1516,7 +4111,7 @@ else.36
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.37
+	jmp_false else.105
 	push_a 8
 	jsr_eval 0
 	push_a 7
@@ -1544,8 +4139,8 @@ else.36
 	update_a 1 10
 	updatepop_a 0 9
 .d 8 0
-	jmp s25
-else.37
+	jmp s47
+else.105
 	buildAC "This is why you fail"
 	updatepop_a 0 9
 .d 1 0
@@ -1559,17 +4154,17 @@ else.37
 .d 1 1 b
 	rtn
 .o 6 0
-s24
+s46
 	eq_desc _Nil 0 4
-	jmp_true case.38
-	jmp case.39
-case.38
+	jmp_true case.106
+	jmp case.107
+case.106
 	push_a 5
 	pushB TRUE
 	updatepop_a 0 6
 .d 1 1 b
 	rtn
-case.39
+case.107
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
@@ -1580,15 +4175,15 @@ case.39
 	build d_S.2 -1 n_S.2
 	push_a 1
 	build d_S.1 -1 n_S.1
-	build _ 2 n42
+	build _ 2 n92
 	push_a 0
-	build _ 1 n43
+	build _ 1 n93
 	push_a 0
-	build _ 1 n44
+	build _ 1 n94
 	push_a 11
 	buildI 1
 	push_a 2
-	build _ 1 n45
+	build _ 1 n95
 	push_a 10
 	buildh _Nil 0
 	update_a 0 16
@@ -1600,7 +4195,7 @@ case.39
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.40
+	jmp_false else.108
 	buildAC "failed to open file"
 	updatepop_a 0 13
 .d 1 0
@@ -1613,7 +4208,7 @@ case.39
 	pop_a 1
 .d 1 1 b
 	rtn
-else.40
+else.108
 	push_arg 0 3 3
 	push_arg 1 3 2
 	buildAC ""
@@ -1629,7 +4224,7 @@ else.40
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.41
+	jmp_false else.109
 	buildAC "failed to close file"
 	updatepop_a 0 13
 .d 1 0
@@ -1642,14 +4237,14 @@ else.40
 	pop_a 1
 .d 1 1 b
 	rtn
-else.41
+else.109
 	push_arg 0 2 2
 	push_a 6
 	buildAC "TxmlFiles\\"
 	buildh ARRAY 1
 	build _ 2 e_StdString_n+++;11
 	push_a 10
-	build _ 3 n40
+	build _ 3 n90
 	push_a 0
 	build d_S.2 -1 n_S.2
 	buildh _Nil 0
@@ -1666,7 +4261,7 @@ else.41
 	update_a 1 2
 	update_a 0 1
 	pop_a 1
-	build _ 3 n41
+	build _ 3 n91
 	build d_S.2 -1 n_S.2
 	push_a 1
 	jsr_eval 0
@@ -1690,11 +4285,11 @@ else.41
 	update_a 1 5
 	updatepop_a 0 4
 .d 8 0
-	jsr s23
+	jsr s45
 .o 1 1 b
 	push_b 0
 	notB
-	jmp_false else.42
+	jmp_false else.110
 	push_a 5
 	jsr_eval 0
 	push_array 0
@@ -1727,7 +4322,7 @@ else.41
 	pop_a 1
 .d 1 1 b
 	rtn
-else.42
+else.110
 	push_a 6
 	jsr_eval 0
 	push_a 1
@@ -1754,11 +4349,11 @@ else.42
 	update_a 0 12
 	pop_a 1
 .d 6 0
-	jsr s24
+	jsr s46
 .o 1 1 b
 	pop_a 1
 	notB
-	jmp_false else.43
+	jmp_false else.111
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -1788,24 +4383,24 @@ else.42
 	pop_a 1
 .d 1 1 b
 	rtn
-else.43
+else.111
 	pop_a 6
-	jmp s24.1
-s24.1
+	jmp s46.1
+s46.1
 	pop_a 6
 	pushD m_ParserToXML
-	pushD x_24
+	pushD x_46
 .d 0 2 ii
 	jmp _match_error
-.string x_24 "ParseMultipleFiles"
-.n 1 _ ea45
+.string x_46 "ParseMultipleFiles"
+.n 1 _ ea95
 .o 1 0
-n45
+n95
 	push_node _cycle_in_spine 1
 .o 2 0
-ea45
+ea95
 .o 2 0
-s45
+s95
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -1827,14 +4422,14 @@ s45
 	fillh ARRAY 1 1
 .d 1 0
 	rtn
-.n 1 _ ea44
+.n 1 _ ea94
 .o 1 0
-n44
+n94
 	push_node _cycle_in_spine 1
 .o 2 0
-ea44
+ea94
 .o 2 0
-s44
+s94
 	push_a 0
 	jsr_eval 0
 	push_a 1
@@ -1843,7 +4438,7 @@ s44
 	update_a 0 3
 	pop_a 1
 .d 1 1 i
-	jsr s13
+	jsr s26
 .o 0 1 i
 	create_array_ CHAR 0 1
 	buildI 0
@@ -1855,19 +4450,19 @@ s44
 	update_a 1 2
 	updatepop_a 0 1
 .d 3 0
-	jsr s12
+	jsr s25
 .o 1 0
 	fillh ARRAY 1 1
 .d 1 0
 	rtn
-.n 1 _ ea43
+.n 1 _ ea93
 .o 1 0
-n43
+n93
 	push_node _cycle_in_spine 1
 .o 2 0
-ea43
+ea93
 .o 2 0
-s43
+s93
 	push_a 0
 	jsr_eval 0
 .d 1 0
@@ -1883,14 +4478,14 @@ s43
 	updatepop_a 0 1
 .d 2 1 i
 	jmp e_StdList_stake
-.n 2 _ ea42
+.n 2 _ ea92
 .o 1 0
-n42
+n92
 	push_node _cycle_in_spine 2
 .o 3 0
-ea42
+ea92
 .o 3 0
-s42
+s92
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -1905,15 +4500,15 @@ s42
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s10
-.n 3 _ ea41
+	jmp s23
+.n 3 _ ea91
 .o 1 0
-n41
+n91
 	push_node _cycle_in_spine 3
 .o 4 0
-ea41
+ea91
 .o 4 0
-s41
+s91
 	push_a 2
 	push_a 1
 	jsr_eval 0
@@ -1930,14 +4525,14 @@ s41
 	pop_a 1
 .d 1 0
 	rtn
-.n 3 _ ea40
+.n 3 _ ea90
 .o 1 0
-n40
+n90
 	push_node _cycle_in_spine 3
 .o 4 0
-ea40
+ea90
 .o 4 0
-s40
+s90
 	push_a 2
 	buildI 0
 	push_a 2
@@ -1957,21 +4552,21 @@ s40
 .d 1 0
 	rtn
 .o 8 0
-s25
+s47
 	eq_desc _Cons 2 4
-	jmp_true case.44
-	jmp s25.1
-case.44
+	jmp_true case.112
+	jmp s47.1
+case.112
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
 	pop_a 1
 	jsr_eval 1
 	eq_desc _Cons 2 1
-	jmp_true case.45
+	jmp_true case.113
 	pop_a 2
-	jmp s25.1
-case.45
+	jmp s47.1
+case.113
 	push_args 1 2 2
 	buildh _Nil 0
 	update_a 0 4
@@ -1979,7 +4574,7 @@ case.45
 	push_a 11
 	buildI 2
 	push_a 11
-	build _ 1 n48
+	build _ 1 n98
 	push_a 8
 	buildh _Nil 0
 	update_a 0 16
@@ -1990,7 +4585,7 @@ case.45
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.46
+	jmp_false else.114
 	buildAC "failed to open file"
 	updatepop_a 0 13
 .d 1 0
@@ -2003,12 +4598,12 @@ case.45
 	pop_a 1
 .d 1 1 b
 	rtn
-else.46
+else.114
 	push_arg 0 3 3
 	push_arg 1 3 2
 	push_a 3
 	push_a 6
-	build _ 3 n46
+	build _ 3 n96
 	push_a 7
 	update_a 5 7
 	update_a 2 6
@@ -2020,7 +4615,7 @@ else.46
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.47
+	jmp_false else.115
 	buildAC "failed to close file"
 	updatepop_a 0 10
 .d 1 0
@@ -2033,7 +4628,7 @@ else.46
 	pop_a 1
 .d 1 1 b
 	rtn
-else.47
+else.115
 	push_arg 0 2 2
 	push_a 2
 	jsr_eval 0
@@ -2057,17 +4652,14 @@ else.47
 	update_a 2 4
 	update_a 1 3
 	updatepop_a 0 2
-	buildh _Nil 0
-	update_a 0 15
-	pop_a 1
 .d 8 0
-	jsr s22
-.o 1 1 b
+	jsr s43
+.o 2 1 b
 	push_b 0
 	notB
-	jmp_false else.48
-	buildAC "failed to parse subroutine"
-	updatepop_a 0 9
+	jmp_false else.116
+	buildAC "failed to parse vardec"
+	updatepop_a 0 10
 	pop_b 1
 .d 1 0
 	jsr print_string_
@@ -2079,28 +4671,76 @@ else.47
 	pop_a 1
 .d 1 1 b
 	rtn
-else.48
+else.116
 	push_a 0
-	buildI 2
-	push_a 8
-	build _ 1 n47
-	push_a 5
+	jsr_eval 0
+	push_a 2
+	push_a 10
+	push_a 10
+	buildh ARRAY 1
+	push_a 9
+	push_a 9
+	push_a 9
+	push_a 9
+	push_a 7
+	update_a 7 8
+	update_a 6 7
+	update_a 5 6
+	update_a 0 5
+	pop_a 1
 	pop_b 1
+	update_a 7 9
+	update_a 6 8
+	update_a 5 7
+	update_a 4 6
+	update_a 3 5
+	update_a 2 4
+	update_a 1 3
+	updatepop_a 0 2
+	buildh _Nil 0
+	update_a 0 15
+	pop_a 1
+.d 8 0
+	jsr s44
+.o 2 1 b
+	push_b 0
+	notB
+	jmp_false else.117
+	buildAC "failed to parse subroutine"
+	updatepop_a 0 10
+	pop_b 1
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 1 1 b
+	rtn
+else.117
+	push_a 1
+	buildI 2
+	push_a 9
+	build _ 1 n97
+	push_a 6
+	pop_b 1
+	update_a 9 13
 	update_a 8 12
 	update_a 7 11
 	update_a 6 10
-	update_a 5 9
-	update_a 3 8
-	update_a 2 7
-	update_a 1 6
-	updatepop_a 0 5
+	update_a 3 9
+	update_a 2 8
+	update_a 1 7
+	updatepop_a 0 6
 	jsr_ap 3
 	push_arg 0 3 1
 	jsr_eval 0
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.49
+	jmp_false else.118
 	buildAC "failed to open file"
 	updatepop_a 0 5
 .d 1 0
@@ -2113,7 +4753,7 @@ else.48
 	pop_a 1
 .d 1 1 b
 	rtn
-else.49
+else.118
 	push_arg 0 3 3
 	push_arg 1 3 2
 	buildAC "<symbol> } </symbol>\n</class>\n"
@@ -2129,7 +4769,7 @@ else.49
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.50
+	jmp_false else.119
 	buildAC "failed to close file"
 	updatepop_a 0 1
 .d 1 0
@@ -2142,27 +4782,27 @@ else.49
 	pop_a 1
 .d 1 1 b
 	rtn
-else.50
+else.119
 	push_arg 0 2 2
 	pushB TRUE
 	updatepop_a 0 1
 .d 1 1 b
 	rtn
-s25.1
+s47.1
 	pop_a 8
 	pushD m_ParserToXML
-	pushD x_25
+	pushD x_47
 .d 0 2 ii
 	jmp _match_error
-.string x_25 "parseClass"
-.n 1 _ ea48
+.string x_47 "parseClass"
+.n 1 _ ea98
 .o 1 0
-n48
+n98
 	push_node _cycle_in_spine 1
 .o 2 0
-ea48
+ea98
 .o 2 0
-s48
+s98
 	buildAC ".xml"
 	push_a 1
 	update_a 1 2
@@ -2177,14 +4817,14 @@ s48
 	fillh ARRAY 1 1
 .d 1 0
 	rtn
-.n 1 _ ea47
+.n 1 _ ea97
 .o 1 0
-n47
+n97
 	push_node _cycle_in_spine 1
 .o 2 0
-ea47
+ea97
 .o 2 0
-s47
+s97
 	buildAC ".xml"
 	push_a 1
 	update_a 1 2
@@ -2199,14 +4839,14 @@ s47
 	fillh ARRAY 1 1
 .d 1 0
 	rtn
-.n 3 _ ea46
+.n 3 _ ea96
 .o 1 0
-n46
+n96
 	push_node _cycle_in_spine 3
 .o 4 0
-ea46
+ea96
 .o 4 0
-s46
+s96
 	push_a 2
 	jsr_eval 0
 	pushF_a 3
@@ -2243,5 +4883,370 @@ s46
 	pop_b 2
 .d 1 0
 	rtn
+.o 8 0
+s48
+	eq_desc _Cons 2 4
+	jmp_true case.120
+	jmp s48.1
+case.120
+	push_args 4 2 2
+	buildh _Nil 0
+	update_a 0 7
+	pop_a 1
+	jsr_eval 1
+	eq_desc _Cons 2 1
+	jmp_true case.121
+	pop_a 2
+	jmp s48.1
+case.121
+	push_args 1 2 2
+	buildh _Nil 0
+	update_a 0 4
+	pop_a 1
+	jsr_eval 1
+	eq_desc _Cons 2 1
+	jmp_true case.122
+	pop_a 4
+	jmp s48.1
+case.122
+	push_args 1 2 2
+	buildh _Nil 0
+	update_a 0 4
+	pop_a 1
+	push_a 13
+	buildI 2
+	push_a 13
+	build _ 1 n81
+	push_a 10
+	buildh _Nil 0
+	update_a 0 16
+	update_a 0 18
+	pop_a 1
+	jsr_ap 3
+	push_arg 0 3 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.123
+	buildAC "failed to open file"
+	updatepop_a 0 15
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 3 3
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 2 1 b
+	rtn
+else.123
+	push_arg 0 3 3
+	push_arg 1 3 2
+	push_a 5
+	push_a 8
+	build _ 3 n80
+	push_a 9
+	update_a 5 17
+	update_a 4 16
+	update_a 2 15
+	update_a 1 14
+	updatepop_a 0 13
+	jsr_ap 2
+	push_arg 0 2 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.124
+	buildAC "failed to close file"
+	updatepop_a 0 3
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 3 3
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 2 1 b
+	rtn
+else.124
+	push_arg 0 2 2
+	push_a 3
+	push_a 3
+	buildh _Cons 2
+	pushB TRUE
+	update_a 1 4
+	updatepop_a 0 3
+.d 2 1 b
+	rtn
+s48.1
+	pop_a 8
+	pushD m_ParserToXML
+	pushD x_48
+.d 0 2 ii
+	jmp _match_error
+.string x_48 "finishParameterList"
+.n 1 _ ea81
+.o 1 0
+n81
+	push_node _cycle_in_spine 1
+.o 2 0
+ea81
+.o 2 0
+s81
+	buildAC ".xml"
+	push_a 1
+	update_a 1 2
+	updatepop_a 0 1
+.d 2 0
+	jsr catAC
+.o 1 0
+	buildAC "xmlFiles\\"
+.d 2 0
+	jsr catAC
+.o 1 0
+	fillh ARRAY 1 1
+.d 1 0
+	rtn
+.n 3 _ ea80
+.o 1 0
+n80
+	push_node _cycle_in_spine 3
+.o 4 0
+ea80
+.o 4 0
+s80
+	push_a 2
+	jsr_eval 0
+	pushF_a 3
+	pop_a 1
+	push_a 1
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	push_a 1
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	update_a 1 4
+	updatepop_a 0 3
+.d 2 0
+	jsr catAC
+.o 1 0
+.d 1 2 f
+	jsr writeFS
+.o 0 2 f
+	fillF_b 0 0
+	pop_b 2
+.d 1 0
+	rtn
+.o 8 0
+s49
+	eq_desc _Cons 2 4
+	jmp_true case.125
+	jmp s49.1
+case.125
+	push_args 4 2 2
+	buildh _Nil 0
+	update_a 0 7
+	pop_a 1
+	pop_a 1
+	jsr_eval 0
+	eq_desc _Cons 2 0
+	jmp_true case.126
+	pop_a 1
+	jmp s49.1
+case.126
+	repl_args 2 2
+	pop_a 1
+	jsr_eval 0
+	eq_desc _Cons 2 0
+	jmp_true case.127
+	pop_a 1
+	jmp s49.1
+case.127
+	repl_args 2 2
+	pop_a 1
+	push_a 8
+	push_a 1
+	pushB TRUE
+	update_a 1 10
+	updatepop_a 0 9
+.d 2 1 b
+	rtn
+s49.1
+	pop_a 8
+	pushD m_ParserToXML
+	pushD x_49
+.d 0 2 ii
+	jmp _match_error
+.string x_49 "parseReturnStatement"
+.o 8 0
+s50
+	eq_desc _Cons 2 4
+	jmp_true case.128
+	jmp s50.1
+case.128
+	push_args 4 2 2
+	buildh _Nil 0
+	update_a 0 7
+	pop_a 1
+	pop_a 1
+	jsr_eval 0
+	eq_desc _Cons 2 0
+	jmp_true case.129
+	pop_a 1
+	jmp s50.1
+case.129
+	repl_args 2 2
+	pop_a 1
+	jsr_eval 0
+	eq_desc _Cons 2 0
+	jmp_true case.130
+	pop_a 1
+	jmp s50.1
+case.130
+	repl_args 2 2
+	pop_a 1
+	push_a 8
+	push_a 1
+	pushB TRUE
+	update_a 1 10
+	updatepop_a 0 9
+.d 2 1 b
+	rtn
+s50.1
+	pop_a 8
+	pushD m_ParserToXML
+	pushD x_50
+.d 0 2 ii
+	jmp _match_error
+.string x_50 "parseDoStatement"
+.o 8 0
+s51
+	eq_desc _Cons 2 4
+	jmp_true case.131
+	jmp s51.1
+case.131
+	push_args 4 2 2
+	buildh _Nil 0
+	update_a 0 7
+	pop_a 1
+	pop_a 1
+	jsr_eval 0
+	eq_desc _Cons 2 0
+	jmp_true case.132
+	pop_a 1
+	jmp s51.1
+case.132
+	repl_args 2 2
+	pop_a 1
+	jsr_eval 0
+	eq_desc _Cons 2 0
+	jmp_true case.133
+	pop_a 1
+	jmp s51.1
+case.133
+	repl_args 2 2
+	pop_a 1
+	push_a 8
+	push_a 1
+	pushB TRUE
+	update_a 1 10
+	updatepop_a 0 9
+.d 2 1 b
+	rtn
+s51.1
+	pop_a 8
+	pushD m_ParserToXML
+	pushD x_51
+.d 0 2 ii
+	jmp _match_error
+.string x_51 "parseWhileStatement"
+.o 8 0
+s52
+	eq_desc _Cons 2 4
+	jmp_true case.134
+	jmp s52.1
+case.134
+	push_args 4 2 2
+	buildh _Nil 0
+	update_a 0 7
+	pop_a 1
+	pop_a 1
+	jsr_eval 0
+	eq_desc _Cons 2 0
+	jmp_true case.135
+	pop_a 1
+	jmp s52.1
+case.135
+	repl_args 2 2
+	pop_a 1
+	jsr_eval 0
+	eq_desc _Cons 2 0
+	jmp_true case.136
+	pop_a 1
+	jmp s52.1
+case.136
+	repl_args 2 2
+	pop_a 1
+	push_a 8
+	push_a 1
+	pushB TRUE
+	update_a 1 10
+	updatepop_a 0 9
+.d 2 1 b
+	rtn
+s52.1
+	pop_a 8
+	pushD m_ParserToXML
+	pushD x_52
+.d 0 2 ii
+	jmp _match_error
+.string x_52 "parseIfStatement"
+.o 8 0
+s53
+	eq_desc _Cons 2 4
+	jmp_true case.137
+	jmp s53.1
+case.137
+	push_args 4 2 2
+	buildh _Nil 0
+	update_a 0 7
+	pop_a 1
+	pop_a 1
+	jsr_eval 0
+	eq_desc _Cons 2 0
+	jmp_true case.138
+	pop_a 1
+	jmp s53.1
+case.138
+	repl_args 2 2
+	pop_a 1
+	jsr_eval 0
+	eq_desc _Cons 2 0
+	jmp_true case.139
+	pop_a 1
+	jmp s53.1
+case.139
+	repl_args 2 2
+	pop_a 1
+	push_a 8
+	push_a 1
+	pushB TRUE
+	update_a 1 10
+	updatepop_a 0 9
+.d 2 1 b
+	rtn
+s53.1
+	pop_a 8
+	pushD m_ParserToXML
+	pushD x_53
+.d 0 2 ii
+	jmp _match_error
+.string x_53 "parseLetStatement"
 .impmod _system
 .implab _match_error
