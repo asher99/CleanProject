@@ -96,14 +96,14 @@ parseSubroutineDec [subroutine_kw, subroutine_type ,subroutine_name, sym:xs] fil
 | not ok_read_close = abort("failed to close file")
 = parseSubroutineDec xs filename num w
 
-/*
+
 parseClassVarDec :: [String] String Int *f -> (Bool,[String],*f) | FileSystem f
-parseClassVarDec [classVarDec_kw,classVarDec_type,classVarName:xs] filename num w
+parseClassVarDec [classVarDec_kw,classVarDec_type:xs] filename num w
 | not ((classVarDec_kw == "<keyword> static </keyword>\n") || (classVarDec_kw == "<keyword> field </keyword>\n")  = (True,w)
 # outFile = "xmlFiles\\" +++ filename +++ ".xml"
 # (ok_open,outFile,w) = fopen outFile FAppendText w
 | not ok_open = abort("failed to open file")
-# string_to_print = "<classVarDec>\n" +++ classVarDec_kw 
+# string_to_print = "<classVarDec>\n" +++ classVarDec_kw +++ classVarDec_type
 
 # outFile = fwrites string_to_print outFile
 # (ok_read_close,w) = fclose outFile w
@@ -121,12 +121,12 @@ parseClassVarDec [classVarDec_kw,classVarDec_type,classVarName:xs] filename num 
 
 /* parses all the symicollons in ClassVarDec */
 parseAllVars :: [String] String Int *f -> (Bool,[String],*f) | FileSystem f
-parseAllVars [type,varName,sym:xs] filename num w
+parseAllVars [varName,sym:xs] filename num w
 
 # outFile = "xmlFiles\\" +++ filename +++ ".xml"
 # (ok_open,outFile,w) = fopen outFile FAppendText w
 | not ok_open = abort("failed to open file")
-# string_to_print = type +++ varName +++ sym
+# string_to_print = varName +++ sym
 # outFile = fwrites string_to_print outFile
 # (ok_read_close,w) = fclose outFile w
 | not ok_read_close = abort("failed to close file")
@@ -145,7 +145,7 @@ parseType [x:xs] filename num w
 | not ok_read_close = abort("failed to close file") 
 = (True,w)
 
-
+/*
 parseParameterList ::
 
 parseSubroutineBody ::
