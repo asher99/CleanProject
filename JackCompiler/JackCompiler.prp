@@ -49,29 +49,11 @@ OtherModules
 		Name:	ParserToXML
 		Dir:	{Project}
 		DclOpen:	False
-		Icl
-			WindowPosition
-				X:	47
-				Y:	0
-				SizeX:	1448
-				SizeY:	596
-		IclOpen:	True
+		IclOpen:	False
 	Module
 		Name:	Tokenizer
 		Dir:	{Project}
-		Dcl
-			WindowPosition
-				X:	736
-				Y:	5
-				SizeX:	800
-				SizeY:	680
 		DclOpen:	False
-		Icl
-			WindowPosition
-				X:	-237
-				Y:	59
-				SizeX:	1304
-				SizeY:	680
 		IclOpen:	False
 	Module
 		Name:	Directory

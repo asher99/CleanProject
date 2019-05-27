@@ -54,10 +54,6 @@ startParsing [x:xs] filename num w
 | otherwise = abort("This is why you fail")//(False,w)
 
 
-
-
-
-
 /************* PROGRAM STRUCTURE ***************/
 
 parseClass :: [String] String Int *f -> (Bool,*f) | FileSystem f
@@ -228,40 +224,7 @@ parseVarDec [var,type,name:xs] filename num w
 = (True,xs_,w)
 
 
-parseStatements:: [String] String Int *f -> (Bool,[String],*f) | FileSystem f
-parseStatements [first:xs] filename num w
-| not ((first == "<keyword> let </keyword>\n") || (first == "<keyword> if </keyword>\n") || (first == "<keyword> while </keyword>\n") || (first == "<keyword> do </keyword>\n") || (first == "<keyword> return </keyword>\n")) = (True,[first:xs],w)
-# outFile = "xmlFiles\\" +++ filename +++ ".xml"
-# (ok_open,outFile,w) = fopen outFile FAppendText w
-| not ok_open = abort("failed to open file")
-# string_to_print = "<statements>\n"
-# outFile = fwrites string_to_print outFile
-# (ok_read_close,w) = fclose outFile w
-| not ok_read_close = abort("failed to close file")
 
-# (ok_stmts,xs_,w) = parseStatement xs filename num w
-| not ok_stmts = abort("failed statments")
-
-# outFile2 = "xmlFiles\\" +++ filename +++ ".xml"
-# (ok_open2,outFile2,w) = fopen outFile2 FAppendText w
-| not ok_open2 = abort("failed to open file")
-# string_to_print_end = "</statements>\n"
-# outFile2 = fwrites string_to_print_end outFile2
-# (ok_read_close2,w) = fclose outFile2 w
-| not ok_read_close2 = abort("failed to close file")
-= (True,xs_,w)
-
-
-
-
-parseStatement:: [String] String Int *f -> (Bool,[String],*f) | FileSystem f
-parseStatement [first:xs] filename num w
-| first == "<keyword> let </keyword>\n"	= parseLetStatement [first:xs] filename num w/*
-| (first == "<keyword> if </keyword>\n") 	= parseIfStatement [first:xs] filename w
-| (first == "<keyword> while </keyword>\n") = parseWhileStatement [first:xs] filename w
-| (first == "<keyword> do </keyword>\n") 	= parseDoStatement [first:xs] filename w
-| (first == "<keyword> return </keyword>\n")= parseReturnStatement [first:xs] filename w*/
-= (True,[first:xs],w)
 
 /*
 parseVarDec :: 
@@ -299,9 +262,39 @@ parseVarName [x:xs] filename num w
 
 /************* STATEMENTS ***************/
 
-//parseStatements :: [String] String Int *f -> (Bool,[String],*f) | FileSystem f 
+parseStatements:: [String] String Int *f -> (Bool,[String],*f) | FileSystem f
+parseStatements [first:xs] filename num w
+| not ((first == "<keyword> let </keyword>\n") || (first == "<keyword> if </keyword>\n") || (first == "<keyword> while </keyword>\n") || (first == "<keyword> do </keyword>\n") || (first == "<keyword> return </keyword>\n")) = (True,[first:xs],w)
+# outFile = "xmlFiles\\" +++ filename +++ ".xml"
+# (ok_open,outFile,w) = fopen outFile FAppendText w
+| not ok_open = abort("failed to open file")
+# string_to_print = "<statements>\n"
+# outFile = fwrites string_to_print outFile
+# (ok_read_close,w) = fclose outFile w
+| not ok_read_close = abort("failed to close file")
 
-//parseStatement :: [String] String Int *f -> (Bool,[String],*f) | FileSystem f
+# (ok_stmts,xs_,w) = parseStatement xs filename num w
+| not ok_stmts = abort("failed statments")
+
+# outFile2 = "xmlFiles\\" +++ filename +++ ".xml"
+# (ok_open2,outFile2,w) = fopen outFile2 FAppendText w
+| not ok_open2 = abort("failed to open file")
+# string_to_print_end = "</statements>\n"
+# outFile2 = fwrites string_to_print_end outFile2
+# (ok_read_close2,w) = fclose outFile2 w
+| not ok_read_close2 = abort("failed to close file")
+= (True,xs_,w)
+
+
+parseStatement:: [String] String Int *f -> (Bool,[String],*f) | FileSystem f
+parseStatement [first:xs] filename num w
+| not((first == "<keyword> let </keyword>\n")||(first == "<keyword> if </keyword>\n")||(first == "<keyword> while </keyword>\n")||(first == "<keyword> do </keyword>\n")||(first == "<keyword> return </keyword>\n")) = (True,[first:xs],w)
+| first == "<keyword> let </keyword>\n"	= parseLetStatement [first:xs] filename num w/*
+| (first == "<keyword> if </keyword>\n") 	= parseIfStatement [first:xs] filename w
+| (first == "<keyword> while </keyword>\n") = parseWhileStatement [first:xs] filename w
+| (first == "<keyword> do </keyword>\n") 	= parseDoStatement [first:xs] filename w
+| (first == "<keyword> return </keyword>\n")= parseReturnStatement [first:xs] filename w*/
+= parseStatement [first:xs] filename w
 
 parseLetStatement:: [String] String Int *f -> (Bool,[String],*f) | FileSystem f
 parseLetStatement [] filename num w = (True,[],w)
@@ -353,24 +346,148 @@ parseWhileStatement :: [String] String *f -> (Bool,[String],*f) | FileSystem f
 parseWhileStatement [let_,name,sym:xs] filename w = (True,xs,w)
 
 parseDoStatement :: [String] String *f -> (Bool,[String],*f) | FileSystem f
-parseDoStatement [let_,name,sym:xs] filename w = (True,xs,w)
+parseDoStatement [do_stat:xs] filename w 
+# outFile = "xmlFiles\\" +++ filename +++ ".xml"
+# (ok_open,outFile,w) = fopen outFile FAppendText w
+| not ok_open = abort("failed to open file")
+# string_to_print = "<doStatement>\n" +++ do_stat
+# outFile = fwrites string_to_print outFile
+# (ok_read_close,w) = fclose outFile w
+| not ok_read_close = abort("failed to close file")
+
+# (ok_stmts,[sym:xs_],w) = parseSubroutineCall xs filename num w
+| not ok_stmts = abort("failed doStatmente")
+
+# outFile2 = "xmlFiles\\" +++ filename +++ ".xml"
+# (ok_open2,outFile2,w) = fopen outFile2 FAppendText w
+| not ok_open2 = abort("failed to open file")
+# string_to_print_end = sym +++ "</doStatement>\n" // symbol here is ;
+# outFile2 = fwrites string_to_print_end outFile2
+# (ok_read_close2,w) = fclose outFile2 w
+| not ok_read_close2 = abort("failed to close file")
+= (True,xs_,w)
+
 
 parseReturnStatement :: [String] String *f -> (Bool,[String],*f) | FileSystem f
-parseReturnStatement [let_,name,sym:xs] filename w = (True,xs,w)
+parseReturnStatement [return:xs] filename w 
+# outFile = "xmlFiles\\" +++ filename +++ ".xml"
+# (ok_open,outFile,w) = fopen outFile FAppendText w
+| not ok_open = abort("failed to open file")
+# string_to_print = "<returnStatement>\n" +++ return
+# outFile = fwrites string_to_print outFile
+# (ok_read_close,w) = fclose outFile w
+| not ok_read_close = abort("failed to close file")
 
+# (ok_stmts,[sym:xs_],w) = parseExpression xs filename num w
+| not ok_stmts = abort("failed returnStatement")
+
+# outFile2 = "xmlFiles\\" +++ filename +++ ".xml"
+# (ok_open2,outFile2,w) = fopen outFile2 FAppendText w
+| not ok_open2 = abort("failed to open file")
+# string_to_print_end = sym +++ "</returnStatement>\n" // symbol here is ;
+# outFile2 = fwrites string_to_print_end outFile2
+# (ok_read_close2,w) = fclose outFile2 w
+| not ok_read_close2 = abort("failed to close file")
+= (True,xs_,w)
 
 
 /************* EXPRESSIONS ***************/
 
 parseExpression :: [String] String *f -> (Bool,[String],*f) | FileSystem f
-parseExpression [x:xs] name w = (True,xs,w)
+parseExpression [expr:xs] name w
+# outFile = "xmlFiles\\" +++ filename +++ ".xml"
+# (ok_open,outFile,w) = fopen outFile FAppendText w
+| not ok_open = abort("failed to open file")
+# string_to_print = "<expression>\n" 
+# outFile = fwrites string_to_print outFile
+# (ok_read_close,w) = fclose outFile w
+| not ok_read_close = abort("failed to close file")
+
+# (ok_stmts,xs_,w) = parseTerm xs filename num w
+| not ok_stmts = abort("failed expression")
+
+// calls to a method who does: (op term)*
+# (ok_stmts,xs__,w) = parseOpTerm xs_ filename num w
+| not ok_stmts = abort("failed expression")
+
+# outFile2 = "xmlFiles\\" +++ filename +++ ".xml"
+# (ok_open2,outFile2,w) = fopen outFile2 FAppendText w
+| not ok_open2 = abort("failed to open file")
+# string_to_print_end = "</expression>\n" 
+# outFile2 = fwrites string_to_print_end outFile2
+# (ok_read_close2,w) = fclose outFile2 w
+| not ok_read_close2 = abort("failed to close file")
+= (True,xs__,w)
+
+/* allows to writ÷ (op term)* */
+parseOpTerm :: [String] String *f -> (Bool,[String],*f) | FileSystem f
+parseOpTerm [op:xs] filename w
+| not((op == "<symbol> + </symbol>\n") || (op == "<symbol> - </symbol>\n")||(op == "<symbol> * </symbol>\n") || (op == "<symbol> / </symbol>\n")) = (True,[op:xs],w)
+| not((op == "<symbol> = </symbol>\n") || (op == "<symbol> &amp </symbol>\n") || (op == "<symbol> | </symbol>\n") || (op == "<symbol> &lt </symbol>\n") || (op == "<symbol> &gt </symbol>\n")) = (True,[op:xs],w)
+
+# outFile = "xmlFiles\\" +++ filename +++ ".xml"
+# (ok_open,outFile,w) = fopen outFile FAppendText w
+| not ok_open = abort("failed to open file")
+# string_to_print = op 
+# outFile = fwrites string_to_print outFile
+# (ok_read_close,w) = fclose outFile w
+| not ok_read_close = abort("failed to close file")
+# (ok_stmts,xs_,w) = parseTerm xs filename num w
+| not ok_stmts = abort("failed expression")
+= parseOpTerm xs_ filename w
+
+
+
+parseTerm :: [String] String *f -> (Bool,[String],*f) | FileSystem f
+parseTerm [let_,name,sym:xs] filename w = (True,xs,w)
+
+parseSubroutineCall :: [String] String *f -> (Bool,[String],*f) | FileSystem f
+parseSubroutineCall [let_,name,sym:xs] filename w = (True,xs,w)
+
+
+parseExpressionList :: [String] String *f -> (Bool,[String],*f) | FileSystem f
+parseExpressionList [xs] filename w
+# outFile = "xmlFiles\\" +++ filename +++ ".xml"
+# (ok_open,outFile,w) = fopen outFile FAppendText w
+| not ok_open = abort("failed to open file")
+# string_to_print = "<expressionList>\n" 
+# outFile = fwrites string_to_print outFile
+# (ok_read_close,w) = fclose outFile w
+| not ok_read_close = abort("failed to close file")
+
+# (ok_stmts,[sym:xs_],w) = parseExpression xs filename num w
+| not ok_stmts = abort("failed expression")
+
+#(ok_semi,xs__,w) = parseSemiExpression [sym:xs_] filename w
+| not ok_semi = abort("failed semiEpression")
+
+# outFile2 = "xmlFiles\\" +++ filename +++ ".xml"
+# (ok_open2,outFile2,w) = fopen outFile2 FAppendText w
+| not ok_open2 = abort("failed to open file")
+# string_to_print_end = "</expressionList>\n" 
+# outFile2 = fwrites string_to_print_end outFile2
+# (ok_read_close2,w) = fclose outFile2 w
+| not ok_read_close2 = abort("failed to close file")
+= (True,xs__,w)
+
+parseSemiExpression :: [String] String *f -> (Bool,[String],*f) | FileSystem f
+parseSemiExpression [sym:xs] filename w
+| not (op == "<symbol> , </symbol>\n") = (True,[sym:xs],w)
+# outFile = "xmlFiles\\" +++ filename +++ ".xml"
+# (ok_open,outFile,w) = fopen outFile FAppendText w
+| not ok_open = abort("failed to open file")
+# string_to_print = sym
+# outFile = fwrites string_to_print outFile
+# (ok_read_close,w) = fclose outFile w
+| not ok_read_close = abort("failed to close file")
+
+# (ok_stmts,xs_,w) = parseExpression xs filename num w
+| not ok_stmts = abort("failed expression")
+
+= parseSemiExpression xs_ filename w
+
+
 /*
-parseTerm ::
-
-parseSubroutineCall ::
-
-parseExpressionList ::
-
 /* terminal of symbol */
 
 parseOp ::
