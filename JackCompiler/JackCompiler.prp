@@ -5,10 +5,10 @@ MainModule
 	DclOpen:	False
 	Icl
 		WindowPosition
-			X:	109
-			Y:	17
-			SizeX:	1385
-			SizeY:	680
+			X:	0
+			Y:	713
+			SizeX:	0
+			SizeY:	0
 	IclOpen:	True
 OtherModules
 	Module
@@ -44,12 +44,18 @@ OtherModules
 				Y:	10
 				SizeX:	800
 				SizeY:	680
-		IclOpen:	True
+		IclOpen:	False
 	Module
 		Name:	ParserToXML
 		Dir:	{Project}
 		DclOpen:	False
-		IclOpen:	False
+		Icl
+			WindowPosition
+				X:	10
+				Y:	10
+				SizeX:	1350
+				SizeY:	680
+		IclOpen:	True
 	Module
 		Name:	Tokenizer
 		Dir:	{Project}
