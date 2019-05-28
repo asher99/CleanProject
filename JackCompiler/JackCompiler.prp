@@ -51,10 +51,10 @@ OtherModules
 		DclOpen:	False
 		Icl
 			WindowPosition
-				X:	10
-				Y:	10
+				X:	-6
+				Y:	-10
 				SizeX:	1493
-				SizeY:	680
+				SizeY:	676
 		IclOpen:	True
 	Module
 		Name:	Tokenizer
