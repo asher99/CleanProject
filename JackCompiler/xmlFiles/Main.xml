@@ -19,7 +19,3 @@
 <symbol> ; </symbol>
 <keyword> var </keyword>
 </varDec>
-<keyword> int </keyword>
-</subroutineBody>
-<symbol> } </symbol>
-</class>

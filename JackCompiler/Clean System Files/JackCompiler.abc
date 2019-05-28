@@ -1,7 +1,7 @@
 .comp 920 000111010
 .start __JackCompiler_Start
 .depend "ParserToXML" "20190524122747"
-.depend "Tokenizer" "20190521232801"
+.depend "Tokenizer" "20190528111305"
 .depend "FileManipulation" "20190524120125"
 .depend "StdLibMisc" "20180913124337"
 .depend "Directory" "20180913124337"

@@ -3,6 +3,7 @@ import StdEnv
 import StdFile
 import Directory
 import FileManipulation
+import Tokenizer
 
 /*
 *	ParseMultipleFiles.
@@ -175,7 +176,7 @@ finishParameterList [type,varname,sym:xs] filename num w
 
 
 parseSubroutineBody :: [String] String Int *f -> (Bool,[String],*f) | FileSystem f
-parseSubroutineBody [sym:xs] filename num w
+parseSubroutineBody [sym:xs] filename num w //= abort(xs!!0 +++ xs!!1 +++ xs!!2)
 # outFile = "xmlFiles\\" +++ filename +++ ".xml"
 # (ok_open,outFile,w) = fopen outFile FAppendText w
 | not ok_open = abort("failed to open file")
@@ -202,7 +203,7 @@ parseSubroutineBody [sym:xs] filename num w
 
 parseVarDec:: [String] String Int *f -> (Bool,[String],*f) | FileSystem f
 parseVarDec [var,type,name:xs] filename num w
-| not (var == "<keyword> var </keyword>\n") = (True,[var:xs],w)
+| not (var == "<keyword> var </keyword>\n") = (True,[var,type,name:xs],w)
 # outFile = "xmlFiles\\" +++ filename +++ ".xml"
 # (ok_open,outFile,w) = fopen outFile FAppendText w
 | not ok_open = abort("failed to open file")
@@ -263,7 +264,7 @@ parseVarName [x:xs] filename num w
 /************* STATEMENTS ***************/
 
 parseStatements:: [String] String Int *f -> (Bool,[String],*f) | FileSystem f
-parseStatements [first:xs] filename num w
+parseStatements [first:xs] filename num w //= abort(first +++ a +++ b +++ c)
 | not ((first == "<keyword> let </keyword>\n") || (first == "<keyword> if </keyword>\n") || (first == "<keyword> while </keyword>\n") || (first == "<keyword> do </keyword>\n") || (first == "<keyword> return </keyword>\n")) = (True,[first:xs],w)
 # outFile = "xmlFiles\\" +++ filename +++ ".xml"
 # (ok_open,outFile,w) = fopen outFile FAppendText w
@@ -273,7 +274,7 @@ parseStatements [first:xs] filename num w
 # (ok_read_close,w) = fclose outFile w
 | not ok_read_close = abort("failed to close file")
 
-# (ok_stmts,xs_,w) = parseStatement xs filename num w
+# (ok_stmts,xs_,w) = parseStatement [first:xs] filename num w
 | not ok_stmts = abort("failed statments")
 
 # outFile2 = "xmlFiles\\" +++ filename +++ ".xml"
@@ -295,7 +296,7 @@ parseStatement [first:xs] filename num w
 
 
 parseLetStatement:: [String] String *f -> (Bool,[String],*f) | FileSystem f
-parseLetStatement [first,name,sym:xs] filename w
+parseLetStatement [first,name,sym:xs] filename w //= abort(first +++ name +++ sym)
 # string2print = "<letStatement>\n" +++ first +++ name +++ sym
 # outFile = "xmlFiles\\" +++ filename +++ ".xml"
 # (ok_open,outFile,w) = fopen outFile FAppendText w
@@ -304,7 +305,7 @@ parseLetStatement [first,name,sym:xs] filename w
 # (ok_read_close,w) = fclose outFile w
 | not ok_read_close = abort("failed to close file")
 
-//| sym == "<symbol> [ </symbol>\n" = parseArrayLetStatement xs filename w
+| sym == "<symbol> [ </symbol>\n" = parseArrayLetStatement xs filename w
 // sc - semi colmun (;)
 # (ok_expr,[sc:xs_],w) = parseExpression xs filename w
 # string2print2 = sc +++ "</letStatement>\n"
@@ -450,12 +451,13 @@ parseExpression [expr:xs] filename w
 # (ok_read_close,w) = fclose outFile w
 | not ok_read_close = abort("failed to close file")
 
-# (ok_stmts,xs_,w) = parseTerm xs filename w
-| not ok_stmts = abort("failed expression")
+# (ok_stmts,[op:xs_],w) = parseTerm xs filename w
+| ((op == "<symbol> + </symbol>\n") || (op == "<symbol> - </symbol>\n") || (op == "<symbol> * </symbol>\n") || (op == "<symbol> / </symbol>\n") || (op == "<symbol> &amp; </symbol>\n")) =  parseOpTerm [op:xs_] filename w
+| ((op == "<symbol> | </symbol>\n") || (op == "<symbol> &gt; </symbol>\n") || (op == "<symbol> &lt; </symbol>\n") || (op == "<symbol> = </symbol>\n")) = parseOpTerm [op:xs_] filename w
 
 // calls to a method who does: (op term)*
-# (ok_stmts,xs__,w) = parseOpTerm xs_ filename w
-| not ok_stmts = abort("failed expression")
+//# (ok_stmts,xs__,w) = parseOpTerm [op:xs_] filename w
+//| not ok_stmts = abort("failed expression")
 
 # outFile2 = "xmlFiles\\" +++ filename +++ ".xml"
 # (ok_open2,outFile2,w) = fopen outFile2 FAppendText w
@@ -464,9 +466,9 @@ parseExpression [expr:xs] filename w
 # outFile2 = fwrites string_to_print_end outFile2
 # (ok_read_close2,w) = fclose outFile2 w
 | not ok_read_close2 = abort("failed to close file")
-= (True,xs__,w)
+= (True,[op:xs_],w)
 
-/* allows to writ÷ (op term)* */
+/* allows to write (op term)* */
 parseOpTerm :: [String] String *f -> (Bool,[String],*f) | FileSystem f
 parseOpTerm [op:xs] filename w
 | not((op == "<symbol> + </symbol>\n") || (op == "<symbol> - </symbol>\n")||(op == "<symbol> * </symbol>\n") || (op == "<symbol> / </symbol>\n")) = (True,[op:xs],w)
@@ -486,11 +488,77 @@ parseOpTerm [op:xs] filename w
 
 
 parseTerm :: [String] String *f -> (Bool,[String],*f) | FileSystem f
-parseTerm [let_,name,sym:xs] filename w = (True,xs,w)
+parseTerm [x:xs] filename w //= (True,[x:xs],w)
+| ((getTag x 17) == "<integerConstant>") = parseConstant [x:xs] filename w
+| ((getTag x 16) == "<stringConstant>")  = parseConstant [x:xs] filename w
+| ((getTag x 9) == "<keyword>")  = parseConstant [x:xs] filename w
+| ((x == "<symbol> - </symbol>\n") || (x == "<symbol> ~ </symbol>\n"))  = parseConstant [x:xs] filename w
+| (x == "<symbol> ( </symbol>\n") = parseTermExpression [x:xs] filename w
+| ((getTag x 12) == "<identifier>")  = var_or_subroutine [x:xs] filename w
+
+
+parseConstant:: [String] String *f -> (Bool,[String],*f) | FileSystem f
+parseConstant [x:xs] filename w
+# (ok,w) = write2file ("<term>\n" +++ x +++ "</term>\n") filename w
+| not ok = abort("error constant")
+= (True,xs,w)
+
+parseTermExpression:: [String] String *f -> (Bool,[String],*f) | FileSystem f
+parseTermExpression [x:xs] filename w
+# string2print = "<term>\n" +++ x
+# (ok_w,w) = write2file string2print filename w
+| not ok_w = abort("")
+# (ok_e,[x_:xs_],w) = parseExpression xs filename w
+# string2print2 = x_ +++ "</term>\n"
+# (ok_2,w) = write2file string2print2 filename w
+= (True,xs_,w)
+
+var_or_subroutine:: [String] String *f -> (Bool,[String],*f) | FileSystem f
+var_or_subroutine [x1,x2:xs] filename w
+| x2 == "<symbol> ( </symbol>\n" = parseSubroutineCall [x1,x2:xs] filename w
+| x2 == "<symbol> . </symbol>\n" = parseSubroutineCall [x1,x2:xs] filename w
+= parseVarName [x1,x2:xs] filename w
+
+parseVarName:: [String] String *f -> (Bool,[String],*f) | FileSystem f
+parseVarName [x1,x2:xs] filename w
+# str2prt = "<term>\n" +++ x1
+# (ok_w,w) = write2file str2prt filename w
+| not ok_w = abort("a")
+| x2 == "<symbol> [ </symbol>\n" = parseVarExperssion [x2:xs] filename w
+# str2prt2 = "</term>\n"
+# (ok_w2,w) = write2file str2prt2 filename w
+| not ok_w2 = abort("a2")
+= (True,[x2:xs],w)
+
+parseVarExperssion:: [String] String *f -> (Bool,[String],*f) | FileSystem f
+parseVarExperssion [x:xs] filename w
+# (ok_w,w) = write2file x filename w
+# (ok_e,[x_:xs_],w) = parseExpression xs filename w
+# (ok_w,w) = write2file (x_ +++ "</term>\n") filename w
+= (True,xs_,w)
+
 
 parseSubroutineCall :: [String] String *f -> (Bool,[String],*f) | FileSystem f
-parseSubroutineCall [let_,name,sym:xs] filename w = (True,xs,w)
+parseSubroutineCall [x1,x2:xs] filename w //= (True,xs,w)
+# str2prt = "<term>\n" +++ x1
+# (ok_w,w) = write2file str2prt filename w
+| not ok_w = abort("a")
+| x2 == "<symbol> . </symbol>\n" = parseNestedSubroutineCall [x2:xs] filename w
+# (ok_w,w) = write2file x2 filename w
+| not ok_w = abort("a")
+# (ok_e,[x:xs_],w) = parseExpression xs filename w
+# (ok_w,w) = write2file (x +++ "</term>\n") filename w
+| not ok_w = abort("a")
+= (True,xs_,w)
 
+parseNestedSubroutineCall:: [String] String *f -> (Bool,[String],*f) | FileSystem f
+parseNestedSubroutineCall [dot,name,sym:xs] filename w
+# (ok_w,w) = write2file (dot+++name+++sym) filename w
+| not ok_w = abort("a")
+# (ok_e,[x_:xs_],w) = parseExpression xs filename w
+# (ok_w,w) = write2file (x_ +++ "</term>\n") filename w
+| not ok_w = abort("a")
+= (True,xs_,w)
 
 parseExpressionList :: [String] String *f -> (Bool,[String],*f) | FileSystem f
 parseExpressionList xs filename w
@@ -569,7 +637,10 @@ write2file string filename w
 = (True,w)
 
 
-
+getTag:: {#Char} Int -> {#Char}
+getTag str len
+# strlist = [ c \\ c <-: str ]
+= { c \\ c <- ( take len strlist ) }
 
 
 

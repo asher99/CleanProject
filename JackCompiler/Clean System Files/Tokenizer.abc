@@ -26,7 +26,7 @@
 .depend "StdOverloaded" "20180913124337"
 .depend "StdBool" "20180913124337"
 .depend "StdEnv" "20180913124337"
-.depend "Tokenizer" "20190521232801"
+.depend "Tokenizer" "20190528111305"
 .module m_Tokenizer "Tokenizer" "20190524153122"
 .endinfo
 .impmod _system
@@ -1726,7 +1726,7 @@ s97
 .d 1 0
 	rtn
 .o 8 0
-s18
+s20
 	push_a 7
 	buildI 2
 	push_a 7
@@ -1820,7 +1820,7 @@ s100
 .d 1 0
 	rtn
 .o 8 1 c
-s25
+s26
 	push_a 7
 	buildI 2
 	push_a 7
@@ -1929,7 +1929,7 @@ s101
 .d 1 0
 	rtn
 .o 8 1 c
-s23
+s24
 	push_a 7
 	buildI 2
 	push_a 7
@@ -2038,7 +2038,7 @@ s102
 .d 1 0
 	rtn
 .o 8 1 c
-s24
+s25
 	push_a 7
 	buildI 2
 	push_a 7
@@ -2147,7 +2147,7 @@ s103
 .d 1 0
 	rtn
 .o 8 1 c
-s22
+s23
 	push_a 7
 	buildI 2
 	push_a 7
@@ -2256,7 +2256,7 @@ s104
 .d 1 0
 	rtn
 .o 8 1 c
-s21
+s22
 	pushC '&'
 	push_b 1
 	eqC
@@ -2280,7 +2280,7 @@ s21
 	updatepop_a 0 8
 	updatepop_b 0 1
 .d 8 1 c
-	jmp s22
+	jmp s23
 else.43
 	pushC '<'
 	push_b 1
@@ -2305,7 +2305,7 @@ else.43
 	updatepop_a 0 8
 	updatepop_b 0 1
 .d 8 1 c
-	jmp s24
+	jmp s25
 else.44
 	pushC '>'
 	push_b 1
@@ -2330,7 +2330,7 @@ else.44
 	updatepop_a 0 8
 	updatepop_b 0 1
 .d 8 1 c
-	jmp s23
+	jmp s24
 else.45
 	pushC 'W'
 	push_b 1
@@ -2355,19 +2355,19 @@ else.45
 	updatepop_a 0 8
 	updatepop_b 0 1
 .d 8 1 c
-	jmp s25
+	jmp s26
 else.46
-	jmp s21.1
-s21.1
+	jmp s22.1
+s22.1
 	pop_a 8
 	pop_b 1
 	pushD m_Tokenizer
-	pushD x_21
+	pushD x_22
 .d 0 2 ii
 	jmp _match_error
-.string x_21 "handleSpecialCharacter"
+.string x_22 "handleSpecialCharacter"
 .o 8 0
-s16
+s18
 	eq_desc _Nil 0 4
 	jmp_true case.47
 	jmp case.48
@@ -2386,7 +2386,7 @@ case.48
 .o 1 0
 	pushC_a 0
 .d 0 1 c
-	jsr s20
+	jsr s21
 .o 0 1 b
 	jmp_false else.49
 	push_a 8
@@ -2408,7 +2408,7 @@ case.48
 	update_a 1 10
 	updatepop_a 0 9
 .d 8 1 c
-	jmp s21
+	jmp s22
 else.49
 	push_a 8
 	buildI 2
@@ -2493,7 +2493,7 @@ else.51
 	update_a 1 10
 	updatepop_a 0 9
 .d 8 0
-	jmp s18
+	jmp s20
 .n 1 _ ea99
 .o 1 0
 n99
@@ -2524,7 +2524,7 @@ s99
 .d 1 0
 	rtn
 .o 8 0
-s10
+s12
 	push_a 7
 	buildI 2
 	push_a 7
@@ -2593,7 +2593,7 @@ else.53
 	update_a 1 10
 	updatepop_a 0 9
 .d 8 0
-	jmp s16
+	jmp s18
 .n 1 _ ea98
 .o 1 0
 n98
@@ -2617,7 +2617,7 @@ s98
 .d 1 0
 	rtn
 .o 8 0
-s17
+s19
 	push_a 7
 	buildI 2
 	push_a 7
@@ -2711,7 +2711,7 @@ s107
 .d 1 0
 	rtn
 .o 8 0
-s15
+s17
 	eq_desc _Nil 0 4
 	jmp_true case.56
 	jmp case.57
@@ -2752,7 +2752,7 @@ case.57
 	update_a 1 10
 	updatepop_a 0 9
 .d 8 0
-	jmp s17
+	jmp s19
 else.58
 	push_a 8
 	buildI 2
@@ -2836,7 +2836,7 @@ else.60
 	update_a 1 10
 	updatepop_a 0 9
 .d 8 0
-	jmp s15
+	jmp s17
 .n 1 _ ea106
 .o 1 0
 n106
@@ -2867,7 +2867,7 @@ s106
 .d 1 0
 	rtn
 .o 8 0
-s9
+s11
 	push_a 7
 	buildI 2
 	push_a 7
@@ -2936,7 +2936,7 @@ else.62
 	update_a 1 10
 	updatepop_a 0 9
 .d 8 0
-	jmp s15
+	jmp s17
 .n 1 _ ea105
 .o 1 0
 n105
@@ -2960,7 +2960,7 @@ s105
 .d 1 0
 	rtn
 .o 9 0
-s14
+s16
 	push_a 8
 	buildI 2
 	push_a 8
@@ -3105,7 +3105,7 @@ s108
 .d 1 0
 	rtn
 .o 9 0
-s13
+s15
 	push_a 8
 	buildI 2
 	push_a 8
@@ -3250,13 +3250,13 @@ s111
 .d 1 0
 	rtn
 .o 9 0
-s12
+s14
 	push_a 5
 .d 1 0
 	jsr e_StdList_stoString;79
 .o 1 0
 .d 1 0
-	jsr s26
+	jsr s8
 .o 0 1 b
 	jmp_false else.67
 	push_a 8
@@ -3278,7 +3278,7 @@ s12
 	update_a 1 10
 	updatepop_a 0 9
 .d 9 0
-	jmp s13
+	jmp s15
 else.67
 	push_a 8
 	push_a 8
@@ -3299,9 +3299,9 @@ else.67
 	update_a 1 10
 	updatepop_a 0 9
 .d 9 0
-	jmp s14
+	jmp s16
 .o 9 0
-s11
+s13
 	pushI 0
 	push_a 4
 .d 1 1 i
@@ -3314,7 +3314,7 @@ s11
 	jmp_true then.68
 	pushC_a 0
 .d 0 1 c
-	jsr s19
+	jsr s9
 .o 0 1 b
 	jmp_false else.68
 then.68
@@ -3345,7 +3345,7 @@ then.68
 	update_a 1 11
 	updatepop_a 0 10
 .d 9 0
-	jmp s12
+	jmp s14
 else.68
 	buildh _Nil 0
 	push_a 1
@@ -3398,9 +3398,9 @@ else.68
 	update_a 1 10
 	updatepop_a 0 9
 .d 9 0
-	jmp s11
+	jmp s13
 .o 8 0
-s8
+s10
 	buildh _Nil 0
 	push_a 8
 	push_a 8
@@ -3426,7 +3426,7 @@ s8
 	update_a 1 9
 	updatepop_a 0 8
 .d 9 0
-	jmp s11
+	jmp s13
 .export e_Tokenizer_sFDAutomaton_state_0
 .descexp e_Tokenizer_dFDAutomaton_state_0 e_Tokenizer_nFDAutomaton_state_0 e_Tokenizer_lFDAutomaton_state_0 5 0 "FDAutomaton_state_0"
 .a 0 a3
@@ -3512,7 +3512,7 @@ then.72
 	update_a 1 10
 	updatepop_a 0 9
 .d 8 0
-	jmp s8
+	jmp s10
 else.72
 	pushC_a 0
 .d 0 1 c
@@ -3544,11 +3544,11 @@ else.72
 	update_a 1 10
 	updatepop_a 0 9
 .d 8 0
-	jmp s9
+	jmp s11
 else.74
 	pushC_a 0
 .d 0 1 c
-	jsr s19
+	jsr s9
 .o 0 1 b
 	jmp_false else.75
 	push_a 8
@@ -3576,7 +3576,7 @@ else.74
 	update_a 1 10
 	updatepop_a 0 9
 .d 8 0
-	jmp s10
+	jmp s12
 else.75
 	pushC '\"'
 	pushC_a 0
@@ -3901,7 +3901,7 @@ s113
 .d 1 0
 	rtn
 .o 0 1 c
-s20
+s21
 	pushC '<'
 	push_b 1
 	eqC
@@ -3942,8 +3942,39 @@ else.92
 	pushB FALSE
 .d 0 1 b
 	rtn
+.export e_Tokenizer_sisKeyword
+.descexp e_Tokenizer_disKeyword e_Tokenizer_nisKeyword e_Tokenizer_lisKeyword 1 0 "isKeyword"
+.o 2 0
+e_Tokenizer_lisKeyword
+	pop_a 1
+.d 1 0
+	jsr ea8
+.o 0 1 b
+	buildB_b 0
+	pop_b 1
+.d 1 0
+	rtn
+.n 1 e_Tokenizer_disKeyword
 .o 1 0
-s26
+e_Tokenizer_nisKeyword
+	push_node _cycle_in_spine 1
+.d 1 0
+	jsr ea8
+.o 0 1 b
+	fillB_b 0 0
+	pop_b 1
+.d 1 0
+	rtn
+.o 1 0
+e_Tokenizer_sisKeyword
+.o 1 0
+ea8
+	jsr_eval 0
+	push_array 0
+	update_a 0 1
+	pop_a 1
+.o 1 0
+s8
 	buildAC "class"
 	push_a 1
 .d 2 0
@@ -4179,8 +4210,38 @@ else.113
 	pushB FALSE
 .d 0 1 b
 	rtn
+.export e_Tokenizer_sisSymbol
+.descexp e_Tokenizer_disSymbol e_Tokenizer_nisSymbol e_Tokenizer_lisSymbol 1 0 "isSymbol"
+.o 2 0
+e_Tokenizer_lisSymbol
+	pop_a 1
+.d 1 0
+	jsr ea9
+.o 0 1 b
+	buildB_b 0
+	pop_b 1
+.d 1 0
+	rtn
+.n 1 e_Tokenizer_disSymbol
+.o 1 0
+e_Tokenizer_nisSymbol
+	push_node _cycle_in_spine 1
+.d 1 0
+	jsr ea9
+.o 0 1 b
+	fillB_b 0 0
+	pop_b 1
+.d 1 0
+	rtn
+.o 1 0
+e_Tokenizer_sisSymbol
+.o 1 0
+ea9
+	jsr_eval 0
+	pushC_a 0
+	pop_a 1
 .o 0 1 c
-s19
+s9
 	pushC '{'
 	push_b 1
 	eqC
@@ -4444,7 +4505,7 @@ else.135
 else.137
 	pushC_a 0
 .d 0 1 c
-	jsr s19
+	jsr s9
 .o 0 1 b
 	jmp_false else.138
 	push_a 8
@@ -5724,7 +5785,7 @@ s70
 	jmp_true then.165
 	pushC_a 0
 .d 0 1 c
-	jsr s19
+	jsr s9
 .o 0 1 b
 	jmp_false else.165
 then.165
@@ -5981,7 +6042,7 @@ case.173
 .o 1 0
 	pushC_a 0
 .d 0 1 c
-	jsr s20
+	jsr s21
 .o 0 1 b
 	jmp_false else.174
 	push_a 8
@@ -6715,7 +6776,7 @@ s78
 	jsr e_StdList_stoString;79
 .o 1 0
 .d 1 0
-	jsr s26
+	jsr s8
 .o 0 1 b
 	jmp_false else.192
 	push_a 8

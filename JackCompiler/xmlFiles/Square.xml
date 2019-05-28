@@ -35,14 +35,8 @@
 <subroutineBody>
 <symbol> { </symbol>
 <statements>
-<returnStatement>
-<identifier> Ax </identifier>
-<expression>
-</expression>
-<symbol> ; </symbol>
-</returnStatement>
-</statements>
+<letStatement>
 <keyword> let </keyword>
-</subroutineBody>
-<symbol> } </symbol>
-</class>
+<identifier> x </identifier>
+<symbol> = </symbol>
+<expression>

@@ -1,88 +1,16 @@
 Version: 1.4
 MainModule
-	Name:	JackCompiler
+	Name:	test
 	Dir:	{Project}
 	DclOpen:	False
 	Icl
 		WindowPosition
-			X:	0
-			Y:	713
-			SizeX:	1519
-			SizeY:	730
-	IclOpen:	True
+			X:	10
+			Y:	10
+			SizeX:	800
+			SizeY:	680
+	IclOpen:	False
 OtherModules
-	Module
-		Name:	ClearComments
-		Dir:	{Project}
-		Dcl
-			WindowPosition
-				X:	82
-				Y:	180
-				SizeX:	800
-				SizeY:	680
-		DclOpen:	False
-		Icl
-			WindowPosition
-				X:	0
-				Y:	713
-				SizeX:	0
-				SizeY:	0
-		IclOpen:	True
-	Module
-		Name:	FileManipulation
-		Dir:	{Project}
-		Dcl
-			WindowPosition
-				X:	680
-				Y:	23
-				SizeX:	783
-				SizeY:	680
-		DclOpen:	False
-		Icl
-			WindowPosition
-				X:	10
-				Y:	10
-				SizeX:	800
-				SizeY:	680
-		IclOpen:	False
-	Module
-		Name:	ParserToXML
-		Dir:	{Project}
-		DclOpen:	False
-		Icl
-			WindowPosition
-				X:	10
-				Y:	10
-				SizeX:	1493
-				SizeY:	680
-		IclOpen:	True
-	Module
-		Name:	Tokenizer
-		Dir:	{Project}
-		Dcl
-			WindowPosition
-				X:	10
-				Y:	10
-				SizeX:	800
-				SizeY:	680
-		DclOpen:	False
-		Icl
-			WindowPosition
-				X:	512
-				Y:	50
-				SizeX:	800
-				SizeY:	680
-		IclOpen:	False
-	Module
-		Name:	Directory
-		Dir:	{Application}*Libraries*Directory
-		DclOpen:	False
-		IclOpen:	False
-	Module
-		Name:	StdLibMisc
-		Dir:	{Application}*Libraries*StdLib
-		DclOpen:	False
-		IclOpen:	False
 	Module
 		Name:	StdArray
 		Dir:	{Application}*Libraries*StdEnv
@@ -135,11 +63,6 @@ OtherModules
 		IclOpen:	False
 	Module
 		Name:	StdList
-		Dir:	{Application}*Libraries*StdEnv
-		DclOpen:	False
-		IclOpen:	False
-	Module
-		Name:	StdMaybe
 		Dir:	{Application}*Libraries*StdEnv
 		DclOpen:	False
 		IclOpen:	False
