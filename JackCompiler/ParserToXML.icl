@@ -471,12 +471,12 @@ parseExpression [x:xs] filename w
 | not ok_read_close = abort("failed to close file")
 
 # (ok_stmts,[op:xs_],w) = parseTerm [x:xs] filename w
-| ((op == "<symbol> + </symbol>\n") || (op == "<symbol> - </symbol>\n") || (op == "<symbol> * </symbol>\n") || (op == "<symbol> / </symbol>\n") || (op == "<symbol> &amp; </symbol>\n")) =  parseOpTerm [op:xs_] filename w
-| ((op == "<symbol> | </symbol>\n") || (op == "<symbol> &gt; </symbol>\n") || (op == "<symbol> &lt; </symbol>\n") || (op == "<symbol> = </symbol>\n")) = parseOpTerm [op:xs_] filename w
+//| ((op == "<symbol> + </symbol>\n") || (op == "<symbol> - </symbol>\n") || (op == "<symbol> * </symbol>\n") || (op == "<symbol> / </symbol>\n") || (op == "<symbol> &amp; </symbol>\n")) =  parseOpTerm [op:xs_] filename w
+//| ((op == "<symbol> | </symbol>\n") || (op == "<symbol> &gt; </symbol>\n") || (op == "<symbol> &lt; </symbol>\n") || (op == "<symbol> = </symbol>\n")) = parseOpTerm [op:xs_] filename w
 
 // calls to a method who does: (op term)*
-//# (ok_stmts,xs__,w) = parseOpTerm [op:xs_] filename w
-//| not ok_stmts = abort("failed expression")
+# (ok_stmts,xs__,w) = parseOpTerm [op:xs_] filename w
+| not ok_stmts = abort("failed expression")
 
 # outFile2 = "xmlFiles\\" +++ filename +++ ".xml"
 # (ok_open2,outFile2,w) = fopen outFile2 FAppendText w
@@ -485,19 +485,19 @@ parseExpression [x:xs] filename w
 # outFile2 = fwrites string_to_print_end outFile2
 # (ok_read_close2,w) = fclose outFile2 w
 | not ok_read_close2 = abort("failed to close file")
-= (True,[op:xs_],w)
+= (True,xs__,w)
 
 /* allows to write (op term)* */
 parseOpTerm :: [String] String *f -> (Bool,[String],*f) | FileSystem f
-parseOpTerm [op:xs] filename w
+parseOpTerm [op:xs] filename w //= abort("made it till here" +++ op +++ xs!!0)
 | not((op == "<symbol> + </symbol>\n") || (op == "<symbol> - </symbol>\n")||(op == "<symbol> * </symbol>\n") || (op == "<symbol> / </symbol>\n")) = (True,[op:xs],w)
 | not((op == "<symbol> = </symbol>\n") || (op == "<symbol> &amp </symbol>\n") || (op == "<symbol> | </symbol>\n") || (op == "<symbol> &lt </symbol>\n") || (op == "<symbol> &gt </symbol>\n")) = (True,[op:xs],w)
 
 # outFile = "xmlFiles\\" +++ filename +++ ".xml"
 # (ok_open,outFile,w) = fopen outFile FAppendText w
 | not ok_open = abort("failed to open file")
-# string_to_print = op 
-# outFile = fwrites string_to_print outFile
+//# string_to_print = op 
+# outFile = fwrites op outFile
 # (ok_read_close,w) = fclose outFile w
 | not ok_read_close = abort("failed to close file")
 # (ok_stmts,xs_,w) = parseTerm xs filename w
@@ -577,7 +577,7 @@ parseNestedSubroutineCall [dot,name,sym:xs] filename w
 # (ok_w,w) = write2file (dot+++name+++sym) filename w
 | not ok_w = abort("a")
 # (ok_w,w) = write2file ("<expressionList>\n") filename w
-# (ok_e,[x_:xs_],w) = parseExpression xs filename w
+# (ok_e,[x_:xs_],w) = parseExpressionList xs filename w
 # (ok_w,w) = write2file ("</expressionList>\n" +++ x_ /*+++ "</term>\n"*/) filename w
 | not ok_w = abort("a")
 = (True,xs_,w)
@@ -593,10 +593,10 @@ parseExpressionList [sym:xs] filename w
 # (ok_read_close,w) = fclose outFile w
 | not ok_read_close = abort("failed to close file")*/
 
-# (ok_stmts,[sym:xs_],w) = parseExpression xs filename w
+# (ok_stmts,xs_,w) = parseExpression [sym:xs] filename w
 | not ok_stmts = abort("failed expression")
 
-#(ok_semi,xs__,w) = parseSemiExpression [sym:xs_] filename w
+#(ok_semi,xs__,w) = parseSemiExpression xs_ filename w
 | not ok_semi = abort("failed semiEpression")
 
 /*# outFile2 = "xmlFiles\\" +++ filename +++ ".xml"
@@ -610,7 +610,8 @@ parseExpressionList [sym:xs] filename w
 
 parseSemiExpression :: [String] String *f -> (Bool,[String],*f) | FileSystem f
 parseSemiExpression [sym:xs] filename w
-| not (sym == "<symbol> , </symbol>\n") = (True,[sym:xs],w)
+//| not (sym == "<symbol> , </symbol>\n") = (True,[sym:xs],w)
+| (sym == "<symbol> ) </symbol>\n") = (True,[sym:xs],w)
 # outFile = "xmlFiles\\" +++ filename +++ ".xml"
 # (ok_open,outFile,w) = fopen outFile FAppendText w
 | not ok_open = abort("failed to open file")
