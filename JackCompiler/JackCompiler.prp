@@ -5,11 +5,11 @@ MainModule
 	DclOpen:	False
 	Icl
 		WindowPosition
-			X:	-220
+			X:	0
 			Y:	106
 			SizeX:	1516
 			SizeY:	730
-	IclOpen:	False
+	IclOpen:	True
 OtherModules
 	Module
 		Name:	ClearComments
@@ -17,7 +17,7 @@ OtherModules
 		Dcl
 			WindowPosition
 				X:	82
-				Y:	180
+				Y:	168
 				SizeX:	800
 				SizeY:	680
 		DclOpen:	False
@@ -51,8 +51,8 @@ OtherModules
 		DclOpen:	False
 		Icl
 			WindowPosition
-				X:	-20
-				Y:	-1
+				X:	0
+				Y:	0
 				SizeX:	1492
 				SizeY:	675
 		IclOpen:	True

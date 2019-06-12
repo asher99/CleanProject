@@ -432,6 +432,19 @@ parseSubroutineCallNoTerm :: [String] String *f -> (Bool,[String],*f) | FileSyst
 parseSubroutineCallNoTerm [x1,x2:xs] filename w// = abort(x1+++x2)
 # (ok_w,w) = write2file x1 filename w
 | not ok_w = abort("a")
+| x2 == "<symbol> . </symbol>\n" = parseNestedSubroutineCallNoTerm [x2:xs] filename w
+# (ok_w,w) = write2file x2 filename w
+| not ok_w = abort("a")
+# (ok_w,w) = write2file "<expressionList>\n" filename w
+# (ok_e,[x:xs_],w) = parseExpressionList xs filename w
+# (ok_w,w) = write2file ("</expressionList>\n" +++ x) filename w
+| not ok_w = abort("a")
+= (True,xs_,w)
+
+parseSubroutineCallWithTerm :: [String] String *f -> (Bool,[String],*f) | FileSystem f
+parseSubroutineCallWithTerm [x1,x2:xs] filename w// = abort(x1+++x2)
+# (ok_w,w) = write2file x1 filename w
+| not ok_w = abort("a")
 | x2 == "<symbol> . </symbol>\n" = parseNestedSubroutineCall [x2:xs] filename w
 # (ok_w,w) = write2file x2 filename w
 | not ok_w = abort("a")
@@ -440,6 +453,8 @@ parseSubroutineCallNoTerm [x1,x2:xs] filename w// = abort(x1+++x2)
 # (ok_w,w) = write2file ("</expressionList>\n" +++ x) filename w
 | not ok_w = abort("a")
 = (True,xs_,w)
+
+
 
 
 parseReturnStatement :: [String] String *f -> (Bool,[String],*f) | FileSystem f
@@ -528,7 +543,7 @@ parseTerm [x:xs] filename w //= (True,[x:xs],w)
 | ((getTag x 17) == "<integerConstant>") = parseConstant [x:xs] filename w
 | ((getTag x 16) == "<stringConstant>")  = parseConstant [x:xs] filename w
 | ((getTag x 9) == "<keyword>")  = parseConstant [x:xs] filename w
-| ((x == "<symbol> - </symbol>\n") || (x == "<symbol> ~ </symbol>\n"))  = parseConstant [x:xs] filename w
+| ((x == "<symbol> - </symbol>\n") || (x == "<symbol> ~ </symbol>\n"))  = parseUnaryOp [x:xs] filename w
 | (x == "<symbol> ( </symbol>\n") = parseTermExpression [x:xs] filename w
 | ((getTag x 12) == "<identifier>")  = var_or_subroutine [x:xs] filename w
 
@@ -595,7 +610,17 @@ parseNestedSubroutineCall [dot,name,sym:xs] filename w
 | not ok_w = abort("a")
 # (ok_w,w) = write2file ("<expressionList>\n") filename w
 # (ok_e,[x_:xs_],w) = parseExpressionList xs filename w
-# (ok_w,w) = write2file ("</expressionList>\n" +++ x_ /*+++ "</term>\n"*/) filename w
+# (ok_w,w) = write2file ("</expressionList>\n" +++ x_ +++ "</term>\n") filename w
+| not ok_w = abort("a")
+= (True,xs_,w)
+
+parseNestedSubroutineCallNoTerm:: [String] String *f -> (Bool,[String],*f) | FileSystem f
+parseNestedSubroutineCallNoTerm [dot,name,sym:xs] filename w
+# (ok_w,w) = write2file (dot+++name+++sym) filename w
+| not ok_w = abort("a")
+# (ok_w,w) = write2file ("<expressionList>\n") filename w
+# (ok_e,[x_:xs_],w) = parseExpressionList xs filename w
+# (ok_w,w) = write2file ("</expressionList>\n" +++ x_) filename w
 | not ok_w = abort("a")
 = (True,xs_,w)
 
@@ -643,19 +668,27 @@ parseSemiExpression [sym:xs] filename w
 = parseSemiExpression xs_ filename w
 
 
+
+
+/* terminal of symbol */
+parseUnaryOp :: [String] String *f -> (Bool,[String],*f) | FileSystem f
+parseUnaryOp [op:xs] filename w
+# (okw,w) = write2file ("<term>\n" +++ op) filename w
+# (okt,tokens,w) = parseTerm xs filename w
+# (okw,w) = write2file "</term>\n" filename w
+= (True,tokens,w)
+
+
+
+
 /*
-/* terminal of symbol */
-
-parseOp ::
-
-/* terminal of symbol */
-
-parseUnaryOp ::
-
 /* terminal of keyword */
 
 parseKeywordConstant ::
 
+/* terminal of symbol */
+
+parseOp ::
 
 /************* GETTERS ***************/
 getKeyword:: String -> String
@@ -664,8 +697,9 @@ getKeyword:: String -> String
 getIdentifier:: 
 
 getSymbol:: 
-
 */
+
+
 
 write2file:: String String *f -> (Bool,*f) | FileSystem f
 write2file string filename w
