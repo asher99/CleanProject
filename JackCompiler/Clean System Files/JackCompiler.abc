@@ -27,7 +27,7 @@
 .depend "StdOverloaded" "20180913124337"
 .depend "StdBool" "20180913124337"
 .depend "StdEnv" "20180913124337"
-.module m_JackCompiler "JackCompiler" "20190524155004"
+.module m_JackCompiler "JackCompiler" "20190607145847"
 .endinfo
 .impmod _system
 .implab _cycle_in_spine
@@ -66,17 +66,23 @@
 .implab _driver
 .impmod ParserToXML
 .implab e_ParserToXML_sParseMultipleFiles
+.impmod Tokenizer
+.implab e_Tokenizer_sTokenizeMultipleFiles
 .impmod FileManipulation
 .impdesc e_FileManipulation_dgetEntriesList
 .implab e_FileManipulation_ngetEntriesList e_FileManipulation_eagetEntriesList
 .impdesc e_FileManipulation_dgetNamesOfFilesInDirectory
 .implab e_FileManipulation_ngetNamesOfFilesInDirectory e_FileManipulation_eagetNamesOfFilesInDirectory
+.impdesc e_FileManipulation_dgetJackFiles
+.implab e_FileManipulation_ngetJackFiles e_FileManipulation_eagetJackFiles
 .impdesc e_FileManipulation_dgetTxmlFiles
 .implab e_FileManipulation_ngetTxmlFiles e_FileManipulation_eagetTxmlFiles
 .impmod Directory
 .implab e_Directory_sgetDirectoryContents
 .impdesc e_Directory_dRelativePath
 .impdesc e_Directory_dPathDown
+.impmod StdMisc
+.implab e_StdMisc_sabort
 .impmod StdFile
 .impdesc e_StdFile_dfclose;30
 .impdesc e_StdFile_dfopen;31
@@ -84,6 +90,8 @@
 .impdesc e_StdFile_dstdio;33
 .implab e_StdFile_nstdio;33
 .impdesc e_StdFile_rFileSystem;
+.impmod StdBool
+.implab e_StdBool_snot
 .export __JackCompiler_Start
 .o 0 0
 __JackCompiler_Start
@@ -112,11 +120,59 @@ s3
 	build e_StdFile_dstdio;33 1 e_StdFile_nstdio;33
 	build d_S.2 -1 n_S.2
 	buildh _Nil 0
+	buildAC "jackFiles"
+	buildh ARRAY 1
+	buildh e_Directory_dPathDown 1
+	buildh _Cons 2
+	buildh e_Directory_dRelativePath 1
+	build _ 2 n7
+	push_a 0
+	build d_S.2 -1 n_S.2
+	push_a 1
+	build d_S.1 -1 n_S.1
+	build e_FileManipulation_dgetEntriesList 1 e_FileManipulation_ngetEntriesList
+	build e_FileManipulation_dgetNamesOfFilesInDirectory 1 e_FileManipulation_ngetNamesOfFilesInDirectory
+	build e_FileManipulation_dgetJackFiles 1 e_FileManipulation_ngetJackFiles
+	buildh e_StdFile_dstdio;33 0
+	buildh e_StdFile_dsfopen;32 0
+	buildh e_StdFile_dfopen;31 0
+	buildh e_StdFile_dfclose;30 0
+	update_a 5 7
+	update_a 4 6
+	update_a 3 5
+	update_a 2 4
+	update_a 1 3
+	updatepop_a 0 2
+.d 6 0
+	jsr e_Tokenizer_sTokenizeMultipleFiles
+.o 2 0
+	push_a 0
+	jsr_eval 0
+	pushB_a 1
+	pop_a 1
+	notB
+	jmp_false else.1
+	buildAC "failed to tokenize"
+	updatepop_a 0 2
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+.d 2 0
+	rtn
+else.1
+	buildh _Nil 0
 	buildAC "TxmlFiles"
 	buildh ARRAY 1
 	buildh e_Directory_dPathDown 1
 	buildh _Cons 2
 	buildh e_Directory_dRelativePath 1
+	push_a 2
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
 	build _ 2 n6
 	push_a 0
 	build d_S.2 -1 n_S.2
@@ -129,6 +185,30 @@ s3
 	buildh e_StdFile_dsfopen;32 0
 	buildh e_StdFile_dfopen;31 0
 	buildh e_StdFile_dfclose;30 0
+	update_a 5 8
+	update_a 4 7
+	update_a 3 6
+	update_a 2 5
+	update_a 1 4
+	updatepop_a 0 3
+.d 6 0
+	jmp e_ParserToXML_sParseMultipleFiles
+.n 2 _ ea7
+.o 1 0
+n7
+	push_node _cycle_in_spine 2
+.o 3 0
+ea7
+.o 3 0
+s7
+	push_a 1
+	jsr_eval 0
+	push_a 1
+	jsr_eval 0
+	buildh e_StdFile_dstdio;33 0
+	buildh e_StdFile_dsfopen;32 0
+	buildh e_StdFile_dfopen;31 0
+	buildh e_StdFile_dfclose;30 0
 	update_a 5 7
 	update_a 4 6
 	update_a 3 5
@@ -136,7 +216,16 @@ s3
 	update_a 1 3
 	updatepop_a 0 2
 .d 6 0
-	jmp e_ParserToXML_sParseMultipleFiles
+	jsr e_Directory_sgetDirectoryContents
+.o 3 0
+	push_a 2
+	push_a 2
+	push_a 2
+	buildh _Tuple 2
+	fillh _Tuple 2 5
+	pop_a 3
+.d 1 0
+	rtn
 .n 2 _ ea6
 .o 1 0
 n6

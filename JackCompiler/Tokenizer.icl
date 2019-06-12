@@ -91,13 +91,13 @@ FDAutomaton_state_0 input filename num w
 # ch = input !! 0
 # ch2 = input !! 1
 # input_ = drop 1 input
+| (ch == '/') && (ch2 == '/') = (True,w)
 | (ch == '_') || (isAlpha ch)	= FDAutomaton_transit_0_1 input filename num w
 | isDigit ch  	= FDAutomaton_transit_0_3 input filename num w
 | isSymbol ch 	= FDAutomaton_transit_0_4 input filename num w
 | ch == '\"'  	= FDAutomaton_transit_0_5 input_ filename num w
 | isSpace ch  	= FDAutomaton_state_0 (drop 1 input) filename num w
 | ch == '\n'  	= (True,w)
-| (ch == '/') && (ch2 == '/') = (True,w)
 | otherwise	  	= (False,w)
 
 

@@ -30,7 +30,7 @@ Start w
 # (io,w) = stdio w                                				// open stdio
 # io = fwrites "JACK COMPILER by Asher Alexander & Zvei Eliezer Nir\n" io
 
-/*
+
 // Tokenizer:
 
 // 2. Import the content of InputFiles directory
@@ -38,13 +38,8 @@ Start w
 # filesList = getJackFiles (getNamesOfFilesInDirectory (getEntriesList dir))
 # io = fwrites "The compiler found the following .VM files: " io
 # io = printList filesList io
-= TokenizeMultipleFiles filesList w
-// 3. 
-//| moreThanOneFile filesList 1 = TokenizeMultipleFiles filesList w
-//| otherwise = False
-*/
-
-
+# (ok_token,w) =  TokenizeMultipleFiles filesList w
+| not ok_token = abort("failed to tokenize")
  
 // Parser:
 # (dir,w) = getDirectoryContents (RelativePath [PathDown "TxmlFiles"]) w 

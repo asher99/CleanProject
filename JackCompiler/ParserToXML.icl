@@ -38,7 +38,7 @@ ParseMultipleFiles [x:xs] w
 | not ok = abort ("Failed to parse file " +++ x +++ ", execution terminated\n")
 # (parsed,w) = ParseMultipleFiles xs w
 | not parsed = abort("failed to parse file " +++ filename +++ "T.xml\n")
-
+= ParseMultipleFiles xs w
 
 
 /*
@@ -82,6 +82,8 @@ parseClass [class_name,sym:xs] filename num w
 = (True,w)
 
 parseSubroutineDec :: [String] String Int *f -> (Bool,[String],*f) | FileSystem f
+parseSubroutineDec [x1,x2] filename num w = (True,[x1,x2],w)
+
 parseSubroutineDec [subroutine_kw, subroutine_type ,subroutine_name, sym:xs] filename num w
 | not ((subroutine_kw == "<keyword> function </keyword>\n") || (subroutine_kw == "<keyword> method </keyword>\n") || (subroutine_kw == "<keyword> constructor </keyword>\n")) = (True,[subroutine_kw, subroutine_type ,subroutine_name, sym:xs],w)
 # outFile = "xmlFiles\\" +++ filename +++ ".xml"
@@ -105,6 +107,7 @@ parseSubroutineDec [subroutine_kw, subroutine_type ,subroutine_name, sym:xs] fil
 
 # (ok_body,xs__,w) = parseSubroutineBody xs_ filename num w
 # (okw,w) = write2file "</subroutineDec>\n" filename w
+| not okw = abort("bello")
 //| ok_body = abort(xs__!!0+++xs__!!1+++xs__!!2)
 | not ok_body  = abort("failed to parse subroutine body")
 = parseSubroutineDec xs__ filename num w
@@ -136,6 +139,7 @@ parseClassVarDec [classVarDec_kw,classVarDec_type:xs] filename num w
 /* parses all the symicollons in ClassVarDec */
 parseAllVars :: [String] String Int *f -> (Bool,[String],*f) | FileSystem f
 parseAllVars [varName,sym:xs] filename num w
+| varName == "<symbol> ; </symbol>\n" = (True,[varName,sym:xs],w)
 # outFile = "xmlFiles\\" +++ filename +++ ".xml"
 # (ok_open,outFile,w) = fopen outFile FAppendText w
 | not ok_open = abort("failed to open file")
@@ -215,18 +219,18 @@ parseVarDec [var,type,name:xs] filename num w
 # (ok_read_close,w) = fclose outFile w
 | not ok_read_close = abort("failed to close file")
 
-# (ok_allvars,xs_,w) = parseAllVars xs filename num w
+# (ok_allvars,[sym:xs_],w) = parseAllVars xs filename num w
 | not ok_allvars = abort("failed vardec")
 
 # outFile2 = "xmlFiles\\" +++ filename +++ ".xml"
 # (ok_open2,outFile2,w) = fopen outFile2 FAppendText w
 | not ok_open2 = abort("failed to open file")
-# string_to_print_end = "</varDec>\n"
+# string_to_print_end = sym +++ "</varDec>\n"
 # outFile2 = fwrites string_to_print_end outFile2
 # (ok_read_close2,w) = fclose outFile2 w
 | not ok_read_close2 = abort("failed to close file")
-= (True,xs_,w)
-//= parseVarDec xs_ filename num w
+//= (True,xs_,w)
+= parseVarDec xs_ filename num w
 
 
 
@@ -336,7 +340,7 @@ parseArrayLetStatement input filename w
 // sc - semi colmun (;)
 # (ok_expr2,[sc:xs_],w) = parseExpression xs filename w
 # string2print2 = sc +++ "</letStatement>\n"
-# (ok_tag2,w) = write2file string2print filename w
+# (ok_tag2,w) = write2file string2print2 filename w
 | not ok_tag2 = abort("error in let statemeny")
 = (True,xs_,w)
 
@@ -354,11 +358,11 @@ parseIfStatement [first,opening:xs] filename w //= abort(first +++opening +++ xs
 # (ok_stmt,[clos_stmt,x:xs__],w) = parseStatements xs_ filename 0 w
 # (ok_w,w) = write2file clos_stmt filename w
 
-| x == "<keyword> else </keyword>\n" = parseElseStatement xs_ filename w
+| x == "<keyword> else </keyword>\n" = parseElseStatement xs__ filename w
 
 # (ok_tag2,w) = write2file "</ifStatement>\n" filename w
 | not ok_tag2 = abort("error in let statemeny")
-= (True,xs_,w)
+= (True,[x:xs__],w)
 
 
 parseElseStatement :: [String] String *f -> (Bool,[String],*f) | FileSystem f
@@ -383,16 +387,20 @@ parseWhileStatement :: [String] String *f -> (Bool,[String],*f) | FileSystem f
 parseWhileStatement [first,opening:xs] filename w
 | not (first == "<keyword> while </keyword>\n") = parseDoStatement [first,opening:xs] filename w
 
-# string2print = "<whileStatement?\n" +++ first +++ opening
+# string2print = "<whileStatement>\n" +++ first +++ opening
 # (ok_w,w) = write2file string2print filename w
 | not ok_w = abort("error in if statement")
 
-# (ok_stmt,[clos_stmt,x:xs_],w) = parseStatements xs filename 0 w
+# (ok_expr,[closing:open_stmt:xs_],w) = parseExpression xs filename w
+# (ok_w,w) = write2file (closing +++ open_stmt) filename w
+| not ok_w = abort("error in if statement")
+
+# (ok_stmt,[clos_stmt,x:xs__],w) = parseStatements xs_ filename 0 w
 # (ok_w,w) = write2file clos_stmt filename w
 
-# (ok_tag2,w) = write2file "</ifStatement>\n" filename w
-| not ok_tag2 = abort("error in let statemeny")
-= (True,xs_,w)
+# (ok_tag2,w) = write2file "</whileStatement>\n" filename w
+| not ok_tag2 = abort("error in while statemeny")
+= (True,[x:xs__],w)
 
 
 
@@ -490,8 +498,17 @@ parseExpression [x:xs] filename w
 /* allows to write (op term)* */
 parseOpTerm :: [String] String *f -> (Bool,[String],*f) | FileSystem f
 parseOpTerm [op:xs] filename w //= abort("made it till here" +++ op +++ xs!!0)
-| not((op == "<symbol> + </symbol>\n") || (op == "<symbol> - </symbol>\n")||(op == "<symbol> * </symbol>\n") || (op == "<symbol> / </symbol>\n")) = (True,[op:xs],w)
-| not((op == "<symbol> = </symbol>\n") || (op == "<symbol> &amp </symbol>\n") || (op == "<symbol> | </symbol>\n") || (op == "<symbol> &lt </symbol>\n") || (op == "<symbol> &gt </symbol>\n")) = (True,[op:xs],w)
+# plus = "<symbol> + </symbol>\n"
+# sub  = "<symbol> - </symbol>\n"
+# mult = "<symbol> * </symbol>\n"
+# div  = "<symbol> / </symbol>\n"
+# asgn = "<symbol> = </symbol>\n"
+# amp  = "<symbol> &amp; </symbol>\n"
+# or   = "<symbol> | </symbol>\n"
+# lt   = "<symbol> &lt; </symbol>\n"
+# gt   = "<symbol> &gt; </symbol>\n"
+
+| not ((op == plus) || (op == sub) ||(op == mult) ||(op == div) ||(op == asgn) ||(op == amp) ||(op == or) ||(op == lt) ||(op == gt)) = (True,[op:xs],w)
 
 # outFile = "xmlFiles\\" +++ filename +++ ".xml"
 # (ok_open,outFile,w) = fopen outFile FAppendText w

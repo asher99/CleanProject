@@ -23,7 +23,7 @@
 .depend "StdBool" "20180913124337"
 .depend "StdEnv" "20180913124337"
 .depend "ClearComments" "20190524154812"
-.module m_ClearComments "ClearComments" "20190524154805"
+.module m_ClearComments "ClearComments" "20190607153931"
 .endinfo
 .impmod _system
 .implab _cycle_in_spine
@@ -352,16 +352,13 @@ case.6
 	buildh _Nil 0
 	update_a 0 4
 	pop_a 1
-	eqB_b FALSE 0
-	jmp_true case.10
-	pop_a 4
-	jmp s3.1
-case.10
+	push_b 0
+	jmp_false else.10
 	push_a 2
 	jsr_eval 0
 	pushC_a 3
 	pop_a 1
-	pushC '/'
+	pushC '*'
 	push_b 1
 	update_b 1 2
 	update_b 0 1
@@ -372,13 +369,86 @@ case.10
 	jsr_eval 0
 	pushC_a 1
 	pop_a 1
-	pushC '*'
+	pushC '/'
 	push_b 1
 	update_b 1 2
 	update_b 0 1
 	pop_b 1
 	eqC
 	jmp_false else.11
+	push_a 1
+	jsr_eval 0
+	push_a 11
+	push_a 11
+	pushB FALSE
+	push_a 10
+	push_a 10
+	push_a 10
+	push_a 10
+	push_a 6
+	update_a 6 7
+	update_a 5 6
+	update_a 0 5
+	pop_a 1
+	update_a 6 17
+	update_a 5 16
+	update_a 4 15
+	update_a 3 14
+	update_a 2 13
+	update_a 1 12
+	updatepop_a 0 11
+	updatepop_b 0 1
+.d 7 1 b
+	jmp s3
+else.11
+	push_a 1
+	push_a 1
+	buildh _Cons 2
+	push_a 11
+	push_a 11
+	pushB TRUE
+	push_a 10
+	push_a 10
+	push_a 10
+	push_a 10
+	push_a 6
+	update_a 6 7
+	update_a 5 6
+	update_a 0 5
+	pop_a 1
+	update_a 6 17
+	update_a 5 16
+	update_a 4 15
+	update_a 3 14
+	update_a 2 13
+	update_a 1 12
+	updatepop_a 0 11
+	updatepop_b 0 1
+.d 7 1 b
+	jmp s3
+else.10
+	push_a 2
+	jsr_eval 0
+	pushC_a 3
+	pop_a 1
+	pushC '/'
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	eqC
+	jmp_false else.13
+	push_a 0
+	jsr_eval 0
+	pushC_a 1
+	pop_a 1
+	pushC '*'
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	eqC
+	jmp_false else.13
 	push_a 1
 	jsr_eval 0
 	push_a 11
@@ -403,7 +473,7 @@ case.10
 	updatepop_b 0 1
 .d 7 1 b
 	jmp s3
-else.11
+else.13
 	push_a 10
 	buildI 2
 	push_a 11
@@ -419,7 +489,7 @@ else.11
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.13
+	jmp_false else.15
 	buildAC "failed to open file"
 	updatepop_a 0 12
 .d 1 0
@@ -429,7 +499,7 @@ else.11
 	repl_args 2 2
 .d 2 0
 	rtn
-else.13
+else.15
 	push_arg 0 3 3
 	push_arg 1 3 2
 	push_a 5
@@ -446,7 +516,7 @@ else.13
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.14
+	jmp_false else.16
 	buildAC "failed to close file"
 	updatepop_a 0 10
 .d 1 0
@@ -456,7 +526,7 @@ else.13
 	repl_args 2 2
 .d 2 0
 	rtn
-else.14
+else.16
 	push_arg 0 2 2
 	push_a 3
 	push_a 3
@@ -571,14 +641,14 @@ e_ClearComments_eareadAllCharactersOfFile
 .o 3 0
 s2
 	eq_desc _Nil 0 0
-	jmp_true case.15
-	jmp case.16
-case.15
+	jmp_true case.17
+	jmp case.18
+case.17
 	fill_a 1 2
 	pop_a 2
 .d 1 0
 	rtn
-case.16
+case.18
 	repl_args 2 2
 	push_a 0
 	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
@@ -635,7 +705,7 @@ s5
 	push_b 2
 	ltI
 	notB
-	jmp_false else.17
+	jmp_false else.19
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -656,7 +726,7 @@ s5
 	pop_b 3
 .d 1 0
 	rtn
-else.17
+else.19
 	fillh _Nil 0 1
 	pop_a 1
 	pop_b 2
@@ -687,34 +757,34 @@ s12
 .o 7 1 b
 s8
 	eq_desc _Nil 0 4
-	jmp_true case.18
-	jmp case.19
-case.18
-	eqB_b FALSE 0
 	jmp_true case.20
-	jmp s8.1
+	jmp case.21
 case.20
+	eqB_b FALSE 0
+	jmp_true case.22
+	jmp s8.1
+case.22
 	push_a 6
 	pushB TRUE
 	updatepop_a 0 7
 	updatepop_b 0 1
 .d 1 1 b
 	rtn
-case.19
+case.21
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
 	pop_a 1
 	jsr_eval 1
 	eq_desc _Nil 0 1
-	jmp_true case.21
-	jmp case.22
-case.21
-	eqB_b FALSE 0
 	jmp_true case.23
+	jmp case.24
+case.23
+	eqB_b FALSE 0
+	jmp_true case.25
 	pop_a 2
 	jmp s8.1
-case.23
+case.25
 	push_a 8
 	buildI 2
 	push_a 9
@@ -735,7 +805,7 @@ case.23
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.24
+	jmp_false else.26
 	buildAC "failed to open file"
 	updatepop_a 0 9
 .d 1 0
@@ -748,7 +818,7 @@ case.23
 	pop_a 1
 .d 1 1 b
 	rtn
-else.24
+else.26
 	push_arg 0 3 3
 	push_arg 1 3 2
 	push_a 3
@@ -763,7 +833,7 @@ else.24
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.25
+	jmp_false else.27
 	buildAC "failed to close file"
 	updatepop_a 0 8
 .d 1 0
@@ -776,7 +846,7 @@ else.24
 	pop_a 1
 .d 1 1 b
 	rtn
-else.25
+else.27
 	push_arg 0 2 2
 	buildh _Nil 0
 	push_a 8
@@ -798,16 +868,86 @@ else.25
 	updatepop_a 0 8
 .d 7 1 b
 	jmp s8
-case.22
+case.24
 	push_args 1 2 2
 	buildh _Nil 0
 	update_a 0 4
 	pop_a 1
-	eqB_b FALSE 0
-	jmp_true case.26
-	pop_a 4
-	jmp s8.1
-case.26
+	push_b 0
+	jmp_false else.28
+	push_a 2
+	jsr_eval 0
+	pushC_a 3
+	pop_a 1
+	pushC '*'
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	eqC
+	jmp_false else.29
+	push_a 0
+	jsr_eval 0
+	pushC_a 1
+	pop_a 1
+	pushC '/'
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	eqC
+	jmp_false else.29
+	push_a 1
+	jsr_eval 0
+	push_a 11
+	push_a 11
+	pushB FALSE
+	push_a 10
+	push_a 10
+	push_a 10
+	push_a 10
+	push_a 6
+	update_a 6 7
+	update_a 5 6
+	update_a 0 5
+	pop_a 1
+	update_a 6 17
+	update_a 5 16
+	update_a 4 15
+	update_a 3 14
+	update_a 2 13
+	update_a 1 12
+	updatepop_a 0 11
+	updatepop_b 0 1
+.d 7 1 b
+	jmp s8
+else.29
+	push_a 1
+	push_a 1
+	buildh _Cons 2
+	push_a 11
+	push_a 11
+	pushB TRUE
+	push_a 10
+	push_a 10
+	push_a 10
+	push_a 10
+	push_a 6
+	update_a 6 7
+	update_a 5 6
+	update_a 0 5
+	pop_a 1
+	update_a 6 17
+	update_a 5 16
+	update_a 4 15
+	update_a 3 14
+	update_a 2 13
+	update_a 1 12
+	updatepop_a 0 11
+	updatepop_b 0 1
+.d 7 1 b
+	jmp s8
+else.28
 	push_a 2
 	jsr_eval 0
 	pushC_a 3
@@ -818,7 +958,7 @@ case.26
 	update_b 0 1
 	pop_b 1
 	eqC
-	jmp_false else.27
+	jmp_false else.31
 	push_a 0
 	jsr_eval 0
 	pushC_a 1
@@ -829,7 +969,7 @@ case.26
 	update_b 0 1
 	pop_b 1
 	eqC
-	jmp_false else.27
+	jmp_false else.31
 	push_a 1
 	jsr_eval 0
 	push_a 11
@@ -854,7 +994,7 @@ case.26
 	updatepop_b 0 1
 .d 7 1 b
 	jmp s8
-else.27
+else.31
 	push_a 10
 	buildI 2
 	push_a 11
@@ -870,7 +1010,7 @@ else.27
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.29
+	jmp_false else.33
 	buildAC "failed to open file"
 	updatepop_a 0 12
 .d 1 0
@@ -883,7 +1023,7 @@ else.27
 	pop_a 1
 .d 1 1 b
 	rtn
-else.29
+else.33
 	push_arg 0 3 3
 	push_arg 1 3 2
 	push_a 5
@@ -900,7 +1040,7 @@ else.29
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.30
+	jmp_false else.34
 	buildAC "failed to close file"
 	updatepop_a 0 10
 .d 1 0
@@ -913,7 +1053,7 @@ else.29
 	pop_a 1
 .d 1 1 b
 	rtn
-else.30
+else.34
 	push_arg 0 2 2
 	push_a 3
 	push_a 3

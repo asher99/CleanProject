@@ -5,11 +5,11 @@ MainModule
 	DclOpen:	False
 	Icl
 		WindowPosition
-			X:	0
-			Y:	713
-			SizeX:	1519
+			X:	-220
+			Y:	106
+			SizeX:	1516
 			SizeY:	730
-	IclOpen:	True
+	IclOpen:	False
 OtherModules
 	Module
 		Name:	ClearComments
@@ -24,10 +24,10 @@ OtherModules
 		Icl
 			WindowPosition
 				X:	0
-				Y:	713
-				SizeX:	0
-				SizeY:	0
-		IclOpen:	True
+				Y:	36
+				SizeX:	1325
+				SizeY:	677
+		IclOpen:	False
 	Module
 		Name:	FileManipulation
 		Dir:	{Project}
@@ -51,10 +51,10 @@ OtherModules
 		DclOpen:	False
 		Icl
 			WindowPosition
-				X:	0
-				Y:	0
-				SizeX:	1493
-				SizeY:	676
+				X:	-20
+				Y:	-1
+				SizeX:	1492
+				SizeY:	675
 		IclOpen:	True
 	Module
 		Name:	Tokenizer
@@ -68,9 +68,9 @@ OtherModules
 		DclOpen:	False
 		Icl
 			WindowPosition
-				X:	512
+				X:	141
 				Y:	50
-				SizeX:	800
+				SizeX:	1171
 				SizeY:	680
 		IclOpen:	False
 	Module

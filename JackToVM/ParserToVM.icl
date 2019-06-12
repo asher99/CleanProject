@@ -268,7 +268,8 @@ parseVarName [x:xs] filename num w
 /************* STATEMENTS ***************/
 
 parseStatements:: [String] String Int *f -> (Bool,[String],*f) | FileSystem f
-
+parseStatements a b c w = (True,["a"],w)
+/*
 
 parseStatement:: [String] String Int *f -> (Bool,[String],*f) | FileSystem f
 parseStatement [first:xs] filename num w
@@ -379,7 +380,7 @@ getIdentifier::
 getSymbol:: 
 
 */
-
+*/
 write2file:: String String *f -> (Bool,*f) | FileSystem f
 write2file string filename w
 # outFile = "xmlFiles\\" +++ filename +++ ".xml"

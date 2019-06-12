@@ -6,6 +6,7 @@ import Directory
 import FileManipulation
 import Tokenizer
 import ParserToVM
+import symTable
 
 printList:: [String] *File -> *File
 printList [] io = io
@@ -26,7 +27,7 @@ moreThanOneFile [x:xs] num
 # num = num + 1
 = moreThanOneFile xs num 
 
-Start w
+/*Start w
 // 1. Welcome
 # (io,w) = stdio w                                				// open stdio
 # io = fwrites "JACK COMPILER by Asher Alexander & Zvei Eliezer Nir\n" io
@@ -52,4 +53,7 @@ Start w
 # filesList = getTxmlFiles (getNamesOfFilesInDirectory (getEntriesList dir))
 # io = fwrites "The compiler found the following .Txml files: " io
 # io = printList filesList io
-= ParseMultipleFiles filesList w
+= ParseMultipleFiles filesList w*/
+
+Start w = getIndexClassTable "name" w
+

@@ -25,7 +25,7 @@
 .depend "StdBool" "20180913124337"
 .depend "StdEnv" "20180913124337"
 .depend "FileManipulation" "20190524120125"
-.module m_FileManipulation "FileManipulation" "20190524120119"
+.module m_FileManipulation "FileManipulation" "20190606154014"
 .endinfo
 .impmod _system
 .implab _cycle_in_spine

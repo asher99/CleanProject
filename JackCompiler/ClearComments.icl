@@ -45,7 +45,7 @@ writeCharactersToFile [ch1,ch2:chars] False filename w
 | not ok_write_close = abort("failed to close file")
 = writeCharactersToFile [ch2:chars] False filename w
 
-writeCharactersToFile [ch1,ch2:chars] False filename w
+writeCharactersToFile [ch1,ch2:chars] True filename w
 // look for comment end:
 | (ch1 == '*') && (ch2 == '/') = writeCharactersToFile chars False filename w
 // otherwise: continue to read.
