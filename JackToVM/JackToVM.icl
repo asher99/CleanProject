@@ -27,12 +27,12 @@ moreThanOneFile [x:xs] num
 # num = num + 1
 = moreThanOneFile xs num 
 
-/*Start w
+Start w
 // 1. Welcome
 # (io,w) = stdio w                                				// open stdio
 # io = fwrites "JACK COMPILER by Asher Alexander & Zvei Eliezer Nir\n" io
 
-/*
+
 // Tokenizer:
 
 // 2. Import the content of InputFiles directory
@@ -40,11 +40,12 @@ moreThanOneFile [x:xs] num
 # filesList = getJackFiles (getNamesOfFilesInDirectory (getEntriesList dir))
 # io = fwrites "The compiler found the following .VM files: " io
 # io = printList filesList io
-= TokenizeMultipleFiles filesList w
+# (ok_token,w) =  TokenizeMultipleFiles filesList w
+| not ok_token = abort("failed to tokenize")
 // 3. 
 //| moreThanOneFile filesList 1 = TokenizeMultipleFiles filesList w
 //| otherwise = False
-*/
+
 
 
  
@@ -53,7 +54,7 @@ moreThanOneFile [x:xs] num
 # filesList = getTxmlFiles (getNamesOfFilesInDirectory (getEntriesList dir))
 # io = fwrites "The compiler found the following .Txml files: " io
 # io = printList filesList io
-= ParseMultipleFiles filesList w*/
+= ParseMultipleFiles filesList w
 
-Start w = getIndexClassTable "name" w
+//Start = getTokenValue "<identifier> airbnb </identifier>\n" 12
 

@@ -25,8 +25,8 @@
 .depend "StdOverloaded" "20180913124337"
 .depend "StdBool" "20180913124337"
 .depend "StdEnv" "20180913124337"
-.depend "symTable" "20190606154953"
-.module m_symTable "symTable" "20190606165222"
+.depend "symTable" "20190613214628"
+.module m_symTable "symTable" "20190613232650"
 .endinfo
 .impmod _system
 .implab _cycle_in_spine
@@ -96,6 +96,238 @@
 .implab e_StdInt_stoInt;23
 .impmod StdBool
 .implab e_StdBool_snot
+.export e_symTable_sgetClassTableCounter
+.descexp e_symTable_dgetClassTableCounter e_symTable_ngetClassTableCounter e_symTable_lgetClassTableCounter 2 0 "getClassTableCounter"
+.a 0 a6
+.o 2 0
+e_symTable_lgetClassTableCounter
+	repl_args 1 1
+.o 2 0
+a6
+.d 2 0
+	jsr ea6
+.o 3 0
+	push_a 2
+	push_a 2
+	push_a 2
+	buildh _Tuple 3
+	updatepop_a 0 3
+.d 1 0
+	rtn
+.n 2 e_symTable_dgetClassTableCounter
+.o 1 0
+e_symTable_ngetClassTableCounter
+	push_node _cycle_in_spine 2
+.d 2 0
+	jsr ea6
+.o 3 0
+	push_a 2
+	push_a 2
+	push_a 2
+	fillh _Tuple 3 6
+	pop_a 3
+.d 1 0
+	rtn
+.o 2 0
+ea6
+	jsr_eval 0
+	repl_r_args 4 0
+.o 5 0
+e_symTable_sgetClassTableCounter
+.o 5 0
+s6
+	push_a 1
+	push_a 5
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	build _ 2 n17
+	push_a 0
+	build d_S.2 -1 n_S.2
+	build _ 1 e_StdFile_nfreadline
+	push_a 1
+	build d_S.3 -1 n_S.3
+	push_a 1
+	build d_S.2 -1 n_S.2
+	push_a 4
+	build _ 3 n18
+	build d_S.2 -1 n_S.2
+	push_a 1
+	build d_S.1 -1 n_S.1
+	buildB TRUE
+	update_a 2 9
+	update_a 1 8
+	updatepop_a 0 7
+.d 3 0
+	rtn
+.n 3 _ ea18
+.o 1 0
+n18
+	push_node _cycle_in_spine 3
+.o 4 0
+ea18
+.o 4 0
+s18
+	push_a 2
+	push_a 1
+	jsr_eval 0
+	push_a 3
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	update_a 2 5
+	update_a 1 4
+	updatepop_a 0 3
+	jsr_ap 2
+	fill_a 0 1
+	pop_a 1
+.d 1 0
+	rtn
+.n 2 _ ea17
+.o 1 0
+n17
+	push_node _cycle_in_spine 2
+.o 3 0
+ea17
+.o 3 0
+s17
+	push_a 1
+	buildI 0
+	push_a 2
+	jsr_eval 0
+	buildAC "symtables\\classcounter.txt"
+	buildh ARRAY 1
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	update_a 3 5
+	update_a 2 4
+	update_a 1 3
+	updatepop_a 0 2
+	jsr_ap 3
+	fill_a 0 1
+	pop_a 1
+.d 1 0
+	rtn
+.export e_symTable_sgetMethodTableCounter
+.descexp e_symTable_dgetMethodTableCounter e_symTable_ngetMethodTableCounter e_symTable_lgetMethodTableCounter 2 0 "getMethodTableCounter"
+.a 0 a5
+.o 2 0
+e_symTable_lgetMethodTableCounter
+	repl_args 1 1
+.o 2 0
+a5
+.d 2 0
+	jsr ea5
+.o 3 0
+	push_a 2
+	push_a 2
+	push_a 2
+	buildh _Tuple 3
+	updatepop_a 0 3
+.d 1 0
+	rtn
+.n 2 e_symTable_dgetMethodTableCounter
+.o 1 0
+e_symTable_ngetMethodTableCounter
+	push_node _cycle_in_spine 2
+.d 2 0
+	jsr ea5
+.o 3 0
+	push_a 2
+	push_a 2
+	push_a 2
+	fillh _Tuple 3 6
+	pop_a 3
+.d 1 0
+	rtn
+.o 2 0
+ea5
+	jsr_eval 0
+	repl_r_args 4 0
+.o 5 0
+e_symTable_sgetMethodTableCounter
+.o 5 0
+s5
+	push_a 1
+	push_a 5
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	build _ 2 n19
+	push_a 0
+	build d_S.2 -1 n_S.2
+	build _ 1 e_StdFile_nfreadline
+	push_a 1
+	build d_S.3 -1 n_S.3
+	push_a 1
+	build d_S.2 -1 n_S.2
+	push_a 4
+	build _ 3 n20
+	build d_S.2 -1 n_S.2
+	push_a 1
+	build d_S.1 -1 n_S.1
+	buildB TRUE
+	update_a 2 9
+	update_a 1 8
+	updatepop_a 0 7
+.d 3 0
+	rtn
+.n 3 _ ea20
+.o 1 0
+n20
+	push_node _cycle_in_spine 3
+.o 4 0
+ea20
+.o 4 0
+s20
+	push_a 2
+	push_a 1
+	jsr_eval 0
+	push_a 3
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	update_a 2 5
+	update_a 1 4
+	updatepop_a 0 3
+	jsr_ap 2
+	fill_a 0 1
+	pop_a 1
+.d 1 0
+	rtn
+.n 2 _ ea19
+.o 1 0
+n19
+	push_node _cycle_in_spine 2
+.o 3 0
+ea19
+.o 3 0
+s19
+	push_a 1
+	buildI 0
+	push_a 2
+	jsr_eval 0
+	buildAC "symtables\\methodcounter.txt"
+	buildh ARRAY 1
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	update_a 3 5
+	update_a 2 4
+	update_a 1 3
+	updatepop_a 0 2
+	jsr_ap 3
+	fill_a 0 1
+	pop_a 1
+.d 1 0
+	rtn
 .export e_symTable_sgetIndexMethodTable
 .descexp e_symTable_dgetIndexMethodTable e_symTable_ngetIndexMethodTable e_symTable_lgetIndexMethodTable 3 0 "getIndexMethodTable"
 .a 0 a4
@@ -142,7 +374,7 @@ s4
 	update_a 1 2
 	update_a 0 1
 	pop_a 1
-	build _ 2 n13
+	build _ 2 n21
 	push_a 0
 	build d_S.2 -1 n_S.2
 	build e_FileManipulation_dlistOfLinesInFile 1 e_FileManipulation_nlistOfLinesInFile
@@ -151,26 +383,26 @@ s4
 	push_a 1
 	build d_S.2 -1 n_S.2
 	push_a 4
-	build _ 3 n14
+	build _ 3 n22
 	build d_S.2 -1 n_S.2
 	push_a 1
 	build d_S.1 -1 n_S.1
 	push_a 8
-	build _ 2 n5
+	build _ 2 n8
 	buildB TRUE
 	update_a 2 10
 	update_a 1 9
 	updatepop_a 0 8
 .d 3 0
 	rtn
-.n 3 _ ea14
+.n 3 _ ea22
 .o 1 0
-n14
+n22
 	push_node _cycle_in_spine 3
 .o 4 0
-ea14
+ea22
 .o 4 0
-s14
+s22
 	push_a 2
 	push_a 1
 	jsr_eval 0
@@ -187,14 +419,14 @@ s14
 	pop_a 1
 .d 1 0
 	rtn
-.n 2 _ ea13
+.n 2 _ ea21
 .o 1 0
-n13
+n21
 	push_node _cycle_in_spine 2
 .o 3 0
-ea13
+ea21
 .o 3 0
-s13
+s21
 	push_a 1
 	buildI 0
 	push_a 2
@@ -260,7 +492,7 @@ s3
 	update_a 1 2
 	update_a 0 1
 	pop_a 1
-	build _ 2 n15
+	build _ 2 n23
 	push_a 0
 	build d_S.2 -1 n_S.2
 	build e_FileManipulation_dlistOfLinesInFile 1 e_FileManipulation_nlistOfLinesInFile
@@ -269,26 +501,26 @@ s3
 	push_a 1
 	build d_S.2 -1 n_S.2
 	push_a 4
-	build _ 3 n16
+	build _ 3 n24
 	build d_S.2 -1 n_S.2
 	push_a 1
 	build d_S.1 -1 n_S.1
 	push_a 8
-	build _ 2 n5
+	build _ 2 n8
 	buildB TRUE
 	update_a 2 10
 	update_a 1 9
 	updatepop_a 0 8
 .d 3 0
 	rtn
-.n 3 _ ea16
+.n 3 _ ea24
 .o 1 0
-n16
+n24
 	push_node _cycle_in_spine 3
 .o 4 0
-ea16
+ea24
 .o 4 0
-s16
+s24
 	push_a 2
 	push_a 1
 	jsr_eval 0
@@ -305,14 +537,14 @@ s16
 	pop_a 1
 .d 1 0
 	rtn
-.n 2 _ ea15
+.n 2 _ ea23
 .o 1 0
-n15
+n23
 	push_node _cycle_in_spine 2
 .o 3 0
-ea15
+ea23
 .o 3 0
-s15
+s23
 	push_a 1
 	buildI 0
 	push_a 2
@@ -334,26 +566,26 @@ s15
 	rtn
 .n 2 _
 .o 1 0
-n5
+n8
 	push_node _cycle_in_spine 2
 .d 2 0
-	jsr ea5
+	jsr ea8
 .o 1 0
 	fillh ARRAY 1 1
 .d 1 0
 	rtn
 .o 2 0
-ea5
+ea8
 	jsr_eval 1
 	jsr_eval 0
 	push_array 0
 	update_a 0 1
 	pop_a 1
 .o 2 0
-s5
+s8
 	eq_desc _Cons 2 1
 	jmp_true case.1
-	jmp s5.1
+	jmp s8.1
 case.1
 	push_args 1 2 2
 	buildh _Nil 0
@@ -371,7 +603,7 @@ case.1
 	update_a 1 2
 	updatepop_a 0 1
 .d 2 0
-	jsr s6
+	jsr s9
 .o 1 0
 	pushI 0
 	push_a 0
@@ -396,7 +628,7 @@ case.1
 	update_a 1 5
 	updatepop_a 0 4
 .d 2 0
-	jmp s5
+	jmp s8
 else.2
 	pushI 3
 	push_a 0
@@ -408,15 +640,15 @@ else.2
 	updatepop_a 0 1
 .d 1 0
 	rtn
-s5.1
+s8.1
 	pop_a 2
 	pushD m_symTable
-	pushD x_5
+	pushD x_8
 .d 0 2 ii
 	jmp _match_error
-.string x_5 "findRecordIndex"
+.string x_8 "findRecordIndex"
 .o 2 0
-s6
+s9
 	create
 	push_a 1
 	update_a 1 2
@@ -425,16 +657,16 @@ s6
 	jsr e_StdList_sfromString;78
 .o 1 0
 .d 2 0
-	jmp s7
-.n 1 _ ea7
+	jmp s10
+.n 1 _ ea10
 .o 1 0
-n7
+n10
 	push_node _cycle_in_spine 1
 .o 2 0
-ea7
+ea10
 	jsr_eval 0
 .o 2 0
-s7
+s10
 	eq_desc _Nil 0 0
 	jmp_true case.3
 	jmp case.4
@@ -471,9 +703,9 @@ case.4
 	jsr e_StdList_sdropWhile
 .o 1 0
 .d 2 0
-	jmp s7
+	jmp s10
 else.5
-	buildh d10 0
+	buildh d13 0
 	push_a 1
 	push_a 1
 	update_a 1 2
@@ -482,7 +714,7 @@ else.5
 	build e_StdList_dspan 2 e_StdList_nspan
 	push_a 0
 	build d_S.2 -1 n_S.2
-	build _ 1 n7
+	build _ 1 n10
 	push_a 1
 	build d_S.1 -1 n_S.1
 	build e_StdList_dtoString;79 1 e_StdList_ntoString;79
@@ -490,24 +722,24 @@ else.5
 	pop_a 2
 .d 1 0
 	rtn
-.desc d10 _hnf l10 1 0 "<lambda>[line:15];13;9"
+.desc d13 _hnf l13 1 0 "<lambda>[line:15];13;12"
 .o 2 0
-l10
+l13
 	pop_a 1
 .d 1 0
-	jsr ea10
+	jsr ea13
 .o 0 1 b
 	buildB_b 0
 	pop_b 1
 .d 1 0
 	rtn
 .o 1 0
-ea10
+ea13
 	jsr_eval 0
 	pushC_a 0
 	pop_a 1
 .o 0 1 c
-s10
+s13
 	push_b 0
 	updatepop_b 0 1
 .d 0 1 c
@@ -617,7 +849,7 @@ else.6
 	push_a 1
 	build d_S.2 -1 n_S.2
 	push_a 4
-	build _ 3 n17
+	build _ 3 n25
 	build d_S.2 -1 n_S.2
 	buildI 2
 	push_a 5
@@ -649,44 +881,58 @@ else.6
 .d 2 0
 	rtn
 else.7
-	push_a 1
-	build d_S.1 -1 n_S.1
+	jsr_eval 1
+	push_arg 1 2 1
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
 	push_arg 1 3 3
 	push_arg 2 3 2
 	push_a 2
 	push_a 12
 	push_a 12
 	push_a 12
-	build _ 5 n19
+	build _ 5 n26
 	push_a 5
-	build _ 3 n18
-	build d_S.2 -1 n_S.2
-	buildI 1
-	push_a 6
-	buildAC "symtables\\classcounter.txt"
-	buildh ARRAY 1
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-	update_a 10 14
 	update_a 9 13
 	update_a 8 12
 	update_a 7 11
-	update_a 4 10
+	update_a 6 10
 	update_a 3 9
 	update_a 2 8
 	update_a 1 7
 	updatepop_a 0 6
-	jsr_ap 3
-	push_arg 0 3 1
-	jsr_eval 0
-	pushB_a 0
+	jsr_ap 2
+	repl_args 2 2
+	jsr_eval 1
 	pop_a 1
+	push_a 1
+	buildh _Nil 0
+	update_a 0 3
+	pop_a 1
+.d 1 0
+	jsr e_StdInt_stoInt;23
+.o 0 1 i
+	buildAC "symtables\\methodcounter.txt"
+	push_a 6
+	push_a 6
+	push_a 6
+	push_a 6
+	update_a 5 10
+	update_a 4 9
+	update_a 3 8
+	update_a 2 7
+	update_a 1 6
+	updatepop_a 0 5
+.d 6 1 i
+	jsr s16
+.o 1 1 b
+	push_b 0
 	notB
 	jmp_false else.8
-	buildAC ""
-	updatepop_a 0 6
+	buildAC "failed with the counter++ thing"
+	updatepop_a 0 1
+	pop_b 1
 .d 1 0
 	jsr print_string_
 .o 0 0
@@ -695,99 +941,27 @@ else.7
 .d 2 0
 	rtn
 else.8
-	push_arg 0 3 3
-	push_arg 1 3 2
-	push_a 3
-	build _ 2 n21
-	push_a 4
-	build _ 3 n20
-	build d_S.2 -1 n_S.2
+	push_a 0
 	buildB TRUE
-	update_a 1 7
-	updatepop_a 0 6
+	update_a 1 2
+	updatepop_a 0 1
+	pop_b 1
 .d 2 0
 	rtn
-.n 2 _ ea21
+.n 5 _ ea26
 .o 1 0
-n21
-	push_node _cycle_in_spine 2
-.o 3 0
-ea21
-.o 3 0
-s21
-	push_a 1
-	jsr_eval 0
-	pushF_a 2
-	pop_a 1
-	push_a 0
-	jsr_eval 0
-	push_array 0
-	updatepop_a 0 1
-	updatepop_a 0 2
-.d 1 0
-	jsr e_StdInt_stoInt;23
-.o 0 1 i
-	pushI 1
-	push_b 1
-	update_b 1 2
-	update_b 0 1
-	pop_b 1
-	addI
-.d 0 1 i
-	jsr ItoAC
-.o 1 0
-.d 1 2 f
-	jsr writeFS
-.o 0 2 f
-	fillF_b 0 0
-	pop_b 2
-.d 1 0
-	rtn
-.n 3 _ ea20
-.o 1 0
-n20
-	push_node _cycle_in_spine 3
-.o 4 0
-ea20
-.o 4 0
-s20
-	push_a 2
-	push_a 1
-	jsr_eval 0
-	push_a 3
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-	update_a 2 5
-	update_a 1 4
-	updatepop_a 0 3
-	jsr_ap 2
-	fill_a 0 1
-	pop_a 1
-.d 1 0
-	rtn
-.n 5 _ ea19
-.o 1 0
-n19
+n26
 	push_node _cycle_in_spine 5
 .o 6 0
-ea19
+ea26
 .o 6 0
-s19
+s26
 	push_a 4
 	jsr_eval 0
 	pushF_a 5
 	pop_a 1
-	push_a 3
-	jsr_eval 0
-	push_array 0
-	updatepop_a 0 1
 	buildAC "\n"
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
+	push_a 4
 	buildh _Nil 0
 	update_a 0 6
 	update_a 0 7
@@ -835,38 +1009,14 @@ s19
 	pop_b 2
 .d 1 0
 	rtn
-.n 3 _ ea18
+.n 3 _ ea25
 .o 1 0
-n18
+n25
 	push_node _cycle_in_spine 3
 .o 4 0
-ea18
+ea25
 .o 4 0
-s18
-	push_a 2
-	push_a 1
-	jsr_eval 0
-	push_a 3
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-	update_a 2 5
-	update_a 1 4
-	updatepop_a 0 3
-	jsr_ap 2
-	fill_a 0 1
-	pop_a 1
-.d 1 0
-	rtn
-.n 3 _ ea17
-.o 1 0
-n17
-	push_node _cycle_in_spine 3
-.o 4 0
-ea17
-.o 4 0
-s17
+s25
 	push_a 2
 	push_a 1
 	jsr_eval 0
@@ -984,7 +1134,7 @@ else.9
 	push_a 1
 	build d_S.2 -1 n_S.2
 	push_a 4
-	build _ 3 n22
+	build _ 3 n27
 	build d_S.2 -1 n_S.2
 	buildI 2
 	push_a 5
@@ -1016,44 +1166,58 @@ else.9
 .d 2 0
 	rtn
 else.10
-	push_a 1
-	build d_S.1 -1 n_S.1
+	jsr_eval 1
+	push_arg 1 2 1
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
 	push_arg 1 3 3
 	push_arg 2 3 2
 	push_a 2
 	push_a 12
 	push_a 12
 	push_a 12
-	build _ 5 n24
+	build _ 5 n28
 	push_a 5
-	build _ 3 n23
-	build d_S.2 -1 n_S.2
-	buildI 1
-	push_a 6
-	buildAC "symtables\\classcounter.txt"
-	buildh ARRAY 1
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-	update_a 10 14
 	update_a 9 13
 	update_a 8 12
 	update_a 7 11
-	update_a 4 10
+	update_a 6 10
 	update_a 3 9
 	update_a 2 8
 	update_a 1 7
 	updatepop_a 0 6
-	jsr_ap 3
-	push_arg 0 3 1
-	jsr_eval 0
-	pushB_a 0
+	jsr_ap 2
+	repl_args 2 2
+	jsr_eval 1
 	pop_a 1
+	push_a 1
+	buildh _Nil 0
+	update_a 0 3
+	pop_a 1
+.d 1 0
+	jsr e_StdInt_stoInt;23
+.o 0 1 i
+	buildAC "symtables\\classcounter.txt"
+	push_a 6
+	push_a 6
+	push_a 6
+	push_a 6
+	update_a 5 10
+	update_a 4 9
+	update_a 3 8
+	update_a 2 7
+	update_a 1 6
+	updatepop_a 0 5
+.d 6 1 i
+	jsr s16
+.o 1 1 b
+	push_b 0
 	notB
 	jmp_false else.11
-	buildAC ""
-	updatepop_a 0 6
+	buildAC "failed with the counter++ thing"
+	updatepop_a 0 1
+	pop_b 1
 .d 1 0
 	jsr print_string_
 .o 0 0
@@ -1062,99 +1226,27 @@ else.10
 .d 2 0
 	rtn
 else.11
-	push_arg 0 3 3
-	push_arg 1 3 2
-	push_a 3
-	build _ 2 n26
-	push_a 4
-	build _ 3 n25
-	build d_S.2 -1 n_S.2
+	push_a 0
 	buildB TRUE
-	update_a 1 7
-	updatepop_a 0 6
+	update_a 1 2
+	updatepop_a 0 1
+	pop_b 1
 .d 2 0
 	rtn
-.n 2 _ ea26
+.n 5 _ ea28
 .o 1 0
-n26
-	push_node _cycle_in_spine 2
-.o 3 0
-ea26
-.o 3 0
-s26
-	push_a 1
-	jsr_eval 0
-	pushF_a 2
-	pop_a 1
-	push_a 0
-	jsr_eval 0
-	push_array 0
-	updatepop_a 0 1
-	updatepop_a 0 2
-.d 1 0
-	jsr e_StdInt_stoInt;23
-.o 0 1 i
-	pushI 1
-	push_b 1
-	update_b 1 2
-	update_b 0 1
-	pop_b 1
-	addI
-.d 0 1 i
-	jsr ItoAC
-.o 1 0
-.d 1 2 f
-	jsr writeFS
-.o 0 2 f
-	fillF_b 0 0
-	pop_b 2
-.d 1 0
-	rtn
-.n 3 _ ea25
-.o 1 0
-n25
-	push_node _cycle_in_spine 3
-.o 4 0
-ea25
-.o 4 0
-s25
-	push_a 2
-	push_a 1
-	jsr_eval 0
-	push_a 3
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-	update_a 2 5
-	update_a 1 4
-	updatepop_a 0 3
-	jsr_ap 2
-	fill_a 0 1
-	pop_a 1
-.d 1 0
-	rtn
-.n 5 _ ea24
-.o 1 0
-n24
+n28
 	push_node _cycle_in_spine 5
 .o 6 0
-ea24
+ea28
 .o 6 0
-s24
+s28
 	push_a 4
 	jsr_eval 0
 	pushF_a 5
 	pop_a 1
-	push_a 3
-	jsr_eval 0
-	push_array 0
-	updatepop_a 0 1
 	buildAC "\n"
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
+	push_a 4
 	buildh _Nil 0
 	update_a 0 6
 	update_a 0 7
@@ -1202,14 +1294,14 @@ s24
 	pop_b 2
 .d 1 0
 	rtn
-.n 3 _ ea23
+.n 3 _ ea27
 .o 1 0
-n23
+n27
 	push_node _cycle_in_spine 3
 .o 4 0
-ea23
+ea27
 .o 4 0
-s23
+s27
 	push_a 2
 	push_a 1
 	jsr_eval 0
@@ -1226,28 +1318,102 @@ s23
 	pop_a 1
 .d 1 0
 	rtn
-.n 3 _ ea22
-.o 1 0
-n22
-	push_node _cycle_in_spine 3
-.o 4 0
-ea22
-.o 4 0
-s22
-	push_a 2
-	push_a 1
-	jsr_eval 0
+.o 6 1 i
+s16
+	push_a 5
+	buildI 1
 	push_a 3
+	push_a 7
+	buildh ARRAY 1
 	push_a 1
 	update_a 1 2
 	update_a 0 1
 	pop_a 1
-	update_a 2 5
-	update_a 1 4
-	updatepop_a 0 3
-	jsr_ap 2
-	fill_a 0 1
+	buildh _Nil 0
+	update_a 0 9
+	update_a 0 10
 	pop_a 1
+	jsr_ap 3
+	push_arg 0 3 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.12
+	buildAC ""
+	updatepop_a 0 7
+	pop_b 1
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 1 1 b
+	rtn
+else.12
+	push_arg 0 3 3
+	push_arg 1 3 2
+	push_b 0
+	build_u _ 1 1 n29
+	push_a 3
+	pop_b 1
+	update_a 2 9
+	update_a 1 8
+	updatepop_a 0 7
+	jsr_ap 2
+	push_arg 0 2 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.13
+	buildAC ""
+	updatepop_a 0 1
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+.d 1 1 b
+	rtn
+else.13
+	push_arg 0 2 2
+	pushB TRUE
+	updatepop_a 0 1
+.d 1 1 b
+	rtn
+.nu 1 1 _ _
+.o 1 0
+n29
+	push_node_u _cycle_in_spine 1 1
+.o 2 1 i
+ea29
+.o 2 1 i
+s29
+	push_a 0
+	jsr_eval 0
+	pushF_a 1
+	pop_a 1
+	pushI 1
+	push_b 3
+	addI
+	pop_a 1
+.d 0 1 i
+	jsr ItoAC
+.o 1 0
+	update_b 1 2
+	updatepop_b 0 1
+.d 1 2 f
+	jsr writeFS
+.o 0 2 f
+	fillF_b 0 0
+	pop_b 2
 .d 1 0
 	rtn
 .impmod _system

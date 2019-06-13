@@ -5,11 +5,11 @@ MainModule
 	DclOpen:	False
 	Icl
 		WindowPosition
-			X:	155
-			Y:	1
-			SizeX:	999
+			X:	774
+			Y:	308
+			SizeX:	800
 			SizeY:	680
-	IclOpen:	False
+	IclOpen:	True
 OtherModules
 	Module
 		Name:	ClearComments
@@ -20,12 +20,6 @@ OtherModules
 		Name:	FileManipulation
 		Dir:	{Project}
 		DclOpen:	False
-		Icl
-			WindowPosition
-				X:	10
-				Y:	87
-				SizeX:	800
-				SizeY:	603
 		IclOpen:	False
 	Module
 		Name:	ParserToVM
@@ -39,11 +33,11 @@ OtherModules
 		DclOpen:	True
 		Icl
 			WindowPosition
-				X:	343
-				Y:	67
-				SizeX:	997
-				SizeY:	781
-		IclOpen:	False
+				X:	31
+				Y:	2
+				SizeX:	1090
+				SizeY:	662
+		IclOpen:	True
 	Module
 		Name:	Tokenizer
 		Dir:	{Project}
@@ -52,14 +46,20 @@ OtherModules
 	Module
 		Name:	symTable
 		Dir:	{Project}
-		DclOpen:	False
+		Dcl
+			WindowPosition
+				X:	592
+				Y:	177
+				SizeX:	800
+				SizeY:	680
+		DclOpen:	True
 		Icl
 			WindowPosition
-				X:	10
-				Y:	10
-				SizeX:	1519
-				SizeY:	730
-		IclOpen:	False
+				X:	247
+				Y:	16
+				SizeX:	800
+				SizeY:	684
+		IclOpen:	True
 	Module
 		Name:	Directory
 		Dir:	{Application}*Libraries*Directory

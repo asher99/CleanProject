@@ -20,12 +20,8 @@ insertRecordClassTable name type kind w
 # tFile = fwrites (name +++ " " +++ type +++ " " +++ kind +++ " " +++ counterstr +++ "\n" ) tFile 
 # (okclose,w) = fclose tFile w
 // open the file for writing, set the counter, close the file:
-# counter_ = counter + 1
-# cFile = "symtables\\classcounter.txt"
-# (okopen,cFile,w) = fopen cFile FWriteText w
-| not okopen = abort("")
-# cFile = fwrites (toString counter_) cFile
-# (okclose,w) = fclose cFile w
+# (ok_inc,w) = incIndex counter "symtables\\classcounter.txt" w
+| not ok_inc = abort("failed with the counter++ thing")
 // return:
 = (True,w)
 
@@ -57,13 +53,20 @@ insertRecordMethodTable name type kind w
 # tFile = fwrites (name +++ " " +++ type +++ " " +++ kind +++ " " +++ counterstr +++ "\n" ) tFile 
 # (okclose,w) = fclose tFile w
 // open the file for writing, set the counter, close the file:
-# counter_ = counter + 1
-# cFile = "symtables\\classcounter.txt"
-# (okopen,cFile,w) = fopen cFile FWriteText w
-| not okopen = abort("")
-# cFile = fwrites (toString counter_) cFile
-# (okclose,w) = fclose cFile w
+# (ok_inc,w) = incIndex counter "symtables\\methodcounter.txt" w
+| not ok_inc = abort("failed with the counter++ thing")
 // return:
+= (True,w)
+
+incIndex:: Int String *f -> (Bool,*f) | FileSystem f
+incIndex counter cFile w
+// write counter++
+# counter_ = counter + 1
+# (okopen2,cFile,w) = fopen cFile FWriteText w
+| not okopen2 = abort("")
+# cFile = fwrites (toString counter_) cFile
+# (okclose2,w) = fclose cFile w
+| not okclose2 = abort("")
 = (True,w)
 
 getIndexMethodTable:: String *f -> (Bool,String,*f) | FileSystem f
@@ -83,6 +86,23 @@ findRecordIndex name [x:xs]
 # record = split x
 | not (record!!0 == name) = findRecordIndex name xs
 = record!!3
+
+
+getMethodTableCounter:: *f -> (Bool,String,*f) | FileSystem f
+getMethodTableCounter w
+# cFile = "symtables\\methodcounter.txt"
+# (ok_read_open,cFile,w) = fopen cFile FReadText w
+# (counter,inputfile) = freadline cFile
+# (ok_read_close,w) = fclose inputfile w
+= (True,counter,w)
+
+getClassTableCounter:: *f -> (Bool,String,*f) | FileSystem f
+getClassTableCounter w
+# cFile = "symtables\\classcounter.txt"
+# (ok_read_open,cFile,w) = fopen cFile FReadText w
+# (counter,inputfile) = freadline cFile
+# (ok_read_close,w) = fclose inputfile w
+= (True,counter,w)
 
 
 /*
