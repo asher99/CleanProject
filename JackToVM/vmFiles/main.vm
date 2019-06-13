@@ -1,0 +1,3 @@
+function main.main 3
+pop  local 2
+function main.0

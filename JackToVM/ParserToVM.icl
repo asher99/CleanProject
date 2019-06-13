@@ -81,7 +81,7 @@ parseSubroutineDec [subroutine_kw, subroutine_type ,subroutine_name, sym:xs] fil
 # (ok_params,[sym_:xs_],w) = parseParameterList xs filename num w
 | not ok_params = abort("failed to parse params list")
 // enter locals to the method symbol table, and generate vm code.
-# (ok_body,xs__,w) = parseSubroutineBody xs_ filename num w
+# (ok_body,xs__,w) = parseSubroutineBody xs_ filename (getTokenValue subroutine_name 12) num w
 | not ok_body = abort("failed to parse subroutine body")
 = parseSubroutineDec xs__ filename num w
 
@@ -142,17 +142,19 @@ finishParameterList [type,varname,sym:xs] filename num w
 | not ok_arg = abort("failed to insert argument symbol")
 = (True,[sym:xs],w)
 
-parseSubroutineBody :: [String] String Int *f -> (Bool,[String],*f) | FileSystem f
-parseSubroutineBody [sym:xs] filename num w //= abort(xs!!0 +++ xs!!1 +++ xs!!2)
+parseSubroutineBody :: [String] String String Int *f -> (Bool,[String],*f) | FileSystem f
+parseSubroutineBody [sym:xs] filename methodname num w //= abort(xs!!0 +++ xs!!1 +++ xs!!2)
 // insert locals to the method symbol table:
 #(ok_vardec,xs_,w) = parseVarDec xs filename num w
 | not ok_vardec = abort("failed to parse vardec")
 // get the method symbol table counter, indicates the number of locals:
-
+# (ok_locals,num_of_locals,w) = getMethodTableCounter w
+| not ok_locals = abort("failed to get number of locals")
 // print the 'function' command to the vm file:
-
-// generate vm code:
-#(ok_stmt,[sym_:xs__],w) = parseStatements xs_ filename num w
+# (okw,w) = write2file ("function " +++ filename +++ "." +++ methodname +++ num_of_locals +++ "\n") filename w
+| not ok_locals = abort("failed to print 'function' instruction")
+// generate vm code for the function statements:
+#(ok_stmt,[sym_:xs__],w) = parseStatements xs_ filename w
 | not ok_stmt = abort("failed to parse statements")
 = (True,xs__,w)
 
@@ -168,58 +170,51 @@ parseVarDec [var,type,name:xs] filename num w
 
 
 
-
-/*
-parseVarDec :: 
-/* terminal of identifier */
-parseClassName :: [String] String Int *f -> (Bool,*f) | FileSystem f
-parseClassName [x:xs] filename num w
-# outFile = "xmlFiles\\" +++ filename +++ ".xml"
-# (ok_open,outFile,w) = fopen outFile FAppendText w
-| not ok_open = abort("failed to open file")
-# string_to_print = x
-# outFile = fwrites string_to_print outFile
-# (ok_read_close,w) = fclose outFile w
-| not ok_read_close = abort("failed to close file") 
-= (True,w)
-
-
-
-/* terminal of identifier */
-parseSubroutineName ::
-
-/* terminal of identifier */
-parseVarName :: [String] String Int *f -> (Bool,*f) | FileSystem f
-parseVarName [x:xs] filename num w
-# outFile = "xmlFiles\\" +++ filename +++ ".xml"
-# (ok_open,outFile,w) = fopen outFile FAppendText w
-| not ok_open = abort("failed to open file")
-# string_to_print = x
-# outFile = fwrites string_to_print outFile
-# (ok_read_close,w) = fclose outFile w
-| not ok_read_close = abort("failed to close file")
-= (True,w)
-
-*/
-
 /************* STATEMENTS ***************/
 
-parseStatements:: [String] String Int *f -> (Bool,[String],*f) | FileSystem f
-parseStatements a b c w = (True,["a"],w)
-/*
-parseStatement:: [String] String Int *f -> (Bool,[String],*f) | FileSystem f
-parseStatement [first:xs] filename num w
+parseStatements:: [String] String *f -> (Bool,[String],*f) | FileSystem f
+parseStatements [first:xs] filename w
+// end condition:
+| not ((first == "<keyword> let </keyword>\n") || (first == "<keyword> if </keyword>\n") || (first == "<keyword> while </keyword>\n") || (first == "<keyword> do </keyword>\n") || (first == "<keyword> return </keyword>\n")) = (True,[first:xs],w)
+// generate vm code for singel statement:
+# (ok_stmts,xs_,w) = parseStatement [first:xs] filename w
+| not ok_stmts = abort("failed statments")
+// not sure if needed, maybe just 'return true' was enough. But I'm not gonna mess with Targil4 structure.
+= parseStatement xs_ filename w
+
+
+parseStatement:: [String] String *f -> (Bool,[String],*f) | FileSystem f
+parseStatement [first:xs] filename w
+// end condition:
 | not (( first == "<keyword> let </keyword>\n") || (first == "<keyword> if </keyword>\n") || (first == "<keyword> while </keyword>\n") || (first == "<keyword> do </keyword>\n") || (first == "<keyword> return </keyword>\n")) = (True,[first:xs],w)
+// switch control flow to generate vm code to the right kind of statment (we start with 'let' and switch to other cases if needed:)
 # (ok_let,xs_,w) = parseLetStatement [first:xs] filename w
 | not ok_let = abort("error in let statement")
-//= (True,xs_,w)
-= parseStatement xs_ filename num w
+= parseStatement xs_ filename w
+
 parseLetStatement:: [String] String *f -> (Bool,[String],*f) | FileSystem f
-parseLetStatement [return:xs] filename w 
-parseArrayLetStatement :: [String] String *f -> (Bool,[String],*f) | FileSystem f
-parseArrayLetStatement [return:xs] filename w 
+parseLetStatement [first,name,sym:xs] filename w //= abort(first +++ name +++ sym)
+| not (first == "<keyword> let </keyword>\n") = parseIfStatement [first,name,sym:xs] filename w
+
+//| sym == "<symbol> [ </symbol>\n" = parseArrayLetStatement xs filename w
+// sc - semi colmun (;)
+# (ok_expr,[sc:xs_],w) = parseExpression xs filename w
+
+// pop the result from parseExpression into the left-side-variable
+# symbol_name = getTokenValue name 12
+# (ok_kind,symbol_kind,w) = getMethodSymbolKind symbol_name w
+# (ok_index,symbol_index,w) = getMethodSymbolIndex symbol_name w
+| not (ok_kind && ok_index) = abort("failed to get symbol record fields")
+
+# (ok_right,w) = write2file ("pop " +++ " " +++ symbol_kind +++ " " +++ symbol_index +++ "\n") filename w
+
+= (True,xs_,w)
 parseIfStatement :: [String] String *f -> (Bool,[String],*f) | FileSystem f
-parseIfStatement [return:xs] filename w 
+parseIfStatement [return:xs] filename w = (True,[return:xs],w)
+
+/*parseArrayLetStatement :: [String] String *f -> (Bool,[String],*f) | FileSystem f
+parseArrayLetStatement [return:xs] filename w 
+
 parseElseStatement :: [String] String *f -> (Bool,[String],*f) | FileSystem f
 parseElseStatement [return:xs] filename w 
 parseWhileStatement :: [String] String *f -> (Bool,[String],*f) | FileSystem f
@@ -231,11 +226,11 @@ parseSubroutineCallNoTerm [x1,x2:xs] filename w// = abort(x1+++x2)
 parseReturnStatement :: [String] String *f -> (Bool,[String],*f) | FileSystem f
 parseReturnStatement [return:xs] filename w 
 /************* EXPRESSIONS ***************/
-
+*/
 parseExpression :: [String] String *f -> (Bool,[String],*f) | FileSystem f
-parseExpression [x:xs] filename w
+parseExpression [x:xs] filename w = (True,[x:xs],w)
 
-
+/*
 /* allows to write (op term)* */
 parseOpTerm :: [String] String *f -> (Bool,[String],*f) | FileSystem f
 parseOpTerm [op:xs] filename w //= abort("made it till here" +++ op +++ xs!!0)
@@ -325,7 +320,7 @@ getTag str len
 getTokenValue:: {#Char} Int -> {#Char}
 getTokenValue str len
 # strlist = [ c \\ c <-: str ]
-# strlen  = length strlist 					// one for '\n', anohter one for the extra char in closing tag.
-= { c \\ c <- (drop len ( take (strlen - len - 2) strlist ) ) }
+# strlen  = length strlist 					// one for '\n', anohter one for the extra char in closing tag, and the last for the space.
+= { c \\ c <- (drop (len+1) ( take (strlen - len - 2) strlist ) ) }
 
 

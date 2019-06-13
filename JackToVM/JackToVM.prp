@@ -33,9 +33,9 @@ OtherModules
 		DclOpen:	True
 		Icl
 			WindowPosition
-				X:	31
-				Y:	2
-				SizeX:	1090
+				X:	38
+				Y:	78
+				SizeX:	1291
 				SizeY:	662
 		IclOpen:	True
 	Module
@@ -48,17 +48,17 @@ OtherModules
 		Dir:	{Project}
 		Dcl
 			WindowPosition
-				X:	592
-				Y:	177
+				X:	642
+				Y:	84
 				SizeX:	800
 				SizeY:	680
 		DclOpen:	True
 		Icl
 			WindowPosition
-				X:	247
-				Y:	16
+				X:	667
+				Y:	-1
 				SizeX:	800
-				SizeY:	684
+				SizeY:	681
 		IclOpen:	True
 	Module
 		Name:	Directory

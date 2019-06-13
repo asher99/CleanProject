@@ -33,7 +33,7 @@ getIndexClassTable name w
 # (content,inputfile) = listOfLinesInFile inputfile
 # (ok_read_close,w) = fclose inputfile w
 // get the index based on the record name
-# index = findRecordIndex name content
+# index = findSymbolIndex name content
 // return:
 = (True,index,w)
 
@@ -69,23 +69,50 @@ incIndex counter cFile w
 | not okclose2 = abort("")
 = (True,w)
 
-getIndexMethodTable:: String *f -> (Bool,String,*f) | FileSystem f
-getIndexMethodTable name w
+getMethodSymbolIndex:: String *f -> (Bool,String,*f) | FileSystem f
+getMethodSymbolIndex name w
 // open the file for reading, get the content as list of lines
 # tFile = "symtables\\methodtable.txt"
 # (ok_read_open,inputfile,w) = fopen tFile FReadText w
 # (content,inputfile) = listOfLinesInFile inputfile
 # (ok_read_close,w) = fclose inputfile w
 // get the index based on the record name
-# index = findRecordIndex name content
+# index = findSymbolIndex name content
 // return:
 = (True,index,w)
 
-findRecordIndex:: String [String] -> String
-findRecordIndex name [x:xs]
+findSymbolIndex:: String [String] -> String
+findSymbolIndex name [x]
 # record = split x
-| not (record!!0 == name) = findRecordIndex name xs
 = record!!3
+
+findSymbolIndex name [x:xs]
+# record = split x
+| not (record!!0 == name) = findSymbolIndex name xs
+= record!!3
+
+getMethodSymbolKind:: String *f -> (Bool,String,*f) | FileSystem f
+getMethodSymbolKind name w
+// open the file for reading, get the content as list of lines
+# tFile = "symtables\\methodtable.txt"
+# (ok_read_open,inputfile,w) = fopen tFile FReadText w
+# (content,inputfile) = listOfLinesInFile inputfile
+# (ok_read_close,w) = fclose inputfile w
+// get the index based on the record name
+# index = findSymbolKind name content
+// return:
+= (True,index,w)
+
+findSymbolKind:: String [String] -> String
+findSymbolKind name [x]
+# record = split x
+= record!!2
+
+findSymbolKind name [x:xs]
+# record = split x
+| (record!!0 == name) = record!!2
+= findSymbolKind name xs
+
 
 
 getMethodTableCounter:: *f -> (Bool,String,*f) | FileSystem f
@@ -102,8 +129,7 @@ getClassTableCounter w
 # (ok_read_open,cFile,w) = fopen cFile FReadText w
 # (counter,inputfile) = freadline cFile
 # (ok_read_close,w) = fclose inputfile w
-= (True,counter,w)
-
+= (True,counter,w) 
 
 /*
 *	Split
