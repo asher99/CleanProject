@@ -26,18 +26,18 @@ OtherModules
 		Dir:	{Project}
 		Dcl
 			WindowPosition
-				X:	10
-				Y:	10
+				X:	631
+				Y:	121
 				SizeX:	800
 				SizeY:	680
 		DclOpen:	True
 		Icl
 			WindowPosition
-				X:	10
-				Y:	-2
-				SizeX:	1519
+				X:	3
+				Y:	0
+				SizeX:	1516
 				SizeY:	730
-		IclOpen:	False
+		IclOpen:	True
 	Module
 		Name:	Tokenizer
 		Dir:	{Project}

@@ -22,6 +22,10 @@
 <symbol> , </symbol>
 <identifier> b </identifier>
 <symbol> ; </symbol>
+<keyword> var </keyword>
+<keyword> int </keyword>
+<identifier> c </identifier>
+<symbol> ; </symbol>
 <keyword> let </keyword>
 <identifier> a </identifier>
 <symbol> = </symbol>

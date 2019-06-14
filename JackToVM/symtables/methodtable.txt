@@ -1,1 +1,6 @@
-  argument 0
+x  int  argument 0
+y  int  argument 1
+z  int  argument 2
+a  String  local 0
+b  String  local 1
+c  int  local 2

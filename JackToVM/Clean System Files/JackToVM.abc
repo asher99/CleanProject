@@ -1,7 +1,7 @@
 .comp 920 000111010
 .start __JackToVM_Start
 .depend "symTable" "20190614010302"
-.depend "ParserToVM" "20190613214340"
+.depend "ParserToVM" "20190614173944"
 .depend "Tokenizer" "20190528111305"
 .depend "FileManipulation" "20190524120125"
 .depend "StdLibMisc" "20180913124337"

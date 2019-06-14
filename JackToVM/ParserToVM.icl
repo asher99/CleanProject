@@ -81,7 +81,7 @@ parseSubroutineDec [subroutine_kw, subroutine_type ,subroutine_name, sym:xs] fil
 # (ok_params,[sym_:xs_],w) = parseParameterList xs filename num w
 | not ok_params = abort("failed to parse params list")
 // enter locals to the method symbol table, and generate vm code.
-# (ok_body,xs__,w) = parseSubroutineBody xs_ filename (getTokenValue subroutine_name 12) num w
+# (ok_body,xs__,w) = parseSubroutineBody xs_ filename (getTokenValue subroutine_name) num w
 | not ok_body = abort("failed to parse subroutine body")
 = parseSubroutineDec xs__ filename num w
 
@@ -112,23 +112,23 @@ parseClassVarDec [classVarDec_kw,classVarDec_type:xs] filename num w
 
 /* parses all the symicollons in ClassVarDec */
 parseAllVars :: [String] String Int *f -> (Bool,[String],*f) | FileSystem f
-parseAllVars [var,type,name,sc:xs] filename num w 
+parseAllVars [var,type,name,sc:xs] filename num w //= abort(var +++ type +++ name +++ sc +++ xs!!0 +++ xs!!1 +++ xs!!2 +++ xs!!3 +++ xs!!4 +++ xs!!5) 
 // end condition:
 | not (var == "<keyword> var </keyword>\n") = (True,[var,type,name,sc:xs],w)
 // insert local to the method symbol table:
-# (ok_local,w) = insertRecordMethodTable (getTokenValue name 12) (getTokenValue type 9) "local" w
+# (ok_local,w) = insertRecordMethodTable (getTokenValue name) (getTokenValue type) "local" w
 // recursive call:
-| sc == "<symbol> , </symbol>\n"  = parseMultipleVarsInLine xs (getTokenValue type 9) filename w
-= (True,xs,w)
+| sc == "<symbol> , </symbol>\n"  = parseMultipleVarsInLine xs (getTokenValue type) filename w
+= parseAllVars xs filename num w
 
-parseMultipleVarsInLine:: [String] String String Int *f -> (Bool,[String],*f) | FileSystem f
-parseMultipleVarsInLine [name,sc:xs] type filename num w 
-| not ((getTag 12 name) ==  "<identifier>") = (True,[name,sc:xs],w)
+parseMultipleVarsInLine:: [String] String String *f -> (Bool,[String],*f) | FileSystem f
+parseMultipleVarsInLine [name,sc:xs] type filename w 
+| not ((sc == "<symbol> , </symbol>\n")||(sc == "<symbol> ; </symbol>\n")) = (True,[name,sc:xs],w)
 // insert local to the method symbol table:
-# (ok_local,w) = insertRecordMethodTable (getTokenValue name 12) type "local" w
+# (ok_local,w) = insertRecordMethodTable (getTokenValue name) type "local" w
 // recursive call:
 | sc == "<symbol> , </symbol>\n"  = parseMultipleVarsInLine xs type filename w
-| sc == "<symbol> ; </symbol>\n" = (True,xs,w)
+| sc == "<symbol> ; </symbol>\n" = parseAllVars xs filename 0 w
 
 
 parseParameterList :: [String] String Int *f -> (Bool,[String],*f) | FileSystem f
@@ -139,7 +139,7 @@ parseParameterList [type,varname,sym:xs] filename num w
 // final parameter in list:
 | sym == "<symbol> ) </symbol>\n" = finishParameterList [type,varname,sym:xs] filename num w
 // append new 'arg' to the method symbol table, automatically updates the counter value.
-# (ok_arg,w) = insertRecordMethodTable (getTokenValue varname 12) (getTokenValue type 9) "argument" w
+# (ok_arg,w) = insertRecordMethodTable (getTokenValue varname) (getTokenValue type) "argument" w
 | not ok_arg = abort("failed to insert argument symbol")
 // recursive call
 | sym == "<symbol> , </symbol>\n" = parseParameterList xs filename num w // until we get a symbol of ;
@@ -148,7 +148,7 @@ parseParameterList [type,varname,sym:xs] filename num w
 finishParameterList :: [String] String Int *f -> (Bool,[String],*f) | FileSystem f
 finishParameterList [type,varname,sym:xs] filename num w
 // insert the last parameter:
-# (ok_arg,w) = insertRecordMethodTable (getTokenValue varname 12) (getTokenValue type 9) "argument" w
+# (ok_arg,w) = insertRecordMethodTable (getTokenValue varname) (getTokenValue type) "argument" w
 | not ok_arg = abort("failed to insert argument symbol")
 = (True,[sym:xs],w)
 
@@ -211,7 +211,7 @@ parseLetStatement [first,name,sym:xs] filename w //= abort(first +++ name +++ sy
 # (ok_expr,[sc:xs_],w) = parseExpression xs filename w
 | not ok_expr = abort("failed to gen code for expression")
 // pop the result from parseExpression into the left-side-variable
-# symbol_name = getTokenValue name 12
+# symbol_name = getTokenValue name
 # (ok_kind,symbol_kind,w) = getMethodSymbolKind symbol_name w
 # (ok_index,symbol_index,w) = getMethodSymbolIndex symbol_name w
 | not (ok_kind && ok_index) = abort("failed to get symbol record fields")
@@ -310,14 +310,31 @@ parseStringConstant:: [String] String *f -> (Bool,[String],*f) | FileSystem f
 parseStringConstant [x:xs] filename w
 // get string length:
 # string = getTokenValue x
-# len = length [ c \\ c <-: string ]
-# (okw,w) = write2file ("push constant " +++ (getTokenValue x 17) +++ "\n") filename w
+# charlist = [ c \\ c <-: string ]
+# len = length charlist
+# (okw,w) = write2file  ("push constant " +++ (toString (len-1)) +++ "\n") filename w
+// call String.new
+# (okw2,w) = write2file "call String.new 1\n" filename w
+// recursivly call String.appendChar
+# (okchars,w) = parseAppendChar charlist filename w
+| not okchars = abort("failed to append chars to string")
 = (True,xs,w)
+
+parseAppendChar:: [Char] String *f -> (Bool,*f) | FileSystem f
+parseAppendChar [x,' '] filename w
+# (okw,w) = write2file ("push constant " +++ (toString (toInt x)) +++ "\ncall String.appendChar 2\n") filename w
+| not okw = abort("failed to append char to string")
+= (True,w)
+
+parseAppendChar [x:xs] filename w
+# (okw,w) = write2file ("push constant " +++ (toString (toInt x)) +++ "\ncall String.appendChar 2\n") filename w
+| not okw = abort("failed to append char to string")
+= parseAppendChar xs filename w
 
 
 parseIntegerConstant:: [String] String *f -> (Bool,[String],*f) | FileSystem f
 parseIntegerConstant [x:xs] filename w
-# (okw,w) = write2file ("push constant " +++ (getTokenValue x 17) +++ "\n") filename w
+# (okw,w) = write2file ("push constant " +++ (getTokenValue x) +++ "\n") filename w
 = (True,xs,w)
 
 
@@ -334,7 +351,7 @@ parseVarName [x1,x2:xs] filename w
 //| x2 == "<symbol> [ </symbol>\n" = parseVarExperssion [x2:xs] filename w
 
 // push var to stack:
-# symbol_name = getTokenValue x1 12
+# symbol_name = getTokenValue x1
 # (ok_kind,symbol_kind,w) = getMethodSymbolKind symbol_name w
 # (ok_index,symbol_index,w) = getMethodSymbolIndex symbol_name w
 | not (ok_kind && ok_index) = abort("failed to get symbol record fields")
@@ -431,11 +448,20 @@ getTag str len
 # strlist = [ c \\ c <-: str ]
 = { c \\ c <- ( take len strlist ) }
 
-getTokenValue:: {#Char} Int -> {#Char}
-getTokenValue str len
+getTokenValue:: {#Char} -> {#Char}
+getTokenValue str
+# taglen = tagLength [ c \\ c <-: str ] 0
 # strlist = [ c \\ c <-: str ]
 # strlen  = length strlist 					// one for '\n', anohter one for the extra char in closing tag, and the last for the space.
-= { c \\ c <- (drop (len+1) ( take (strlen - len - 2) strlist ) ) }
+= { c \\ c <- (drop (taglen+1) ( take (strlen - taglen - 2) strlist ) ) }
+
+
+tagLength:: [Char] Int -> Int
+tagLength [x:xs] acc
+| x == '>' = (acc+1)
+= tagLength xs (acc+1)
+
+
 
 
 opName:: String -> String

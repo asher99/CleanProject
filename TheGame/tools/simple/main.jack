@@ -2,7 +2,8 @@ class main
 {
 	function String main(int x, int y, int z)
 	{
-		var String a,b;
+		var String a , b;
+		var int c;
 		let a = "Hello, and welcome to the world of Poke`Mon!";
 		let b = a;
 		return b;
