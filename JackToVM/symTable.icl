@@ -88,7 +88,7 @@ findSymbolIndex name [x]
 
 findSymbolIndex name [x:xs]
 # record = split x
-| not (record!!0 == name) = findSymbolIndex name xs
+| not ((record!!0 +++ " ")== name) = findSymbolIndex name xs
 = record!!3
 
 getMethodSymbolKind:: String *f -> (Bool,String,*f) | FileSystem f
@@ -110,7 +110,7 @@ findSymbolKind name [x]
 
 findSymbolKind name [x:xs]
 # record = split x
-| (record!!0 == name) = record!!2
+| ((record!!0 +++ " ")== name) = record!!2
 = findSymbolKind name xs
 
 

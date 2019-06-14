@@ -1,14 +1,11 @@
 class main
 {
-	function void main()
+	function String main(int x, int y, int z)
 	{
-		var int a;
-		var int b;
-		var int c;
-		let a = 2;
-		let b = 3;
-		let c = a + b;
-		return;
+		var String a,b;
+		let a = "Hello, and welcome to the world of Poke`Mon!";
+		let b = a;
+		return b;
 	}
 
 }

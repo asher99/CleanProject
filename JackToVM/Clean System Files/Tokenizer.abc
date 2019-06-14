@@ -1,9 +1,9 @@
 .comp 920 000111010
 .start _nostart_
 .depend "ClearComments" "20190524154812"
-.depend "FileManipulation" "20190524120125"
 .depend "StdLibMisc" "20180913124337"
 .depend "Directory" "20180913124337"
+.depend "FileManipulation" "20190524120125"
 .depend "_SystemEnumStrict" "20180913124337"
 .depend "_SystemStrictLists" "20180913124337"
 .depend "StdStrictLists" "20180913124337"
@@ -27,7 +27,7 @@
 .depend "StdBool" "20180913124337"
 .depend "StdEnv" "20180913124337"
 .depend "Tokenizer" "20190528111305"
-.module m_Tokenizer "Tokenizer" "20190524153122"
+.module m_Tokenizer "Tokenizer" "20190614114433"
 .endinfo
 .impmod _system
 .implab _cycle_in_spine
@@ -3485,16 +3485,41 @@ case.71
 .d 1 1 i
 	jsr e_StdList_s!!
 .o 1 0
+	pushC '/'
+	pushC_a 0
+	eqC
+	jmp_false else.72
+	pushI 1
+	push_a 5
+.d 1 1 i
+	jsr e_StdList_s!!
+.o 1 0
+	pushC_a 0
+	pop_a 1
+	pushC '/'
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	eqC
+	jmp_false else.72
+	push_a 8
+	buildB TRUE
+	update_a 1 10
+	updatepop_a 0 9
+.d 2 0
+	rtn
+else.72
 	pushC '_'
 	pushC_a 0
 	eqC
-	jmp_true then.72
+	jmp_true then.74
 	pushC_a 0
 .d 0 1 c
 	jsr e_StdChar_sisAlpha
 .o 0 1 b
-	jmp_false else.72
-then.72
+	jmp_false else.74
+then.74
 	push_a 8
 	push_a 8
 	push_a 8
@@ -3513,12 +3538,12 @@ then.72
 	updatepop_a 0 9
 .d 8 0
 	jmp s10
-else.72
+else.74
 	pushC_a 0
 .d 0 1 c
 	jsr e_StdChar_sisDigit
 .o 0 1 b
-	jmp_false else.74
+	jmp_false else.76
 	push_a 8
 	jsr_eval 0
 	push_a 7
@@ -3545,12 +3570,12 @@ else.72
 	updatepop_a 0 9
 .d 8 0
 	jmp s11
-else.74
+else.76
 	pushC_a 0
 .d 0 1 c
 	jsr s9
 .o 0 1 b
-	jmp_false else.75
+	jmp_false else.77
 	push_a 8
 	jsr_eval 0
 	push_a 7
@@ -3577,11 +3602,11 @@ else.74
 	updatepop_a 0 9
 .d 8 0
 	jmp s12
-else.75
+else.77
 	pushC '\"'
 	pushC_a 0
 	eqC
-	jmp_false else.76
+	jmp_false else.78
 	push_a 8
 	jsr_eval 0
 	push_a 7
@@ -3620,12 +3645,12 @@ else.75
 	updatepop_a 0 9
 .d 8 0
 	jmp s4
-else.76
+else.78
 	pushC_a 0
 .d 0 1 c
 	jsr e_StdChar_sisSpace
 .o 0 1 b
-	jmp_false else.77
+	jmp_false else.79
 	create
 	push_a 6
 	pushI 1
@@ -3660,52 +3685,18 @@ else.76
 	updatepop_a 0 8
 .d 8 0
 	jmp s3
-else.77
+else.79
 	pushC '\n'
 	pushC_a 0
 	eqC
-	jmp_false else.78
+	jmp_false else.80
 	push_a 8
 	buildB TRUE
 	update_a 1 10
 	updatepop_a 0 9
 .d 2 0
 	rtn
-else.78
-	pushC '/'
-	pushC_a 0
-	eqC
-	jmp_false else.79
-	pushI 1
-	push_a 5
-	updatepop_a 0 8
-.d 1 1 i
-	jsr e_StdList_s!!
-.o 1 0
-	pushC_a 0
-	pop_a 1
-	pushC '/'
-	push_b 1
-	update_b 1 2
-	update_b 0 1
-	pop_b 1
-	eqC
-	buildh _Nil 0
-	push_a 0
-	push_a 1
-	push_a 2
-	push_a 3
-	push_a 4
-	push_a 5
-	push_a 6
-	jmp_false else.79
-	push_a 8
-	buildB TRUE
-	update_a 1 10
-	updatepop_a 0 9
-.d 2 0
-	rtn
-else.79
+else.80
 	push_a 8
 	buildB FALSE
 	update_a 1 10
@@ -4434,16 +4425,40 @@ case.134
 .d 1 1 i
 	jsr e_StdList_s!!
 .o 1 0
+	pushC '/'
+	pushC_a 0
+	eqC
+	jmp_false else.135
+	pushI 1
+	push_a 5
+.d 1 1 i
+	jsr e_StdList_s!!
+.o 1 0
+	pushC_a 0
+	pop_a 1
+	pushC '/'
+	push_b 1
+	update_b 1 2
+	update_b 0 1
+	pop_b 1
+	eqC
+	jmp_false else.135
+	push_a 8
+	pushB TRUE
+	updatepop_a 0 9
+.d 1 1 b
+	rtn
+else.135
 	pushC '_'
 	pushC_a 0
 	eqC
-	jmp_true then.135
+	jmp_true then.137
 	pushC_a 0
 .d 0 1 c
 	jsr e_StdChar_sisAlpha
 .o 0 1 b
-	jmp_false else.135
-then.135
+	jmp_false else.137
+then.137
 	push_a 8
 	jsr_eval 0
 	push_a 7
@@ -4470,12 +4485,12 @@ then.135
 	updatepop_a 0 9
 .d 8 0
 	jmp s69
-else.135
+else.137
 	pushC_a 0
 .d 0 1 c
 	jsr e_StdChar_sisDigit
 .o 0 1 b
-	jmp_false else.137
+	jmp_false else.139
 	push_a 8
 	jsr_eval 0
 	push_a 7
@@ -4502,12 +4517,12 @@ else.135
 	updatepop_a 0 9
 .d 8 0
 	jmp s68
-else.137
+else.139
 	pushC_a 0
 .d 0 1 c
 	jsr s9
 .o 0 1 b
-	jmp_false else.138
+	jmp_false else.140
 	push_a 8
 	jsr_eval 0
 	push_a 7
@@ -4534,11 +4549,11 @@ else.137
 	updatepop_a 0 9
 .d 8 0
 	jmp s67
-else.138
+else.140
 	pushC '\"'
 	pushC_a 0
 	eqC
-	jmp_false else.139
+	jmp_false else.141
 	push_a 8
 	jsr_eval 0
 	push_a 7
@@ -4577,12 +4592,12 @@ else.138
 	updatepop_a 0 9
 .d 8 0
 	jmp s66
-else.139
+else.141
 	pushC_a 0
 .d 0 1 c
 	jsr e_StdChar_sisSpace
 .o 0 1 b
-	jmp_false else.140
+	jmp_false else.142
 	create
 	push_a 6
 	pushI 1
@@ -4617,50 +4632,17 @@ else.139
 	updatepop_a 0 8
 .d 8 0
 	jmp s63
-else.140
+else.142
 	pushC '\n'
 	pushC_a 0
 	eqC
-	jmp_false else.141
+	jmp_false else.143
 	push_a 8
 	pushB TRUE
 	updatepop_a 0 9
 .d 1 1 b
 	rtn
-else.141
-	pushC '/'
-	pushC_a 0
-	eqC
-	jmp_false else.142
-	pushI 1
-	push_a 5
-	updatepop_a 0 8
-.d 1 1 i
-	jsr e_StdList_s!!
-.o 1 0
-	pushC_a 0
-	pop_a 1
-	pushC '/'
-	push_b 1
-	update_b 1 2
-	update_b 0 1
-	pop_b 1
-	eqC
-	buildh _Nil 0
-	push_a 0
-	push_a 1
-	push_a 2
-	push_a 3
-	push_a 4
-	push_a 5
-	push_a 6
-	jmp_false else.142
-	push_a 8
-	pushB TRUE
-	updatepop_a 0 9
-.d 1 1 b
-	rtn
-else.142
+else.143
 	push_a 8
 	pushB FALSE
 	updatepop_a 0 9

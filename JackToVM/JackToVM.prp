@@ -33,11 +33,11 @@ OtherModules
 		DclOpen:	True
 		Icl
 			WindowPosition
-				X:	38
-				Y:	78
-				SizeX:	1291
-				SizeY:	662
-		IclOpen:	True
+				X:	10
+				Y:	-2
+				SizeX:	1519
+				SizeY:	730
+		IclOpen:	False
 	Module
 		Name:	Tokenizer
 		Dir:	{Project}
@@ -56,10 +56,10 @@ OtherModules
 		Icl
 			WindowPosition
 				X:	667
-				Y:	-1
+				Y:	0
 				SizeX:	800
 				SizeY:	681
-		IclOpen:	True
+		IclOpen:	False
 	Module
 		Name:	Directory
 		Dir:	{Application}*Libraries*Directory

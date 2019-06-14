@@ -26,7 +26,7 @@
 .depend "StdBool" "20180913124337"
 .depend "StdEnv" "20180913124337"
 .depend "symTable" "20190614010302"
-.module m_symTable "symTable" "20190614013142"
+.module m_symTable "symTable" "20190614095832"
 .endinfo
 .impmod _system
 .implab _cycle_in_spine
@@ -522,6 +522,14 @@ case.3
 .o 1 0
 	push_array 0
 	updatepop_a 0 1
+	buildAC " "
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.d 2 0
+	jsr catAC
+.o 1 0
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
@@ -862,6 +870,14 @@ case.7
 .o 1 0
 	push_array 0
 	updatepop_a 0 1
+	buildAC " "
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.d 2 0
+	jsr catAC
+.o 1 0
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
