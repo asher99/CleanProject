@@ -5,11 +5,11 @@ MainModule
 	DclOpen:	False
 	Icl
 		WindowPosition
-			X:	774
-			Y:	308
+			X:	9
+			Y:	-6
 			SizeX:	800
 			SizeY:	680
-	IclOpen:	True
+	IclOpen:	False
 OtherModules
 	Module
 		Name:	ClearComments
@@ -59,7 +59,7 @@ OtherModules
 				Y:	0
 				SizeX:	800
 				SizeY:	681
-		IclOpen:	False
+		IclOpen:	True
 	Module
 		Name:	Directory
 		Dir:	{Application}*Libraries*Directory

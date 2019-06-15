@@ -81,7 +81,7 @@ parseSubroutineDec [subroutine_kw, subroutine_type ,subroutine_name, sym:xs] fil
 # (ok_params,[sym_:xs_],w) = parseParameterList xs filename num w
 | not ok_params = abort("failed to parse params list")
 // enter locals to the method symbol table, and generate vm code.
-# (ok_body,xs__,w) = parseSubroutineBody xs_ filename (getTokenValue subroutine_name) num w
+# (ok_body,xs__,w) = parseSubroutineBody xs_ filename (getTokenValue subroutine_name) subroutine_kw w
 | not ok_body = abort("failed to parse subroutine body")
 = parseSubroutineDec xs__ filename num w
 
@@ -97,7 +97,7 @@ parseClassVarDec [classVarDec_kw,classVarDec_type:xs] filename num w
 # outFile = fwrites string_to_print outFile
 # (ok_read_close,w) = fclose outFile w
 | not ok_read_close = abort("failed to close file")
-# (ok_parsed_all_sym,xs_,w) = parseAllVars xs filename num w // calls a method that will write to file all the : type varName, type varName ... 
+# (ok_parsed_all_sym,xs_,w) = parseAllVars xs filename w // calls a method that will write to file all the : type varName, type varName ... 
 
 # outFile2 = "xmlFiles\\" +++ filename +++ ".xml"
 # (ok_open2,outFile2,w) = fopen outFile2 FAppendText w
@@ -111,15 +111,15 @@ parseClassVarDec [classVarDec_kw,classVarDec_type:xs] filename num w
 
 
 /* parses all the symicollons in ClassVarDec */
-parseAllVars :: [String] String Int *f -> (Bool,[String],*f) | FileSystem f
-parseAllVars [var,type,name,sc:xs] filename num w //= abort(var +++ type +++ name +++ sc +++ xs!!0 +++ xs!!1 +++ xs!!2 +++ xs!!3 +++ xs!!4 +++ xs!!5) 
+parseAllVars :: [String] String *f -> (Bool,[String],*f) | FileSystem f
+parseAllVars [var,type,name,sc:xs] filename w //= abort(var +++ type +++ name +++ sc +++ xs!!0 +++ xs!!1 +++ xs!!2 +++ xs!!3 +++ xs!!4 +++ xs!!5) 
 // end condition:
 | not (var == "<keyword> var </keyword>\n") = (True,[var,type,name,sc:xs],w)
 // insert local to the method symbol table:
 # (ok_local,w) = insertRecordMethodTable (getTokenValue name) (getTokenValue type) "local" w
 // recursive call:
 | sc == "<symbol> , </symbol>\n"  = parseMultipleVarsInLine xs (getTokenValue type) filename w
-= parseAllVars xs filename num w
+= parseAllVars xs filename w
 
 parseMultipleVarsInLine:: [String] String String *f -> (Bool,[String],*f) | FileSystem f
 parseMultipleVarsInLine [name,sc:xs] type filename w 
@@ -128,7 +128,7 @@ parseMultipleVarsInLine [name,sc:xs] type filename w
 # (ok_local,w) = insertRecordMethodTable (getTokenValue name) type "local" w
 // recursive call:
 | sc == "<symbol> , </symbol>\n"  = parseMultipleVarsInLine xs type filename w
-| sc == "<symbol> ; </symbol>\n" = parseAllVars xs filename 0 w
+| sc == "<symbol> ; </symbol>\n" = parseAllVars xs filename w
 
 
 parseParameterList :: [String] String Int *f -> (Bool,[String],*f) | FileSystem f
@@ -152,10 +152,10 @@ finishParameterList [type,varname,sym:xs] filename num w
 | not ok_arg = abort("failed to insert argument symbol")
 = (True,[sym:xs],w)
 
-parseSubroutineBody :: [String] String String Int *f -> (Bool,[String],*f) | FileSystem f
-parseSubroutineBody [sym:xs] filename methodname num w //= abort(sym +++ xs!!0 +++ xs!!1 +++ xs!!2)
+parseSubroutineBody :: [String] String String String *f -> (Bool,[String],*f) | FileSystem f
+parseSubroutineBody [sym:xs] filename methodname subroutine_kw w //= abort(sym +++ xs!!0 +++ xs!!1 +++ xs!!2)
 // insert locals to the method symbol table:
-#(ok_vardec,xs_,w) = parseVarDec xs filename num w
+#(ok_vardec,xs_,w) = parseVarDec xs filename w
 | not ok_vardec = abort("failed to parse vardec")
 // get the method symbol table counter, indicates the number of locals:
 # (ok_locals,num_of_locals,w) = getMethodTableCounter w
@@ -163,18 +163,26 @@ parseSubroutineBody [sym:xs] filename methodname num w //= abort(sym +++ xs!!0 +
 // print the 'function' command to the vm file:
 # (okw,w) = write2file ("function " +++ filename +++ "." +++ methodname +++ num_of_locals +++ "\n") filename w
 | not ok_locals = abort("failed to print 'function' instruction")
+// if the subroutine is method, write method prefix:
+# (ok_prefix,w) = parseMethodPrefix subroutine_kw filename w
 // generate vm code for the function statements:
 #(ok_stmt,[sym_:xs__],w) = parseStatements xs_ filename w
 | not ok_stmt = abort("failed to parse statements")
 = (True,xs__,w)
 
+parseMethodPrefix:: String String *f -> (Bool,*f) | FileSystem f
+parseMethodPrefix kw filename w
+| not (kw == "<keyword> method </keyword>\n") = (True,w)
+# (okw,w) = write2file "push argument 0\npop pointer 0\n" filename w
+| not okw = abort("failed to print method prefix")
+= (True,w)
 
-parseVarDec:: [String] String Int *f -> (Bool,[String],*f) | FileSystem f
-parseVarDec [var,type,name:xs] filename num w
+parseVarDec:: [String] String *f -> (Bool,[String],*f) | FileSystem f
+parseVarDec [var,type,name:xs] filename w
 // reset the method symbol table counter:
 # (ok_init,w) = overrideFile "0" "symtables\\methodcounter.txt" w
 // insert locals to method symbol table:
-# (ok_allvars,xs_,w) = parseAllVars [var,type,name:xs] filename num w
+# (ok_allvars,xs_,w) = parseAllVars [var,type,name:xs] filename w
 | not ok_allvars = abort("failed vardec")
 = (True,xs_,w)
 
@@ -239,8 +247,23 @@ parseWhileStatement [first,opening:xs] filename w
 
  
 parseDoStatement :: [String] String *f -> (Bool,[String],*f) | FileSystem f
-parseDoStatement [first:xs] filename w 
+parseDoStatement [first,name,sym:xs] filename w 
 | not (first == "<keyword> do </keyword>\n") = parseReturnStatement [first:xs] filename w 
+/*
+TODO:
+implement pushArguments
+add suuport to methods outside this class
+
+// I assume it's possible to call to 'method' only.
+// initial method calling by pushing 'pointer 0' into stack.
+# (okw,w) = write2file "push pointer 0" filename w
+// push arguments into stack.
+# (okp,count,tokens,w) = pushArguments xs 1 filename w
+// call method
+# (okw2,w) = write2file ("call " +++ filename +++ "." +++ name +++ " " +++ count +++ "\n") filename w
+// return
+= (True,tokens,w)
+*/
 
 /*parseSubroutineCallNoTerm :: [String] String *f -> (Bool,[String],*f) | FileSystem f
 parseSubroutineCallNoTerm [x1,x2:xs] filename w = abort(x1+++x2)*/

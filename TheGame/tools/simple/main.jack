@@ -1,12 +1,30 @@
 class main
 {
-	function String main(int x, int y, int z)
+	method void main()
 	{
-		var String a , b;
+		/*var String a;
+		var char b;
 		var int c;
 		let a = "Hello, and welcome to the world of Poke`Mon!";
-		let b = a;
-		return b;
+		let c = 3;
+		let b = a[c];
+		return b;*/
+		
+		/*var Array arr;
+		let arr = Array.new(2);
+		let arr[0] = 25;
+		let arr[1] = 42;*/
+		
+		/*do bloop(33,66);*/
+		do bloop(1,2,3);
+		return;
 	}
+ 
+	
+	method int bloop(int a, int b, int c)
+	{
+		return 13;
+	}
+	
 
 }
