@@ -1,16 +1,9 @@
-function main.main 0
+function main.main 2
 push argument 0
 pop pointer 0
-push pointer 0
-push constant 1
-push constant 2
-push constant 3
-call main.bloop 4
-pop temp 0
+push constant 44
+pop local 0
+push constant 54
+pop local 1
 push constant 0
-return
-function main.bloop 0
-push argument 0
-pop pointer 0
-push constant 13
 return

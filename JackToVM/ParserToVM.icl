@@ -248,22 +248,38 @@ parseWhileStatement [first,opening:xs] filename w
  
 parseDoStatement :: [String] String *f -> (Bool,[String],*f) | FileSystem f
 parseDoStatement [first,name,sym:xs] filename w 
-| not (first == "<keyword> do </keyword>\n") = parseReturnStatement [first:xs] filename w 
+| not (first == "<keyword> do </keyword>\n") = parseReturnStatement [first,name,sym:xs] filename w 
+
 /*
 TODO:
-implement pushArguments
 add suuport to methods outside this class
-
+*/
 // I assume it's possible to call to 'method' only.
 // initial method calling by pushing 'pointer 0' into stack.
-# (okw,w) = write2file "push pointer 0" filename w
+# (okw,w) = write2file "push pointer 0\n" filename w
 // push arguments into stack.
-# (okp,count,tokens,w) = pushArguments xs 1 filename w
+//= abort(first +++ name +++ sym +++ xs!!0 +++ xs!!1 +++ xs!!2 +++ xs!!3)
+# (okp,count,[sc:tokens],w) = pushArguments xs 1 filename w
+| not okp = abort("failed")
 // call method
-# (okw2,w) = write2file ("call " +++ filename +++ "." +++ name +++ " " +++ count +++ "\n") filename w
+# (okw2,w) = write2file ("call " +++ filename +++ "." +++ (getTokenValue name) +++ (toString count) +++ "\npop temp 0\n") filename w
 // return
+//= abort(tokens!!0 +++ tokens!!1 +++ tokens!!2 +++ tokens!!3 +++ tokens!!4)
 = (True,tokens,w)
-*/
+
+
+
+pushArguments:: [String] Int String *f -> (Bool,Int,[String],*f) | FileSystem f
+// if we have ')' in the begining of the input, we reach the end of the subroutine parameters.
+pushArguments ["<symbol> ) </symbol>\n":xs] count filename w = (True,count,xs,w)
+// otherwise, parseExpression pushs the argument into stack.
+pushArguments input count filename w //= abort(input!!0 +++ input!!1 +++ input!!2 +++ input!!3 +++ input!!4)
+# (ok_exp,input_,w) = parseExpression input filename w
+| ok_exp = abort("failed to parse expression in push argument")
+= pushArguments input_ (count+1) filename w
+
+
+
 
 /*parseSubroutineCallNoTerm :: [String] String *f -> (Bool,[String],*f) | FileSystem f
 parseSubroutineCallNoTerm [x1,x2:xs] filename w = abort(x1+++x2)*/
