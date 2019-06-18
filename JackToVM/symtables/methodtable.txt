@@ -1,4 +1,1 @@
-x  int  argument 0
-y  int  argument 1
-z  int  argument 2
-arr  Array  local 0
+a  int  argument 0

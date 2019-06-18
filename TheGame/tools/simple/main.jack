@@ -1,5 +1,6 @@
 class main
 {
+
 	method void main(int x, int y, int z)
 	{
 		var Array arr;
@@ -9,7 +10,7 @@ class main
 		let arr[8] = 800;
 		
 		
-		//do func(arr[5]);
+		do func(arr[5]);
 		
 		return;
 	}

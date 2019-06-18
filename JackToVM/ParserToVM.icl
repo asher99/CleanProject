@@ -397,6 +397,7 @@ parseTerm [x:xs] filename w //= abort(x +++ xs!!0 +++ xs!!1 +++ xs!!2)//= (True,
 | ((getTag x 17) == "<integerConstant>") = parseIntegerConstant [x:xs] filename w
 | ((getTag x 16) == "<stringConstant>")  = parseStringConstant [x:xs] filename w
 //| ((getTag x 9) == "<keyword>")  = parseConstant [x:xs] filename w
+| xs!!0 == "<symbol> [ </symbol>\n" = parseArrayTerm [x:xs] filename w
 | ((x == "<symbol> - </symbol>\n") || (x == "<symbol> ~ </symbol>\n"))  = parseUnaryOp [x:xs] filename w
 | (x == "<symbol> ( </symbol>\n") = parseTermExpression [x:xs] filename w
 | ((getTag x 12) == "<identifier>")  = var_or_subroutine [x:xs] filename w
@@ -471,6 +472,20 @@ parseTermExpression:: [String] String *f -> (Bool,[String],*f) | FileSystem f
 parseTermExpression [x:xs] filename w
 // generate vm code for the expression
 # (ok_e,[x_:xs_],w) = parseExpression xs filename w
+= (True,xs_,w)
+
+parseArrayTerm:: [String] String *f -> (Bool,[String],*f) | FileSystem f
+parseArrayTerm [varName,open:xs] filename w
+// parse expression
+# (ok_exp,[close:xs_],w) = parseExpression xs filename w
+| not ok_exp = abort("failed in parseArrayTerm 2")
+// push varName, and other necessary actions
+# symbol_name = getTokenValue varName
+# (ok_fetch,index,kind,w) = fetchVariableFromTables symbol_name w
+| not ok_fetch = abort("failed to get symbol record fields")
+# (ok_write,w) = write2file ("push " +++ kind +++ " " +++ index +++ "\nadd\npop pointer 1\npush that 0\n") filename w
+| not ok_write = abort("failed in parseArrayTerm 3")
+// return
 = (True,xs_,w)
 
 
