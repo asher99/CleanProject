@@ -61,7 +61,12 @@ startParsing [x:xs] filename num w
 parseClass :: [String] String Int *f -> (Bool,*f) | FileSystem f
 parseClass [class_name,sym:xs] filename num w 
 // initialize the class symbol table and counter
-
+# (ok_init1,w) = overrideFile "" "symtables\\classtable.txt" w
+| not ok_init1 = abort("failed to intialize class symbol table")
+# (ok_init2,w) = overrideFile "0" "symtables\\classstaticcounter.txt" w
+| not ok_init2 = abort("failed to intialize class counter")
+# (ok_init3,w) = overrideFile "0" "symtables\\classfieldcounter.txt" w
+| not ok_init3 = abort("failed to intialize class counter") 
 //enter fields and statics to the class symbol table.
 #(ok_parse_classVarDec,xs_,w) = parseClassVarDec xs filename num w
 | not ok_parse_classVarDec = abort("failed to parse vardec")
@@ -87,28 +92,21 @@ parseSubroutineDec [subroutine_kw, subroutine_type ,subroutine_name, sym:xs] fil
 
 
 parseClassVarDec :: [String] String Int *f -> (Bool,[String],*f) | FileSystem f
-parseClassVarDec [classVarDec_kw,classVarDec_type:xs] filename num w
-| not ((classVarDec_kw == "<keyword> static </keyword>\n") || (classVarDec_kw == "<keyword> field </keyword>\n"))  = (True,[classVarDec_kw,classVarDec_type:xs],w)
-# outFile = "xmlFiles\\" +++ filename +++ ".xml"
-# (ok_open,outFile,w) = fopen outFile FAppendText w
-| not ok_open = abort("failed to open file")
-# string_to_print = "<classVarDec>\n" +++ classVarDec_kw +++ classVarDec_type
-
-# outFile = fwrites string_to_print outFile
-# (ok_read_close,w) = fclose outFile w
-| not ok_read_close = abort("failed to close file")
-# (ok_parsed_all_sym,xs_,w) = parseAllVars xs filename w // calls a method that will write to file all the : type varName, type varName ... 
-
-# outFile2 = "xmlFiles\\" +++ filename +++ ".xml"
-# (ok_open2,outFile2,w) = fopen outFile2 FAppendText w
-| not ok_open2 = abort("failed to open file")
-# string_to_print_end = "</classVarDec>\n"
-# outFile2 = fwrites string_to_print_end outFile2
-# (ok_read_close2,w) = fclose outFile2 w
-| not ok_read_close2 = abort("failed to close file")
+parseClassVarDec [kw,type,name,sym:xs] filename num w //= abort(kw +++ type +++ xs!!0 +++ xs!!1 +++ xs!!2)
+// end condition:
+| not ((kw == "<keyword> static </keyword>\n") || (kw == "<keyword> field </keyword>\n"))  = (True,[kw,type,name,sym:xs],w)
+// parse multiple vars in file.
+# (ok_parsed,xs_,w) = parseAllClassVars [name,sym:xs] (getTokenValue type) (getTokenValue kw) w // calls a method that will write to file all the : type varName, type varName ... 
+| not ok_parsed = abort("failed in parseClassVarDec")
+// recursive call
 = parseClassVarDec xs_ filename num w
 //= (True,xs_,w)
 
+parseAllClassVars:: [String] String String *f -> (Bool,[String],*f) | FileSystem f
+parseAllClassVars [name,sym:xs] type kind w
+# (okw,w) = insertRecordClassTable (getTokenValue name) type kind w
+| sym == "<symbol> ; </symbol>\n" = (True,xs,w)
+= parseAllClassVars xs type kind w
 
 /* parses all the symicollons in ClassVarDec */
 parseAllVars :: [String] String *f -> (Bool,[String],*f) | FileSystem f
@@ -211,25 +209,43 @@ parseStatement [first:xs] filename w
 = parseStatement xs_ filename w
 
 parseLetStatement:: [String] String *f -> (Bool,[String],*f) | FileSystem f
-parseLetStatement [first,name,sym:xs] filename w //= abort(first +++ name +++ sym)
+parseLetStatement [first,name,sym:xs] filename w //= abort(first +++ name +++ sym +++ xs!!0)
 | not (first == "<keyword> let </keyword>\n") = parseIfStatement [first,name,sym:xs] filename w
-// TODO:
-//| sym == "<symbol> [ </symbol>\n" = parseArrayLetStatement xs filename w
+
+| sym == "<symbol> [ </symbol>\n" = parseArrayLetStatement [name,sym:xs] filename w
+
 // sc - semi colmun (;)
 # (ok_expr,[sc:xs_],w) = parseExpression xs filename w
 | not ok_expr = abort("failed to gen code for expression")
 // pop the result from parseExpression into the left-side-variable
 # symbol_name = getTokenValue name
-# (ok_kind,symbol_kind,w) = getMethodSymbolKind symbol_name w
-# (ok_index,symbol_index,w) = getMethodSymbolIndex symbol_name w
-| not (ok_kind && ok_index) = abort("failed to get symbol record fields")
-# (ok_right,w) = write2file ("pop " +++ symbol_kind +++ " " +++ symbol_index +++ "\n") filename w
+# (ok_fetch,index,kind,w) = fetchVariableFromTables symbol_name w
+| not ok_fetch = abort("failed to get symbol record fields")
+# (ok_right,w) = write2file ("pop " +++ kind +++ " " +++ index +++ "\n") filename w
 | not ok_right = abort("failed to write vm code to file")
+//abort(sc +++ xs_!!0 +++ xs_!!1 +++ xs_!!2)
 = (True,xs_,w)
 
 
-/*parseArrayLetStatement :: [String] String *f -> (Bool,[String],*f) | FileSystem f
-parseArrayLetStatement [return:xs] filename w */
+parseArrayLetStatement :: [String] String *f -> (Bool,[String],*f) | FileSystem f
+parseArrayLetStatement [name,sym:xs] filename w //= abort(name +++ sym +++ xs!!0)// varName[expression1] = expression2
+// parse expression1
+# (ok_exp1,[soger,asgn:xs_],w) = parseExpression xs filename w
+| not ok_exp1 = abort("abort in parseArrayLetStatement exp1")
+// parse varName,  varName+expression1
+# symbol_name = getTokenValue name
+# (ok_fetch,index,kind,w) = fetchVariableFromTables symbol_name w
+| not ok_fetch = abort("failed to get symbol record fields")
+# (ok_write,w) = write2file ("push " +++ kind +++ " " +++ index +++ "\nadd\n") filename w
+| not ok_write = abort("abort in parseArrayLetStatement varName")
+// parse expression2
+# (ok_exp2,[sc:xs__],w) = parseExpression xs_ filename w
+| not ok_exp2 = abort("abort in parseArrayLetStatement exp2")
+// array suffix:
+# (ok_write2,w) = write2file "pop temp 0\npop pointer 1\npush temp 0\npop that 0\n" filename w
+// return:
+= (True,xs__,w)
+
 
 parseIfStatement :: [String] String *f -> (Bool,[String],*f) | FileSystem f
 parseIfStatement [first,opening:xs] filename w //= (True,[return:xs],w)
@@ -249,35 +265,74 @@ parseWhileStatement [first,opening:xs] filename w
 parseDoStatement :: [String] String *f -> (Bool,[String],*f) | FileSystem f
 parseDoStatement [first,name,sym:xs] filename w 
 | not (first == "<keyword> do </keyword>\n") = parseReturnStatement [first,name,sym:xs] filename w 
+# (ok_sr,[sc:xs_],w) = parseSubroutineCall [name,sym:xs] filename w
+| not ok_sr = abort("abort in parseDoStatement")
+# (okw,w) = write2file "pop temp 0\n" filename w
+| not okw = abort("abort in parseDoStatement")
+= (True,xs_,w)
 
-/*
-TODO:
-add suuport to methods outside this class
-*/
-// I assume it's possible to call to 'method' only.
+parseSubroutineCall:: [String] String *f -> (Bool,[String],*f) | FileSystem f
+parseSubroutineCall [name,sym:xs] filename w //= abort("H" +++ name+++sym+++xs!!0)
+// of there is dot, it can be external function or method
+| sym == "<symbol> . </symbol>\n" = doExternalSubroutine [name,sym:xs] filename w 
+// if there is no dot so its have to be *method* from this class.
 // initial method calling by pushing 'pointer 0' into stack.
 # (okw,w) = write2file "push pointer 0\n" filename w
 // push arguments into stack.
-//= abort(first +++ name +++ sym +++ xs!!0 +++ xs!!1 +++ xs!!2 +++ xs!!3)
-# (okp,count,[sc:tokens],w) = pushArguments xs 1 filename w
+# (okp,count,tokens,w) = pushArguments xs 1 filename w
 | not okp = abort("failed")
 // call method
-# (okw2,w) = write2file ("call " +++ filename +++ "." +++ (getTokenValue name) +++ (toString count) +++ "\npop temp 0\n") filename w
+# (okw2,w) = write2file ("call " +++ filename +++ "." +++ (getTokenValue name) +++ (toString count) +++ "\n") filename w
 // return
 //= abort(tokens!!0 +++ tokens!!1 +++ tokens!!2 +++ tokens!!3 +++ tokens!!4)
 = (True,tokens,w)
 
 
 
+doExternalSubroutine :: [String] String *f -> (Bool,[String],*f) | FileSystem f
+doExternalSubroutine [class_name,dot,name,sym:xs] filename w //= abort(class_name +++ dot +++ name +++sym)
+// if 'class_name' is not in the symtables, it means the Subroutine is function and not method.
+# (objExist,s1,s2,w) = fetchVariableFromTables (getTokenValue class_name) w
+//= abort(toString objExist)
+| not objExist = doExternalFunction [class_name,dot,name,sym:xs] filename w
+// initial method calling by pushing 'pointer 0' into stack.
+# (okw,w) = write2file "push pointer 0\n" filename w
+// push arguments into stack.
+# (okp,count,tokens,w) = pushArguments xs 1 filename w
+| not okp = abort("failed")
+// call method
+# class_list = getTokenValue class_name
+# len = length [ c \\ c <-: class_list ]
+# classname =  { c \\ c <- (take (len-1) [ c \\ c <-: class_list]) }
+# (okw2,w) = write2file ("call " +++ classname +++ "." +++ (getTokenValue name) +++ (toString count) +++ "\n") filename w
+// return
+//= abort(tokens!!0 +++ tokens!!1 +++ tokens!!2 +++ tokens!!3 +++ tokens!!4)
+= (True,tokens,w)
+
+doExternalFunction :: [String] String *f -> (Bool,[String],*f) | FileSystem f
+doExternalFunction [class_name,dot,name,sym:xs] filename w
+// push arguments into stack.
+//= abort("H" +++ xs!!0 +++ xs!!1 +++ xs!!2)
+# (okp,count,tokens,w) = pushArguments xs 0 filename w
+| not okp = abort("failed")
+// call method
+# class_list = getTokenValue class_name
+# len = length [ c \\ c <-: class_list ]
+# classname =  { c \\ c <- (take (len-1) [ c \\ c <-: class_list]) }
+# (okw2,w) = write2file ("call " +++ classname +++ "." +++ (getTokenValue name) +++ (toString count) +++ "\n") filename w
+// return
+//= abort( sc +++ tokens!!0 +++ tokens!!1 +++ tokens!!2 +++ tokens!!3 +++ tokens!!4)
+= (True,tokens,w)
+
 pushArguments:: [String] Int String *f -> (Bool,Int,[String],*f) | FileSystem f
 // if we have ')' in the begining of the input, we reach the end of the subroutine parameters.
 pushArguments ["<symbol> ) </symbol>\n":xs] count filename w = (True,count,xs,w)
 // otherwise, parseExpression pushs the argument into stack.
 pushArguments input count filename w //= abort(input!!0 +++ input!!1 +++ input!!2 +++ input!!3 +++ input!!4)
-# (ok_exp,input_,w) = parseExpression input filename w
-| ok_exp = abort("failed to parse expression in push argument")
-= pushArguments input_ (count+1) filename w
-
+# (ok_exp,[sym:input_],w) = parseExpression input filename w
+| not ok_exp = abort("failed to parse expression in push argument")
+| sym == "<symbol> , </symbol>\n" = pushArguments input_ (count+1) filename w
+= pushArguments [sym:input_] (count+1) filename w
 
 
 
@@ -309,9 +364,10 @@ parseExpression [x:xs] filename w
 // generate vm code for term
 # (ok_stmts,[op:xs_],w) = parseTerm [x:xs] filename w
 | not ok_stmts = abort("failed to generate code for term")
-// cgenerate vm code for (op term)*
+// generate vm code for (op term)*
 # (ok_stmts,xs__,w) = parseOpTerm [op:xs_] filename w
 | not ok_stmts = abort("failed expression")
+//= abort(xs__!!0 +++ xs__!!1 +++ xs__!!2 +++ xs__!!3)
 = (True,xs__,w)
 
 /* allows to write (op term)* */
@@ -337,13 +393,14 @@ parseOpTerm [op:xs] filename w //= abort("made it till here" +++ op +++ xs!!0)
 
 
 parseTerm :: [String] String *f -> (Bool,[String],*f) | FileSystem f
-parseTerm [x:xs] filename w //= (True,[x:xs],w)
+parseTerm [x:xs] filename w //= abort(x +++ xs!!0 +++ xs!!1 +++ xs!!2)//= (True,[x:xs],w)
 | ((getTag x 17) == "<integerConstant>") = parseIntegerConstant [x:xs] filename w
 | ((getTag x 16) == "<stringConstant>")  = parseStringConstant [x:xs] filename w
 //| ((getTag x 9) == "<keyword>")  = parseConstant [x:xs] filename w
 | ((x == "<symbol> - </symbol>\n") || (x == "<symbol> ~ </symbol>\n"))  = parseUnaryOp [x:xs] filename w
 | (x == "<symbol> ( </symbol>\n") = parseTermExpression [x:xs] filename w
 | ((getTag x 12) == "<identifier>")  = var_or_subroutine [x:xs] filename w
+= abort("ABORT\n" +++ x +++ xs!!0 +++ xs!!1)
 
 parseStringConstant:: [String] String *f -> (Bool,[String],*f) | FileSystem f
 parseStringConstant [x:xs] filename w
@@ -357,9 +414,11 @@ parseStringConstant [x:xs] filename w
 // recursivly call String.appendChar
 # (okchars,w) = parseAppendChar charlist filename w
 | not okchars = abort("failed to append chars to string")
+//= abort(xs!!0 +++ xs!!1 +++ xs!!2 +++ xs!!3 +++ xs!!4)
 = (True,xs,w)
 
 parseAppendChar:: [Char] String *f -> (Bool,*f) | FileSystem f
+// the string always end with extra space after the last char.
 parseAppendChar [x,' '] filename w
 # (okw,w) = write2file ("push constant " +++ (toString (toInt x)) +++ "\ncall String.appendChar 2\n") filename w
 | not okw = abort("failed to append char to string")
@@ -386,22 +445,18 @@ var_or_subroutine [x1,x2:xs] filename w
 
 
 parseVarName:: [String] String *f -> (Bool,[String],*f) | FileSystem f
-parseVarName [x1,x2:xs] filename w
+parseVarName [x1,x2:xs] filename w //= abort(x1 +++ x2 +++ xs!!0)
 //| x2 == "<symbol> [ </symbol>\n" = parseVarExperssion [x2:xs] filename w
 
 // push var to stack:
 # symbol_name = getTokenValue x1
-# (ok_kind,symbol_kind,w) = getMethodSymbolKind symbol_name w
-# (ok_index,symbol_index,w) = getMethodSymbolIndex symbol_name w
-| not (ok_kind && ok_index) = abort("failed to get symbol record fields")
-# (ok_right,w) = write2file ("push " +++ symbol_kind +++ " " +++ symbol_index +++ "\n") filename w
+# (ok_fetch,index,kind,w) = fetchVariableFromTables symbol_name w
+| not ok_fetch = abort("failed to get symbol record fields")
+# (ok_right,w) = write2file ("push " +++ kind +++ " " +++ index +++ "\n") filename w
 | not ok_right = abort("failed to write vm code to file")
 = (True,[x2:xs],w)
 
-
-parseSubroutineCall :: [String] String *f -> (Bool,[String],*f) | FileSystem f
-parseSubroutineCall [x1,x2:xs] filename w = abort(x1+++x2)
-
+// parseSubroutineCall is not here. GOTO parseDoStatement.
 
 parseUnaryOp :: [String] String *f -> (Bool,[String],*f) | FileSystem f
 parseUnaryOp [op:xs] filename w

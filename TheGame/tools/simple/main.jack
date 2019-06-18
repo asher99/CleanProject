@@ -2,11 +2,19 @@ class main
 {
 	method void main(int x, int y, int z)
 	{
-		var int a, b;
-		let a = 44;
-		let b = 54;
+		var Array arr;
+		let arr = Array.new(10);
+		let arr[1] = 100;
+		let arr[6] = 600;
+		let arr[8] = 800;
+		
+		
+		//do func(arr[5]);
+		
 		return;
 	}
+	
+	method void func(int a) {return;}
 	
 
 }

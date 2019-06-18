@@ -5,9 +5,15 @@ import Directory
 import FileManipulation
 
 insertRecordClassTable:: String String String *f -> (Bool,*f) | FileSystem f
-insertRecordClassTable name type kind w
+insertRecordClassTable name type kind w //= abort(kind)
+| kind == "static " = insertStatic name type kind w
+| kind == "field "  = insertField name type kind w
+
+
+insertStatic:: String String String *f -> (Bool,*f) | FileSystem f
+insertStatic name type kind w
 // open the file for reading, get the counter, close the file:
-# cFile = "symtables\\classcounter.txt"
+# cFile = "symtables\\classstaticcounter.txt"
 # (okopen,cFile,w) = fopen cFile FReadText w
 | not okopen = abort("")
 # (counterstr,cFile) = freadline cFile
@@ -20,10 +26,32 @@ insertRecordClassTable name type kind w
 # tFile = fwrites (name +++ " " +++ type +++ " " +++ kind +++ " " +++ counterstr +++ "\n" ) tFile 
 # (okclose,w) = fclose tFile w
 // open the file for writing, set the counter, close the file:
-# (ok_inc,w) = incIndex counter "symtables\\classcounter.txt" w
+# (ok_inc,w) = incIndex counter "symtables\\classstaticcounter.txt" w
 | not ok_inc = abort("failed with the counter++ thing")
 // return:
 = (True,w)
+
+insertField:: String String String *f -> (Bool,*f) | FileSystem f
+insertField name type kind w
+// open the file for reading, get the counter, close the file:
+# cFile = "symtables\\classfieldcounter.txt"
+# (okopen,cFile,w) = fopen cFile FReadText w
+| not okopen = abort("")
+# (counterstr,cFile) = freadline cFile
+# counter = toInt counterstr
+# (okclose,w) = fclose cFile w
+// insert record to the symbol record:
+# tFile = "symtables\\classtable.txt"
+# (okopen,tFile,w) = fopen tFile FAppendText w
+| not okopen = abort("")
+# tFile = fwrites (name +++ " " +++ type +++ " " +++ kind +++ " " +++ counterstr +++ "\n" ) tFile 
+# (okclose,w) = fclose tFile w
+// open the file for writing, set the counter, close the file:
+# (ok_inc,w) = incIndex counter "symtables\\classfieldcounter.txt" w
+| not ok_inc = abort("failed with the counter++ thing")
+// return:
+= (True,w)
+
 
 getIndexClassTable:: String *f -> (Bool,String,*f) | FileSystem f
 getIndexClassTable name w
@@ -69,6 +97,20 @@ incIndex counter cFile w
 | not okclose2 = abort("")
 = (True,w)
 
+
+getClassSymbolIndex:: String *f -> (Bool,String,*f) | FileSystem f
+getClassSymbolIndex name w
+// open the file for reading, get the content as list of lines
+# tFile = "symtables\\classtable.txt"
+# (ok_read_open,inputfile,w) = fopen tFile FReadText w
+# (content,inputfile) = listOfLinesInFile inputfile
+# (ok_read_close,w) = fclose inputfile w
+// get the index based on the record name
+# index = findSymbolIndex name content
+// return:
+| index == "false" = (False,"failed",w)
+= (True,index,w)
+
 getMethodSymbolIndex:: String *f -> (Bool,String,*f) | FileSystem f
 getMethodSymbolIndex name w
 // open the file for reading, get the content as list of lines
@@ -79,17 +121,34 @@ getMethodSymbolIndex name w
 // get the index based on the record name
 # index = findSymbolIndex name content
 // return:
+| index == "false" = (False,"failed",w)
 = (True,index,w)
 
 findSymbolIndex:: String [String] -> String
-findSymbolIndex name [x]
+findSymbolIndex name [] = "false"
+
+findSymbolIndex name [x] //= abort(name)
 # record = split x
+| not ((record!!0 +++ " ")== name) = findSymbolIndex name []
 = record!!3
 
 findSymbolIndex name [x:xs]
 # record = split x
 | not ((record!!0 +++ " ")== name) = findSymbolIndex name xs
 = record!!3
+
+getClassSymbolKind:: String *f -> (Bool,String,*f) | FileSystem f
+getClassSymbolKind name w
+// open the file for reading, get the content as list of lines
+# tFile = "symtables\\classtable.txt"
+# (ok_read_open,inputfile,w) = fopen tFile FReadText w
+# (content,inputfile) = listOfLinesInFile inputfile
+# (ok_read_close,w) = fclose inputfile w
+// get the index based on the record name
+# kind = findSymbolKind name content
+// return:
+| kind == "field" = (True,"this",w)
+= (True,kind,w)
 
 getMethodSymbolKind:: String *f -> (Bool,String,*f) | FileSystem f
 getMethodSymbolKind name w
@@ -99,9 +158,9 @@ getMethodSymbolKind name w
 # (content,inputfile) = listOfLinesInFile inputfile
 # (ok_read_close,w) = fclose inputfile w
 // get the index based on the record name
-# index = findSymbolKind name content
+# kind = findSymbolKind name content
 // return:
-= (True,index,w)
+= (True,kind,w)
 
 findSymbolKind:: String [String] -> String
 findSymbolKind name [x]
@@ -123,13 +182,39 @@ getMethodTableCounter w
 # (ok_read_close,w) = fclose inputfile w
 = (True,counter,w)
 
-getClassTableCounter:: *f -> (Bool,String,*f) | FileSystem f
-getClassTableCounter w
-# cFile = "symtables\\classcounter.txt"
+getClassStaticTableCounter:: *f -> (Bool,String,*f) | FileSystem f
+getClassStaticTableCounter w
+# cFile = "symtables\\classstaticcounter.txt"
 # (ok_read_open,cFile,w) = fopen cFile FReadText w
 # (counter,inputfile) = freadline cFile
 # (ok_read_close,w) = fclose inputfile w
 = (True,counter,w) 
+
+getClassFieldTableCounter:: *f -> (Bool,String,*f) | FileSystem f
+getClassFieldTableCounter w
+# cFile = "symtables\\classfieldcounter.txt"
+# (ok_read_open,cFile,w) = fopen cFile FReadText w
+# (counter,inputfile) = freadline cFile
+# (ok_read_close,w) = fclose inputfile w
+= (True,counter,w) 
+
+fetchVariableFromTables:: String *f -> (Bool,String,String,*f) | FileSystem f
+fetchVariableFromTables name w
+# (inMethod,index,w) = getMethodSymbolIndex name w
+| inMethod = getMethodVariableParams name index w
+# (inClass,index,w) = getClassSymbolIndex name w
+| not inClass = (False,"","",w)
+= getClassVariableParams name index w
+
+getClassVariableParams:: String String *f -> (Bool,String,String,*f) | FileSystem f
+getClassVariableParams name index w 
+# (ok_kind,kind,w) = getClassSymbolKind name w
+= (True,index,kind,w)
+
+getMethodVariableParams:: String String *f -> (Bool,String,String,*f) | FileSystem f
+getMethodVariableParams name index w 
+# (ok_kind,kind,w) = getMethodSymbolKind name w
+= (True,index,kind,w)
 
 /*
 *	Split

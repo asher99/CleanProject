@@ -1,5 +1,4 @@
 x  int  argument 0
 y  int  argument 1
 z  int  argument 2
-a  int  local 0
-b  int  local 1
+arr  Array  local 0

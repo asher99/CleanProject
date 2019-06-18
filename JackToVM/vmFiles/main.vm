@@ -1,9 +1,32 @@
-function main.main 2
+function main.main 1
 push argument 0
 pop pointer 0
-push constant 44 
+push constant 10 
+call Array.new 1
 pop local 0
-push constant 54 
-pop local 1
+push constant 1 
+push local 0
+add
+push constant 100 
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 6 
+push local 0
+add
+push constant 600 
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 8 
+push local 0
+add
+push constant 800 
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
 push constant 0
 return
