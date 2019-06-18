@@ -67,6 +67,11 @@ parseClass [class_name,sym:xs] filename num w
 | not ok_init2 = abort("failed to intialize class counter")
 # (ok_init3,w) = overrideFile "0" "symtables\\classfieldcounter.txt" w
 | not ok_init3 = abort("failed to intialize class counter") 
+// initialize the 'if' and the 'while' counters
+# (ok_init4,w) = overrideFile "0" "counters\\ifcounter.txt" w
+| not ok_init4 = abort("failed to intialize if counter")
+# (ok_init5,w) = overrideFile "0" "counters\\whilecounter.txt" w
+| not ok_init5 = abort("failed to intialize while counter")
 //enter fields and statics to the class symbol table.
 #(ok_parse_classVarDec,xs_,w) = parseClassVarDec xs filename num w
 | not ok_parse_classVarDec = abort("failed to parse vardec")
@@ -250,17 +255,47 @@ parseArrayLetStatement [name,sym:xs] filename w //= abort(name +++ sym +++ xs!!0
 parseIfStatement :: [String] String *f -> (Bool,[String],*f) | FileSystem f
 parseIfStatement [first,opening:xs] filename w //= (True,[return:xs],w)
 | not (first == "<keyword> if </keyword>\n") = parseWhileStatement [first,opening:xs] filename w
+// parse the 'if' condition (expression)
+
+// if the condition satisfied - goto IF_TRUE label, else goto IF_FALSE
+
+// IF_TRUE label
+
+// parse the 'if' statements
+
+// if we found 'else' token, switch to 'parseElseStatement'
+
+// IF_FALSE label
 
 
-/*
+
 parseElseStatement :: [String] String *f -> (Bool,[String],*f) | FileSystem f
 parseElseStatement [return:xs] filename w 
-*/
+// if the condition was satisfied - goto IF_END
+
+// IF_FALSE label
+
+// parse the 'else' statements
+
+// IF_END label
+
 
 parseWhileStatement :: [String] String *f -> (Bool,[String],*f) | FileSystem f
 parseWhileStatement [first,opening:xs] filename w
 | not (first == "<keyword> while </keyword>\n") = parseDoStatement [first,opening:xs] filename w
+//print WHILE_EXP# label
 
+// parse the 'while' condition (expression)
+ 
+// if the condition is not satisfied - goto WHILE_END label
+
+// parse the 'while' statements
+
+// goto WHILE_EXP
+
+// WHILE_END label
+ 
+ 
  
 parseDoStatement :: [String] String *f -> (Bool,[String],*f) | FileSystem f
 parseDoStatement [first,name,sym:xs] filename w 
@@ -551,6 +586,37 @@ overrideFile string filename w
 | not ok_read_close = abort("failed to close file")
 = (True,w)
 
+
+incIfCounter:: *f -> (Bool,Int,*f) | FileSystem f
+incIfCounter w
+// open the file for reading, get the counter, close the file:
+# cFile = "counters\\ifcounter.txt"
+# filename = "counters\\ifcounter.txt"
+# (okopen,cFile,w) = fopen cFile FReadText w
+| not okopen = abort("")
+# (counterstr,cFile) = freadline cFile
+# counter = toInt counterstr
+# (okclose,w) = fclose cFile w
+// override the file with the new counter value.
+# (ok1,w) = overrideFile (toString (counter+1)) filename w
+| not ok1 = abort("failed to increase if counter")
+= (True,counter,w)
+
+
+incWhileCounter:: *f -> (Bool,Int,*f) | FileSystem f
+incWhileCounter w
+// open the file for reading, get the counter, close the file:
+# cFile = "counters\\whilecounter.txt"
+# filename = "counters\\ifcounter.txt"
+# (okopen,cFile,w) = fopen cFile FReadText w
+| not okopen = abort("")
+# (counterstr,cFile) = freadline cFile
+# counter = toInt counterstr
+# (okclose,w) = fclose cFile w
+// override the file with the new counter value.
+# (ok1,w) = overrideFile (toString (counter+1)) filename w
+| not ok1 = abort("failed to increase if counter")
+= (True,counter,w)
 
 getTag:: {#Char} Int -> {#Char}
 getTag str len
