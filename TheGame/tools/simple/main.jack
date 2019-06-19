@@ -10,8 +10,8 @@ class main
 		let n = 9;
 		
 		//while(i<n) { let i = i + 1; }
-		if(i<n) { let i = i +1; }
-		let i = 5;
+		//if(i<n) { let i = i +1; }
+		//let i = 5;
 		if(i<n) { let i = i +1; } else { let i = i-1; }
 		
 		return;

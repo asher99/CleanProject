@@ -1,21 +1,20 @@
 class main
 {
 
+	field int n;
 	method void main(int x, int y, int z)
 	{
-		var Array arr;
-		let arr = Array.new(10);
-		let arr[1] = 100;
-		let arr[6] = 600;
-		let arr[8] = 800;
+		var int i;
 		
+		let i = 0;
+		let n = 9;
 		
-		do func(arr[5]);
+		//while(i<n) { let i = i + 1; }
+		//if(i<n) { let i = i +1; }
+		//let i = 5;
+		if(i<n) { let i = i +1; } else { let i = i-1; }
 		
 		return;
-	}
-	
-	method void func(int a) {return;}
-	
+	}	
 
 }

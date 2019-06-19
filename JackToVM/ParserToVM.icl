@@ -256,45 +256,65 @@ parseIfStatement :: [String] String *f -> (Bool,[String],*f) | FileSystem f
 parseIfStatement [first,opening:xs] filename w //= (True,[return:xs],w)
 | not (first == "<keyword> if </keyword>\n") = parseWhileStatement [first,opening:xs] filename w
 // parse the 'if' condition (expression)
-
-// if the condition satisfied - goto IF_TRUE label, else goto IF_FALSE
-
-// IF_TRUE label
-
-// parse the 'if' statements
-
+# (ok_exp,[closing,st_open:xs_],w) = parseExpression xs filename w
+| not ok_exp = abort("failed in parseIfStatement 1")
+// if the condition satisfied - goto IF_TRUE label, else goto IF_FALSE 
+# (okc,counter,w) = incIfCounter w
+# counstr = toString counter
+# (okw1,w) = write2file ("if-goto IF_TRUE"+++counstr+++"\ngoto IF_FALSE"+++counstr+++"\n") filename w
+| not okw1 = abort("failed in parseIfStatement 2")
 // if we found 'else' token, switch to 'parseElseStatement'
-
+|  isElseStatement xs_ = parseElseStatement xs_ counstr filename w
+//IF_TRUE label
+# (okww,w) = write2file ("label IF_TRUE"+++counstr+++"\n") filename w
+// parse 'if' statements.
+# (ok_st,[st_closing:xs__],w) = parseStatements xs_ filename w
+| not ok_st = abort("failed in parseIfStatement 3")
 // IF_FALSE label
+# (okw2,w) = write2file ("label IF_FALSE"+++counstr+++"\n") filename w
+| not okw2 = abort("failed in parseIfStatement 2")
+// return:
+= (True,xs__,w)
 
-
-
-parseElseStatement :: [String] String *f -> (Bool,[String],*f) | FileSystem f
-parseElseStatement [return:xs] filename w 
-// if the condition was satisfied - goto IF_END
-
-// IF_FALSE label
-
+parseElseStatement :: [String] String String *f -> (Bool,[String],*f) | FileSystem f
+parseElseStatement [opening:xs] counter filename w // = abort("??")
+//IF_TRUE label
+# (okww,w) = write2file ("label IF_TRUE"+++counter+++"\n") filename w
+| not okww = abort("failed in parseIfStatement 1")
+// parse 'if' statements.
+# (ok_st,[st_closing,else:xs_],w) = parseStatements xs filename w
+| not ok_st = abort("failed in parseIfStatement 2")
+// if the condition was satisfied - goto IF_END + IF_FALSE label
+# (okw2,w) = write2file ("goto IF_END"+++counter+++"\nlabel IF_FALSE1"+++counter+++"\n") filename w
 // parse the 'else' statements
-
+# (ok_st2,[st_closing2:xs__],w) = parseStatements xs_ filename w
+| not ok_st2 = abort("failed in parseIfStatement 2")
 // IF_END label
-
+# (okw3,w) = write2file ("label IF_END"+++counter+++"\n") filename w
+// retrun:
+= (True,xs__,w)
 
 parseWhileStatement :: [String] String *f -> (Bool,[String],*f) | FileSystem f
 parseWhileStatement [first,opening:xs] filename w
 | not (first == "<keyword> while </keyword>\n") = parseDoStatement [first,opening:xs] filename w
 //print WHILE_EXP# label
-
+# (okc,counter,w) = incWhileCounter w
+# (okw1,w) = write2file ("label WHILE_EXP"+++(toString counter)+++"\n") filename w
+| (not okw1) || (not okc) = abort("failed in parseWhileStatement 1")
 // parse the 'while' condition (expression)
- 
+# (ok_exp,[closing,st_open:xs_],w) = parseExpression xs filename w
+| not ok_exp = abort("failed in parseWhileStatement 2")
 // if the condition is not satisfied - goto WHILE_END label
-
+# (okw2,w) = write2file ("not\nif-goto WHILE_END"+++(toString counter)+++"\n") filename w
+| not okw2 = abort("failed in parseWhileStatement 3")
 // parse the 'while' statements
-
-// goto WHILE_EXP
-
-// WHILE_END label
- 
+# (oks,[st_closing:xs__],w) = parseStatements xs_ filename w
+| not oks = abort("failed in parseWhileStatement 4")
+// goto WHILE_EXP + WHILE_END label
+# (okw3,w) = write2file ("goto WHILE_EXP"+++(toString counter)+++"\nlabel WHILE_END"+++(toString counter)+++"\n") filename w
+| not okw2 = abort("failed in parseWhileStatement 5")
+// return:
+= (True,xs__,w)
  
  
 parseDoStatement :: [String] String *f -> (Bool,[String],*f) | FileSystem f
@@ -602,6 +622,12 @@ incIfCounter w
 | not ok1 = abort("failed to increase if counter")
 = (True,counter,w)
 
+isElseStatement:: [String] -> Bool
+isElseStatement ["<symbol> } </symbol>\n",x:xs]
+| x == "<keyword> else </keyword>\n" = True
+= False
+
+isElseStatement [x:xs] = isElseStatement xs
 
 incWhileCounter:: *f -> (Bool,Int,*f) | FileSystem f
 incWhileCounter w
