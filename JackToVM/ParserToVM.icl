@@ -33,13 +33,13 @@ ParseMultipleFiles [x:xs] w
 # (ok_read_open,inputfile,w) = fopen currentFile FReadText w
 # (content,inputfile) = listOfLinesInFile inputfile
 # (ok_read_close,w) = fclose inputfile w
-
 // parse the file:
 # (ok,w) = startParsing content filename 1 w
 | not ok = abort ("Failed to parse file " +++ x +++ ", execution terminated\n")
 # (parsed,w) = ParseMultipleFiles xs w
 | not parsed = abort("failed to parse file " +++ filename +++ "T.xml\n")
-
+// parse next file
+= ParseMultipleFiles xs w
 
 
 /*
@@ -78,9 +78,10 @@ parseClass [class_name,sym:xs] filename num w
 // generates vm code based on class subroutines.
 #(ok_parse_subroutine,xs__,w) = parseSubroutineDec xs_ filename num w
 | not ok_parse_subroutine = abort("failed to parse subroutine")
-//= (True,w)
+= (True,w)
 
 parseSubroutineDec :: [String] String Int *f -> (Bool,[String],*f) | FileSystem f
+parseSubroutineDec["<symbol> } </symbol>\n":xs] filename num w = (True,[],w)
 parseSubroutineDec [subroutine_kw, subroutine_type ,subroutine_name, sym:xs] filename num w
 // initialize the method symbol table and counter.
 # (ok_init1,w) = overrideFile "" "symtables\\methodtable.txt" w
@@ -94,7 +95,6 @@ parseSubroutineDec [subroutine_kw, subroutine_type ,subroutine_name, sym:xs] fil
 # (ok_body,xs__,w) = parseSubroutineBody xs_ filename (getTokenValue subroutine_name) subroutine_kw w
 | not ok_body = abort("failed to parse subroutine body")
 = parseSubroutineDec xs__ filename num w
-
 
 parseClassVarDec :: [String] String Int *f -> (Bool,[String],*f) | FileSystem f
 parseClassVarDec [kw,type,name,sym:xs] filename num w //= abort(kw +++ type +++ xs!!0 +++ xs!!1 +++ xs!!2)
@@ -277,15 +277,15 @@ parseIfStatement [first,opening:xs] filename w //= (True,[return:xs],w)
 = (True,xs__,w)
 
 parseElseStatement :: [String] String String *f -> (Bool,[String],*f) | FileSystem f
-parseElseStatement [opening:xs] counter filename w // = abort("??")
+parseElseStatement [x:xs] counter filename w //= abort(opening +++ xs!!0 +++ xs!!1 +++ xs!!2)
 //IF_TRUE label
 # (okww,w) = write2file ("label IF_TRUE"+++counter+++"\n") filename w
 | not okww = abort("failed in parseIfStatement 1")
 // parse 'if' statements.
-# (ok_st,[st_closing,else:xs_],w) = parseStatements xs filename w
+# (ok_st,[st_closing,else,st_open2:xs_],w) = parseStatements [x:xs] filename w
 | not ok_st = abort("failed in parseIfStatement 2")
 // if the condition was satisfied - goto IF_END + IF_FALSE label
-# (okw2,w) = write2file ("goto IF_END"+++counter+++"\nlabel IF_FALSE1"+++counter+++"\n") filename w
+# (okw2,w) = write2file ("goto IF_END"+++counter+++"\nlabel IF_FALSE"+++counter+++"\n") filename w
 // parse the 'else' statements
 # (ok_st2,[st_closing2:xs__],w) = parseStatements xs_ filename w
 | not ok_st2 = abort("failed in parseIfStatement 2")
