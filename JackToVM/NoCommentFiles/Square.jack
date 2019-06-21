@@ -1,0 +1,28 @@
+ // This file is part of the materials accompanying the book 
+// "The Elements of Computing Systems" by Nisan and Schocken, 
+// MIT Press. Book site: www.idc.ac.il/tecs
+// File name: projects/11/Square/Square.jack
+
+
+class Square {
+
+    // Location on the screen
+    field int x, y;
+
+    // The size of the square
+    field int size;
+
+    
+    constructor Square new(int Ax, int Ay, int Asize) {
+        let x = Ax;
+        let y = Ay;
+        let size = Asize;
+
+        do draw();
+
+        return this;
+    }
+
+    
+    method void dispose() {
+     

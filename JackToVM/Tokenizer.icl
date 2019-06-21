@@ -33,7 +33,7 @@ TokenizeMultipleFiles [x:xs] w
 // remove all comments
 # (comments_removed,w) = clearComments content filename w
 | not comments_removed = abort("problem with the comments")
-// read all lines of No-Comment version of the file to list of strings:
+// read all lines of No-Comment v.ersion of the file to list of strings:
 # currentFile_NC = "NoCommentFiles\\" +++ x
 # (ok_read_NC,inputfile_NC,w) = fopen currentFile_NC FReadText w
 # (content_NC,inputfile_NC) = listOfLinesInFile inputfile_NC

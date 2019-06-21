@@ -1,2 +1,3 @@
-square  Square  field  0
-direction  int  field  1
+x  int  field  0
+y  int  field  1
+size  int  field  2

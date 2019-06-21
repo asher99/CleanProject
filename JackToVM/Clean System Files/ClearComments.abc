@@ -23,7 +23,7 @@
 .depend "StdBool" "20180913124337"
 .depend "StdEnv" "20180913124337"
 .depend "ClearComments" "20190524154812"
-.module m_ClearComments "ClearComments" "20190621123646"
+.module m_ClearComments "ClearComments" "20190621172512"
 .endinfo
 .impmod _system
 .implab _cycle_in_spine
@@ -67,6 +67,8 @@
 .impmod StdFile
 .impdesc e_StdFile_dfwritec
 .implab e_StdFile_nfwritec
+.impdesc e_StdFile_dfwrites
+.implab e_StdFile_nfwrites
 .impmod StdString
 .implab e_StdString_s+++;11
 .impmod _SystemArray
@@ -113,53 +115,119 @@ e_ClearComments_nclearComments
 	rtn
 .o 7 0
 e_ClearComments_sclearComments
-	jsr_eval 4
+	jsr_eval 6
+	jsr_eval 5
+	push_array 5
+	jsr_eval 5
+	update_a 0 6
+	pop_a 1
 .d 7 0
 	jmp s1
 .o 4 0
 ea1
+	jsr_eval 3
+	jsr_eval 2
 	jsr_eval 1
 	jsr_eval 0
-	repl_r_args 4 0
+	push_array 2
+	push_r_args 1 4 0
+	update_a 4 7
+	update_a 2 4
+	update_a 0 2
+	update_a 3 5
+	update_a 1 3
+	pop_a 2
 .o 7 0
 s1
+	push_a 6
+	buildI 1
+	push_a 7
+	build _ 1 n9
+	push_a 4
+	buildh _Nil 0
+	update_a 0 11
+	pop_a 1
+	jsr_ap 3
+	push_arg 0 3 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.1
+	buildAC "failed to open file :clearComments"
+	updatepop_a 0 8
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+.d 2 0
+	rtn
+else.1
+	push_arg 0 3 3
+	push_arg 1 3 2
+	buildAC " "
+	buildh ARRAY 1
+	build _ 2 e_StdFile_nfwrites
+	push_a 3
+	update_a 2 3
+	update_a 1 2
+	updatepop_a 0 1
+	jsr_ap 2
+	push_arg 0 2 1
+	jsr_eval 0
+	pushB_a 0
+	pop_a 1
+	notB
+	jmp_false else.2
+	buildAC "failed to close file :clearComments"
+	updatepop_a 0 8
+.d 1 0
+	jsr print_string_
+.o 0 0
+	halt
+	repl_args 2 2
+.d 2 0
+	rtn
+else.2
+	push_arg 0 2 2
 	buildh _Nil 0
 	create
-	push_a 6
+	push_a 8
 	push_a 2
 	update_a 2 3
 	update_a 0 2
 	pop_a 1
 	buildh _Nil 0
-	update_a 0 8
+	update_a 0 10
+	update_a 0 5
 	pop_a 1
 .d 3 0
 	jsr s2
 .o 1 0
-	push_a 7
-	push_a 7
+	push_a 8
+	buildh ARRAY 1
 	pushB FALSE
-	push_a 6
-	push_a 6
-	push_a 6
-	push_a 6
-	push_a 6
-	update_a 6 7
+	push_a 7
+	push_a 7
+	push_a 7
+	push_a 7
+	push_a 5
 	update_a 5 6
 	update_a 0 5
 	pop_a 1
-	update_a 6 13
-	update_a 5 12
-	update_a 4 11
-	update_a 3 10
-	update_a 2 9
-	update_a 1 8
-	updatepop_a 0 7
+	update_a 6 14
+	update_a 5 13
+	update_a 4 12
+	update_a 3 11
+	update_a 2 10
+	update_a 1 9
+	updatepop_a 0 8
 .d 7 1 b
 	jsr s8
 .o 1 1 b
 	push_b 0
-	jmp_false else.1
+	jmp_false else.3
 	push_a 0
 	buildB TRUE
 	update_a 1 2
@@ -167,7 +235,7 @@ s1
 	pop_b 1
 .d 2 0
 	rtn
-else.1
+else.3
 	buildh _Nil 0
 	push_a 0
 	push_a 1
@@ -182,6 +250,28 @@ s1.1
 	pushD e_ClearComments_dclearComments
 .d 0 2 ii
 	jmp _match_error
+.n 1 _ ea9
+.o 1 0
+n9
+	push_node _cycle_in_spine 1
+.o 2 0
+ea9
+.o 2 0
+s9
+	buildAC ".jack"
+	push_a 1
+	update_a 1 2
+	updatepop_a 0 1
+.d 2 0
+	jsr catAC
+.o 1 0
+	buildAC "NoCommentFiles\\"
+.d 2 0
+	jsr catAC
+.o 1 0
+	fillh ARRAY 1 1
+.d 1 0
+	rtn
 .export e_ClearComments_swriteCharactersToFile
 .descexp e_ClearComments_dwriteCharactersToFile e_ClearComments_nwriteCharactersToFile e_ClearComments_lwriteCharactersToFile 5 0 "writeCharactersToFile"
 .a 0 a3
@@ -241,13 +331,13 @@ ea3
 .o 7 1 b
 s3
 	eq_desc _Nil 0 4
-	jmp_true case.2
-	jmp case.3
-case.2
-	eqB_b FALSE 0
 	jmp_true case.4
-	jmp s3.1
+	jmp case.5
 case.4
+	eqB_b FALSE 0
+	jmp_true case.6
+	jmp s3.1
+case.6
 	push_a 6
 	buildB TRUE
 	update_a 1 8
@@ -255,25 +345,25 @@ case.4
 	pop_b 1
 .d 2 0
 	rtn
-case.3
+case.5
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
 	pop_a 1
 	jsr_eval 1
 	eq_desc _Nil 0 1
-	jmp_true case.5
-	jmp case.6
-case.5
-	eqB_b FALSE 0
 	jmp_true case.7
+	jmp case.8
+case.7
+	eqB_b FALSE 0
+	jmp_true case.9
 	pop_a 2
 	jmp s3.1
-case.7
+case.9
 	push_a 8
 	buildI 2
 	push_a 9
-	build _ 1 n9
+	build _ 1 n10
 	push_a 6
 	pop_b 1
 	update_a 4 5
@@ -290,9 +380,17 @@ case.7
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.8
-	buildAC "failed to open file"
+	jmp_false else.10
+	push_a 7
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	buildAC "failed to open file :writeCharactersToFile "
+	update_a 1 10
 	updatepop_a 0 9
+.d 2 0
+	jsr catAC
+.o 1 0
 .d 1 0
 	jsr print_string_
 .o 0 0
@@ -300,7 +398,7 @@ case.7
 	repl_args 2 2
 .d 2 0
 	rtn
-else.8
+else.10
 	push_arg 0 3 3
 	push_arg 1 3 2
 	push_a 3
@@ -315,9 +413,17 @@ else.8
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.9
-	buildAC "failed to close file"
+	jmp_false else.11
+	push_a 6
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	buildAC "failed to close file :writeCharactersToFile "
+	update_a 1 9
 	updatepop_a 0 8
+.d 2 0
+	jsr catAC
+.o 1 0
 .d 1 0
 	jsr print_string_
 .o 0 0
@@ -325,7 +431,7 @@ else.8
 	repl_args 2 2
 .d 2 0
 	rtn
-else.9
+else.11
 	push_arg 0 2 2
 	buildh _Nil 0
 	push_a 8
@@ -347,13 +453,13 @@ else.9
 	updatepop_a 0 8
 .d 7 1 b
 	jmp s3
-case.6
+case.8
 	push_args 1 2 2
 	buildh _Nil 0
 	update_a 0 4
 	pop_a 1
 	push_b 0
-	jmp_false else.10
+	jmp_false else.12
 	push_a 2
 	jsr_eval 0
 	pushC_a 3
@@ -364,7 +470,7 @@ case.6
 	update_b 0 1
 	pop_b 1
 	eqC
-	jmp_false else.11
+	jmp_false else.13
 	push_a 0
 	jsr_eval 0
 	pushC_a 1
@@ -375,7 +481,7 @@ case.6
 	update_b 0 1
 	pop_b 1
 	eqC
-	jmp_false else.11
+	jmp_false else.13
 	push_a 1
 	jsr_eval 0
 	push_a 11
@@ -400,7 +506,7 @@ case.6
 	updatepop_b 0 1
 .d 7 1 b
 	jmp s3
-else.11
+else.13
 	push_a 1
 	push_a 1
 	buildh _Cons 2
@@ -426,7 +532,7 @@ else.11
 	updatepop_b 0 1
 .d 7 1 b
 	jmp s3
-else.10
+else.12
 	push_a 2
 	jsr_eval 0
 	pushC_a 3
@@ -437,7 +543,7 @@ else.10
 	update_b 0 1
 	pop_b 1
 	eqC
-	jmp_false else.13
+	jmp_false else.15
 	push_a 0
 	jsr_eval 0
 	pushC_a 1
@@ -448,7 +554,7 @@ else.10
 	update_b 0 1
 	pop_b 1
 	eqC
-	jmp_false else.13
+	jmp_false else.15
 	push_a 1
 	jsr_eval 0
 	push_a 11
@@ -473,11 +579,11 @@ else.10
 	updatepop_b 0 1
 .d 7 1 b
 	jmp s3
-else.13
+else.15
 	push_a 10
 	buildI 2
 	push_a 11
-	build _ 1 n10
+	build _ 1 n11
 	push_a 8
 	pop_b 1
 	buildh _Nil 0
@@ -489,9 +595,17 @@ else.13
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.15
-	buildAC "failed to open file"
+	jmp_false else.17
+	push_a 10
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	buildAC "failed to open file :writeCharactersToFile "
+	update_a 1 13
 	updatepop_a 0 12
+.d 2 0
+	jsr catAC
+.o 1 0
 .d 1 0
 	jsr print_string_
 .o 0 0
@@ -499,7 +613,7 @@ else.13
 	repl_args 2 2
 .d 2 0
 	rtn
-else.15
+else.17
 	push_arg 0 3 3
 	push_arg 1 3 2
 	push_a 5
@@ -516,9 +630,17 @@ else.15
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.16
-	buildAC "failed to close file"
+	jmp_false else.18
+	push_a 8
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	buildAC "failed to close file :writeCharactersToFile "
+	update_a 1 11
 	updatepop_a 0 10
+.d 2 0
+	jsr catAC
+.o 1 0
 .d 1 0
 	jsr print_string_
 .o 0 0
@@ -526,7 +648,7 @@ else.15
 	repl_args 2 2
 .d 2 0
 	rtn
-else.16
+else.18
 	push_arg 0 2 2
 	push_a 3
 	push_a 3
@@ -557,14 +679,14 @@ s3.1
 	pushD e_ClearComments_dwriteCharactersToFile
 .d 0 2 ii
 	jmp _match_error
-.n 1 _ ea10
+.n 1 _ ea11
 .o 1 0
-n10
+n11
 	push_node _cycle_in_spine 1
 .o 2 0
-ea10
+ea11
 .o 2 0
-s10
+s11
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -586,14 +708,14 @@ s10
 	fillh ARRAY 1 1
 .d 1 0
 	rtn
-.n 1 _ ea9
+.n 1 _ ea10
 .o 1 0
-n9
+n10
 	push_node _cycle_in_spine 1
 .o 2 0
-ea9
+ea10
 .o 2 0
-s9
+s10
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -641,14 +763,14 @@ e_ClearComments_eareadAllCharactersOfFile
 .o 3 0
 s2
 	eq_desc _Nil 0 0
-	jmp_true case.17
-	jmp case.18
-case.17
+	jmp_true case.19
+	jmp case.20
+case.19
 	fill_a 1 2
 	pop_a 2
 .d 1 0
 	rtn
-case.18
+case.20
 	repl_args 2 2
 	push_a 0
 	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
@@ -656,7 +778,7 @@ case.18
 	build d_S.2 -1 n_S.2
 	push_a 1
 	build d_S.1 -1 n_S.1
-	build _ 2 n11
+	build _ 2 n12
 	create
 	push_a 5
 	push_a 2
@@ -676,14 +798,14 @@ case.18
 	updatepop_a 0 1
 .d 3 0
 	jmp s2
-.n 2 _ ea11
+.n 2 _ ea12
 .o 1 0
-n11
+n12
 	push_node _cycle_in_spine 2
 .o 3 0
-ea11
+ea12
 .o 3 0
-s11
+s12
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -705,7 +827,7 @@ s5
 	push_b 2
 	ltI
 	notB
-	jmp_false else.19
+	jmp_false else.21
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -719,14 +841,14 @@ s5
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n12
+	build_u _ 1 2 n13
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
 	pop_b 3
 .d 1 0
 	rtn
-else.19
+else.21
 	fillh _Nil 0 1
 	pop_a 1
 	pop_b 2
@@ -734,12 +856,12 @@ else.19
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n12
+n13
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea12
+ea13
 .o 2 2 ii
-s12
+s13
 	pushI 1
 	push_b 1
 	addI
@@ -757,38 +879,38 @@ s12
 .o 7 1 b
 s8
 	eq_desc _Nil 0 4
-	jmp_true case.20
-	jmp case.21
-case.20
-	eqB_b FALSE 0
 	jmp_true case.22
-	jmp s8.1
+	jmp case.23
 case.22
+	eqB_b FALSE 0
+	jmp_true case.24
+	jmp s8.1
+case.24
 	push_a 6
 	pushB TRUE
 	updatepop_a 0 7
 	updatepop_b 0 1
 .d 1 1 b
 	rtn
-case.21
+case.23
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
 	pop_a 1
 	jsr_eval 1
 	eq_desc _Nil 0 1
-	jmp_true case.23
-	jmp case.24
-case.23
-	eqB_b FALSE 0
 	jmp_true case.25
+	jmp case.26
+case.25
+	eqB_b FALSE 0
+	jmp_true case.27
 	pop_a 2
 	jmp s8.1
-case.25
+case.27
 	push_a 8
 	buildI 2
 	push_a 9
-	build _ 1 n13
+	build _ 1 n14
 	push_a 6
 	pop_b 1
 	update_a 4 5
@@ -805,9 +927,17 @@ case.25
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.26
-	buildAC "failed to open file"
+	jmp_false else.28
+	push_a 7
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	buildAC "failed to open file :writeCharactersToFile "
+	update_a 1 10
 	updatepop_a 0 9
+.d 2 0
+	jsr catAC
+.o 1 0
 .d 1 0
 	jsr print_string_
 .o 0 0
@@ -818,7 +948,7 @@ case.25
 	pop_a 1
 .d 1 1 b
 	rtn
-else.26
+else.28
 	push_arg 0 3 3
 	push_arg 1 3 2
 	push_a 3
@@ -833,9 +963,17 @@ else.26
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.27
-	buildAC "failed to close file"
+	jmp_false else.29
+	push_a 6
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	buildAC "failed to close file :writeCharactersToFile "
+	update_a 1 9
 	updatepop_a 0 8
+.d 2 0
+	jsr catAC
+.o 1 0
 .d 1 0
 	jsr print_string_
 .o 0 0
@@ -846,7 +984,7 @@ else.26
 	pop_a 1
 .d 1 1 b
 	rtn
-else.27
+else.29
 	push_arg 0 2 2
 	buildh _Nil 0
 	push_a 8
@@ -868,13 +1006,13 @@ else.27
 	updatepop_a 0 8
 .d 7 1 b
 	jmp s8
-case.24
+case.26
 	push_args 1 2 2
 	buildh _Nil 0
 	update_a 0 4
 	pop_a 1
 	push_b 0
-	jmp_false else.28
+	jmp_false else.30
 	push_a 2
 	jsr_eval 0
 	pushC_a 3
@@ -885,7 +1023,7 @@ case.24
 	update_b 0 1
 	pop_b 1
 	eqC
-	jmp_false else.29
+	jmp_false else.31
 	push_a 0
 	jsr_eval 0
 	pushC_a 1
@@ -896,7 +1034,7 @@ case.24
 	update_b 0 1
 	pop_b 1
 	eqC
-	jmp_false else.29
+	jmp_false else.31
 	push_a 1
 	jsr_eval 0
 	push_a 11
@@ -921,7 +1059,7 @@ case.24
 	updatepop_b 0 1
 .d 7 1 b
 	jmp s8
-else.29
+else.31
 	push_a 1
 	push_a 1
 	buildh _Cons 2
@@ -947,7 +1085,7 @@ else.29
 	updatepop_b 0 1
 .d 7 1 b
 	jmp s8
-else.28
+else.30
 	push_a 2
 	jsr_eval 0
 	pushC_a 3
@@ -958,7 +1096,7 @@ else.28
 	update_b 0 1
 	pop_b 1
 	eqC
-	jmp_false else.31
+	jmp_false else.33
 	push_a 0
 	jsr_eval 0
 	pushC_a 1
@@ -969,7 +1107,7 @@ else.28
 	update_b 0 1
 	pop_b 1
 	eqC
-	jmp_false else.31
+	jmp_false else.33
 	push_a 1
 	jsr_eval 0
 	push_a 11
@@ -994,11 +1132,11 @@ else.28
 	updatepop_b 0 1
 .d 7 1 b
 	jmp s8
-else.31
+else.33
 	push_a 10
 	buildI 2
 	push_a 11
-	build _ 1 n14
+	build _ 1 n15
 	push_a 8
 	pop_b 1
 	buildh _Nil 0
@@ -1010,9 +1148,17 @@ else.31
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.33
-	buildAC "failed to open file"
+	jmp_false else.35
+	push_a 10
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	buildAC "failed to open file :writeCharactersToFile "
+	update_a 1 13
 	updatepop_a 0 12
+.d 2 0
+	jsr catAC
+.o 1 0
 .d 1 0
 	jsr print_string_
 .o 0 0
@@ -1023,7 +1169,7 @@ else.31
 	pop_a 1
 .d 1 1 b
 	rtn
-else.33
+else.35
 	push_arg 0 3 3
 	push_arg 1 3 2
 	push_a 5
@@ -1040,9 +1186,17 @@ else.33
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.34
-	buildAC "failed to close file"
+	jmp_false else.36
+	push_a 8
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	buildAC "failed to close file :writeCharactersToFile "
+	update_a 1 11
 	updatepop_a 0 10
+.d 2 0
+	jsr catAC
+.o 1 0
 .d 1 0
 	jsr print_string_
 .o 0 0
@@ -1053,7 +1207,7 @@ else.33
 	pop_a 1
 .d 1 1 b
 	rtn
-else.34
+else.36
 	push_arg 0 2 2
 	push_a 3
 	push_a 3
@@ -1085,14 +1239,14 @@ s8.1
 .d 0 2 ii
 	jmp _match_error
 .string x_8 "writeCharactersToFile"
-.n 1 _ ea14
+.n 1 _ ea15
 .o 1 0
-n14
+n15
 	push_node _cycle_in_spine 1
 .o 2 0
-ea14
+ea15
 .o 2 0
-s14
+s15
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -1114,14 +1268,14 @@ s14
 	fillh ARRAY 1 1
 .d 1 0
 	rtn
-.n 1 _ ea13
+.n 1 _ ea14
 .o 1 0
-n13
+n14
 	push_node _cycle_in_spine 1
 .o 2 0
-ea13
+ea14
 .o 2 0
-s13
+s14
 	push_a 0
 	jsr_eval 0
 	push_array 0

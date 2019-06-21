@@ -6,7 +6,7 @@ MainModule
 	Icl
 		WindowPosition
 			X:	9
-			Y:	-6
+			Y:	0
 			SizeX:	800
 			SizeY:	680
 	IclOpen:	False
@@ -21,10 +21,16 @@ OtherModules
 				Y:	10
 				SizeX:	1368
 				SizeY:	680
-		IclOpen:	False
+		IclOpen:	True
 	Module
 		Name:	FileManipulation
 		Dir:	{Project}
+		Dcl
+			WindowPosition
+				X:	10
+				Y:	10
+				SizeX:	800
+				SizeY:	680
 		DclOpen:	False
 		IclOpen:	False
 	Module
@@ -48,7 +54,13 @@ OtherModules
 		Name:	Tokenizer
 		Dir:	{Project}
 		DclOpen:	False
-		IclOpen:	False
+		Icl
+			WindowPosition
+				X:	10
+				Y:	10
+				SizeX:	1039
+				SizeY:	680
+		IclOpen:	True
 	Module
 		Name:	symTable
 		Dir:	{Project}

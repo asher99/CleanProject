@@ -28,7 +28,7 @@
 .depend "StdBool" "20180913124337"
 .depend "StdEnv" "20180913124337"
 .depend "ParserToVM" "20190614173944"
-.module m_ParserToVM "ParserToVM" "20190621165254"
+.module m_ParserToVM "ParserToVM" "20190621173321"
 .endinfo
 .impmod _system
 .implab _cycle_in_spine
@@ -179,15 +179,15 @@ case.2
 	build d_S.2 -1 n_S.2
 	push_a 1
 	build d_S.1 -1 n_S.1
-	build _ 2 n194
+	build _ 2 n185
 	push_a 0
-	build _ 1 n195
+	build _ 1 n186
 	push_a 0
-	build _ 1 n196
+	build _ 1 n187
 	push_a 11
 	buildI 1
 	push_a 2
-	build _ 1 n197
+	build _ 1 n188
 	push_a 10
 	buildh _Nil 0
 	update_a 0 16
@@ -200,7 +200,7 @@ case.2
 	pop_a 1
 	notB
 	jmp_false else.3
-	buildAC "failed to open file"
+	buildAC "failed to open vm file to writing in the first time"
 	updatepop_a 0 13
 .d 1 0
 	jsr print_string_
@@ -242,7 +242,7 @@ else.4
 	buildh ARRAY 1
 	build _ 2 e_StdString_n+++;11
 	push_a 10
-	build _ 3 n192
+	build _ 3 n183
 	push_a 0
 	build d_S.2 -1 n_S.2
 	update_a 1 2
@@ -258,7 +258,7 @@ else.4
 	update_a 1 2
 	update_a 0 1
 	pop_a 1
-	build _ 3 n193
+	build _ 3 n184
 	build d_S.2 -1 n_S.2
 	push_a 1
 	jsr_eval 0
@@ -282,7 +282,7 @@ else.4
 	update_a 1 4
 	updatepop_a 0 3
 .d 8 0
-	jsr s165
+	jsr s156
 .o 1 1 b
 	push_b 0
 	notB
@@ -336,7 +336,7 @@ else.5
 	update_a 1 2
 	updatepop_a 0 1
 .d 6 0
-	jsr s166
+	jsr s157
 .o 1 1 b
 	push_b 0
 	notB
@@ -386,14 +386,14 @@ else.6
 	pop_b 1
 .d 6 0
 	jmp s1
-.n 1 _ ea197
+.n 1 _ ea188
 .o 1 0
-n197
+n188
 	push_node _cycle_in_spine 1
 .o 2 0
-ea197
+ea188
 .o 2 0
-s197
+s188
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -415,14 +415,14 @@ s197
 	fillh ARRAY 1 1
 .d 1 0
 	rtn
-.n 1 _ ea196
+.n 1 _ ea187
 .o 1 0
-n196
+n187
 	push_node _cycle_in_spine 1
 .o 2 0
-ea196
+ea187
 .o 2 0
-s196
+s187
 	push_a 0
 	jsr_eval 0
 	push_a 1
@@ -431,7 +431,7 @@ s196
 	update_a 0 3
 	pop_a 1
 .d 1 1 i
-	jsr s109
+	jsr s103
 .o 0 1 i
 	create_array_ CHAR 0 1
 	buildI 0
@@ -443,19 +443,19 @@ s196
 	update_a 1 2
 	updatepop_a 0 1
 .d 3 0
-	jsr s108
+	jsr s102
 .o 1 0
 	fillh ARRAY 1 1
 .d 1 0
 	rtn
-.n 1 _ ea195
+.n 1 _ ea186
 .o 1 0
-n195
+n186
 	push_node _cycle_in_spine 1
 .o 2 0
-ea195
+ea186
 .o 2 0
-s195
+s186
 	push_a 0
 	jsr_eval 0
 .d 1 0
@@ -471,14 +471,14 @@ s195
 	updatepop_a 0 1
 .d 2 1 i
 	jmp e_StdList_stake
-.n 2 _ ea194
+.n 2 _ ea185
 .o 1 0
-n194
+n185
 	push_node _cycle_in_spine 2
 .o 3 0
-ea194
+ea185
 .o 3 0
-s194
+s185
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -493,15 +493,15 @@ s194
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s106
-.n 3 _ ea193
+	jmp s100
+.n 3 _ ea184
 .o 1 0
-n193
+n184
 	push_node _cycle_in_spine 3
 .o 4 0
-ea193
+ea184
 .o 4 0
-s193
+s184
 	push_a 2
 	push_a 1
 	jsr_eval 0
@@ -518,14 +518,14 @@ s193
 	pop_a 1
 .d 1 0
 	rtn
-.n 3 _ ea192
+.n 3 _ ea183
 .o 1 0
-n192
+n183
 	push_node _cycle_in_spine 3
 .o 4 0
-ea192
+ea183
 .o 4 0
-s192
+s183
 	push_a 2
 	buildI 0
 	push_a 2
@@ -545,15 +545,15 @@ s192
 .d 1 0
 	rtn
 .o 1 1 i
-s109
+s103
 	push_b 0
 	push_a 0
 	updatepop_a 0 1
 	updatepop_b 0 1
 .d 1 1 i
-	jmp s141
+	jmp s132
 .o 1 1 i
-s141
+s132
 	eq_desc _Cons 2 0
 	jmp_true case.7
 	jmp case.8
@@ -568,13 +568,13 @@ case.7
 	updatepop_a 0 1
 	updatepop_b 0 1
 .d 1 1 i
-	jmp s109
+	jmp s103
 case.8
 	pop_a 1
 .d 0 1 i
 	rtn
 .o 3 0
-s108
+s102
 	push_a 1
 	push_a 1
 	push_a 4
@@ -582,9 +582,9 @@ s108
 	update_a 1 4
 	updatepop_a 0 3
 .d 3 0
-	jmp s140
+	jmp s131
 .o 3 0
-s140
+s131
 	eq_desc _Cons 2 0
 	jmp_true case.9
 	jmp case.10
@@ -593,7 +593,7 @@ case.9
 	push_a 1
 	jsr_eval 0
 	push_a 4
-	build _ 1 n258
+	build _ 1 n237
 	push_a 2
 	jsr_eval 0
 	pushC_a 3
@@ -614,19 +614,19 @@ case.9
 	update_a 1 5
 	updatepop_a 0 4
 .d 3 0
-	jmp s108
+	jmp s102
 case.10
 	updatepop_a 1 2
 .d 1 0
 	rtn
-.n 1 _ ea258
+.n 1 _ ea237
 .o 1 0
-n258
+n237
 	push_node _cycle_in_spine 1
 .o 2 0
-ea258
+ea237
 .o 2 0
-s258
+s237
 	pushI 1
 	push_a 0
 	jsr_eval 0
@@ -639,7 +639,7 @@ s258
 .d 1 0
 	rtn
 .o 2 2 ii
-s106
+s100
 	push_b 0
 	push_b 2
 	ltI
@@ -658,7 +658,7 @@ s106
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n257
+	build_u _ 1 2 n236
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
@@ -673,12 +673,12 @@ else.11
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n257
+n236
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea257
+ea236
 .o 2 2 ii
-s257
+s236
 	pushI 1
 	push_b 1
 	addI
@@ -692,7 +692,7 @@ s257
 	update_b 1 3
 	updatepop_b 0 2
 .d 2 2 ii
-	jmp s106
+	jmp s100
 .export e_ParserToVM_sstartParsing
 .descexp e_ParserToVM_dstartParsing e_ParserToVM_nstartParsing e_ParserToVM_lstartParsing 5 0 "startParsing"
 .a 0 a2
@@ -769,7 +769,7 @@ case.13
 	update_a 1 2
 	updatepop_a 0 1
 .d 2 2 ii
-	jsr s105
+	jsr s99
 .o 1 0
 .d 1 0
 	jsr e_StdList_stoString;79
@@ -850,7 +850,7 @@ else.15
 .d 2 0
 	rtn
 .o 2 2 ii
-s105
+s99
 	push_b 0
 	push_b 2
 	ltI
@@ -869,7 +869,7 @@ s105
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n256
+	build_u _ 1 2 n235
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
@@ -884,12 +884,12 @@ else.16
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n256
+n235
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea256
+ea235
 .o 2 2 ii
-s256
+s235
 	pushI 1
 	push_b 1
 	addI
@@ -903,7 +903,7 @@ s256
 	update_b 1 3
 	updatepop_b 0 2
 .d 2 2 ii
-	jmp s105
+	jmp s99
 .o 8 0
 s4
 	eq_desc _Cons 2 4
@@ -934,7 +934,7 @@ case.18
 	update_a 0 16
 	pop_a 1
 .d 7 0
-	jsr s162
+	jsr s153
 .o 1 1 b
 	push_b 0
 	notB
@@ -967,7 +967,7 @@ else.19
 	update_a 1 2
 	updatepop_a 0 1
 .d 7 0
-	jsr s162
+	jsr s153
 .o 1 1 b
 	push_b 0
 	notB
@@ -1000,7 +1000,7 @@ else.20
 	update_a 1 2
 	updatepop_a 0 1
 .d 7 0
-	jsr s162
+	jsr s153
 .o 1 1 b
 	push_b 0
 	notB
@@ -1033,7 +1033,7 @@ else.21
 	update_a 1 2
 	updatepop_a 0 1
 .d 7 0
-	jsr s162
+	jsr s153
 .o 1 1 b
 	push_b 0
 	notB
@@ -1066,7 +1066,7 @@ else.22
 	update_a 1 2
 	updatepop_a 0 1
 .d 7 0
-	jsr s162
+	jsr s153
 .o 1 1 b
 	push_b 0
 	notB
@@ -1107,7 +1107,7 @@ else.23
 	update_a 1 3
 	updatepop_a 0 2
 .d 8 0
-	jsr s163
+	jsr s154
 .o 2 1 b
 	push_b 0
 	notB
@@ -1148,7 +1148,7 @@ else.24
 	update_a 1 11
 	updatepop_a 0 10
 .d 8 0
-	jsr s164
+	jsr s155
 .o 2 1 b
 	push_b 0
 	notB
@@ -1179,7 +1179,7 @@ s4.1
 	jmp _match_error
 .string x_4 "parseClass"
 .o 1 1 b
-s138
+s129
 	eqB_b TRUE 0
 	jmp_true case.26
 	jmp case.27
@@ -1241,7 +1241,7 @@ else.30
 .d 0 1 b
 	rtn
 .o 1 1 b
-s137
+s128
 	eqB_b TRUE 0
 	jmp_true case.31
 	jmp case.32
@@ -1409,7 +1409,7 @@ case.44
 	update_a 1 2
 	update_a 0 1
 	pop_a 1
-	build _ 4 n237
+	build _ 4 n216
 	build d_S.2 -1 n_S.2
 	push_a 1
 	jsr_eval 0
@@ -1438,7 +1438,7 @@ case.44
 	update_a 0 18
 	pop_a 1
 .d 8 0
-	jsr s149
+	jsr s140
 .o 3 1 b
 	push_b 0
 	notB
@@ -1468,7 +1468,7 @@ else.45
 	update_a 1 2
 	update_a 0 1
 	pop_a 1
-	build _ 6 n236
+	build _ 6 n215
 	build d_S.2 -1 n_S.2
 	push_a 2
 	buildB TRUE
@@ -1485,14 +1485,14 @@ s26.1
 .d 0 2 ii
 	jmp _match_error
 .string x_26 "doClassObjectMethod"
-.n 4 _ ea237
+.n 4 _ ea216
 .o 1 0
-n237
+n216
 	push_node _cycle_in_spine 4
 .o 5 0
-ea237
+ea216
 .o 5 0
-s237
+s216
 	push_a 3
 	jsr_eval 0
 	push_a 3
@@ -1537,14 +1537,14 @@ s237
 	pop_a 2
 .d 1 0
 	rtn
-.n 6 _ ea236
+.n 6 _ ea215
 .o 1 0
-n236
+n215
 	push_node _cycle_in_spine 6
 .o 7 0
-ea236
+ea215
 .o 7 0
-s236
+s215
 	push_a 5
 	jsr_eval 0
 	push_a 5
@@ -1687,7 +1687,7 @@ case.49
 	update_a 0 17
 	pop_a 1
 .d 8 0
-	jsr s149
+	jsr s140
 .o 3 1 b
 	push_b 0
 	notB
@@ -1711,7 +1711,7 @@ else.50
 	build d_S.2 -1 n_S.2
 	push_a 1
 	build d_S.1 -1 n_S.1
-	build _ 2 n238
+	build _ 2 n217
 	build e_StdList_dlength;47 1 e_StdList_nlength;47
 	push_a 2
 	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
@@ -1721,16 +1721,16 @@ else.50
 	build d_S.2 -1 n_S.2
 	push_a 1
 	build d_S.1 -1 n_S.1
-	build _ 2 n243
+	build _ 2 n222
 	push_a 3
-	build _ 2 n242
+	build _ 2 n221
 	push_a 2
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n241
+	build _ 2 n220
 	push_a 4
-	build _ 2 n240
+	build _ 2 n219
 	build_r e_StdFile_rFileSystem; 4 0 12 0
 	push_a 10
 	push_a 19
@@ -1745,7 +1745,7 @@ else.50
 	update_a 3 6
 	update_a 0 3
 	pop_a 1
-	build _ 7 n239
+	build _ 7 n218
 	build d_S.2 -1 n_S.2
 	push_a 7
 	buildB TRUE
@@ -1762,14 +1762,14 @@ s27.1
 .d 0 2 ii
 	jmp _match_error
 .string x_27 "doExternalFunction"
-.n 2 _ ea243
+.n 2 _ ea222
 .o 1 0
-n243
+n222
 	push_node _cycle_in_spine 2
 .o 3 0
-ea243
+ea222
 .o 3 0
-s243
+s222
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -1784,15 +1784,15 @@ s243
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s101
-.n 2 _ ea242
+	jmp s96
+.n 2 _ ea221
 .o 1 0
-n242
+n221
 	push_node _cycle_in_spine 2
 .o 3 0
-ea242
+ea221
 .o 3 0
-s242
+s221
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -1807,14 +1807,14 @@ s242
 	updatepop_a 0 2
 .d 2 1 i
 	jmp e_StdList_stake
-.n 2 _ ea241
+.n 2 _ ea220
 .o 1 0
-n241
+n220
 	push_node _cycle_in_spine 2
 .o 3 0
-ea241
+ea220
 .o 3 0
-s241
+s220
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -1829,15 +1829,15 @@ s241
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s99
-.n 2 _ ea240
+	jmp s94
+.n 2 _ ea219
 .o 1 0
-n240
+n219
 	push_node _cycle_in_spine 2
 .o 3 0
-ea240
+ea219
 .o 3 0
-s240
+s219
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -1852,14 +1852,14 @@ s240
 	updatepop_a 0 2
 .d 2 1 i
 	jmp e_StdList_stake
-.n 7 _ ea239
+.n 7 _ ea218
 .o 1 0
-n239
+n218
 	push_node _cycle_in_spine 7
 .o 8 0
-ea239
+ea218
 .o 8 0
-s239
+s218
 	push_a 6
 	jsr_eval 0
 	push_a 6
@@ -1913,7 +1913,7 @@ s239
 	update_a 0 8
 	pop_a 1
 .d 1 1 i
-	jsr s104
+	jsr s98
 .o 0 1 i
 	create_array_ CHAR 0 1
 	buildI 0
@@ -1922,7 +1922,7 @@ s239
 	update_a 0 1
 	pop_a 1
 .d 3 0
-	jsr s102
+	jsr s97
 .o 1 0
 .d 2 0
 	jsr catAC
@@ -1948,14 +1948,14 @@ s239
 	pop_a 2
 .d 1 0
 	rtn
-.n 2 _ ea238
+.n 2 _ ea217
 .o 1 0
-n238
+n217
 	push_node _cycle_in_spine 2
 .o 3 0
-ea238
+ea217
 .o 3 0
-s238
+s217
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -1970,7 +1970,7 @@ s238
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s98
+	jmp s93
 .o 7 0
 s25
 	eq_desc _Cons 2 4
@@ -2070,35 +2070,33 @@ else.55
 	updatepop_a 0 1
 	buildAC "this"
 	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
+	update_a 2 3
 	update_a 1 2
 	updatepop_a 0 1
 	buildh _Nil 0
-	update_a 0 5
+	update_a 0 6
 	pop_a 1
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
 	jmp_false else.56
+	push_a 6
+	push_a 6
+	buildh _Cons 2
+	push_a 8
+	buildh _Cons 2
+	push_a 10
+	buildh _Cons 2
+	push_a 12
+	buildh _Cons 2
 	push_a 5
-	push_a 5
-	buildh _Cons 2
-	push_a 7
-	buildh _Cons 2
-	push_a 9
-	buildh _Cons 2
-	push_a 11
-	buildh _Cons 2
+	push_a 20
 	push_a 4
-	push_a 19
-	push_a 3
-	push_a 5
-	push_a 20
-	push_a 20
-	push_a 20
-	push_a 20
+	push_a 6
+	push_a 21
+	push_a 21
+	push_a 21
+	push_a 21
 	push_a 8
 	update_a 8 9
 	update_a 7 8
@@ -2106,61 +2104,63 @@ else.55
 	update_a 5 6
 	update_a 0 5
 	pop_a 1
-	update_a 8 27
-	update_a 7 26
-	update_a 6 25
-	update_a 5 24
-	update_a 4 23
-	update_a 3 22
-	update_a 2 21
-	update_a 1 20
-	updatepop_a 0 19
+	update_a 8 28
+	update_a 7 27
+	update_a 6 26
+	update_a 5 25
+	update_a 4 24
+	update_a 3 23
+	update_a 2 22
+	update_a 1 21
+	updatepop_a 0 20
 .d 9 0
 	jmp s26
 else.56
-	build_r e_StdFile_rFileSystem; 4 0 12 0
+	build_r e_StdFile_rFileSystem; 4 0 13 0
+	push_a 5
+	push_a 20
 	push_a 4
-	push_a 19
-	buildAC "push pointer 0\n"
+	push_a 4
 	buildh ARRAY 1
-	push_a 3
+	push_a 4
+	update_a 4 5
 	update_a 3 4
 	update_a 2 3
 	update_a 1 2
 	update_a 0 1
 	pop_a 1
-	build _ 4 n47
+	build _ 5 n213
 	build d_S.2 -1 n_S.2
-	push_a 6
+	push_a 7
 	jsr_eval 0
-	push_a 19
+	push_a 20
 	buildI 1
-	push_a 19
-	push_a 19
-	push_a 19
-	push_a 19
+	push_a 20
+	push_a 20
+	push_a 20
+	push_a 20
 	push_a 6
 	update_a 6 7
 	update_a 5 6
 	update_a 0 5
 	pop_a 1
-	update_a 14 17
-	update_a 7 16
-	update_a 6 15
-	update_a 5 14
-	update_a 4 13
-	update_a 3 12
-	update_a 2 11
-	update_a 1 10
-	updatepop_a 0 9
+	update_a 10 14
+	update_a 7 13
+	update_a 6 12
+	update_a 5 11
+	update_a 4 10
+	update_a 3 9
+	update_a 2 8
+	update_a 1 7
+	updatepop_a 0 6
 .d 8 0
-	jsr s149
+	jsr s140
 .o 3 1 b
 	push_b 0
 	notB
 	jmp_false else.57
 	buildAC "failed"
-	updatepop_a 0 13
+	updatepop_a 0 17
 	pop_b 1
 .d 1 0
 	jsr print_string_
@@ -2170,55 +2170,27 @@ else.56
 .d 3 0
 	rtn
 else.57
-	push_a 4
-	build e_ParserToVM_dgetTokenValue 1 e_ParserToVM_ngetTokenValue
-	push_a 0
-	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
-	push_a 0
-	build d_S.2 -1 n_S.2
-	push_a 1
-	build d_S.1 -1 n_S.1
-	build _ 2 n230
-	build e_StdList_dlength;47 1 e_StdList_nlength;47
-	push_a 2
-	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
+	build_r e_StdFile_rFileSystem; 4 0 10 0
 	push_a 3
-	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
-	push_a 0
-	build d_S.2 -1 n_S.2
-	push_a 1
-	build d_S.1 -1 n_S.1
-	build _ 2 n235
+	push_a 17
 	push_a 3
-	build _ 2 n234
-	push_a 2
-	build d_S.2 -1 n_S.2
-	push_a 3
-	build d_S.1 -1 n_S.1
-	build _ 2 n233
-	push_a 4
-	build _ 2 n232
-	build_r e_StdFile_rFileSystem; 4 0 13 0
-	push_a 10
-	push_a 20
-	push_a 10
-	push_a 14
-	push_a 6
-	update_a 4 7
-	update_a 1 4
-	update_a 5 1
-	update_a 2 5
-	update_a 6 2
-	update_a 3 6
-	update_a 0 3
+	push_a 8
+	push_a 8
+	push_a 5
+	update_a 5 6
+	update_a 4 5
+	update_a 3 4
+	update_a 2 3
+	update_a 1 2
+	update_a 0 1
 	pop_a 1
-	build _ 7 n231
+	build _ 6 n214
 	build d_S.2 -1 n_S.2
-	push_a 7
+	push_a 2
 	buildB TRUE
-	update_a 2 20
-	update_a 1 19
-	updatepop_a 0 18
+	update_a 2 19
+	update_a 1 18
+	updatepop_a 0 17
 	pop_b 1
 .d 3 0
 	rtn
@@ -2229,118 +2201,28 @@ s25.1
 .d 0 2 ii
 	jmp _match_error
 .string x_25 "doExternalSubroutine"
-.n 2 _ ea235
+.n 6 _ ea214
 .o 1 0
-n235
-	push_node _cycle_in_spine 2
-.o 3 0
-ea235
-.o 3 0
-s235
-	push_a 0
+n214
+	push_node _cycle_in_spine 6
+.o 7 0
+ea214
+.o 7 0
+s214
+	push_a 5
 	jsr_eval 0
-	pushI_a 1
-	pop_a 1
-	pushI 1
-	push_b 1
-	update_b 1 2
-	update_b 0 1
-	pop_b 1
-	subI
-	push_a 1
-	pushI 0
-	updatepop_a 0 2
-.d 2 2 ii
-	jmp s96
-.n 2 _ ea234
-.o 1 0
-n234
-	push_node _cycle_in_spine 2
-.o 3 0
-ea234
-.o 3 0
-s234
-	push_a 0
-	jsr_eval 0
-	pushI_a 1
-	pop_a 1
-	pushI 1
-	push_b 1
-	update_b 1 2
-	update_b 0 1
-	pop_b 1
-	subI
-	push_a 1
-	updatepop_a 0 2
-.d 2 1 i
-	jmp e_StdList_stake
-.n 2 _ ea233
-.o 1 0
-n233
-	push_node _cycle_in_spine 2
-.o 3 0
-ea233
-.o 3 0
-s233
-	push_a 0
-	jsr_eval 0
-	pushI_a 1
-	pop_a 1
-	pushI 1
-	push_b 1
-	update_b 1 2
-	update_b 0 1
-	pop_b 1
-	subI
-	push_a 1
-	pushI 0
-	updatepop_a 0 2
-.d 2 2 ii
-	jmp s94
-.n 2 _ ea232
-.o 1 0
-n232
-	push_node _cycle_in_spine 2
-.o 3 0
-ea232
-.o 3 0
-s232
-	push_a 0
-	jsr_eval 0
-	pushI_a 1
-	pop_a 1
-	pushI 1
-	push_b 1
-	update_b 1 2
-	update_b 0 1
-	pop_b 1
-	subI
-	push_a 1
-	updatepop_a 0 2
-.d 2 1 i
-	jmp e_StdList_stake
-.n 7 _ ea231
-.o 1 0
-n231
-	push_node _cycle_in_spine 7
-.o 8 0
-ea231
-.o 8 0
-s231
-	push_a 6
-	jsr_eval 0
-	push_a 6
+	push_a 5
 	jsr_eval 0
 	push_array 0
 	updatepop_a 0 1
-	push_a 6
+	push_a 5
 	jsr_eval 0
-	pushI_a 7
+	pushI_a 6
 	pop_a 1
 	buildh _Nil 0
+	update_a 0 6
 	update_a 0 7
 	update_a 0 8
-	update_a 0 9
 	pop_a 1
 .d 0 1 i
 	jsr ItoAC
@@ -2353,12 +2235,12 @@ s231
 .d 2 0
 	jsr catAC
 .o 1 0
-	push_a 6
+	push_a 5
 	jsr_eval 0
 	push_array 0
 	updatepop_a 0 1
 	buildh _Nil 0
-	update_a 0 8
+	update_a 0 7
 	pop_a 1
 .d 1 0
 	jsr s3
@@ -2370,27 +2252,13 @@ s231
 .d 2 0
 	jsr catAC
 .o 1 0
-	push_a 5
+	push_a 4
 	jsr_eval 0
-	push_a 5
-	jsr_eval 0
-	pushI 0
+	push_array 0
+	updatepop_a 0 1
 	buildh _Nil 0
-	update_a 0 7
-	update_a 0 8
+	update_a 0 6
 	pop_a 1
-.d 1 1 i
-	jsr s103
-.o 0 1 i
-	create_array_ CHAR 0 1
-	buildI 0
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-.d 3 0
-	jsr s97
-.o 1 0
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -2399,13 +2267,13 @@ s231
 	jsr catAC
 .o 1 0
 	push_r_args 3 4 0
-	update_a 6 13
-	update_a 5 12
-	update_a 4 11
-	update_a 3 10
-	update_a 2 9
-	update_a 1 8
-	updatepop_a 0 7
+	update_a 6 12
+	update_a 5 11
+	update_a 4 10
+	update_a 3 9
+	update_a 2 8
+	update_a 1 7
+	updatepop_a 0 6
 .d 7 0
 	jsr s47
 .o 2 0
@@ -2415,29 +2283,73 @@ s231
 	pop_a 2
 .d 1 0
 	rtn
-.n 2 _ ea230
+.n 5 _ ea213
 .o 1 0
-n230
-	push_node _cycle_in_spine 2
-.o 3 0
-ea230
-.o 3 0
-s230
-	push_a 0
-	jsr_eval 0
-	pushI_a 1
+n213
+	push_node _cycle_in_spine 5
+.o 6 0
+ea213
+	jsr_eval 1
+	push_array 1
+	update_a 0 2
 	pop_a 1
-	pushI 1
-	push_b 1
-	update_b 1 2
-	update_b 0 1
-	pop_b 1
-	subI
+.o 6 0
+s213
+	push_a 4
+	jsr_eval 0
+	push_a 4
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	push_a 4
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	buildAC "\n"
 	push_a 1
-	pushI 0
-	updatepop_a 0 2
-.d 2 2 ii
-	jmp s93
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	buildh _Nil 0
+	update_a 0 7
+	update_a 0 8
+	update_a 0 9
+	pop_a 1
+.d 2 0
+	jsr catAC
+.o 1 0
+	buildAC " "
+.d 2 0
+	jsr catAC
+.o 1 0
+	push_a 4
+	buildh _Nil 0
+	update_a 0 6
+	pop_a 1
+.d 2 0
+	jsr catAC
+.o 1 0
+	buildAC "push "
+.d 2 0
+	jsr catAC
+.o 1 0
+	push_r_args 3 4 0
+	update_a 6 11
+	update_a 5 10
+	update_a 4 9
+	update_a 3 8
+	update_a 2 7
+	update_a 1 6
+	updatepop_a 0 5
+.d 7 0
+	jsr s47
+.o 2 0
+	push_a 1
+	push_a 1
+	fillh _Tuple 2 4
+	pop_a 2
+.d 1 0
+	rtn
 .o 7 0
 s24
 	eq_desc _Cons 2 4
@@ -2536,7 +2448,7 @@ else.60
 	update_a 0 16
 	pop_a 1
 .d 8 0
-	jsr s149
+	jsr s140
 .o 3 1 b
 	push_b 0
 	notB
@@ -2564,7 +2476,7 @@ else.61
 	update_a 1 2
 	update_a 0 1
 	pop_a 1
-	build _ 5 n229
+	build _ 5 n212
 	build d_S.2 -1 n_S.2
 	push_a 2
 	buildB TRUE
@@ -2581,14 +2493,14 @@ s24.1
 .d 0 2 ii
 	jmp _match_error
 .string x_24 "parseSubroutineCall"
-.n 5 _ ea229
+.n 5 _ ea212
 .o 1 0
-n229
+n212
 	push_node _cycle_in_spine 5
 .o 6 0
-ea229
+ea212
 .o 6 0
-s229
+s212
 	push_a 4
 	jsr_eval 0
 	push_a 2
@@ -2811,7 +2723,7 @@ case.66
 	build d_S.3 -1 n_S.3
 	push_a 1
 	build d_S.2 -1 n_S.2
-	build _ 1 n265
+	build _ 1 n244
 	build d_S.2 -1 n_S.2
 	buildB TRUE
 	update_a 2 11
@@ -2826,18 +2738,18 @@ s45.1
 .d 0 2 ii
 	jmp _match_error
 .string x_45 "parseTermExpression"
-.n 1 _ ea265
+.n 1 _ ea244
 .o 1 0
-n265
+n244
 	push_node _cycle_in_spine 1
 .o 2 0
-ea265
+ea244
 	jsr_eval 0
 .o 2 0
-s265
+s244
 	eq_desc _Cons 2 0
 	jmp_true case.67
-	jmp s265.1
+	jmp s244.1
 case.67
 	push_args 0 2 2
 	pop_a 2
@@ -2845,13 +2757,13 @@ case.67
 	pop_a 1
 .d 1 0
 	rtn
-s265.1
+s244.1
 	pop_a 2
 	pushD m_ParserToVM
-	pushD x_265
+	pushD x_244
 .d 0 2 ii
 	jmp _match_error
-.string x_265 "_match0"
+.string x_244 "_match0"
 .o 7 0
 s44
 	eq_desc _Cons 2 4
@@ -2883,7 +2795,7 @@ case.68
 	update_a 1 2
 	update_a 0 1
 	pop_a 1
-	build _ 4 n244
+	build _ 4 n223
 	build d_S.2 -1 n_S.2
 	push_a 1
 	build d_S.2 -1 n_S.2
@@ -2900,14 +2812,14 @@ s44.1
 .d 0 2 ii
 	jmp _match_error
 .string x_44 "parseUnaryOp"
-.n 4 _ ea244
+.n 4 _ ea223
 .o 1 0
-n244
+n223
 	push_node _cycle_in_spine 4
 .o 5 0
-ea244
+ea223
 .o 5 0
-s244
+s223
 	push_a 3
 	jsr_eval 0
 	push_a 3
@@ -2990,7 +2902,7 @@ case.70
 	update_a 0 15
 	pop_a 1
 .d 7 0
-	jsr s156
+	jsr s147
 .o 2 1 b
 	push_b 0
 	notB
@@ -3098,7 +3010,7 @@ else.72
 	update_a 1 13
 	updatepop_a 0 12
 .d 7 0
-	jsr s157
+	jsr s148
 .o 1 1 b
 	push_b 0
 	notB
@@ -3115,7 +3027,7 @@ else.72
 	rtn
 else.73
 	push_a 1
-	build _ 1 n266
+	build _ 1 n245
 	build d_S.2 -1 n_S.2
 	push_a 1
 	buildB TRUE
@@ -3136,18 +3048,18 @@ s46.1
 .d 0 2 ii
 	jmp _match_error
 .string x_46 "parseArrayTerm"
-.n 1 _ ea266
+.n 1 _ ea245
 .o 1 0
-n266
+n245
 	push_node _cycle_in_spine 1
 .o 2 0
-ea266
+ea245
 	jsr_eval 0
 .o 2 0
-s266
+s245
 	eq_desc _Cons 2 0
 	jmp_true case.74
-	jmp s266.1
+	jmp s245.1
 case.74
 	push_args 0 2 2
 	pop_a 2
@@ -3155,13 +3067,13 @@ case.74
 	pop_a 1
 .d 1 0
 	rtn
-s266.1
+s245.1
 	pop_a 2
 	pushD m_ParserToVM
-	pushD x_266
+	pushD x_245
 .d 0 2 ii
 	jmp _match_error
-.string x_266 "_match1"
+.string x_245 "_match1"
 .n 4 _
 .o 1 0
 n33
@@ -3589,7 +3501,7 @@ else.85
 	update_a 0 14
 	pop_a 1
 .d 7 0
-	jsr s150
+	jsr s141
 .o 2 1 b
 	push_b 0
 	notB
@@ -3606,7 +3518,7 @@ else.85
 	rtn
 else.86
 	push_a 0
-	build _ 1 n267
+	build _ 1 n246
 	push_a 0
 	build d_S.2 -1 n_S.2
 	push_a 1
@@ -3632,7 +3544,7 @@ else.86
 	update_a 1 11
 	updatepop_a 0 10
 .d 7 0
-	jsr s148
+	jsr s139
 .o 2 1 b
 	push_b 0
 	notB
@@ -3664,18 +3576,18 @@ s31.1
 .d 0 2 ii
 	jmp _match_error
 .string x_31 "parseExpression"
-.n 1 _ ea267
+.n 1 _ ea246
 .o 1 0
-n267
+n246
 	push_node _cycle_in_spine 1
 .o 2 0
-ea267
+ea246
 	jsr_eval 0
 .o 2 0
-s267
+s246
 	eq_desc _Cons 2 0
 	jmp_true case.88
-	jmp s267.1
+	jmp s246.1
 case.88
 	push_args 0 2 2
 	pop_a 2
@@ -3683,15 +3595,15 @@ case.88
 	pop_a 1
 .d 1 0
 	rtn
-s267.1
+s246.1
 	pop_a 2
 	pushD m_ParserToVM
-	pushD x_267
+	pushD x_246
 .d 0 2 ii
 	jmp _match_error
-.string x_267 "_match2"
+.string x_246 "_match2"
 .o 1 1 b
-s136
+s127
 	eqB_b TRUE 0
 	jmp_true case.89
 	jmp case.90
@@ -3797,15 +3709,15 @@ else.97
 .d 0 1 b
 	rtn
 .o 1 1 i
-s103
+s98
 	push_b 0
 	push_a 0
 	updatepop_a 0 1
 	updatepop_b 0 1
 .d 1 1 i
-	jmp s135
+	jmp s126
 .o 1 1 i
-s135
+s126
 	eq_desc _Cons 2 0
 	jmp_true case.98
 	jmp case.99
@@ -3820,37 +3732,8 @@ case.98
 	updatepop_a 0 1
 	updatepop_b 0 1
 .d 1 1 i
-	jmp s103
+	jmp s98
 case.99
-	pop_a 1
-.d 0 1 i
-	rtn
-.o 1 1 i
-s104
-	push_b 0
-	push_a 0
-	updatepop_a 0 1
-	updatepop_b 0 1
-.d 1 1 i
-	jmp s134
-.o 1 1 i
-s134
-	eq_desc _Cons 2 0
-	jmp_true case.100
-	jmp case.101
-case.100
-	repl_args 2 2
-	pop_a 1
-	push_a 0
-	jsr_eval 0
-	pushI 1
-	push_b 1
-	addI
-	updatepop_a 0 1
-	updatepop_b 0 1
-.d 1 1 i
-	jmp s104
-case.101
 	pop_a 1
 .d 0 1 i
 	rtn
@@ -3863,18 +3746,18 @@ s97
 	update_a 1 4
 	updatepop_a 0 3
 .d 3 0
-	jmp s133
+	jmp s125
 .o 3 0
-s133
+s125
 	eq_desc _Cons 2 0
-	jmp_true case.102
-	jmp case.103
-case.102
+	jmp_true case.100
+	jmp case.101
+case.100
 	repl_args 2 2
 	push_a 1
 	jsr_eval 0
 	push_a 4
-	build _ 1 n213
+	build _ 1 n208
 	push_a 2
 	jsr_eval 0
 	pushC_a 3
@@ -3896,18 +3779,18 @@ case.102
 	updatepop_a 0 4
 .d 3 0
 	jmp s97
-case.103
+case.101
 	updatepop_a 1 2
 .d 1 0
 	rtn
-.n 1 _ ea213
+.n 1 _ ea208
 .o 1 0
-n213
+n208
 	push_node _cycle_in_spine 1
 .o 2 0
-ea213
+ea208
 .o 2 0
-s213
+s208
 	pushI 1
 	push_a 0
 	jsr_eval 0
@@ -3925,7 +3808,7 @@ s94
 	push_b 2
 	ltI
 	notB
-	jmp_false else.104
+	jmp_false else.102
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -3939,14 +3822,14 @@ s94
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n214
+	build_u _ 1 2 n209
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
 	pop_b 3
 .d 1 0
 	rtn
-else.104
+else.102
 	fillh _Nil 0 1
 	pop_a 1
 	pop_b 2
@@ -3954,12 +3837,12 @@ else.104
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n214
+n209
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea214
+ea209
 .o 2 2 ii
-s214
+s209
 	pushI 1
 	push_b 1
 	addI
@@ -3980,7 +3863,7 @@ s96
 	push_b 2
 	ltI
 	notB
-	jmp_false else.105
+	jmp_false else.103
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -3994,14 +3877,14 @@ s96
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n215
+	build_u _ 1 2 n210
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
 	pop_b 3
 .d 1 0
 	rtn
-else.105
+else.103
 	fillh _Nil 0 1
 	pop_a 1
 	pop_b 2
@@ -4009,12 +3892,12 @@ else.105
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n215
+n210
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea215
+ea210
 .o 2 2 ii
-s215
+s210
 	pushI 1
 	push_b 1
 	addI
@@ -4035,7 +3918,7 @@ s93
 	push_b 2
 	ltI
 	notB
-	jmp_false else.106
+	jmp_false else.104
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -4049,14 +3932,14 @@ s93
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n212
+	build_u _ 1 2 n207
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
 	pop_b 3
 .d 1 0
 	rtn
-else.106
+else.104
 	fillh _Nil 0 1
 	pop_a 1
 	pop_b 2
@@ -4064,12 +3947,12 @@ else.106
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n212
+n207
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea212
+ea207
 .o 2 2 ii
-s212
+s207
 	pushI 1
 	push_b 1
 	addI
@@ -4084,236 +3967,6 @@ s212
 	updatepop_b 0 2
 .d 2 2 ii
 	jmp s93
-.o 3 0
-s102
-	push_a 1
-	push_a 1
-	push_a 4
-	update_a 2 5
-	update_a 1 4
-	updatepop_a 0 3
-.d 3 0
-	jmp s131
-.o 3 0
-s131
-	eq_desc _Cons 2 0
-	jmp_true case.107
-	jmp case.108
-case.107
-	repl_args 2 2
-	push_a 1
-	jsr_eval 0
-	push_a 4
-	build _ 1 n225
-	push_a 2
-	jsr_eval 0
-	pushC_a 3
-	pop_a 1
-	push_a 5
-	jsr_eval 0
-	pushI_a 6
-	pop_a 1
-	push_a 4
-	buildh _Nil 0
-	update_a 0 6
-	update_a 0 7
-	update_a 0 4
-	update_a 0 5
-	pop_a 1
-	update CHAR 0 1
-	update_a 2 6
-	update_a 1 5
-	updatepop_a 0 4
-.d 3 0
-	jmp s102
-case.108
-	updatepop_a 1 2
-.d 1 0
-	rtn
-.n 1 _ ea225
-.o 1 0
-n225
-	push_node _cycle_in_spine 1
-.o 2 0
-ea225
-.o 2 0
-s225
-	pushI 1
-	push_a 0
-	jsr_eval 0
-	pushI_a 1
-	pop_a 1
-	pop_a 1
-	addI
-	fillI_b 0 0
-	pop_b 1
-.d 1 0
-	rtn
-.o 2 2 ii
-s99
-	push_b 0
-	push_b 2
-	ltI
-	notB
-	jmp_false else.109
-	push_a 0
-	jsr_eval 0
-	push_array 0
-	updatepop_a 0 1
-	push_b 0
-	updatepop_a 0 1
-	push_a 0
-	select CHAR 0 1
-	push_a 0
-	buildh ARRAY 1
-	push_a 0
-	push_b 2
-	push_b 2
-	build_u _ 1 2 n226
-	buildC_b 0
-	fillh _Cons 2 4
-	pop_a 2
-	pop_b 3
-.d 1 0
-	rtn
-else.109
-	fillh _Nil 0 1
-	pop_a 1
-	pop_b 2
-.d 1 0
-	rtn
-.nu 1 2 _ _
-.o 1 0
-n226
-	push_node_u _cycle_in_spine 1 2
-.o 2 2 ii
-ea226
-.o 2 2 ii
-s226
-	pushI 1
-	push_b 1
-	addI
-	push_a 0
-	push_b 2
-	push_b 1
-	update_b 1 2
-	update_b 0 1
-	pop_b 1
-	updatepop_a 0 1
-	update_b 1 3
-	updatepop_b 0 2
-.d 2 2 ii
-	jmp s99
-.o 2 2 ii
-s101
-	push_b 0
-	push_b 2
-	ltI
-	notB
-	jmp_false else.110
-	push_a 0
-	jsr_eval 0
-	push_array 0
-	updatepop_a 0 1
-	push_b 0
-	updatepop_a 0 1
-	push_a 0
-	select CHAR 0 1
-	push_a 0
-	buildh ARRAY 1
-	push_a 0
-	push_b 2
-	push_b 2
-	build_u _ 1 2 n227
-	buildC_b 0
-	fillh _Cons 2 4
-	pop_a 2
-	pop_b 3
-.d 1 0
-	rtn
-else.110
-	fillh _Nil 0 1
-	pop_a 1
-	pop_b 2
-.d 1 0
-	rtn
-.nu 1 2 _ _
-.o 1 0
-n227
-	push_node_u _cycle_in_spine 1 2
-.o 2 2 ii
-ea227
-.o 2 2 ii
-s227
-	pushI 1
-	push_b 1
-	addI
-	push_a 0
-	push_b 2
-	push_b 1
-	update_b 1 2
-	update_b 0 1
-	pop_b 1
-	updatepop_a 0 1
-	update_b 1 3
-	updatepop_b 0 2
-.d 2 2 ii
-	jmp s101
-.o 2 2 ii
-s98
-	push_b 0
-	push_b 2
-	ltI
-	notB
-	jmp_false else.111
-	push_a 0
-	jsr_eval 0
-	push_array 0
-	updatepop_a 0 1
-	push_b 0
-	updatepop_a 0 1
-	push_a 0
-	select CHAR 0 1
-	push_a 0
-	buildh ARRAY 1
-	push_a 0
-	push_b 2
-	push_b 2
-	build_u _ 1 2 n224
-	buildC_b 0
-	fillh _Cons 2 4
-	pop_a 2
-	pop_b 3
-.d 1 0
-	rtn
-else.111
-	fillh _Nil 0 1
-	pop_a 1
-	pop_b 2
-.d 1 0
-	rtn
-.nu 1 2 _ _
-.o 1 0
-n224
-	push_node_u _cycle_in_spine 1 2
-.o 2 2 ii
-ea224
-.o 2 2 ii
-s224
-	pushI 1
-	push_b 1
-	addI
-	push_a 0
-	push_b 2
-	push_b 1
-	update_b 1 2
-	update_b 0 1
-	pop_b 1
-	updatepop_a 0 1
-	update_b 1 3
-	updatepop_b 0 2
-.d 2 2 ii
-	jmp s98
 .o 1 0
 s54
 	buildAC "<symbol> + </symbol>\n"
@@ -4321,89 +3974,89 @@ s54
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.112
+	jmp_false else.105
 	pop_a 1
 	buildAC "add"
 .d 1 0
 	rtn
-else.112
+else.105
 	buildAC "<symbol> - </symbol>\n"
 	push_a 1
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.113
+	jmp_false else.106
 	pop_a 1
 	buildAC "sub"
 .d 1 0
 	rtn
-else.113
+else.106
 	buildAC "<symbol> * </symbol>\n"
 	push_a 1
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.114
+	jmp_false else.107
 	pop_a 1
 	buildAC "call Math.multiply 2"
 .d 1 0
 	rtn
-else.114
+else.107
 	buildAC "<symbol> / </symbol>\n"
 	push_a 1
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.115
+	jmp_false else.108
 	pop_a 1
 	buildAC "call Math.divide 2"
 .d 1 0
 	rtn
-else.115
+else.108
 	buildAC "<symbol> = </symbol>\n"
 	push_a 1
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.116
+	jmp_false else.109
 	pop_a 1
 	buildAC "eq"
 .d 1 0
 	rtn
-else.116
+else.109
 	buildAC "<symbol> &amp; </symbol>\n"
 	push_a 1
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.117
+	jmp_false else.110
 	pop_a 1
 	buildAC "and"
 .d 1 0
 	rtn
-else.117
+else.110
 	buildAC "<symbol> | </symbol>\n"
 	push_a 1
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.118
+	jmp_false else.111
 	pop_a 1
 	buildAC "or"
 .d 1 0
 	rtn
-else.118
+else.111
 	buildAC "<symbol> &lt; </symbol>\n"
 	push_a 1
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.119
+	jmp_false else.112
 	pop_a 1
 	buildAC "lt"
 .d 1 0
 	rtn
-else.119
+else.112
 	buildAC "<symbol> &gt; </symbol>\n"
 	push_a 1
 	update_a 1 2
@@ -4411,11 +4064,11 @@ else.119
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.120
+	jmp_false else.113
 	buildAC "gt"
 .d 1 0
 	rtn
-else.120
+else.113
 	buildh _Nil 0
 	jmp s54.1
 s54.1
@@ -4428,19 +4081,19 @@ s54.1
 .o 7 0
 s43
 	eq_desc _Cons 2 4
-	jmp_true case.121
+	jmp_true case.114
 	jmp s43.1
-case.121
+case.114
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
 	pop_a 1
 	jsr_eval 1
 	eq_desc _Cons 2 1
-	jmp_true case.122
+	jmp_true case.115
 	pop_a 2
 	jmp s43.1
-case.122
+case.115
 	push_args 1 2 2
 	buildh _Nil 0
 	update_a 0 4
@@ -4475,7 +4128,7 @@ case.122
 	pushB_a 1
 	pop_a 1
 	notB
-	jmp_false else.123
+	jmp_false else.116
 	buildAC "failed to get symbol record fields"
 	updatepop_a 0 14
 .d 1 0
@@ -4485,7 +4138,7 @@ case.122
 	repl_args 3 3
 .d 3 0
 	rtn
-else.123
+else.116
 	push_a 4
 	jsr_eval 0
 	push_a 2
@@ -4541,11 +4194,11 @@ else.123
 	update_a 1 13
 	updatepop_a 0 12
 .d 7 0
-	jsr s157
+	jsr s148
 .o 1 1 b
 	push_b 0
 	notB
-	jmp_false else.124
+	jmp_false else.117
 	buildAC "failed to write vm code to file"
 	updatepop_a 0 3
 	pop_b 1
@@ -4556,7 +4209,7 @@ else.123
 	repl_args 3 3
 .d 3 0
 	rtn
-else.124
+else.117
 	push_a 2
 	push_a 2
 	buildh _Cons 2
@@ -4586,12 +4239,12 @@ s55
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.125
+	jmp_false else.118
 	pop_a 1
 	buildAC "not\n"
 .d 1 0
 	rtn
-else.125
+else.118
 	buildAC "<symbol> - </symbol>\n"
 	push_a 1
 	update_a 1 2
@@ -4599,11 +4252,11 @@ else.125
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.126
+	jmp_false else.119
 	buildAC "neg\n"
 .d 1 0
 	rtn
-else.126
+else.119
 	buildh _Nil 0
 	jmp s55.1
 s55.1
@@ -4616,9 +4269,9 @@ s55.1
 .o 7 0
 s34
 	eq_desc _Cons 2 4
-	jmp_true case.127
+	jmp_true case.120
 	jmp s34.1
-case.127
+case.120
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
@@ -4635,7 +4288,7 @@ case.127
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.128
+	jmp_false else.121
 	push_a 1
 	push_a 1
 	buildh _Cons 2
@@ -4659,13 +4312,13 @@ case.127
 	updatepop_a 0 9
 .d 7 0
 	jmp s35
-else.128
+else.121
 	buildAC "<keyword> false </keyword>\n"
 	push_array 1
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.129
+	jmp_false else.122
 	push_a 1
 	push_a 1
 	buildh _Cons 2
@@ -4689,13 +4342,13 @@ else.128
 	updatepop_a 0 9
 .d 7 0
 	jmp s36
-else.129
+else.122
 	buildAC "<keyword> true </keyword>\n"
 	push_array 1
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.130
+	jmp_false else.123
 	push_a 1
 	push_a 1
 	buildh _Cons 2
@@ -4719,13 +4372,13 @@ else.129
 	updatepop_a 0 9
 .d 7 0
 	jmp s37
-else.130
+else.123
 	buildAC "<keyword> this </keyword>\n"
 	push_array 1
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.131
+	jmp_false else.124
 	push_a 1
 	push_a 1
 	buildh _Cons 2
@@ -4749,7 +4402,7 @@ else.130
 	updatepop_a 0 9
 .d 7 0
 	jmp s38
-else.131
+else.124
 	pop_a 2
 	jmp s34.1
 s34.1
@@ -4762,9 +4415,9 @@ s34.1
 .o 7 0
 s38
 	eq_desc _Cons 2 4
-	jmp_true case.132
+	jmp_true case.125
 	jmp s38.1
-case.132
+case.125
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
@@ -4800,9 +4453,9 @@ s38.1
 .o 7 0
 s37
 	eq_desc _Cons 2 4
-	jmp_true case.133
+	jmp_true case.126
 	jmp s37.1
-case.133
+case.126
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
@@ -4838,9 +4491,9 @@ s37.1
 .o 7 0
 s36
 	eq_desc _Cons 2 4
-	jmp_true case.134
+	jmp_true case.127
 	jmp s36.1
-case.134
+case.127
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
@@ -4876,9 +4529,9 @@ s36.1
 .o 7 0
 s35
 	eq_desc _Cons 2 4
-	jmp_true case.135
+	jmp_true case.128
 	jmp s35.1
-case.135
+case.128
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
@@ -4914,9 +4567,9 @@ s35.1
 .o 7 0
 s39
 	eq_desc _Cons 2 4
-	jmp_true case.136
+	jmp_true case.129
 	jmp s39.1
-case.136
+case.129
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
@@ -4985,7 +4638,7 @@ case.136
 	update_a 0 16
 	pop_a 1
 .d 7 0
-	jsr s146
+	jsr s137
 .o 2 0
 	pop_a 1
 	push_a 8
@@ -4995,7 +4648,7 @@ case.136
 	push_a 8
 	push_a 8
 .d 7 0
-	jsr s146
+	jsr s137
 .o 2 0
 	pop_a 1
 	push_a 8
@@ -5013,11 +4666,11 @@ case.136
 	update_a 1 9
 	updatepop_a 0 8
 .d 7 0
-	jsr s147
+	jsr s138
 .o 1 1 b
 	push_b 0
 	notB
-	jmp_false else.137
+	jmp_false else.130
 	buildAC "failed to append chars to string"
 	updatepop_a 0 2
 	pop_b 1
@@ -5028,7 +4681,7 @@ case.136
 	repl_args 3 3
 .d 3 0
 	rtn
-else.137
+else.130
 	push_a 0
 	push_a 2
 	buildB TRUE
@@ -5051,7 +4704,7 @@ s92
 	push_b 2
 	ltI
 	notB
-	jmp_false else.138
+	jmp_false else.131
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -5065,14 +4718,14 @@ s92
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n246
+	build_u _ 1 2 n225
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
 	pop_b 3
 .d 1 0
 	rtn
-else.138
+else.131
 	fillh _Nil 0 1
 	pop_a 1
 	pop_b 2
@@ -5080,12 +4733,12 @@ else.138
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n246
+n225
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea246
+ea225
 .o 2 2 ii
-s246
+s225
 	pushI 1
 	push_b 1
 	addI
@@ -5103,9 +4756,9 @@ s246
 .o 7 0
 s41
 	eq_desc _Cons 2 4
-	jmp_true case.139
+	jmp_true case.132
 	jmp s41.1
-case.139
+case.132
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
@@ -5120,7 +4773,7 @@ case.139
 	update_a 1 2
 	update_a 0 1
 	pop_a 1
-	build _ 4 n247
+	build _ 4 n226
 	build d_S.2 -1 n_S.2
 	push_a 2
 	buildB TRUE
@@ -5136,14 +4789,14 @@ s41.1
 .d 0 2 ii
 	jmp _match_error
 .string x_41 "parseIntegerConstant"
-.n 4 _ ea247
+.n 4 _ ea226
 .o 1 0
-n247
+n226
 	push_node _cycle_in_spine 4
 .o 5 0
-ea247
+ea226
 .o 5 0
-s247
+s226
 	push_a 3
 	jsr_eval 0
 	push_a 3
@@ -5199,7 +4852,7 @@ s52
 	build d_S.2 -1 n_S.2
 	push_a 1
 	build d_S.1 -1 n_S.1
-	build _ 2 n249
+	build _ 2 n228
 	create
 	push_a 1
 	push_b 0
@@ -5234,14 +4887,14 @@ s52
 	updatepop_a 0 1
 .d 3 0
 	jmp s90
-.n 2 _ ea249
+.n 2 _ ea228
 .o 1 0
-n249
+n228
 	push_node _cycle_in_spine 2
 .o 3 0
-ea249
+ea228
 .o 3 0
-s249
+s228
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -5264,13 +4917,13 @@ s91
 	updatepop_a 0 1
 	updatepop_b 0 1
 .d 1 1 i
-	jmp s123
+	jmp s117
 .o 1 1 i
-s123
+s117
 	eq_desc _Cons 2 0
-	jmp_true case.140
-	jmp case.141
-case.140
+	jmp_true case.133
+	jmp case.134
+case.133
 	repl_args 2 2
 	pop_a 1
 	push_a 0
@@ -5282,7 +4935,7 @@ case.140
 	updatepop_b 0 1
 .d 1 1 i
 	jmp s91
-case.141
+case.134
 	pop_a 1
 .d 0 1 i
 	rtn
@@ -5295,18 +4948,18 @@ s90
 	update_a 1 4
 	updatepop_a 0 3
 .d 3 0
-	jmp s122
+	jmp s116
 .o 3 0
-s122
+s116
 	eq_desc _Cons 2 0
-	jmp_true case.142
-	jmp case.143
-case.142
+	jmp_true case.135
+	jmp case.136
+case.135
 	repl_args 2 2
 	push_a 1
 	jsr_eval 0
 	push_a 4
-	build _ 1 n251
+	build _ 1 n230
 	push_a 2
 	jsr_eval 0
 	pushC_a 3
@@ -5328,18 +4981,18 @@ case.142
 	updatepop_a 0 4
 .d 3 0
 	jmp s90
-case.143
+case.136
 	updatepop_a 1 2
 .d 1 0
 	rtn
-.n 1 _ ea251
+.n 1 _ ea230
 .o 1 0
-n251
+n230
 	push_node _cycle_in_spine 1
 .o 2 0
-ea251
+ea230
 .o 2 0
-s251
+s230
 	pushI 1
 	push_a 0
 	jsr_eval 0
@@ -5357,7 +5010,7 @@ s88
 	push_b 2
 	ltI
 	notB
-	jmp_false else.144
+	jmp_false else.137
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -5371,14 +5024,14 @@ s88
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n250
+	build_u _ 1 2 n229
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
 	pop_b 3
 .d 1 0
 	rtn
-else.144
+else.137
 	fillh _Nil 0 1
 	pop_a 1
 	pop_b 2
@@ -5386,12 +5039,12 @@ else.144
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n250
+n229
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea250
+ea229
 .o 2 2 ii
-s250
+s229
 	pushI 1
 	push_b 1
 	addI
@@ -5441,14 +5094,14 @@ s14
 	jsr eqAC
 .o 0 1 b	
 	notB
-	jmp_false else.145
+	jmp_false else.138
 	push_a 6
 	buildB TRUE
 	update_a 1 8
 	updatepop_a 0 7
 .d 2 0
 	rtn
-else.145
+else.138
 	push_a 6
 	push_a 4
 	push_a 4
@@ -5500,11 +5153,11 @@ else.145
 	update_a 1 11
 	updatepop_a 0 10
 .d 7 0
-	jsr s157
+	jsr s148
 .o 1 1 b
 	push_b 0
 	notB
-	jmp_false else.146
+	jmp_false else.139
 	buildAC "failed to print constructor prefix"
 	updatepop_a 0 1
 	pop_b 1
@@ -5515,7 +5168,7 @@ else.145
 	repl_args 2 2
 .d 2 0
 	rtn
-else.146
+else.139
 	push_a 0
 	buildB TRUE
 	update_a 1 2
@@ -5558,14 +5211,14 @@ s13
 	jsr eqAC
 .o 0 1 b	
 	notB
-	jmp_false else.147
+	jmp_false else.140
 	push_a 6
 	buildB TRUE
 	update_a 1 8
 	updatepop_a 0 7
 .d 2 0
 	rtn
-else.147
+else.140
 	push_a 6
 	jsr_eval 0
 	push_a 6
@@ -5585,11 +5238,11 @@ else.147
 	update_a 1 8
 	updatepop_a 0 7
 .d 7 0
-	jsr s157
+	jsr s148
 .o 1 1 b
 	push_b 0
 	notB
-	jmp_false else.148
+	jmp_false else.141
 	buildAC "failed to print method prefix"
 	updatepop_a 0 1
 	pop_b 1
@@ -5600,7 +5253,7 @@ else.147
 	repl_args 2 2
 .d 2 0
 	rtn
-else.148
+else.141
 	push_a 0
 	buildB TRUE
 	update_a 1 2
@@ -5642,7 +5295,7 @@ s47
 	push_a 6
 	buildI 2
 	push_a 7
-	build _ 1 n202
+	build _ 1 n193
 	push_a 4
 	buildh _Nil 0
 	update_a 0 10
@@ -5654,7 +5307,7 @@ s47
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.149
+	jmp_false else.142
 	buildAC "failed to open file"
 	updatepop_a 0 8
 .d 1 0
@@ -5664,7 +5317,7 @@ s47
 	repl_args 2 2
 .d 2 0
 	rtn
-else.149
+else.142
 	push_arg 0 3 3
 	push_arg 1 3 2
 	push_a 7
@@ -5680,7 +5333,7 @@ else.149
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.150
+	jmp_false else.143
 	buildAC "failed to close file"
 	updatepop_a 0 1
 .d 1 0
@@ -5690,21 +5343,21 @@ else.149
 	repl_args 2 2
 .d 2 0
 	rtn
-else.150
+else.143
 	push_arg 0 2 2
 	buildB TRUE
 	update_a 1 2
 	updatepop_a 0 1
 .d 2 0
 	rtn
-.n 1 _ ea202
+.n 1 _ ea193
 .o 1 0
-n202
+n193
 	push_node _cycle_in_spine 1
 .o 2 0
-ea202
+ea193
 .o 2 0
-s202
+s193
 	buildAC ".vm"
 	push_a 1
 	update_a 1 2
@@ -5720,17 +5373,17 @@ s202
 .d 1 0
 	rtn
 .o 1 1 b
-s118
+s112
 	eqB_b TRUE 0
-	jmp_true case.151
-	jmp case.152
-case.151
+	jmp_true case.144
+	jmp case.145
+case.144
 	pop_a 1
 	pop_b 1
 	pushB TRUE
 .d 0 1 b
 	rtn
-case.152
+case.145
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -5749,17 +5402,17 @@ case.152
 .d 0 1 b
 	rtn
 .o 1 1 b
-s117
+s111
 	eqB_b TRUE 0
-	jmp_true case.153
-	jmp case.154
-case.153
+	jmp_true case.146
+	jmp case.147
+case.146
 	pop_a 1
 	pop_b 1
 	pushB TRUE
 .d 0 1 b
 	rtn
-case.154
+case.147
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -5928,13 +5581,13 @@ s87
 	updatepop_a 0 1
 	updatepop_b 0 1
 .d 1 1 i
-	jmp s116
+	jmp s110
 .o 1 1 i
-s116
+s110
 	eq_desc _Cons 2 0
-	jmp_true case.155
-	jmp case.156
-case.155
+	jmp_true case.148
+	jmp case.149
+case.148
 	repl_args 2 2
 	pop_a 1
 	push_a 0
@@ -5946,7 +5599,7 @@ case.155
 	updatepop_b 0 1
 .d 1 1 i
 	jmp s87
-case.156
+case.149
 	pop_a 1
 .d 0 1 i
 	rtn
@@ -5959,18 +5612,18 @@ s86
 	update_a 1 4
 	updatepop_a 0 3
 .d 3 0
-	jmp s115
+	jmp s109
 .o 3 0
-s115
+s109
 	eq_desc _Cons 2 0
-	jmp_true case.157
-	jmp case.158
-case.157
+	jmp_true case.150
+	jmp case.151
+case.150
 	repl_args 2 2
 	push_a 1
 	jsr_eval 0
 	push_a 4
-	build _ 1 n198
+	build _ 1 n189
 	push_a 2
 	jsr_eval 0
 	pushC_a 3
@@ -5992,18 +5645,18 @@ case.157
 	updatepop_a 0 4
 .d 3 0
 	jmp s86
-case.158
+case.151
 	updatepop_a 1 2
 .d 1 0
 	rtn
-.n 1 _ ea198
+.n 1 _ ea189
 .o 1 0
-n198
+n189
 	push_node _cycle_in_spine 1
 .o 2 0
-ea198
+ea189
 .o 2 0
-s198
+s189
 	pushI 1
 	push_a 0
 	jsr_eval 0
@@ -6021,7 +5674,7 @@ s84
 	push_b 2
 	ltI
 	notB
-	jmp_false else.159
+	jmp_false else.152
 	push_b 0
 	push_array 0
 	updatepop_a 0 1
@@ -6032,14 +5685,14 @@ s84
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n199
+	build_u _ 1 2 n190
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
 	pop_b 3
 .d 1 0
 	rtn
-else.159
+else.152
 	fillh _Nil 0 1
 	pop_a 1
 	pop_b 2
@@ -6047,12 +5700,12 @@ else.159
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n199
+n190
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea199
+ea190
 .o 2 2 ii
-s199
+s190
 	pushI 1
 	push_b 1
 	addI
@@ -6073,7 +5726,7 @@ s83
 	push_b 2
 	ltI
 	notB
-	jmp_false else.160
+	jmp_false else.153
 	push_b 0
 	push_array 0
 	updatepop_a 0 1
@@ -6084,14 +5737,14 @@ s83
 	push_a 0
 	push_b 2
 	push_b 2
-	build_u _ 1 2 n200
+	build_u _ 1 2 n191
 	buildC_b 0
 	fillh _Cons 2 4
 	pop_a 2
 	pop_b 3
 .d 1 0
 	rtn
-else.160
+else.153
 	fillh _Nil 0 1
 	pop_a 1
 	pop_b 2
@@ -6099,12 +5752,12 @@ else.160
 	rtn
 .nu 1 2 _ _
 .o 1 0
-n200
+n191
 	push_node_u _cycle_in_spine 1 2
 .o 2 2 ii
-ea200
+ea191
 .o 2 2 ii
-s200
+s191
 	pushI 1
 	push_b 1
 	addI
@@ -6122,9 +5775,9 @@ s200
 .o 1 1 i
 s53
 	eq_desc _Cons 2 0
-	jmp_true case.161
+	jmp_true case.154
 	jmp s53.1
-case.161
+case.154
 	repl_args 2 2
 	push_a 0
 	jsr_eval 0
@@ -6136,7 +5789,7 @@ case.161
 	update_b 0 1
 	pop_b 1
 	eqC
-	jmp_false else.162
+	jmp_false else.155
 	pushI 1
 	push_b 1
 	update_b 1 2
@@ -6145,7 +5798,7 @@ case.161
 	addI
 .d 0 1 i
 	rtn
-else.162
+else.155
 	pushI 1
 	push_b 1
 	addI
@@ -6210,7 +5863,7 @@ s48
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.163
+	jmp_false else.156
 	buildAC "failed to open file"
 	updatepop_a 0 8
 .d 1 0
@@ -6220,7 +5873,7 @@ s48
 	repl_args 2 2
 .d 2 0
 	rtn
-else.163
+else.156
 	push_arg 0 3 3
 	push_arg 1 3 2
 	push_a 7
@@ -6236,7 +5889,7 @@ else.163
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.164
+	jmp_false else.157
 	buildAC "failed to close file"
 	updatepop_a 0 1
 .d 1 0
@@ -6246,7 +5899,7 @@ else.163
 	repl_args 2 2
 .d 2 0
 	rtn
-else.164
+else.157
 	push_arg 0 2 2
 	buildB TRUE
 	update_a 1 2
@@ -6254,21 +5907,21 @@ else.164
 .d 2 0
 	rtn
 .o 8 0
-s144
+s135
 	eq_desc _Cons 2 4
-	jmp_true case.165
-	jmp s144.1
-case.165
+	jmp_true case.158
+	jmp s135.1
+case.158
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
 	pop_a 1
 	jsr_eval 1
 	eq_desc _Cons 2 1
-	jmp_true case.166
+	jmp_true case.159
 	pop_a 2
-	jmp s144.1
-case.166
+	jmp s135.1
+case.159
 	push_args 1 2 2
 	buildh _Nil 0
 	update_a 0 4
@@ -6287,7 +5940,7 @@ case.166
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.167
+	jmp_false else.160
 	push_a 1
 	build e_ParserToVM_dgetTokenValue 1 e_ParserToVM_ngetTokenValue
 	build_r e_StdFile_rFileSystem; 4 0 4 0
@@ -6309,7 +5962,7 @@ case.166
 	updatepop_a 0 11
 .d 2 1 b
 	rtn
-else.167
+else.160
 	push_a 1
 	build e_ParserToVM_dgetTokenValue 1 e_ParserToVM_ngetTokenValue
 	build_r e_StdFile_rFileSystem; 4 0 4 0
@@ -6347,50 +6000,50 @@ else.167
 	update_a 1 12
 	updatepop_a 0 11
 .d 8 0
-	jmp s144
-s144.1
+	jmp s135
+s135.1
 	pop_a 8
 	pushD m_ParserToVM
-	pushD x_144
+	pushD x_135
 .d 0 2 ii
 	jmp _match_error
-.string x_144 "parseAllClassVars"
+.string x_135 "parseAllClassVars"
 .o 7 0
-s145
+s136
 	eq_desc _Cons 2 4
-	jmp_true case.168
-	jmp s145.1
-case.168
+	jmp_true case.161
+	jmp s136.1
+case.161
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
 	pop_a 1
 	jsr_eval 1
 	eq_desc _Cons 2 1
-	jmp_true case.169
+	jmp_true case.162
 	pop_a 2
-	jmp s145.1
-case.169
+	jmp s136.1
+case.162
 	push_args 1 2 2
 	buildh _Nil 0
 	update_a 0 4
 	pop_a 1
 	jsr_eval 1
 	eq_desc _Cons 2 1
-	jmp_true case.170
+	jmp_true case.163
 	pop_a 4
-	jmp s145.1
-case.170
+	jmp s136.1
+case.163
 	push_args 1 2 2
 	buildh _Nil 0
 	update_a 0 4
 	pop_a 1
 	jsr_eval 1
 	eq_desc _Cons 2 1
-	jmp_true case.171
+	jmp_true case.164
 	pop_a 6
-	jmp s145.1
-case.171
+	jmp s136.1
+case.164
 	push_args 1 2 2
 	buildh _Nil 0
 	update_a 0 4
@@ -6408,7 +6061,7 @@ case.171
 	jsr eqAC
 .o 0 1 b	
 	notB
-	jmp_false else.172
+	jmp_false else.165
 	push_a 1
 	push_a 1
 	buildh _Cons 2
@@ -6428,7 +6081,7 @@ case.171
 	updatepop_a 0 15
 .d 2 1 b
 	rtn
-else.172
+else.165
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -6443,7 +6096,7 @@ else.172
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.173
+	jmp_false else.166
 	push_a 3
 	build e_ParserToVM_dgetTokenValue 1 e_ParserToVM_ngetTokenValue
 	push_a 2
@@ -6484,8 +6137,8 @@ else.172
 	update_a 1 15
 	updatepop_a 0 14
 .d 8 0
-	jmp s179
-else.173
+	jmp s170
+else.166
 	push_a 3
 	build e_ParserToVM_dgetTokenValue 1 e_ParserToVM_ngetTokenValue
 	push_a 2
@@ -6522,20 +6175,20 @@ else.173
 	update_a 1 15
 	updatepop_a 0 14
 .d 7 0
-	jmp s145
-s145.1
+	jmp s136
+s136.1
 	pop_a 7
 	pushD m_ParserToVM
-	pushD x_145
+	pushD x_136
 .d 0 2 ii
 	jmp _match_error
-.string x_145 "parseAllVars"
+.string x_136 "parseAllVars"
 .o 7 0
-s146
+s137
 	push_a 6
 	buildI 2
 	push_a 7
-	build _ 1 n245
+	build _ 1 n224
 	push_a 4
 	buildh _Nil 0
 	update_a 0 10
@@ -6547,7 +6200,7 @@ s146
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.174
+	jmp_false else.167
 	buildAC "failed to open file"
 	updatepop_a 0 8
 .d 1 0
@@ -6558,7 +6211,7 @@ s146
 	jsr_eval 1
 .d 2 0
 	rtn
-else.174
+else.167
 	push_arg 0 3 3
 	push_arg 1 3 2
 	push_a 7
@@ -6574,7 +6227,7 @@ else.174
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.175
+	jmp_false else.168
 	buildAC "failed to close file"
 	updatepop_a 0 1
 .d 1 0
@@ -6585,7 +6238,7 @@ else.174
 	jsr_eval 1
 .d 2 0
 	rtn
-else.175
+else.168
 	push_arg 0 2 2
 	jsr_eval 0
 	buildB TRUE
@@ -6593,14 +6246,14 @@ else.175
 	updatepop_a 0 1
 .d 2 0
 	rtn
-.n 1 _ ea245
+.n 1 _ ea224
 .o 1 0
-n245
+n224
 	push_node _cycle_in_spine 1
 .o 2 0
-ea245
+ea224
 .o 2 0
-s245
+s224
 	buildAC ".vm"
 	push_a 1
 	update_a 1 2
@@ -6616,33 +6269,33 @@ s245
 .d 1 0
 	rtn
 .o 7 0
-s147
+s138
 	eq_desc _Cons 2 4
-	jmp_true case.176
-	jmp s147.1
-case.176
+	jmp_true case.169
+	jmp s138.1
+case.169
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
 	pop_a 1
 	jsr_eval 1
 	eq_desc _Cons 2 1
-	jmp_true case.177
-	jmp case.178
-case.177
+	jmp_true case.170
+	jmp case.171
+case.170
 	push_args 1 2 2
 	jsr_eval 0
 	eqC_a ' ' 0
-	jmp_true case.179
+	jmp_true case.172
 	pop_a 2
-	jmp case.178
-case.179
+	jmp case.171
+case.172
 	jsr_eval 1
 	eq_desc _Nil 0 1
-	jmp_true case.180
+	jmp_true case.173
 	pop_a 2
-	jmp case.178
-case.180
+	jmp case.171
+case.173
 	push_a 2
 	jsr_eval 0
 	pushC_a 3
@@ -6676,11 +6329,11 @@ case.180
 	update_a 0 5
 	pop_a 1
 .d 7 0
-	jsr s157
+	jsr s148
 .o 1 1 b
 	push_b 0
 	notB
-	jmp_false else.181
+	jmp_false else.174
 	buildAC "failed to append char to string"
 	updatepop_a 0 10
 	pop_b 1
@@ -6694,14 +6347,14 @@ case.180
 	pop_a 1
 .d 1 1 b
 	rtn
-else.181
+else.174
 	push_a 0
 	pushB TRUE
 	updatepop_a 0 10
 	updatepop_b 0 1
 .d 1 1 b
 	rtn
-case.178
+case.171
 	push_a 0
 	jsr_eval 0
 	pushC_a 1
@@ -6738,11 +6391,11 @@ case.178
 	update_a 0 15
 	pop_a 1
 .d 7 0
-	jsr s157
+	jsr s148
 .o 1 1 b
 	push_b 0
 	notB
-	jmp_false else.182
+	jmp_false else.175
 	buildAC "failed to append char to string"
 	updatepop_a 0 9
 	pop_b 1
@@ -6756,7 +6409,7 @@ case.178
 	pop_a 1
 .d 1 1 b
 	rtn
-else.182
+else.175
 	push_a 0
 	jsr_eval 0
 	push_a 8
@@ -6774,20 +6427,20 @@ else.182
 	updatepop_a 0 9
 	pop_b 1
 .d 7 0
-	jmp s147
-s147.1
+	jmp s138
+s138.1
 	pop_a 7
 	pushD m_ParserToVM
-	pushD x_147
+	pushD x_138
 .d 0 2 ii
 	jmp _match_error
-.string x_147 "parseAppendChar"
+.string x_138 "parseAppendChar"
 .o 7 0
-s148
+s139
 	eq_desc _Cons 2 4
-	jmp_true case.183
-	jmp s148.1
-case.183
+	jmp_true case.176
+	jmp s139.1
+case.176
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
@@ -6806,10 +6459,10 @@ case.183
 .o 0 1 b	
 	push_a 0
 .d 1 1 b
-	jsr s136
+	jsr s127
 .o 0 1 b
 	notB
-	jmp_false else.184
+	jmp_false else.177
 	push_a 1
 	push_a 1
 	buildh _Cons 2
@@ -6823,7 +6476,7 @@ case.183
 	updatepop_a 0 9
 .d 2 1 b
 	rtn
-else.184
+else.177
 	push_a 1
 	jsr_eval 0
 	push_a 9
@@ -6849,11 +6502,11 @@ else.184
 	update_a 0 15
 	pop_a 1
 .d 7 0
-	jsr s150
+	jsr s141
 .o 2 1 b
 	push_b 0
 	notB
-	jmp_false else.185
+	jmp_false else.178
 	buildAC "failed expression"
 	updatepop_a 0 10
 	pop_b 1
@@ -6867,7 +6520,7 @@ else.184
 	pop_a 1
 .d 2 1 b
 	rtn
-else.185
+else.178
 	build_r e_StdFile_rFileSystem; 4 0 3 0
 	push_a 2
 	push_a 10
@@ -6878,7 +6531,7 @@ else.185
 	update_a 1 2
 	update_a 0 1
 	pop_a 1
-	build _ 4 n204
+	build _ 4 n195
 	build d_S.2 -1 n_S.2
 	push_a 1
 	jsr_eval 0
@@ -6900,22 +6553,22 @@ else.185
 	updatepop_a 0 10
 	pop_b 1
 .d 7 0
-	jmp s148
-s148.1
+	jmp s139
+s139.1
 	pop_a 7
 	pushD m_ParserToVM
-	pushD x_148
+	pushD x_139
 .d 0 2 ii
 	jmp _match_error
-.string x_148 "parseOpTerm"
-.n 4 _ ea204
+.string x_139 "parseOpTerm"
+.n 4 _ ea195
 .o 1 0
-n204
+n195
 	push_node _cycle_in_spine 4
 .o 5 0
-ea204
+ea195
 .o 5 0
-s204
+s195
 	push_a 3
 	jsr_eval 0
 	push_a 3
@@ -6960,19 +6613,19 @@ s204
 .d 1 0
 	rtn
 .o 8 0
-s149
+s140
 	eq_desc _Cons 2 4
-	jmp_true case.186
-	jmp case.187
-case.186
+	jmp_true case.179
+	jmp case.180
+case.179
 	push_args 4 2 2
 	jsr_eval 0
 	push_array 0
 	eqAC_a "<symbol> ) </symbol>\n"
-	jmp_true case.188
+	jmp_true case.181
 	pop_a 2
-	jmp case.187
-case.188
+	jmp case.180
+case.181
 	push_a 9
 	push_a 2
 	push_a 9
@@ -6982,7 +6635,7 @@ case.188
 	updatepop_a 0 10
 .d 3 1 b
 	rtn
-case.187
+case.180
 	push_a 7
 	push_a 7
 	push_a 6
@@ -6995,11 +6648,11 @@ case.187
 	update_a 0 15
 	pop_a 1
 .d 7 0
-	jsr s156
+	jsr s147
 .o 2 1 b
 	push_b 0
 	notB
-	jmp_false else.189
+	jmp_false else.182
 	buildAC "failed to parse expression in push argument"
 	updatepop_a 0 10
 	pop_b 1
@@ -7013,7 +6666,7 @@ case.187
 	pop_a 1
 .d 3 1 b
 	rtn
-else.189
+else.182
 	push_a 0
 	jsr_eval 0
 	eq_desc _Cons 2 0
@@ -7032,7 +6685,7 @@ else.189
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.190
+	jmp_false else.183
 	buildI 1
 	push_a 10
 	build _ 2 e_StdInt_n+;6
@@ -7060,8 +6713,8 @@ else.189
 	update_a 1 13
 	updatepop_a 0 12
 .d 8 0
-	jmp s149
-else.190
+	jmp s140
+else.183
 	buildI 1
 	push_a 10
 	build _ 2 e_StdInt_n+;6
@@ -7091,13 +6744,13 @@ else.190
 	update_a 1 13
 	updatepop_a 0 12
 .d 8 0
-	jmp s149
+	jmp s140
 .o 7 0
-s150
+s141
 	eq_desc _Cons 2 4
-	jmp_true case.191
-	jmp s150.1
-case.191
+	jmp_true case.184
+	jmp s141.1
+case.184
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
@@ -7108,6 +6761,237 @@ case.191
 	jsr s52
 .o 1 0
 	buildAC "<integerConstant>"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_false else.185
+	push_a 1
+	push_a 1
+	buildh _Cons 2
+	push_a 9
+	push_a 9
+	push_a 8
+	push_a 8
+	push_a 8
+	push_a 8
+	push_a 6
+	update_a 6 7
+	update_a 5 6
+	update_a 0 5
+	pop_a 1
+	update_a 6 15
+	update_a 5 14
+	update_a 4 13
+	update_a 3 12
+	update_a 2 11
+	update_a 1 10
+	updatepop_a 0 9
+.d 7 0
+	jmp s169
+else.185
+	pushI 16
+	push_a 0
+.d 1 1 i
+	jsr s52
+.o 1 0
+	buildAC "<stringConstant>"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_false else.186
+	push_a 8
+	jsr_eval 0
+	push_a 8
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	push_a 3
+	push_a 3
+	buildh _Cons 2
+	push_a 8
+	push_a 8
+	push_a 8
+	push_a 8
+	update_a 6 15
+	update_a 5 14
+	update_a 4 13
+	update_a 3 12
+	update_a 2 11
+	update_a 1 10
+	updatepop_a 0 9
+.d 7 0
+	jmp s168
+else.186
+	pushI 9
+	push_a 0
+.d 1 1 i
+	jsr s52
+.o 1 0
+	buildAC "<keyword>"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_false else.187
+	push_a 1
+	push_a 1
+	buildh _Cons 2
+	push_a 9
+	push_a 9
+	push_a 8
+	push_a 8
+	push_a 8
+	push_a 8
+	push_a 6
+	update_a 6 7
+	update_a 5 6
+	update_a 0 5
+	pop_a 1
+	update_a 6 15
+	update_a 5 14
+	update_a 4 13
+	update_a 3 12
+	update_a 2 11
+	update_a 1 10
+	updatepop_a 0 9
+.d 7 0
+	jmp s167
+else.187
+	push_a 1
+	jsr_eval 0
+	pushI 0
+.d 1 1 i
+	jsr e_StdList_s!!
+.o 1 0
+	push_array 0
+	updatepop_a 0 1
+	buildAC "<symbol> [ </symbol>\n"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_false else.188
+	push_a 7
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	push_a 2
+	push_a 2
+	buildh _Cons 2
+	push_a 10
+	push_a 8
+	push_a 8
+	push_a 8
+	push_a 8
+	push_a 6
+	update_a 5 7
+	update_a 6 5
+	update_a 0 6
+	pop_a 1
+	update_a 6 15
+	update_a 5 14
+	update_a 4 13
+	update_a 3 12
+	update_a 2 11
+	update_a 1 10
+	updatepop_a 0 9
+.d 7 0
+	jmp s166
+else.188
+	push_a 0
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	buildAC "<symbol> - </symbol>\n"
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_true then.189
+	buildAC "<symbol> ~ </symbol>\n"
+	push_array 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_false else.189
+then.189
+	push_a 1
+	push_a 1
+	buildh _Cons 2
+	push_a 9
+	push_a 9
+	push_a 8
+	push_a 8
+	push_a 8
+	push_a 8
+	push_a 6
+	update_a 6 7
+	update_a 5 6
+	update_a 0 5
+	pop_a 1
+	update_a 6 15
+	update_a 5 14
+	update_a 4 13
+	update_a 3 12
+	update_a 2 11
+	update_a 1 10
+	updatepop_a 0 9
+.d 7 0
+	jmp s165
+else.189
+	buildAC "<symbol> ( </symbol>\n"
+	push_array 1
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_false else.191
+	push_a 1
+	push_a 1
+	buildh _Cons 2
+	push_a 9
+	push_a 9
+	push_a 8
+	push_a 8
+	push_a 8
+	push_a 8
+	push_a 6
+	update_a 6 7
+	update_a 5 6
+	update_a 0 5
+	pop_a 1
+	update_a 6 15
+	update_a 5 14
+	update_a 4 13
+	update_a 3 12
+	update_a 2 11
+	update_a 1 10
+	updatepop_a 0 9
+.d 7 0
+	jmp s164
+else.191
+	pushI 12
+	push_a 0
+.d 1 1 i
+	jsr s52
+.o 1 0
+	buildAC "<identifier>"
 	push_a 1
 	update_a 1 2
 	update_a 0 1
@@ -7138,239 +7022,8 @@ case.191
 	update_a 1 10
 	updatepop_a 0 9
 .d 7 0
-	jmp s178
+	jmp s163
 else.192
-	pushI 16
-	push_a 0
-.d 1 1 i
-	jsr s52
-.o 1 0
-	buildAC "<stringConstant>"
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-.d 2 0
-	jsr eqAC
-.o 0 1 b	
-	jmp_false else.193
-	push_a 8
-	jsr_eval 0
-	push_a 8
-	jsr_eval 0
-	push_array 0
-	updatepop_a 0 1
-	push_a 3
-	push_a 3
-	buildh _Cons 2
-	push_a 8
-	push_a 8
-	push_a 8
-	push_a 8
-	update_a 6 15
-	update_a 5 14
-	update_a 4 13
-	update_a 3 12
-	update_a 2 11
-	update_a 1 10
-	updatepop_a 0 9
-.d 7 0
-	jmp s177
-else.193
-	pushI 9
-	push_a 0
-.d 1 1 i
-	jsr s52
-.o 1 0
-	buildAC "<keyword>"
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-.d 2 0
-	jsr eqAC
-.o 0 1 b	
-	jmp_false else.194
-	push_a 1
-	push_a 1
-	buildh _Cons 2
-	push_a 9
-	push_a 9
-	push_a 8
-	push_a 8
-	push_a 8
-	push_a 8
-	push_a 6
-	update_a 6 7
-	update_a 5 6
-	update_a 0 5
-	pop_a 1
-	update_a 6 15
-	update_a 5 14
-	update_a 4 13
-	update_a 3 12
-	update_a 2 11
-	update_a 1 10
-	updatepop_a 0 9
-.d 7 0
-	jmp s176
-else.194
-	push_a 1
-	jsr_eval 0
-	pushI 0
-.d 1 1 i
-	jsr e_StdList_s!!
-.o 1 0
-	push_array 0
-	updatepop_a 0 1
-	buildAC "<symbol> [ </symbol>\n"
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-.d 2 0
-	jsr eqAC
-.o 0 1 b	
-	jmp_false else.195
-	push_a 7
-	jsr_eval 0
-	push_array 0
-	updatepop_a 0 1
-	push_a 2
-	push_a 2
-	buildh _Cons 2
-	push_a 10
-	push_a 8
-	push_a 8
-	push_a 8
-	push_a 8
-	push_a 6
-	update_a 5 7
-	update_a 6 5
-	update_a 0 6
-	pop_a 1
-	update_a 6 15
-	update_a 5 14
-	update_a 4 13
-	update_a 3 12
-	update_a 2 11
-	update_a 1 10
-	updatepop_a 0 9
-.d 7 0
-	jmp s175
-else.195
-	push_a 0
-	jsr_eval 0
-	push_array 0
-	updatepop_a 0 1
-	buildAC "<symbol> - </symbol>\n"
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-.d 2 0
-	jsr eqAC
-.o 0 1 b	
-	jmp_true then.196
-	buildAC "<symbol> ~ </symbol>\n"
-	push_array 1
-.d 2 0
-	jsr eqAC
-.o 0 1 b	
-	jmp_false else.196
-then.196
-	push_a 1
-	push_a 1
-	buildh _Cons 2
-	push_a 9
-	push_a 9
-	push_a 8
-	push_a 8
-	push_a 8
-	push_a 8
-	push_a 6
-	update_a 6 7
-	update_a 5 6
-	update_a 0 5
-	pop_a 1
-	update_a 6 15
-	update_a 5 14
-	update_a 4 13
-	update_a 3 12
-	update_a 2 11
-	update_a 1 10
-	updatepop_a 0 9
-.d 7 0
-	jmp s174
-else.196
-	buildAC "<symbol> ( </symbol>\n"
-	push_array 1
-.d 2 0
-	jsr eqAC
-.o 0 1 b	
-	jmp_false else.198
-	push_a 1
-	push_a 1
-	buildh _Cons 2
-	push_a 9
-	push_a 9
-	push_a 8
-	push_a 8
-	push_a 8
-	push_a 8
-	push_a 6
-	update_a 6 7
-	update_a 5 6
-	update_a 0 5
-	pop_a 1
-	update_a 6 15
-	update_a 5 14
-	update_a 4 13
-	update_a 3 12
-	update_a 2 11
-	update_a 1 10
-	updatepop_a 0 9
-.d 7 0
-	jmp s173
-else.198
-	pushI 12
-	push_a 0
-.d 1 1 i
-	jsr s52
-.o 1 0
-	buildAC "<identifier>"
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-.d 2 0
-	jsr eqAC
-.o 0 1 b	
-	jmp_false else.199
-	push_a 1
-	push_a 1
-	buildh _Cons 2
-	push_a 9
-	push_a 9
-	push_a 8
-	push_a 8
-	push_a 8
-	push_a 8
-	push_a 6
-	update_a 6 7
-	update_a 5 6
-	update_a 0 5
-	pop_a 1
-	update_a 6 15
-	update_a 5 14
-	update_a 4 13
-	update_a 3 12
-	update_a 2 11
-	update_a 1 10
-	updatepop_a 0 9
-.d 7 0
-	jmp s172
-else.199
 	pushI 1
 	push_a 1
 .d 1 1 i
@@ -7414,29 +7067,29 @@ else.199
 	pop_a 1
 .d 2 1 b
 	rtn
-s150.1
+s141.1
 	pop_a 7
 	pushD m_ParserToVM
-	pushD x_150
+	pushD x_141
 .d 0 2 ii
 	jmp _match_error
-.string x_150 "parseTerm"
+.string x_141 "parseTerm"
 .o 7 0
-s151
+s142
 	eq_desc _Cons 2 4
-	jmp_true case.200
-	jmp s151.1
-case.200
+	jmp_true case.193
+	jmp s142.1
+case.193
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
 	pop_a 1
 	jsr_eval 1
 	eq_desc _Cons 2 1
-	jmp_true case.201
+	jmp_true case.194
 	pop_a 2
-	jmp s151.1
-case.201
+	jmp s142.1
+case.194
 	push_args 1 2 2
 	buildh _Nil 0
 	update_a 0 4
@@ -7453,7 +7106,7 @@ case.201
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.202
+	jmp_false else.195
 	push_a 1
 	push_a 1
 	buildh _Cons 2
@@ -7478,8 +7131,8 @@ case.201
 	update_a 1 12
 	updatepop_a 0 11
 .d 7 0
-	jmp s171
-else.202
+	jmp s162
+else.195
 	build_r e_StdFile_rFileSystem; 4 0 4 0
 	push_a 11
 	push_a 11
@@ -7519,11 +7172,11 @@ else.202
 	update_a 0 16
 	pop_a 1
 .d 8 0
-	jsr s149
+	jsr s140
 .o 3 1 b
 	push_b 0
 	notB
-	jmp_false else.203
+	jmp_false else.196
 	buildAC "failed"
 	updatepop_a 0 11
 	pop_b 1
@@ -7537,7 +7190,7 @@ else.202
 	pop_a 1
 .d 2 1 b
 	rtn
-else.203
+else.196
 	build_r e_StdFile_rFileSystem; 4 0 4 0
 	push_a 3
 	push_a 2
@@ -7550,7 +7203,7 @@ else.203
 	update_a 1 2
 	update_a 0 1
 	pop_a 1
-	build _ 5 n205
+	build _ 5 n196
 	build d_S.2 -1 n_S.2
 	push_a 2
 	pushB TRUE
@@ -7559,21 +7212,21 @@ else.203
 	updatepop_b 0 1
 .d 2 1 b
 	rtn
-s151.1
+s142.1
 	pop_a 7
 	pushD m_ParserToVM
-	pushD x_151
+	pushD x_142
 .d 0 2 ii
 	jmp _match_error
-.string x_151 "parseSubroutineCall"
-.n 5 _ ea205
+.string x_142 "parseSubroutineCall"
+.n 5 _ ea196
 .o 1 0
-n205
+n196
 	push_node _cycle_in_spine 5
 .o 6 0
-ea205
+ea196
 .o 6 0
-s205
+s196
 	push_a 4
 	jsr_eval 0
 	push_a 2
@@ -7645,11 +7298,11 @@ s205
 .d 1 0
 	rtn
 .o 7 0
-s152
+s143
 	eq_desc _Cons 2 4
-	jmp_true case.204
-	jmp s152.1
-case.204
+	jmp_true case.197
+	jmp s143.1
+case.197
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
@@ -7668,10 +7321,10 @@ case.204
 .o 0 1 b	
 	push_a 0
 .d 1 1 b
-	jsr s138
+	jsr s129
 .o 0 1 b
 	notB
-	jmp_false else.205
+	jmp_false else.198
 	push_a 1
 	push_a 1
 	buildh _Cons 2
@@ -7685,7 +7338,7 @@ case.204
 	updatepop_a 0 9
 .d 2 1 b
 	rtn
-else.205
+else.198
 	push_a 1
 	push_a 1
 	buildh _Cons 2
@@ -7711,11 +7364,11 @@ else.205
 	update_a 0 14
 	pop_a 1
 .d 7 0
-	jsr s153
+	jsr s144
 .o 2 1 b
 	push_b 0
 	notB
-	jmp_false else.206
+	jmp_false else.199
 	buildAC "error in let statement"
 	updatepop_a 0 9
 	pop_b 1
@@ -7729,7 +7382,7 @@ else.205
 	pop_a 1
 .d 2 1 b
 	rtn
-else.206
+else.199
 	push_a 0
 	jsr_eval 0
 	push_a 2
@@ -7752,40 +7405,40 @@ else.206
 	updatepop_a 0 9
 	pop_b 1
 .d 7 0
-	jmp s152
-s152.1
+	jmp s143
+s143.1
 	pop_a 7
 	pushD m_ParserToVM
-	pushD x_152
+	pushD x_143
 .d 0 2 ii
 	jmp _match_error
-.string x_152 "parseStatement"
+.string x_143 "parseStatement"
 .o 7 0
-s153
+s144
 	eq_desc _Cons 2 4
-	jmp_true case.207
-	jmp s153.1
-case.207
+	jmp_true case.200
+	jmp s144.1
+case.200
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
 	pop_a 1
 	jsr_eval 1
 	eq_desc _Cons 2 1
-	jmp_true case.208
+	jmp_true case.201
 	pop_a 2
-	jmp s153.1
-case.208
+	jmp s144.1
+case.201
 	push_args 1 2 2
 	buildh _Nil 0
 	update_a 0 4
 	pop_a 1
 	jsr_eval 1
 	eq_desc _Cons 2 1
-	jmp_true case.209
+	jmp_true case.202
 	pop_a 4
-	jmp s153.1
-case.209
+	jmp s144.1
+case.202
 	push_args 1 2 2
 	buildh _Nil 0
 	update_a 0 4
@@ -7803,7 +7456,7 @@ case.209
 	jsr eqAC
 .o 0 1 b	
 	notB
-	jmp_false else.210
+	jmp_false else.203
 	push_a 1
 	push_a 1
 	buildh _Cons 2
@@ -7830,8 +7483,8 @@ case.209
 	update_a 1 14
 	updatepop_a 0 13
 .d 7 0
-	jmp s170
-else.210
+	jmp s161
+else.203
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -7844,7 +7497,7 @@ else.210
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.211
+	jmp_false else.204
 	push_a 11
 	jsr_eval 0
 	push_array 0
@@ -7872,8 +7525,8 @@ else.210
 	update_a 1 14
 	updatepop_a 0 13
 .d 7 0
-	jmp s169
-else.211
+	jmp s160
+else.204
 	push_a 1
 	jsr_eval 0
 	push_a 13
@@ -7899,11 +7552,11 @@ else.211
 	update_a 0 15
 	pop_a 1
 .d 7 0
-	jsr s156
+	jsr s147
 .o 2 1 b
 	push_b 0
 	notB
-	jmp_false else.212
+	jmp_false else.205
 	buildAC "failed to gen code for expression"
 	updatepop_a 0 10
 	pop_b 1
@@ -7917,7 +7570,7 @@ else.211
 	pop_a 1
 .d 2 1 b
 	rtn
-else.212
+else.205
 	push_a 2
 	build e_ParserToVM_dgetTokenValue 1 e_ParserToVM_ngetTokenValue
 	push_a 2
@@ -7945,7 +7598,7 @@ else.212
 	pushB_a 1
 	pop_a 1
 	notB
-	jmp_false else.213
+	jmp_false else.206
 	buildAC "failed to get symbol record fields"
 	updatepop_a 0 13
 .d 1 0
@@ -7958,7 +7611,7 @@ else.212
 	pop_a 1
 .d 2 1 b
 	rtn
-else.213
+else.206
 	push_a 4
 	jsr_eval 0
 	push_a 12
@@ -8013,11 +7666,11 @@ else.213
 	update_a 1 13
 	updatepop_a 0 12
 .d 7 0
-	jsr s157
+	jsr s148
 .o 1 1 b
 	push_b 0
 	notB
-	jmp_false else.214
+	jmp_false else.207
 	buildAC "failed to write vm code to file"
 	updatepop_a 0 2
 	pop_b 1
@@ -8031,9 +7684,9 @@ else.213
 	pop_a 1
 .d 2 1 b
 	rtn
-else.214
+else.207
 	push_a 1
-	build _ 1 n268
+	build _ 1 n247
 	build d_S.2 -1 n_S.2
 	push_a 1
 	pushB TRUE
@@ -8046,41 +7699,41 @@ else.214
 	updatepop_b 0 1
 .d 2 1 b
 	rtn
-s153.1
+s144.1
 	pop_a 7
 	pushD m_ParserToVM
-	pushD x_153
+	pushD x_144
 .d 0 2 ii
 	jmp _match_error
-.string x_153 "parseLetStatement"
-.n 1 _ ea268
+.string x_144 "parseLetStatement"
+.n 1 _ ea247
 .o 1 0
-n268
+n247
 	push_node _cycle_in_spine 1
 .o 2 0
-ea268
+ea247
 	jsr_eval 0
 .o 2 0
-s268
+s247
 	eq_desc _Cons 2 0
-	jmp_true case.215
-	jmp s268.1
-case.215
+	jmp_true case.208
+	jmp s247.1
+case.208
 	push_args 0 2 2
 	pop_a 2
 	fill_a 0 1
 	pop_a 1
 .d 1 0
 	rtn
-s268.1
+s247.1
 	pop_a 2
 	pushD m_ParserToVM
-	pushD x_268
+	pushD x_247
 .d 0 2 ii
 	jmp _match_error
-.string x_268 "_match3"
+.string x_247 "_match3"
 .o 5 0
-s154
+s145
 	push_a 4
 	buildI 0
 	push_a 3
@@ -8099,7 +7752,7 @@ s154
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.216
+	jmp_false else.209
 	buildAC ""
 	updatepop_a 0 6
 .d 1 0
@@ -8114,7 +7767,7 @@ s154
 	pop_a 1
 .d 2 1 i
 	rtn
-else.216
+else.209
 	push_arg 0 3 2
 	jsr_eval 0
 	pushF_a 0
@@ -8164,11 +7817,11 @@ else.216
 	update_a 1 6
 	updatepop_a 0 5
 .d 7 0
-	jsr s162
+	jsr s153
 .o 1 1 b
 	push_b 0
 	notB
-	jmp_false else.217
+	jmp_false else.210
 	buildAC "failed to increase if counter"
 	updatepop_a 0 1
 	pop_b 4
@@ -8184,7 +7837,7 @@ else.216
 	pop_a 1
 .d 2 1 i
 	rtn
-else.217
+else.210
 	push_a 0
 	jsr_eval 0
 	push_b 1
@@ -8195,7 +7848,7 @@ else.217
 .d 2 1 i
 	rtn
 .o 5 0
-s155
+s146
 	push_a 4
 	buildI 0
 	push_a 3
@@ -8214,7 +7867,7 @@ s155
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.218
+	jmp_false else.211
 	buildAC ""
 	updatepop_a 0 6
 .d 1 0
@@ -8229,7 +7882,7 @@ s155
 	pop_a 1
 .d 2 1 i
 	rtn
-else.218
+else.211
 	push_arg 0 3 2
 	jsr_eval 0
 	pushF_a 0
@@ -8279,11 +7932,11 @@ else.218
 	update_a 1 6
 	updatepop_a 0 5
 .d 7 0
-	jsr s162
+	jsr s153
 .o 1 1 b
 	push_b 0
 	notB
-	jmp_false else.219
+	jmp_false else.212
 	buildAC "failed to increase if counter"
 	updatepop_a 0 1
 	pop_b 4
@@ -8299,7 +7952,7 @@ else.218
 	pop_a 1
 .d 2 1 i
 	rtn
-else.219
+else.212
 	push_a 0
 	jsr_eval 0
 	push_b 1
@@ -8310,11 +7963,11 @@ else.219
 .d 2 1 i
 	rtn
 .o 7 0
-s156
+s147
 	eq_desc _Cons 2 4
-	jmp_true case.220
-	jmp s156.1
-case.220
+	jmp_true case.213
+	jmp s147.1
+case.213
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
@@ -8331,7 +7984,7 @@ case.220
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.221
+	jmp_false else.214
 	push_a 1
 	push_a 1
 	buildh _Cons 2
@@ -8345,7 +7998,7 @@ case.220
 	updatepop_a 0 9
 .d 2 1 b
 	rtn
-else.221
+else.214
 	push_a 1
 	push_a 1
 	buildh _Cons 2
@@ -8371,11 +8024,11 @@ else.221
 	update_a 0 14
 	pop_a 1
 .d 7 0
-	jsr s150
+	jsr s141
 .o 2 1 b
 	push_b 0
 	notB
-	jmp_false else.222
+	jmp_false else.215
 	buildAC "failed to generate code for term"
 	updatepop_a 0 9
 	pop_b 1
@@ -8389,9 +8042,9 @@ else.221
 	pop_a 1
 .d 2 1 b
 	rtn
-else.222
+else.215
 	push_a 0
-	build _ 1 n269
+	build _ 1 n248
 	push_a 0
 	build d_S.2 -1 n_S.2
 	push_a 1
@@ -8417,11 +8070,11 @@ else.222
 	update_a 1 11
 	updatepop_a 0 10
 .d 7 0
-	jsr s148
+	jsr s139
 .o 2 1 b
 	push_b 0
 	notB
-	jmp_false else.223
+	jmp_false else.216
 	buildAC "failed expression"
 	updatepop_a 0 2
 	pop_b 1
@@ -8435,7 +8088,7 @@ else.222
 	pop_a 1
 .d 2 1 b
 	rtn
-else.223
+else.216
 	push_a 1
 	push_a 1
 	pushB TRUE
@@ -8444,45 +8097,45 @@ else.223
 	updatepop_b 0 1
 .d 2 1 b
 	rtn
-s156.1
+s147.1
 	pop_a 7
 	pushD m_ParserToVM
-	pushD x_156
+	pushD x_147
 .d 0 2 ii
 	jmp _match_error
-.string x_156 "parseExpression"
-.n 1 _ ea269
+.string x_147 "parseExpression"
+.n 1 _ ea248
 .o 1 0
-n269
+n248
 	push_node _cycle_in_spine 1
 .o 2 0
-ea269
+ea248
 	jsr_eval 0
 .o 2 0
-s269
+s248
 	eq_desc _Cons 2 0
-	jmp_true case.224
-	jmp s269.1
-case.224
+	jmp_true case.217
+	jmp s248.1
+case.217
 	push_args 0 2 2
 	pop_a 2
 	fill_a 0 1
 	pop_a 1
 .d 1 0
 	rtn
-s269.1
+s248.1
 	pop_a 2
 	pushD m_ParserToVM
-	pushD x_269
+	pushD x_248
 .d 0 2 ii
 	jmp _match_error
-.string x_269 "_match4"
+.string x_248 "_match4"
 .o 7 0
-s157
+s148
 	push_a 6
 	buildI 2
 	push_a 7
-	build _ 1 n203
+	build _ 1 n194
 	push_a 4
 	buildh _Nil 0
 	update_a 0 10
@@ -8494,7 +8147,7 @@ s157
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.225
+	jmp_false else.218
 	buildAC "failed to open file"
 	updatepop_a 0 8
 .d 1 0
@@ -8507,7 +8160,7 @@ s157
 	pop_a 1
 .d 1 1 b
 	rtn
-else.225
+else.218
 	push_arg 0 3 3
 	push_arg 1 3 2
 	push_a 7
@@ -8523,7 +8176,7 @@ else.225
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.226
+	jmp_false else.219
 	buildAC "failed to close file"
 	updatepop_a 0 1
 .d 1 0
@@ -8536,20 +8189,20 @@ else.225
 	pop_a 1
 .d 1 1 b
 	rtn
-else.226
+else.219
 	push_arg 0 2 2
 	pushB TRUE
 	updatepop_a 0 1
 .d 1 1 b
 	rtn
-.n 1 _ ea203
+.n 1 _ ea194
 .o 1 0
-n203
+n194
 	push_node _cycle_in_spine 1
 .o 2 0
-ea203
+ea194
 .o 2 0
-s203
+s194
 	buildAC ".vm"
 	push_a 1
 	update_a 1 2
@@ -8565,31 +8218,31 @@ s203
 .d 1 0
 	rtn
 .o 7 0
-s158
+s149
 	eq_desc _Cons 2 4
-	jmp_true case.227
-	jmp s158.1
-case.227
+	jmp_true case.220
+	jmp s149.1
+case.220
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
 	pop_a 1
 	jsr_eval 1
 	eq_desc _Cons 2 1
-	jmp_true case.228
+	jmp_true case.221
 	pop_a 2
-	jmp s158.1
-case.228
+	jmp s149.1
+case.221
 	push_args 1 2 2
 	buildh _Nil 0
 	update_a 0 4
 	pop_a 1
 	jsr_eval 1
 	eq_desc _Cons 2 1
-	jmp_true case.229
+	jmp_true case.222
 	pop_a 4
-	jmp s158.1
-case.229
+	jmp s149.1
+case.222
 	push_args 1 2 2
 	buildh _Nil 0
 	update_a 0 4
@@ -8632,11 +8285,11 @@ case.229
 	update_a 1 14
 	updatepop_a 0 13
 .d 7 0
-	jsr s145
+	jsr s136
 .o 2 1 b
 	push_b 0
 	notB
-	jmp_false else.230
+	jmp_false else.223
 	buildAC "failed vardec"
 	updatepop_a 0 2
 	pop_b 1
@@ -8650,7 +8303,7 @@ case.229
 	pop_a 1
 .d 2 1 b
 	rtn
-else.230
+else.223
 	push_a 1
 	push_a 1
 	pushB TRUE
@@ -8659,19 +8312,19 @@ else.230
 	updatepop_b 0 1
 .d 2 1 b
 	rtn
-s158.1
+s149.1
 	pop_a 7
 	pushD m_ParserToVM
-	pushD x_158
+	pushD x_149
 .d 0 2 ii
 	jmp _match_error
-.string x_158 "parseVarDec"
+.string x_149 "parseVarDec"
 .o 7 0
-s159
+s150
 	eq_desc _Cons 2 4
-	jmp_true case.231
-	jmp s159.1
-case.231
+	jmp_true case.224
+	jmp s150.1
+case.224
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
@@ -8690,10 +8343,10 @@ case.231
 .o 0 1 b	
 	push_a 0
 .d 1 1 b
-	jsr s137
+	jsr s128
 .o 0 1 b
 	notB
-	jmp_false else.232
+	jmp_false else.225
 	push_a 1
 	push_a 1
 	buildh _Cons 2
@@ -8707,7 +8360,7 @@ case.231
 	updatepop_a 0 9
 .d 2 1 b
 	rtn
-else.232
+else.225
 	push_a 1
 	push_a 1
 	buildh _Cons 2
@@ -8733,11 +8386,11 @@ else.232
 	update_a 0 14
 	pop_a 1
 .d 7 0
-	jsr s152
+	jsr s143
 .o 2 1 b
 	push_b 0
 	notB
-	jmp_false else.233
+	jmp_false else.226
 	buildAC "failed statments"
 	updatepop_a 0 9
 	pop_b 1
@@ -8751,7 +8404,7 @@ else.232
 	pop_a 1
 .d 2 1 b
 	rtn
-else.233
+else.226
 	push_a 0
 	jsr_eval 0
 	push_a 2
@@ -8774,40 +8427,40 @@ else.233
 	updatepop_a 0 9
 	pop_b 1
 .d 7 0
-	jmp s152
-s159.1
+	jmp s143
+s150.1
 	pop_a 7
 	pushD m_ParserToVM
-	pushD x_159
+	pushD x_150
 .d 0 2 ii
 	jmp _match_error
-.string x_159 "parseStatements"
+.string x_150 "parseStatements"
 .o 8 0
-s160
+s151
 	eq_desc _Cons 2 4
-	jmp_true case.234
-	jmp s160.1
-case.234
+	jmp_true case.227
+	jmp s151.1
+case.227
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
 	pop_a 1
 	jsr_eval 1
 	eq_desc _Cons 2 1
-	jmp_true case.235
+	jmp_true case.228
 	pop_a 2
-	jmp s160.1
-case.235
+	jmp s151.1
+case.228
 	push_args 1 2 2
 	buildh _Nil 0
 	update_a 0 4
 	pop_a 1
 	jsr_eval 1
 	eq_desc _Cons 2 1
-	jmp_true case.236
+	jmp_true case.229
 	pop_a 4
-	jmp s160.1
-case.236
+	jmp s151.1
+case.229
 	push_args 1 2 2
 	buildh _Nil 0
 	update_a 0 4
@@ -8824,7 +8477,7 @@ case.236
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.237
+	jmp_false else.230
 	push_a 1
 	push_a 1
 	buildh _Cons 2
@@ -8842,7 +8495,7 @@ case.236
 	updatepop_a 0 14
 .d 2 1 b
 	rtn
-else.237
+else.230
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -8855,7 +8508,7 @@ else.237
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.238
+	jmp_false else.231
 	push_a 1
 	push_a 1
 	buildh _Cons 2
@@ -8885,8 +8538,8 @@ else.237
 	update_a 1 15
 	updatepop_a 0 14
 .d 8 0
-	jmp s168
-else.238
+	jmp s159
+else.231
 	push_a 4
 	build e_ParserToVM_dgetTokenValue 1 e_ParserToVM_ngetTokenValue
 	push_a 3
@@ -8926,7 +8579,7 @@ else.238
 	pushB_a 1
 	pop_a 1
 	notB
-	jmp_false else.239
+	jmp_false else.232
 	buildAC "failed to insert argument symbol"
 	updatepop_a 0 12
 .d 1 0
@@ -8939,7 +8592,7 @@ else.238
 	pop_a 1
 .d 2 1 b
 	rtn
-else.239
+else.232
 	buildAC "<symbol> , </symbol>\n"
 	push_array 3
 	update_a 3 4
@@ -8948,7 +8601,7 @@ else.239
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.240
+	jmp_false else.233
 	push_a 1
 	jsr_eval 0
 	push_a 1
@@ -8973,8 +8626,8 @@ else.239
 	update_a 1 11
 	updatepop_a 0 10
 .d 8 0
-	jmp s160
-else.240
+	jmp s151
+else.233
 	push_a 0
 	push_a 2
 	pushB TRUE
@@ -8982,19 +8635,19 @@ else.240
 	updatepop_a 0 10
 .d 2 1 b
 	rtn
-s160.1
+s151.1
 	pop_a 8
 	pushD m_ParserToVM
-	pushD x_160
+	pushD x_151
 .d 0 2 ii
 	jmp _match_error
-.string x_160 "parseParameterList"
+.string x_151 "parseParameterList"
 .o 9 0
-s161
+s152
 	eq_desc _Cons 2 4
-	jmp_true case.241
-	jmp s161.1
-case.241
+	jmp_true case.234
+	jmp s152.1
+case.234
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
@@ -9024,11 +8677,11 @@ case.241
 	update_a 0 16
 	pop_a 1
 .d 7 0
-	jsr s158
+	jsr s149
 .o 2 1 b
 	push_b 0
 	notB
-	jmp_false else.242
+	jmp_false else.235
 	buildAC "failed to parse vardec"
 	updatepop_a 0 11
 	pop_b 1
@@ -9042,7 +8695,7 @@ case.241
 	pop_a 1
 .d 2 1 b
 	rtn
-else.242
+else.235
 	push_a 1
 	push_a 6
 	push_a 6
@@ -9064,7 +8717,7 @@ else.242
 	pop_a 1
 	push_b 0
 	notB
-	jmp_false else.243
+	jmp_false else.236
 	buildAC "failed to get number of locals"
 	updatepop_a 0 13
 	pop_b 1
@@ -9078,10 +8731,10 @@ else.242
 	pop_a 1
 .d 2 1 b
 	rtn
-else.243
+else.236
 	push_b 0
 	notB
-	jmp_false else.244
+	jmp_false else.237
 	buildAC "failed to print 'function' instruction"
 	updatepop_a 0 13
 	pop_b 1
@@ -9095,7 +8748,7 @@ else.243
 	pop_a 1
 .d 2 1 b
 	rtn
-else.244
+else.237
 	build_r e_StdFile_rFileSystem; 4 0 4 0
 	push_a 3
 	push_a 3
@@ -9108,7 +8761,7 @@ else.244
 	update_a 1 2
 	update_a 0 1
 	pop_a 1
-	build _ 5 n201
+	build _ 5 n192
 	build d_S.2 -1 n_S.2
 	build_r e_StdFile_rFileSystem; 4 0 5 0
 	push_a 11
@@ -9151,11 +8804,11 @@ else.244
 	update_a 1 13
 	updatepop_a 0 12
 .d 7 0
-	jsr s159
+	jsr s150
 .o 2 1 b
 	push_b 0
 	notB
-	jmp_false else.245
+	jmp_false else.238
 	buildAC "failed to parse statements"
 	updatepop_a 0 3
 	pop_b 1
@@ -9169,9 +8822,9 @@ else.244
 	pop_a 1
 .d 2 1 b
 	rtn
-else.245
+else.238
 	push_a 0
-	build _ 1 n270
+	build _ 1 n249
 	build d_S.2 -1 n_S.2
 	push_a 2
 	pushB TRUE
@@ -9184,47 +8837,47 @@ else.245
 	updatepop_b 0 1
 .d 2 1 b
 	rtn
-s161.1
+s152.1
 	pop_a 9
 	pushD m_ParserToVM
-	pushD x_161
+	pushD x_152
 .d 0 2 ii
 	jmp _match_error
-.string x_161 "parseSubroutineBody"
-.n 1 _ ea270
+.string x_152 "parseSubroutineBody"
+.n 1 _ ea249
 .o 1 0
-n270
+n249
 	push_node _cycle_in_spine 1
 .o 2 0
-ea270
+ea249
 	jsr_eval 0
 .o 2 0
-s270
+s249
 	eq_desc _Cons 2 0
-	jmp_true case.246
-	jmp s270.1
-case.246
+	jmp_true case.239
+	jmp s249.1
+case.239
 	push_args 0 2 2
 	pop_a 2
 	fill_a 0 1
 	pop_a 1
 .d 1 0
 	rtn
-s270.1
+s249.1
 	pop_a 2
 	pushD m_ParserToVM
-	pushD x_270
+	pushD x_249
 .d 0 2 ii
 	jmp _match_error
-.string x_270 "_match5"
-.n 5 _ ea201
+.string x_249 "_match5"
+.n 5 _ ea192
 .o 1 0
-n201
+n192
 	push_node _cycle_in_spine 5
 .o 6 0
-ea201
+ea192
 .o 6 0
-s201
+s192
 	push_a 4
 	jsr_eval 0
 	push_a 2
@@ -9290,7 +8943,7 @@ s201
 .d 1 0
 	rtn
 .o 7 0
-s162
+s153
 	push_a 6
 	buildI 1
 	push_a 3
@@ -9310,7 +8963,7 @@ s162
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.247
+	jmp_false else.240
 	buildAC "failed to open file"
 	updatepop_a 0 8
 .d 1 0
@@ -9323,7 +8976,7 @@ s162
 	pop_a 1
 .d 1 1 b
 	rtn
-else.247
+else.240
 	push_arg 0 3 3
 	push_arg 1 3 2
 	push_a 7
@@ -9339,7 +8992,7 @@ else.247
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.248
+	jmp_false else.241
 	buildAC "failed to close file"
 	updatepop_a 0 1
 .d 1 0
@@ -9352,48 +9005,48 @@ else.247
 	pop_a 1
 .d 1 1 b
 	rtn
-else.248
+else.241
 	push_arg 0 2 2
 	pushB TRUE
 	updatepop_a 0 1
 .d 1 1 b
 	rtn
 .o 8 0
-s163
+s154
 	eq_desc _Cons 2 4
-	jmp_true case.249
-	jmp s163.1
-case.249
+	jmp_true case.242
+	jmp s154.1
+case.242
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
 	pop_a 1
 	jsr_eval 1
 	eq_desc _Cons 2 1
-	jmp_true case.250
+	jmp_true case.243
 	pop_a 2
-	jmp s163.1
-case.250
+	jmp s154.1
+case.243
 	push_args 1 2 2
 	buildh _Nil 0
 	update_a 0 4
 	pop_a 1
 	jsr_eval 1
 	eq_desc _Cons 2 1
-	jmp_true case.251
+	jmp_true case.244
 	pop_a 4
-	jmp s163.1
-case.251
+	jmp s154.1
+case.244
 	push_args 1 2 2
 	buildh _Nil 0
 	update_a 0 4
 	pop_a 1
 	jsr_eval 1
 	eq_desc _Cons 2 1
-	jmp_true case.252
+	jmp_true case.245
 	pop_a 6
-	jmp s163.1
-case.252
+	jmp s154.1
+case.245
 	push_args 1 2 2
 	buildh _Nil 0
 	update_a 0 4
@@ -9412,10 +9065,10 @@ case.252
 .o 0 1 b	
 	push_a 6
 .d 1 1 b
-	jsr s117
+	jsr s111
 .o 0 1 b
 	notB
-	jmp_false else.253
+	jmp_false else.246
 	push_a 1
 	push_a 1
 	buildh _Cons 2
@@ -9435,7 +9088,7 @@ case.252
 	updatepop_a 0 16
 .d 2 1 b
 	rtn
-else.253
+else.246
 	push_a 6
 	build e_ParserToVM_dgetTokenValue 1 e_ParserToVM_ngetTokenValue
 	push_a 5
@@ -9468,11 +9121,11 @@ else.253
 	update_a 0 16
 	pop_a 1
 .d 8 0
-	jsr s144
+	jsr s135
 .o 2 1 b
 	push_b 0
 	notB
-	jmp_false else.254
+	jmp_false else.247
 	buildAC "failed in parseClassVarDec"
 	updatepop_a 0 10
 	pop_b 1
@@ -9486,7 +9139,7 @@ else.253
 	pop_a 1
 .d 2 1 b
 	rtn
-else.254
+else.247
 	push_a 0
 	jsr_eval 0
 	push_a 2
@@ -9512,20 +9165,20 @@ else.254
 	updatepop_a 0 10
 	pop_b 1
 .d 8 0
-	jmp s163
-s163.1
+	jmp s154
+s154.1
 	pop_a 8
 	pushD m_ParserToVM
-	pushD x_163
+	pushD x_154
 .d 0 2 ii
 	jmp _match_error
-.string x_163 "parseClassVarDec"
+.string x_154 "parseClassVarDec"
 .o 8 0
-s164
+s155
 	eq_desc _Cons 2 4
-	jmp_true case.255
-	jmp s164.1
-case.255
+	jmp_true case.248
+	jmp s155.1
+case.248
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
@@ -9533,9 +9186,9 @@ case.255
 	jsr_eval 0
 	push_array 0
 	eqAC_a "<symbol> } </symbol>\n"
-	jmp_true case.256
-	jmp case.257
-case.256
+	jmp_true case.249
+	jmp case.250
+case.249
 	buildh _Nil 0
 	push_a 10
 	pushB TRUE
@@ -9547,13 +9200,13 @@ case.256
 	updatepop_a 0 10
 .d 2 1 b
 	rtn
-case.257
+case.250
 	jsr_eval 1
 	eq_desc _Cons 2 1
-	jmp_true case.258
+	jmp_true case.251
 	pop_a 2
-	jmp s164.1
-case.258
+	jmp s155.1
+case.251
 	push_args 1 2 2
 	buildh _Nil 0
 	update_a 0 4
@@ -9561,17 +9214,17 @@ case.258
 	pop_a 1
 	jsr_eval 0
 	eq_desc _Cons 2 0
-	jmp_true case.259
+	jmp_true case.252
 	pop_a 3
-	jmp s164.1
-case.259
+	jmp s155.1
+case.252
 	repl_args 2 2
 	jsr_eval 1
 	eq_desc _Cons 2 1
-	jmp_true case.260
+	jmp_true case.253
 	pop_a 4
-	jmp s164.1
-case.260
+	jmp s155.1
+case.253
 	push_args 1 2 2
 	buildh _Nil 0
 	update_a 0 4
@@ -9589,11 +9242,11 @@ case.260
 	update_a 0 20
 	pop_a 1
 .d 7 0
-	jsr s162
+	jsr s153
 .o 1 1 b
 	push_b 0
 	notB
-	jmp_false else.261
+	jmp_false else.254
 	buildAC "failed to intialize method symbol table"
 	updatepop_a 0 14
 	pop_b 1
@@ -9607,7 +9260,7 @@ case.260
 	pop_a 1
 .d 2 1 b
 	rtn
-else.261
+else.254
 	push_a 0
 	jsr_eval 0
 	buildAC "symtables\\methodcounter.txt"
@@ -9625,11 +9278,11 @@ else.261
 	update_a 1 2
 	updatepop_a 0 1
 .d 7 0
-	jsr s162
+	jsr s153
 .o 1 1 b
 	push_b 0
 	notB
-	jmp_false else.262
+	jmp_false else.255
 	buildAC "failed to intialize method counter"
 	updatepop_a 0 14
 	pop_b 1
@@ -9643,7 +9296,7 @@ else.261
 	pop_a 1
 .d 2 1 b
 	rtn
-else.262
+else.255
 	push_a 1
 	jsr_eval 0
 	push_a 1
@@ -9670,11 +9323,11 @@ else.262
 	update_a 1 4
 	updatepop_a 0 3
 .d 8 0
-	jsr s160
+	jsr s151
 .o 2 1 b
 	push_b 0
 	notB
-	jmp_false else.263
+	jmp_false else.256
 	buildAC "failed to parse params list"
 	updatepop_a 0 13
 	pop_b 1
@@ -9688,7 +9341,7 @@ else.262
 	pop_a 1
 .d 2 1 b
 	rtn
-else.263
+else.256
 	push_a 2
 	build e_ParserToVM_dgetTokenValue 1 e_ParserToVM_ngetTokenValue
 	push_a 1
@@ -9724,11 +9377,11 @@ else.263
 	update_a 1 6
 	updatepop_a 0 5
 .d 9 0
-	jsr s161
+	jsr s152
 .o 2 1 b
 	push_b 0
 	notB
-	jmp_false else.264
+	jmp_false else.257
 	buildAC "failed to parse subroutine body"
 	updatepop_a 0 10
 	pop_b 1
@@ -9742,7 +9395,7 @@ else.263
 	pop_a 1
 .d 2 1 b
 	rtn
-else.264
+else.257
 	push_a 0
 	jsr_eval 0
 	push_a 2
@@ -9768,26 +9421,26 @@ else.264
 	updatepop_a 0 10
 	pop_b 1
 .d 8 0
-	jmp s164
-s164.1
+	jmp s155
+s155.1
 	pop_a 8
 	pushD m_ParserToVM
-	pushD x_164
+	pushD x_155
 .d 0 2 ii
 	jmp _match_error
-.string x_164 "parseSubroutineDec"
+.string x_155 "parseSubroutineDec"
 .o 8 0
-s165
+s156
 	eq_desc _Nil 0 4
-	jmp_true case.265
-	jmp case.266
-case.265
+	jmp_true case.258
+	jmp case.259
+case.258
 	push_a 7
 	pushB TRUE
 	updatepop_a 0 8
 .d 1 1 b
 	rtn
-case.266
+case.259
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
@@ -9811,7 +9464,7 @@ case.266
 	update_a 1 2
 	updatepop_a 0 1
 .d 2 2 ii
-	jsr s105
+	jsr s99
 .o 1 0
 .d 1 0
 	jsr e_StdList_stoString;79
@@ -9821,7 +9474,7 @@ case.266
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.267
+	jmp_false else.260
 	push_a 1
 	jsr_eval 0
 	push_a 10
@@ -9846,8 +9499,8 @@ case.266
 	update_a 1 11
 	updatepop_a 0 10
 .d 8 0
-	jmp s165
-else.267
+	jmp s156
+else.260
 	buildAC "<keyword> class </keyword>\n"
 	push_a 1
 	update_a 1 2
@@ -9855,7 +9508,7 @@ else.267
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.268
+	jmp_false else.261
 	push_a 8
 	jsr_eval 0
 	push_a 1
@@ -9880,8 +9533,8 @@ else.267
 	update_a 1 10
 	updatepop_a 0 9
 .d 8 0
-	jmp s167
-else.268
+	jmp s158
+else.261
 	buildAC "This is why you fail"
 	updatepop_a 0 9
 .d 1 0
@@ -9895,17 +9548,17 @@ else.268
 .d 1 1 b
 	rtn
 .o 6 0
-s166
+s157
 	eq_desc _Nil 0 4
-	jmp_true case.269
-	jmp case.270
-case.269
+	jmp_true case.262
+	jmp case.263
+case.262
 	push_a 5
 	pushB TRUE
 	updatepop_a 0 6
 .d 1 1 b
 	rtn
-case.270
+case.263
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
@@ -9916,15 +9569,15 @@ case.270
 	build d_S.2 -1 n_S.2
 	push_a 1
 	build d_S.1 -1 n_S.1
-	build _ 2 n261
+	build _ 2 n240
 	push_a 0
-	build _ 1 n262
+	build _ 1 n241
 	push_a 0
-	build _ 1 n263
+	build _ 1 n242
 	push_a 11
 	buildI 1
 	push_a 2
-	build _ 1 n264
+	build _ 1 n243
 	push_a 10
 	buildh _Nil 0
 	update_a 0 16
@@ -9936,8 +9589,8 @@ case.270
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.271
-	buildAC "failed to open file"
+	jmp_false else.264
+	buildAC "failed to open vm file to writing in the first time"
 	updatepop_a 0 13
 .d 1 0
 	jsr print_string_
@@ -9949,7 +9602,7 @@ case.270
 	pop_a 1
 .d 1 1 b
 	rtn
-else.271
+else.264
 	push_arg 0 3 3
 	push_arg 1 3 2
 	buildAC ""
@@ -9965,7 +9618,7 @@ else.271
 	pushB_a 0
 	pop_a 1
 	notB
-	jmp_false else.272
+	jmp_false else.265
 	buildAC "failed to close file"
 	updatepop_a 0 13
 .d 1 0
@@ -9978,14 +9631,14 @@ else.271
 	pop_a 1
 .d 1 1 b
 	rtn
-else.272
+else.265
 	push_arg 0 2 2
 	push_a 6
 	buildAC "TxmlFiles\\"
 	buildh ARRAY 1
 	build _ 2 e_StdString_n+++;11
 	push_a 10
-	build _ 3 n259
+	build _ 3 n238
 	push_a 0
 	build d_S.2 -1 n_S.2
 	update_a 1 2
@@ -10001,7 +9654,7 @@ else.272
 	update_a 1 2
 	update_a 0 1
 	pop_a 1
-	build _ 3 n260
+	build _ 3 n239
 	build d_S.2 -1 n_S.2
 	push_a 1
 	jsr_eval 0
@@ -10025,11 +9678,11 @@ else.272
 	update_a 1 4
 	updatepop_a 0 3
 .d 8 0
-	jsr s165
+	jsr s156
 .o 1 1 b
 	push_b 0
 	notB
-	jmp_false else.273
+	jmp_false else.266
 	push_a 5
 	jsr_eval 0
 	push_array 0
@@ -10062,7 +9715,7 @@ else.272
 	pop_a 1
 .d 1 1 b
 	rtn
-else.273
+else.266
 	push_a 6
 	jsr_eval 0
 	push_a 1
@@ -10082,11 +9735,11 @@ else.273
 	update_a 1 2
 	updatepop_a 0 1
 .d 6 0
-	jsr s166
+	jsr s157
 .o 1 1 b
 	push_b 0
 	notB
-	jmp_false else.274
+	jmp_false else.267
 	push_a 1
 	jsr_eval 0
 	push_array 0
@@ -10119,7 +9772,7 @@ else.273
 	pop_a 1
 .d 1 1 b
 	rtn
-else.274
+else.267
 	push_a 0
 	push_a 7
 	push_a 12
@@ -10134,15 +9787,15 @@ else.274
 	updatepop_a 0 13
 	pop_b 1
 .d 6 0
-	jmp s166
-.n 1 _ ea264
+	jmp s157
+.n 1 _ ea243
 .o 1 0
-n264
+n243
 	push_node _cycle_in_spine 1
 .o 2 0
-ea264
+ea243
 .o 2 0
-s264
+s243
 	push_a 0
 	jsr_eval 0
 	push_array 0
@@ -10164,14 +9817,14 @@ s264
 	fillh ARRAY 1 1
 .d 1 0
 	rtn
-.n 1 _ ea263
+.n 1 _ ea242
 .o 1 0
-n263
+n242
 	push_node _cycle_in_spine 1
 .o 2 0
-ea263
+ea242
 .o 2 0
-s263
+s242
 	push_a 0
 	jsr_eval 0
 	push_a 1
@@ -10180,7 +9833,7 @@ s263
 	update_a 0 3
 	pop_a 1
 .d 1 1 i
-	jsr s109
+	jsr s103
 .o 0 1 i
 	create_array_ CHAR 0 1
 	buildI 0
@@ -10192,19 +9845,19 @@ s263
 	update_a 1 2
 	updatepop_a 0 1
 .d 3 0
-	jsr s108
+	jsr s102
 .o 1 0
 	fillh ARRAY 1 1
 .d 1 0
 	rtn
-.n 1 _ ea262
+.n 1 _ ea241
 .o 1 0
-n262
+n241
 	push_node _cycle_in_spine 1
 .o 2 0
-ea262
+ea241
 .o 2 0
-s262
+s241
 	push_a 0
 	jsr_eval 0
 .d 1 0
@@ -10220,14 +9873,14 @@ s262
 	updatepop_a 0 1
 .d 2 1 i
 	jmp e_StdList_stake
-.n 2 _ ea261
+.n 2 _ ea240
 .o 1 0
-n261
+n240
 	push_node _cycle_in_spine 2
 .o 3 0
-ea261
+ea240
 .o 3 0
-s261
+s240
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -10242,15 +9895,15 @@ s261
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s106
-.n 3 _ ea260
+	jmp s100
+.n 3 _ ea239
 .o 1 0
-n260
+n239
 	push_node _cycle_in_spine 3
 .o 4 0
-ea260
+ea239
 .o 4 0
-s260
+s239
 	push_a 2
 	push_a 1
 	jsr_eval 0
@@ -10267,14 +9920,14 @@ s260
 	pop_a 1
 .d 1 0
 	rtn
-.n 3 _ ea259
+.n 3 _ ea238
 .o 1 0
-n259
+n238
 	push_node _cycle_in_spine 3
 .o 4 0
-ea259
+ea238
 .o 4 0
-s259
+s238
 	push_a 2
 	buildI 0
 	push_a 2
@@ -10294,11 +9947,11 @@ s259
 .d 1 0
 	rtn
 .o 8 0
-s167
+s158
 	eq_desc _Cons 2 4
-	jmp_true case.275
-	jmp s167.1
-case.275
+	jmp_true case.268
+	jmp s158.1
+case.268
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
@@ -10306,10 +9959,10 @@ case.275
 	pop_a 1
 	jsr_eval 0
 	eq_desc _Cons 2 0
-	jmp_true case.276
+	jmp_true case.269
 	pop_a 1
-	jmp s167.1
-case.276
+	jmp s158.1
+case.269
 	repl_args 2 2
 	pop_a 1
 	push_a 8
@@ -10323,11 +9976,11 @@ case.276
 	update_a 0 16
 	pop_a 1
 .d 7 0
-	jsr s162
+	jsr s153
 .o 1 1 b
 	push_b 0
 	notB
-	jmp_false else.277
+	jmp_false else.270
 	buildAC "failed to intialize class symbol table"
 	updatepop_a 0 10
 	pop_b 1
@@ -10341,7 +9994,7 @@ case.276
 	pop_a 1
 .d 1 1 b
 	rtn
-else.277
+else.270
 	push_a 0
 	jsr_eval 0
 	buildAC "symtables\\classstaticcounter.txt"
@@ -10359,11 +10012,11 @@ else.277
 	update_a 1 2
 	updatepop_a 0 1
 .d 7 0
-	jsr s162
+	jsr s153
 .o 1 1 b
 	push_b 0
 	notB
-	jmp_false else.278
+	jmp_false else.271
 	buildAC "failed to intialize class counter"
 	updatepop_a 0 10
 	pop_b 1
@@ -10377,7 +10030,7 @@ else.277
 	pop_a 1
 .d 1 1 b
 	rtn
-else.278
+else.271
 	push_a 0
 	jsr_eval 0
 	buildAC "symtables\\classfieldcounter.txt"
@@ -10395,11 +10048,11 @@ else.278
 	update_a 1 2
 	updatepop_a 0 1
 .d 7 0
-	jsr s162
+	jsr s153
 .o 1 1 b
 	push_b 0
 	notB
-	jmp_false else.279
+	jmp_false else.272
 	buildAC "failed to intialize class counter"
 	updatepop_a 0 10
 	pop_b 1
@@ -10413,7 +10066,7 @@ else.278
 	pop_a 1
 .d 1 1 b
 	rtn
-else.279
+else.272
 	push_a 0
 	jsr_eval 0
 	buildAC "counters\\ifcounter.txt"
@@ -10431,11 +10084,11 @@ else.279
 	update_a 1 2
 	updatepop_a 0 1
 .d 7 0
-	jsr s162
+	jsr s153
 .o 1 1 b
 	push_b 0
 	notB
-	jmp_false else.280
+	jmp_false else.273
 	buildAC "failed to intialize if counter"
 	updatepop_a 0 10
 	pop_b 1
@@ -10449,7 +10102,7 @@ else.279
 	pop_a 1
 .d 1 1 b
 	rtn
-else.280
+else.273
 	push_a 0
 	jsr_eval 0
 	buildAC "counters\\whilecounter.txt"
@@ -10467,11 +10120,11 @@ else.280
 	update_a 1 2
 	updatepop_a 0 1
 .d 7 0
-	jsr s162
+	jsr s153
 .o 1 1 b
 	push_b 0
 	notB
-	jmp_false else.281
+	jmp_false else.274
 	buildAC "failed to intialize while counter"
 	updatepop_a 0 10
 	pop_b 1
@@ -10485,7 +10138,7 @@ else.280
 	pop_a 1
 .d 1 1 b
 	rtn
-else.281
+else.274
 	push_a 1
 	jsr_eval 0
 	push_a 1
@@ -10511,11 +10164,11 @@ else.281
 	update_a 1 3
 	updatepop_a 0 2
 .d 8 0
-	jsr s163
+	jsr s154
 .o 2 1 b
 	push_b 0
 	notB
-	jmp_false else.282
+	jmp_false else.275
 	buildAC "failed to parse vardec"
 	updatepop_a 0 10
 	pop_b 1
@@ -10529,7 +10182,7 @@ else.281
 	pop_a 1
 .d 1 1 b
 	rtn
-else.282
+else.275
 	push_a 0
 	jsr_eval 0
 	push_a 2
@@ -10555,11 +10208,11 @@ else.282
 	update_a 1 11
 	updatepop_a 0 10
 .d 8 0
-	jsr s164
+	jsr s155
 .o 2 1 b
 	push_b 0
 	notB
-	jmp_false else.283
+	jmp_false else.276
 	buildAC "failed to parse subroutine"
 	updatepop_a 0 2
 	pop_b 1
@@ -10573,46 +10226,46 @@ else.282
 	pop_a 1
 .d 1 1 b
 	rtn
-else.283
+else.276
 	push_a 1
 	pushB TRUE
 	updatepop_a 0 2
 	updatepop_b 0 1
 .d 1 1 b
 	rtn
-s167.1
+s158.1
 	pop_a 8
 	pushD m_ParserToVM
-	pushD x_167
+	pushD x_158
 .d 0 2 ii
 	jmp _match_error
-.string x_167 "parseClass"
+.string x_158 "parseClass"
 .o 8 0
-s168
+s159
 	eq_desc _Cons 2 4
-	jmp_true case.284
-	jmp s168.1
-case.284
+	jmp_true case.277
+	jmp s159.1
+case.277
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
 	pop_a 1
 	jsr_eval 1
 	eq_desc _Cons 2 1
-	jmp_true case.285
+	jmp_true case.278
 	pop_a 2
-	jmp s168.1
-case.285
+	jmp s159.1
+case.278
 	push_args 1 2 2
 	buildh _Nil 0
 	update_a 0 4
 	pop_a 1
 	jsr_eval 1
 	eq_desc _Cons 2 1
-	jmp_true case.286
+	jmp_true case.279
 	pop_a 4
-	jmp s168.1
-case.286
+	jmp s159.1
+case.279
 	push_args 1 2 2
 	buildh _Nil 0
 	update_a 0 4
@@ -10653,7 +10306,7 @@ case.286
 	pushB_a 1
 	pop_a 1
 	notB
-	jmp_false else.287
+	jmp_false else.280
 	buildAC "failed to insert argument symbol"
 	updatepop_a 0 4
 .d 1 0
@@ -10666,7 +10319,7 @@ case.286
 	pop_a 1
 .d 2 1 b
 	rtn
-else.287
+else.280
 	push_a 3
 	push_a 3
 	buildh _Cons 2
@@ -10680,29 +10333,29 @@ else.287
 	updatepop_a 0 4
 .d 2 1 b
 	rtn
-s168.1
+s159.1
 	pop_a 8
 	pushD m_ParserToVM
-	pushD x_168
+	pushD x_159
 .d 0 2 ii
 	jmp _match_error
-.string x_168 "finishParameterList"
+.string x_159 "finishParameterList"
 .o 7 0
-s169
+s160
 	eq_desc _Cons 2 4
-	jmp_true case.288
-	jmp s169.1
-case.288
+	jmp_true case.281
+	jmp s160.1
+case.281
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
 	pop_a 1
 	jsr_eval 1
 	eq_desc _Cons 2 1
-	jmp_true case.289
+	jmp_true case.282
 	pop_a 2
-	jmp s169.1
-case.289
+	jmp s160.1
+case.282
 	push_args 1 2 2
 	buildh _Nil 0
 	update_a 0 4
@@ -10734,11 +10387,11 @@ case.289
 	update_a 0 15
 	pop_a 1
 .d 7 0
-	jsr s156
+	jsr s147
 .o 2 1 b
 	push_b 0
 	notB
-	jmp_false else.290
+	jmp_false else.283
 	buildAC "abort in parseArrayLetStatement exp1"
 	updatepop_a 0 10
 	pop_b 1
@@ -10752,7 +10405,7 @@ case.289
 	pop_a 1
 .d 2 1 b
 	rtn
-else.290
+else.283
 	push_a 2
 	build e_ParserToVM_dgetTokenValue 1 e_ParserToVM_ngetTokenValue
 	push_a 2
@@ -10780,7 +10433,7 @@ else.290
 	pushB_a 1
 	pop_a 1
 	notB
-	jmp_false else.291
+	jmp_false else.284
 	buildAC "failed to get symbol record fields"
 	updatepop_a 0 13
 .d 1 0
@@ -10793,7 +10446,7 @@ else.290
 	pop_a 1
 .d 2 1 b
 	rtn
-else.291
+else.284
 	push_a 4
 	jsr_eval 0
 	push_a 2
@@ -10847,11 +10500,11 @@ else.291
 	update_a 1 6
 	updatepop_a 0 5
 .d 7 0
-	jsr s157
+	jsr s148
 .o 1 1 b
 	push_b 0
 	notB
-	jmp_false else.292
+	jmp_false else.285
 	buildAC "abort in parseArrayLetStatement varName"
 	updatepop_a 0 9
 	pop_b 1
@@ -10865,7 +10518,7 @@ else.291
 	pop_a 1
 .d 2 1 b
 	rtn
-else.292
+else.285
 	push_a 1
 	jsr_eval 0
 	eq_desc _Cons 2 0
@@ -10899,11 +10552,11 @@ else.292
 	update_a 1 3
 	updatepop_a 0 2
 .d 7 0
-	jsr s156
+	jsr s147
 .o 2 1 b
 	push_b 0
 	notB
-	jmp_false else.293
+	jmp_false else.286
 	buildAC "abort in parseArrayLetStatement exp2"
 	updatepop_a 0 9
 	pop_b 1
@@ -10917,7 +10570,7 @@ else.292
 	pop_a 1
 .d 2 1 b
 	rtn
-else.293
+else.286
 	build_r e_StdFile_rFileSystem; 4 0 2 0
 	push_a 2
 	push_a 9
@@ -10933,7 +10586,7 @@ else.293
 	build _ 4 n47
 	build d_S.2 -1 n_S.2
 	push_a 1
-	build _ 1 n271
+	build _ 1 n250
 	build d_S.2 -1 n_S.2
 	pushB TRUE
 	update_a 1 10
@@ -10941,55 +10594,55 @@ else.293
 	updatepop_b 0 1
 .d 2 1 b
 	rtn
-s169.1
+s160.1
 	pop_a 7
 	pushD m_ParserToVM
-	pushD x_169
+	pushD x_160
 .d 0 2 ii
 	jmp _match_error
-.string x_169 "parseArrayLetStatement"
-.n 1 _ ea271
+.string x_160 "parseArrayLetStatement"
+.n 1 _ ea250
 .o 1 0
-n271
+n250
 	push_node _cycle_in_spine 1
 .o 2 0
-ea271
+ea250
 	jsr_eval 0
 .o 2 0
-s271
+s250
 	eq_desc _Cons 2 0
-	jmp_true case.294
-	jmp s271.1
-case.294
+	jmp_true case.287
+	jmp s250.1
+case.287
 	push_args 0 2 2
 	pop_a 2
 	fill_a 0 1
 	pop_a 1
 .d 1 0
 	rtn
-s271.1
+s250.1
 	pop_a 2
 	pushD m_ParserToVM
-	pushD x_271
+	pushD x_250
 .d 0 2 ii
 	jmp _match_error
-.string x_271 "_match6"
+.string x_250 "_match6"
 .o 7 0
-s170
+s161
 	eq_desc _Cons 2 4
-	jmp_true case.295
-	jmp s170.1
-case.295
+	jmp_true case.288
+	jmp s161.1
+case.288
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
 	pop_a 1
 	jsr_eval 1
 	eq_desc _Cons 2 1
-	jmp_true case.296
+	jmp_true case.289
 	pop_a 2
-	jmp s170.1
-case.296
+	jmp s161.1
+case.289
 	push_args 1 2 2
 	buildh _Nil 0
 	update_a 0 4
@@ -11007,7 +10660,7 @@ case.296
 	jsr eqAC
 .o 0 1 b	
 	notB
-	jmp_false else.297
+	jmp_false else.290
 	push_a 1
 	push_a 1
 	buildh _Cons 2
@@ -11032,8 +10685,8 @@ case.296
 	update_a 1 12
 	updatepop_a 0 11
 .d 7 0
-	jmp s188
-else.297
+	jmp s179
+else.290
 	push_a 1
 	jsr_eval 0
 	push_a 11
@@ -11058,11 +10711,11 @@ else.297
 	update_a 0 14
 	pop_a 1
 .d 7 0
-	jsr s156
+	jsr s147
 .o 2 1 b
 	push_b 0
 	notB
-	jmp_false else.298
+	jmp_false else.291
 	buildAC "failed in parseIfStatement 1"
 	updatepop_a 0 9
 	pop_b 1
@@ -11076,7 +10729,7 @@ else.297
 	pop_a 1
 .d 2 1 b
 	rtn
-else.298
+else.291
 	push_a 1
 	jsr_eval 0
 	push_a 6
@@ -11091,7 +10744,7 @@ else.298
 	update_a 1 2
 	updatepop_a 0 1
 .d 5 0
-	jsr s154
+	jsr s145
 .o 2 1 i
 	push_b 0
 	updatepop_b 0 1
@@ -11139,11 +10792,11 @@ else.298
 	update_a 1 2
 	updatepop_a 0 1
 .d 7 0
-	jsr s157
+	jsr s148
 .o 1 1 b
 	push_b 0
 	notB
-	jmp_false else.299
+	jmp_false else.292
 	buildAC "failed in parseIfStatement 2"
 	updatepop_a 0 10
 	pop_b 1
@@ -11157,7 +10810,7 @@ else.298
 	pop_a 1
 .d 2 1 b
 	rtn
-else.299
+else.292
 	push_a 2
 	jsr_eval 0
 	eq_desc _Cons 2 0
@@ -11178,7 +10831,7 @@ else.299
 .d 1 0
 	jsr s50
 .o 0 1 b
-	jmp_false else.300
+	jmp_false else.293
 	push_a 1
 	jsr_eval 0
 	push_array 10
@@ -11197,8 +10850,8 @@ else.299
 	update_a 1 12
 	updatepop_a 0 11
 .d 8 0
-	jmp s187
-else.300
+	jmp s178
+else.293
 	build_r e_StdFile_rFileSystem; 4 0 4 0
 	push_a 2
 	push_a 11
@@ -11209,7 +10862,7 @@ else.300
 	update_a 1 2
 	update_a 0 1
 	pop_a 1
-	build _ 4 n252
+	build _ 4 n231
 	build d_S.2 -1 n_S.2
 	push_a 10
 	push_a 2
@@ -11226,11 +10879,11 @@ else.300
 	update_a 1 4
 	updatepop_a 0 3
 .d 7 0
-	jsr s159
+	jsr s150
 .o 2 1 b
 	push_b 0
 	notB
-	jmp_false else.301
+	jmp_false else.294
 	buildAC "failed in parseIfStatement 3"
 	updatepop_a 0 10
 	pop_b 1
@@ -11244,7 +10897,7 @@ else.300
 	pop_a 1
 .d 2 1 b
 	rtn
-else.301
+else.294
 	push_a 1
 	jsr_eval 0
 	buildAC "\n"
@@ -11279,11 +10932,11 @@ else.301
 	update_a 1 10
 	updatepop_a 0 9
 .d 7 0
-	jsr s157
+	jsr s148
 .o 1 1 b
 	push_b 0
 	notB
-	jmp_false else.302
+	jmp_false else.295
 	buildAC "failed in parseIfStatement 2"
 	updatepop_a 0 2
 	pop_b 1
@@ -11297,9 +10950,9 @@ else.301
 	pop_a 1
 .d 2 1 b
 	rtn
-else.302
+else.295
 	push_a 1
-	build _ 1 n272
+	build _ 1 n251
 	build d_S.2 -1 n_S.2
 	push_a 1
 	pushB TRUE
@@ -11312,47 +10965,47 @@ else.302
 	updatepop_b 0 1
 .d 2 1 b
 	rtn
-s170.1
+s161.1
 	pop_a 7
 	pushD m_ParserToVM
-	pushD x_170
+	pushD x_161
 .d 0 2 ii
 	jmp _match_error
-.string x_170 "parseIfStatement"
-.n 1 _ ea272
+.string x_161 "parseIfStatement"
+.n 1 _ ea251
 .o 1 0
-n272
+n251
 	push_node _cycle_in_spine 1
 .o 2 0
-ea272
+ea251
 	jsr_eval 0
 .o 2 0
-s272
+s251
 	eq_desc _Cons 2 0
-	jmp_true case.303
-	jmp s272.1
-case.303
+	jmp_true case.296
+	jmp s251.1
+case.296
 	push_args 0 2 2
 	pop_a 2
 	fill_a 0 1
 	pop_a 1
 .d 1 0
 	rtn
-s272.1
+s251.1
 	pop_a 2
 	pushD m_ParserToVM
-	pushD x_272
+	pushD x_251
 .d 0 2 ii
 	jmp _match_error
-.string x_272 "_match7"
-.n 4 _ ea252
+.string x_251 "_match7"
+.n 4 _ ea231
 .o 1 0
-n252
+n231
 	push_node _cycle_in_spine 4
 .o 5 0
-ea252
+ea231
 .o 5 0
-s252
+s231
 	push_a 3
 	jsr_eval 0
 	push_a 3
@@ -11391,41 +11044,41 @@ s252
 .d 1 0
 	rtn
 .o 7 0
-s171
+s162
 	eq_desc _Cons 2 4
-	jmp_true case.304
-	jmp s171.1
-case.304
+	jmp_true case.297
+	jmp s162.1
+case.297
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
 	pop_a 1
 	jsr_eval 1
 	eq_desc _Cons 2 1
-	jmp_true case.305
+	jmp_true case.298
 	pop_a 2
-	jmp s171.1
-case.305
+	jmp s162.1
+case.298
 	push_args 1 2 2
 	buildh _Nil 0
 	update_a 0 4
 	pop_a 1
 	jsr_eval 1
 	eq_desc _Cons 2 1
-	jmp_true case.306
+	jmp_true case.299
 	pop_a 4
-	jmp s171.1
-case.306
+	jmp s162.1
+case.299
 	push_args 1 2 2
 	buildh _Nil 0
 	update_a 0 4
 	pop_a 1
 	jsr_eval 1
 	eq_desc _Cons 2 1
-	jmp_true case.307
+	jmp_true case.300
 	pop_a 6
-	jmp s171.1
-case.307
+	jmp s162.1
+case.300
 	push_args 1 2 2
 	buildh _Nil 0
 	update_a 0 4
@@ -11452,7 +11105,7 @@ case.307
 	pushB_a 1
 	pop_a 1
 	notB
-	jmp_false else.308
+	jmp_false else.301
 	push_a 6
 	push_a 6
 	buildh _Cons 2
@@ -11481,43 +11134,41 @@ case.307
 	update_a 1 21
 	updatepop_a 0 20
 .d 7 0
-	jmp s186
-else.308
+	jmp s177
+else.301
 	push_a 3
 	jsr_eval 0
 	push_array 0
 	updatepop_a 0 1
 	buildAC "this"
 	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
+	update_a 2 3
 	update_a 1 2
 	updatepop_a 0 1
 	buildh _Nil 0
-	update_a 0 5
+	update_a 0 6
 	pop_a 1
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.309
+	jmp_false else.302
+	push_a 6
+	push_a 6
+	buildh _Cons 2
+	push_a 8
+	buildh _Cons 2
+	push_a 10
+	buildh _Cons 2
+	push_a 12
+	buildh _Cons 2
 	push_a 5
-	push_a 5
-	buildh _Cons 2
-	push_a 7
-	buildh _Cons 2
-	push_a 9
-	buildh _Cons 2
-	push_a 11
-	buildh _Cons 2
+	push_a 20
 	push_a 4
-	push_a 19
-	push_a 3
-	push_a 5
-	push_a 20
-	push_a 20
-	push_a 20
-	push_a 20
+	push_a 6
+	push_a 21
+	push_a 21
+	push_a 21
+	push_a 21
 	push_a 8
 	update_a 8 9
 	update_a 7 8
@@ -11525,61 +11176,63 @@ else.308
 	update_a 5 6
 	update_a 0 5
 	pop_a 1
-	update_a 8 27
-	update_a 7 26
-	update_a 6 25
-	update_a 5 24
-	update_a 4 23
-	update_a 3 22
-	update_a 2 21
-	update_a 1 20
-	updatepop_a 0 19
+	update_a 8 28
+	update_a 7 27
+	update_a 6 26
+	update_a 5 25
+	update_a 4 24
+	update_a 3 23
+	update_a 2 22
+	update_a 1 21
+	updatepop_a 0 20
 .d 9 0
-	jmp s185
-else.309
-	build_r e_StdFile_rFileSystem; 4 0 12 0
+	jmp s176
+else.302
+	build_r e_StdFile_rFileSystem; 4 0 13 0
+	push_a 5
+	push_a 20
 	push_a 4
-	push_a 19
-	buildAC "push pointer 0\n"
+	push_a 4
 	buildh ARRAY 1
-	push_a 3
+	push_a 4
+	update_a 4 5
 	update_a 3 4
 	update_a 2 3
 	update_a 1 2
 	update_a 0 1
 	pop_a 1
-	build _ 4 n47
+	build _ 5 n197
 	build d_S.2 -1 n_S.2
-	push_a 6
+	push_a 7
 	jsr_eval 0
-	push_a 19
+	push_a 20
 	buildI 1
-	push_a 19
-	push_a 19
-	push_a 19
-	push_a 19
+	push_a 20
+	push_a 20
+	push_a 20
+	push_a 20
 	push_a 6
 	update_a 6 7
 	update_a 5 6
 	update_a 0 5
 	pop_a 1
-	update_a 14 17
-	update_a 7 16
-	update_a 6 15
-	update_a 5 14
-	update_a 4 13
-	update_a 3 12
-	update_a 2 11
-	update_a 1 10
-	updatepop_a 0 9
+	update_a 10 14
+	update_a 7 13
+	update_a 6 12
+	update_a 5 11
+	update_a 4 10
+	update_a 3 9
+	update_a 2 8
+	update_a 1 7
+	updatepop_a 0 6
 .d 8 0
-	jsr s149
+	jsr s140
 .o 3 1 b
 	push_b 0
 	notB
-	jmp_false else.310
+	jmp_false else.303
 	buildAC "failed"
-	updatepop_a 0 13
+	updatepop_a 0 17
 	pop_b 1
 .d 1 0
 	jsr print_string_
@@ -11591,177 +11244,59 @@ else.309
 	pop_a 1
 .d 2 1 b
 	rtn
-else.310
-	push_a 4
-	build e_ParserToVM_dgetTokenValue 1 e_ParserToVM_ngetTokenValue
-	push_a 0
-	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
-	push_a 0
-	build d_S.2 -1 n_S.2
-	push_a 1
-	build d_S.1 -1 n_S.1
-	build _ 2 n206
-	build e_StdList_dlength;47 1 e_StdList_nlength;47
-	push_a 2
-	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
+else.303
+	build_r e_StdFile_rFileSystem; 4 0 10 0
 	push_a 3
-	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
-	push_a 0
-	build d_S.2 -1 n_S.2
-	push_a 1
-	build d_S.1 -1 n_S.1
-	build _ 2 n211
+	push_a 17
 	push_a 3
-	build _ 2 n210
-	push_a 2
-	build d_S.2 -1 n_S.2
-	push_a 3
-	build d_S.1 -1 n_S.1
-	build _ 2 n209
-	push_a 4
-	build _ 2 n208
-	build_r e_StdFile_rFileSystem; 4 0 13 0
-	push_a 10
-	push_a 20
-	push_a 10
-	push_a 14
-	push_a 6
-	update_a 4 7
-	update_a 1 4
-	update_a 5 1
-	update_a 2 5
-	update_a 6 2
-	update_a 3 6
-	update_a 0 3
+	push_a 8
+	push_a 8
+	push_a 5
+	update_a 5 6
+	update_a 4 5
+	update_a 3 4
+	update_a 2 3
+	update_a 1 2
+	update_a 0 1
 	pop_a 1
-	build _ 7 n207
+	build _ 6 n198
 	build d_S.2 -1 n_S.2
-	push_a 7
+	push_a 2
 	pushB TRUE
-	update_a 1 19
-	updatepop_a 0 18
+	update_a 1 18
+	updatepop_a 0 17
 	updatepop_b 0 1
 .d 2 1 b
 	rtn
-s171.1
+s162.1
 	pop_a 7
 	pushD m_ParserToVM
-	pushD x_171
+	pushD x_162
 .d 0 2 ii
 	jmp _match_error
-.string x_171 "doExternalSubroutine"
-.n 2 _ ea211
+.string x_162 "doExternalSubroutine"
+.n 6 _ ea198
 .o 1 0
-n211
-	push_node _cycle_in_spine 2
-.o 3 0
-ea211
-.o 3 0
-s211
-	push_a 0
+n198
+	push_node _cycle_in_spine 6
+.o 7 0
+ea198
+.o 7 0
+s198
+	push_a 5
 	jsr_eval 0
-	pushI_a 1
-	pop_a 1
-	pushI 1
-	push_b 1
-	update_b 1 2
-	update_b 0 1
-	pop_b 1
-	subI
-	push_a 1
-	pushI 0
-	updatepop_a 0 2
-.d 2 2 ii
-	jmp s96
-.n 2 _ ea210
-.o 1 0
-n210
-	push_node _cycle_in_spine 2
-.o 3 0
-ea210
-.o 3 0
-s210
-	push_a 0
-	jsr_eval 0
-	pushI_a 1
-	pop_a 1
-	pushI 1
-	push_b 1
-	update_b 1 2
-	update_b 0 1
-	pop_b 1
-	subI
-	push_a 1
-	updatepop_a 0 2
-.d 2 1 i
-	jmp e_StdList_stake
-.n 2 _ ea209
-.o 1 0
-n209
-	push_node _cycle_in_spine 2
-.o 3 0
-ea209
-.o 3 0
-s209
-	push_a 0
-	jsr_eval 0
-	pushI_a 1
-	pop_a 1
-	pushI 1
-	push_b 1
-	update_b 1 2
-	update_b 0 1
-	pop_b 1
-	subI
-	push_a 1
-	pushI 0
-	updatepop_a 0 2
-.d 2 2 ii
-	jmp s94
-.n 2 _ ea208
-.o 1 0
-n208
-	push_node _cycle_in_spine 2
-.o 3 0
-ea208
-.o 3 0
-s208
-	push_a 0
-	jsr_eval 0
-	pushI_a 1
-	pop_a 1
-	pushI 1
-	push_b 1
-	update_b 1 2
-	update_b 0 1
-	pop_b 1
-	subI
-	push_a 1
-	updatepop_a 0 2
-.d 2 1 i
-	jmp e_StdList_stake
-.n 7 _ ea207
-.o 1 0
-n207
-	push_node _cycle_in_spine 7
-.o 8 0
-ea207
-.o 8 0
-s207
-	push_a 6
-	jsr_eval 0
-	push_a 6
+	push_a 5
 	jsr_eval 0
 	push_array 0
 	updatepop_a 0 1
-	push_a 6
+	push_a 5
 	jsr_eval 0
-	pushI_a 7
+	pushI_a 6
 	pop_a 1
 	buildh _Nil 0
+	update_a 0 6
 	update_a 0 7
 	update_a 0 8
-	update_a 0 9
 	pop_a 1
 .d 0 1 i
 	jsr ItoAC
@@ -11774,12 +11309,12 @@ s207
 .d 2 0
 	jsr catAC
 .o 1 0
-	push_a 6
+	push_a 5
 	jsr_eval 0
 	push_array 0
 	updatepop_a 0 1
 	buildh _Nil 0
-	update_a 0 8
+	update_a 0 7
 	pop_a 1
 .d 1 0
 	jsr s3
@@ -11791,27 +11326,13 @@ s207
 .d 2 0
 	jsr catAC
 .o 1 0
-	push_a 5
+	push_a 4
 	jsr_eval 0
-	push_a 5
-	jsr_eval 0
-	pushI 0
+	push_array 0
+	updatepop_a 0 1
 	buildh _Nil 0
-	update_a 0 7
-	update_a 0 8
+	update_a 0 6
 	pop_a 1
-.d 1 1 i
-	jsr s103
-.o 0 1 i
-	create_array_ CHAR 0 1
-	buildI 0
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-.d 3 0
-	jsr s97
-.o 1 0
 .d 2 0
 	jsr catAC
 .o 1 0
@@ -11820,13 +11341,13 @@ s207
 	jsr catAC
 .o 1 0
 	push_r_args 3 4 0
-	update_a 6 13
-	update_a 5 12
-	update_a 4 11
-	update_a 3 10
-	update_a 2 9
-	update_a 1 8
-	updatepop_a 0 7
+	update_a 6 12
+	update_a 5 11
+	update_a 4 10
+	update_a 3 9
+	update_a 2 8
+	update_a 1 7
+	updatepop_a 0 6
 .d 7 0
 	jsr s47
 .o 2 0
@@ -11836,45 +11357,89 @@ s207
 	pop_a 2
 .d 1 0
 	rtn
-.n 2 _ ea206
+.n 5 _ ea197
 .o 1 0
-n206
-	push_node _cycle_in_spine 2
-.o 3 0
-ea206
-.o 3 0
-s206
-	push_a 0
-	jsr_eval 0
-	pushI_a 1
+n197
+	push_node _cycle_in_spine 5
+.o 6 0
+ea197
+	jsr_eval 1
+	push_array 1
+	update_a 0 2
 	pop_a 1
-	pushI 1
-	push_b 1
-	update_b 1 2
-	update_b 0 1
-	pop_b 1
-	subI
+.o 6 0
+s197
+	push_a 4
+	jsr_eval 0
+	push_a 4
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	push_a 4
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	buildAC "\n"
 	push_a 1
-	pushI 0
-	updatepop_a 0 2
-.d 2 2 ii
-	jmp s93
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	buildh _Nil 0
+	update_a 0 7
+	update_a 0 8
+	update_a 0 9
+	pop_a 1
+.d 2 0
+	jsr catAC
+.o 1 0
+	buildAC " "
+.d 2 0
+	jsr catAC
+.o 1 0
+	push_a 4
+	buildh _Nil 0
+	update_a 0 6
+	pop_a 1
+.d 2 0
+	jsr catAC
+.o 1 0
+	buildAC "push "
+.d 2 0
+	jsr catAC
+.o 1 0
+	push_r_args 3 4 0
+	update_a 6 11
+	update_a 5 10
+	update_a 4 9
+	update_a 3 8
+	update_a 2 7
+	update_a 1 6
+	updatepop_a 0 5
+.d 7 0
+	jsr s47
+.o 2 0
+	push_a 1
+	push_a 1
+	fillh _Tuple 2 4
+	pop_a 2
+.d 1 0
+	rtn
 .o 7 0
-s172
+s163
 	eq_desc _Cons 2 4
-	jmp_true case.311
-	jmp s172.1
-case.311
+	jmp_true case.304
+	jmp s163.1
+case.304
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
 	pop_a 1
 	jsr_eval 1
 	eq_desc _Cons 2 1
-	jmp_true case.312
+	jmp_true case.305
 	pop_a 2
-	jmp s172.1
-case.312
+	jmp s163.1
+case.305
 	push_args 1 2 2
 	buildh _Nil 0
 	update_a 0 4
@@ -11891,7 +11456,7 @@ case.312
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.313
+	jmp_false else.306
 	push_a 1
 	push_a 1
 	buildh _Cons 2
@@ -11916,14 +11481,14 @@ case.312
 	update_a 1 12
 	updatepop_a 0 11
 .d 7 0
-	jmp s151
-else.313
+	jmp s142
+else.306
 	buildAC "<symbol> . </symbol>\n"
 	push_array 1
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.314
+	jmp_false else.307
 	push_a 1
 	push_a 1
 	buildh _Cons 2
@@ -11948,8 +11513,8 @@ else.313
 	update_a 1 12
 	updatepop_a 0 11
 .d 7 0
-	jmp s151
-else.314
+	jmp s142
+else.307
 	push_a 9
 	jsr_eval 0
 	push_array 0
@@ -11977,20 +11542,20 @@ else.314
 	update_a 1 12
 	updatepop_a 0 11
 .d 7 0
-	jmp s184
-s172.1
+	jmp s175
+s163.1
 	pop_a 7
 	pushD m_ParserToVM
-	pushD x_172
+	pushD x_163
 .d 0 2 ii
 	jmp _match_error
-.string x_172 "var_or_subroutine"
+.string x_163 "var_or_subroutine"
 .o 7 0
-s173
+s164
 	eq_desc _Cons 2 4
-	jmp_true case.315
-	jmp s173.1
-case.315
+	jmp_true case.308
+	jmp s164.1
+case.308
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
@@ -12011,52 +11576,52 @@ case.315
 	build d_S.3 -1 n_S.3
 	push_a 1
 	build d_S.2 -1 n_S.2
-	build _ 1 n273
+	build _ 1 n252
 	build d_S.2 -1 n_S.2
 	pushB TRUE
 	update_a 1 10
 	updatepop_a 0 9
 .d 2 1 b
 	rtn
-s173.1
+s164.1
 	pop_a 7
 	pushD m_ParserToVM
-	pushD x_173
+	pushD x_164
 .d 0 2 ii
 	jmp _match_error
-.string x_173 "parseTermExpression"
-.n 1 _ ea273
+.string x_164 "parseTermExpression"
+.n 1 _ ea252
 .o 1 0
-n273
+n252
 	push_node _cycle_in_spine 1
 .o 2 0
-ea273
+ea252
 	jsr_eval 0
 .o 2 0
-s273
+s252
 	eq_desc _Cons 2 0
-	jmp_true case.316
-	jmp s273.1
-case.316
+	jmp_true case.309
+	jmp s252.1
+case.309
 	push_args 0 2 2
 	pop_a 2
 	fill_a 0 1
 	pop_a 1
 .d 1 0
 	rtn
-s273.1
+s252.1
 	pop_a 2
 	pushD m_ParserToVM
-	pushD x_273
+	pushD x_252
 .d 0 2 ii
 	jmp _match_error
-.string x_273 "_match8"
+.string x_252 "_match8"
 .o 7 0
-s174
+s165
 	eq_desc _Cons 2 4
-	jmp_true case.317
-	jmp s174.1
-case.317
+	jmp_true case.310
+	jmp s165.1
+case.310
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
@@ -12082,7 +11647,7 @@ case.317
 	update_a 1 2
 	update_a 0 1
 	pop_a 1
-	build _ 4 n228
+	build _ 4 n211
 	build d_S.2 -1 n_S.2
 	push_a 1
 	build d_S.2 -1 n_S.2
@@ -12091,21 +11656,21 @@ case.317
 	updatepop_a 0 10
 .d 2 1 b
 	rtn
-s174.1
+s165.1
 	pop_a 7
 	pushD m_ParserToVM
-	pushD x_174
+	pushD x_165
 .d 0 2 ii
 	jmp _match_error
-.string x_174 "parseUnaryOp"
-.n 4 _ ea228
+.string x_165 "parseUnaryOp"
+.n 4 _ ea211
 .o 1 0
-n228
+n211
 	push_node _cycle_in_spine 4
 .o 5 0
-ea228
+ea211
 .o 5 0
-s228
+s211
 	push_a 3
 	jsr_eval 0
 	push_a 3
@@ -12142,21 +11707,21 @@ s228
 .d 1 0
 	rtn
 .o 7 0
-s175
+s166
 	eq_desc _Cons 2 4
-	jmp_true case.318
-	jmp s175.1
-case.318
+	jmp_true case.311
+	jmp s166.1
+case.311
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
 	pop_a 1
 	jsr_eval 1
 	eq_desc _Cons 2 1
-	jmp_true case.319
+	jmp_true case.312
 	pop_a 2
-	jmp s175.1
-case.319
+	jmp s166.1
+case.312
 	push_args 1 2 2
 	buildh _Nil 0
 	update_a 0 4
@@ -12188,11 +11753,11 @@ case.319
 	update_a 0 15
 	pop_a 1
 .d 7 0
-	jsr s156
+	jsr s147
 .o 2 1 b
 	push_b 0
 	notB
-	jmp_false else.320
+	jmp_false else.313
 	buildAC "failed in parseArrayTerm 2"
 	updatepop_a 0 10
 	pop_b 1
@@ -12206,7 +11771,7 @@ case.319
 	pop_a 1
 .d 2 1 b
 	rtn
-else.320
+else.313
 	push_a 2
 	build e_ParserToVM_dgetTokenValue 1 e_ParserToVM_ngetTokenValue
 	push_a 2
@@ -12234,7 +11799,7 @@ else.320
 	pushB_a 1
 	pop_a 1
 	notB
-	jmp_false else.321
+	jmp_false else.314
 	buildAC "failed to get symbol record fields"
 	updatepop_a 0 13
 .d 1 0
@@ -12247,7 +11812,7 @@ else.320
 	pop_a 1
 .d 2 1 b
 	rtn
-else.321
+else.314
 	push_a 4
 	jsr_eval 0
 	push_a 2
@@ -12302,11 +11867,11 @@ else.321
 	update_a 1 13
 	updatepop_a 0 12
 .d 7 0
-	jsr s157
+	jsr s148
 .o 1 1 b
 	push_b 0
 	notB
-	jmp_false else.322
+	jmp_false else.315
 	buildAC "failed in parseArrayTerm 3"
 	updatepop_a 0 2
 	pop_b 1
@@ -12320,9 +11885,9 @@ else.321
 	pop_a 1
 .d 2 1 b
 	rtn
-else.322
+else.315
 	push_a 1
-	build _ 1 n274
+	build _ 1 n253
 	build d_S.2 -1 n_S.2
 	push_a 1
 	pushB TRUE
@@ -12335,45 +11900,45 @@ else.322
 	updatepop_b 0 1
 .d 2 1 b
 	rtn
-s175.1
+s166.1
 	pop_a 7
 	pushD m_ParserToVM
-	pushD x_175
+	pushD x_166
 .d 0 2 ii
 	jmp _match_error
-.string x_175 "parseArrayTerm"
-.n 1 _ ea274
+.string x_166 "parseArrayTerm"
+.n 1 _ ea253
 .o 1 0
-n274
+n253
 	push_node _cycle_in_spine 1
 .o 2 0
-ea274
+ea253
 	jsr_eval 0
 .o 2 0
-s274
+s253
 	eq_desc _Cons 2 0
-	jmp_true case.323
-	jmp s274.1
-case.323
+	jmp_true case.316
+	jmp s253.1
+case.316
 	push_args 0 2 2
 	pop_a 2
 	fill_a 0 1
 	pop_a 1
 .d 1 0
 	rtn
-s274.1
+s253.1
 	pop_a 2
 	pushD m_ParserToVM
-	pushD x_274
+	pushD x_253
 .d 0 2 ii
 	jmp _match_error
-.string x_274 "_match9"
+.string x_253 "_match9"
 .o 7 0
-s176
+s167
 	eq_desc _Cons 2 4
-	jmp_true case.324
-	jmp s176.1
-case.324
+	jmp_true case.317
+	jmp s167.1
+case.317
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
@@ -12390,7 +11955,7 @@ case.324
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.325
+	jmp_false else.318
 	push_a 1
 	push_a 1
 	buildh _Cons 2
@@ -12413,14 +11978,14 @@ case.324
 	update_a 1 10
 	updatepop_a 0 9
 .d 7 0
-	jmp s183
-else.325
+	jmp s174
+else.318
 	buildAC "<keyword> false </keyword>\n"
 	push_array 1
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.326
+	jmp_false else.319
 	push_a 1
 	push_a 1
 	buildh _Cons 2
@@ -12443,14 +12008,14 @@ else.325
 	update_a 1 10
 	updatepop_a 0 9
 .d 7 0
-	jmp s182
-else.326
+	jmp s173
+else.319
 	buildAC "<keyword> true </keyword>\n"
 	push_array 1
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.327
+	jmp_false else.320
 	push_a 1
 	push_a 1
 	buildh _Cons 2
@@ -12473,14 +12038,14 @@ else.326
 	update_a 1 10
 	updatepop_a 0 9
 .d 7 0
-	jmp s181
-else.327
+	jmp s172
+else.320
 	buildAC "<keyword> this </keyword>\n"
 	push_array 1
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.328
+	jmp_false else.321
 	push_a 1
 	push_a 1
 	buildh _Cons 2
@@ -12503,23 +12068,23 @@ else.327
 	update_a 1 10
 	updatepop_a 0 9
 .d 7 0
-	jmp s180
-else.328
+	jmp s171
+else.321
 	pop_a 2
-	jmp s176.1
-s176.1
+	jmp s167.1
+s167.1
 	pop_a 7
 	pushD m_ParserToVM
-	pushD x_176
+	pushD x_167
 .d 0 2 ii
 	jmp _match_error
-.string x_176 "parseKeywordTerm"
+.string x_167 "parseKeywordTerm"
 .o 7 0
-s177
+s168
 	eq_desc _Cons 2 4
-	jmp_true case.329
-	jmp s177.1
-case.329
+	jmp_true case.322
+	jmp s168.1
+case.322
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
@@ -12588,7 +12153,7 @@ case.329
 	update_a 0 16
 	pop_a 1
 .d 7 0
-	jsr s146
+	jsr s137
 .o 2 0
 	pop_a 1
 	push_a 8
@@ -12598,7 +12163,7 @@ case.329
 	push_a 8
 	push_a 8
 .d 7 0
-	jsr s146
+	jsr s137
 .o 2 0
 	pop_a 1
 	push_a 8
@@ -12616,11 +12181,11 @@ case.329
 	update_a 1 9
 	updatepop_a 0 8
 .d 7 0
-	jsr s147
+	jsr s138
 .o 1 1 b
 	push_b 0
 	notB
-	jmp_false else.330
+	jmp_false else.323
 	buildAC "failed to append chars to string"
 	updatepop_a 0 2
 	pop_b 1
@@ -12634,7 +12199,7 @@ case.329
 	pop_a 1
 .d 2 1 b
 	rtn
-else.330
+else.323
 	push_a 0
 	push_a 2
 	pushB TRUE
@@ -12643,19 +12208,19 @@ else.330
 	updatepop_b 0 1
 .d 2 1 b
 	rtn
-s177.1
+s168.1
 	pop_a 7
 	pushD m_ParserToVM
-	pushD x_177
+	pushD x_168
 .d 0 2 ii
 	jmp _match_error
-.string x_177 "parseStringConstant"
+.string x_168 "parseStringConstant"
 .o 7 0
-s178
+s169
 	eq_desc _Cons 2 4
-	jmp_true case.331
-	jmp s178.1
-case.331
+	jmp_true case.324
+	jmp s169.1
+case.324
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
@@ -12670,7 +12235,7 @@ case.331
 	update_a 1 2
 	update_a 0 1
 	pop_a 1
-	build _ 4 n248
+	build _ 4 n227
 	build d_S.2 -1 n_S.2
 	push_a 2
 	pushB TRUE
@@ -12678,21 +12243,21 @@ case.331
 	updatepop_a 0 9
 .d 2 1 b
 	rtn
-s178.1
+s169.1
 	pop_a 7
 	pushD m_ParserToVM
-	pushD x_178
+	pushD x_169
 .d 0 2 ii
 	jmp _match_error
-.string x_178 "parseIntegerConstant"
-.n 4 _ ea248
+.string x_169 "parseIntegerConstant"
+.n 4 _ ea227
 .o 1 0
-n248
+n227
 	push_node _cycle_in_spine 4
 .o 5 0
-ea248
+ea227
 .o 5 0
-s248
+s227
 	push_a 3
 	jsr_eval 0
 	push_a 3
@@ -12741,21 +12306,21 @@ s248
 .d 1 0
 	rtn
 .o 8 0
-s179
+s170
 	eq_desc _Cons 2 4
-	jmp_true case.332
-	jmp s179.1
-case.332
+	jmp_true case.325
+	jmp s170.1
+case.325
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
 	pop_a 1
 	jsr_eval 1
 	eq_desc _Cons 2 1
-	jmp_true case.333
+	jmp_true case.326
 	pop_a 2
-	jmp s179.1
-case.333
+	jmp s170.1
+case.326
 	push_args 1 2 2
 	buildh _Nil 0
 	update_a 0 4
@@ -12774,10 +12339,10 @@ case.333
 .o 0 1 b	
 	push_a 0
 .d 1 1 b
-	jsr s118
+	jsr s112
 .o 0 1 b
 	notB
-	jmp_false else.334
+	jmp_false else.327
 	push_a 1
 	push_a 1
 	buildh _Cons 2
@@ -12793,13 +12358,13 @@ case.333
 	updatepop_a 0 12
 .d 2 1 b
 	rtn
-else.334
+else.327
 	buildAC "<symbol> , </symbol>\n"
 	push_array 1
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.335
+	jmp_false else.328
 	push_a 2
 	build e_ParserToVM_dgetTokenValue 1 e_ParserToVM_ngetTokenValue
 	build_r e_StdFile_rFileSystem; 4 0 5 0
@@ -12838,8 +12403,8 @@ else.334
 	update_a 1 13
 	updatepop_a 0 12
 .d 8 0
-	jmp s179
-else.335
+	jmp s170
+else.328
 	buildAC "<symbol> ; </symbol>\n"
 	push_array 1
 	update_a 1 2
@@ -12847,7 +12412,7 @@ else.335
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.336
+	jmp_false else.329
 	push_a 1
 	build e_ParserToVM_dgetTokenValue 1 e_ParserToVM_ngetTokenValue
 	build_r e_StdFile_rFileSystem; 4 0 4 0
@@ -12883,23 +12448,23 @@ else.335
 	update_a 1 12
 	updatepop_a 0 11
 .d 7 0
-	jmp s145
-else.336
+	jmp s136
+else.329
 	pop_a 3
-	jmp s179.1
-s179.1
+	jmp s170.1
+s170.1
 	pop_a 8
 	pushD m_ParserToVM
-	pushD x_179
+	pushD x_170
 .d 0 2 ii
 	jmp _match_error
-.string x_179 "parseMultipleVarsInLine"
+.string x_170 "parseMultipleVarsInLine"
 .o 7 0
-s180
+s171
 	eq_desc _Cons 2 4
-	jmp_true case.337
-	jmp s180.1
-case.337
+	jmp_true case.330
+	jmp s171.1
+case.330
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
@@ -12924,19 +12489,19 @@ case.337
 	updatepop_a 0 8
 .d 2 1 b
 	rtn
-s180.1
+s171.1
 	pop_a 7
 	pushD m_ParserToVM
-	pushD x_180
+	pushD x_171
 .d 0 2 ii
 	jmp _match_error
-.string x_180 "parseThis"
+.string x_171 "parseThis"
 .o 7 0
-s181
+s172
 	eq_desc _Cons 2 4
-	jmp_true case.338
-	jmp s181.1
-case.338
+	jmp_true case.331
+	jmp s172.1
+case.331
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
@@ -12961,19 +12526,19 @@ case.338
 	updatepop_a 0 8
 .d 2 1 b
 	rtn
-s181.1
+s172.1
 	pop_a 7
 	pushD m_ParserToVM
-	pushD x_181
+	pushD x_172
 .d 0 2 ii
 	jmp _match_error
-.string x_181 "parseTrue"
+.string x_172 "parseTrue"
 .o 7 0
-s182
+s173
 	eq_desc _Cons 2 4
-	jmp_true case.339
-	jmp s182.1
-case.339
+	jmp_true case.332
+	jmp s173.1
+case.332
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
@@ -12998,19 +12563,19 @@ case.339
 	updatepop_a 0 8
 .d 2 1 b
 	rtn
-s182.1
+s173.1
 	pop_a 7
 	pushD m_ParserToVM
-	pushD x_182
+	pushD x_173
 .d 0 2 ii
 	jmp _match_error
-.string x_182 "parseFalse"
+.string x_173 "parseFalse"
 .o 7 0
-s183
+s174
 	eq_desc _Cons 2 4
-	jmp_true case.340
-	jmp s183.1
-case.340
+	jmp_true case.333
+	jmp s174.1
+case.333
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
@@ -13035,29 +12600,29 @@ case.340
 	updatepop_a 0 8
 .d 2 1 b
 	rtn
-s183.1
+s174.1
 	pop_a 7
 	pushD m_ParserToVM
-	pushD x_183
+	pushD x_174
 .d 0 2 ii
 	jmp _match_error
-.string x_183 "parseNull"
+.string x_174 "parseNull"
 .o 7 0
-s184
+s175
 	eq_desc _Cons 2 4
-	jmp_true case.341
-	jmp s184.1
-case.341
+	jmp_true case.334
+	jmp s175.1
+case.334
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
 	pop_a 1
 	jsr_eval 1
 	eq_desc _Cons 2 1
-	jmp_true case.342
+	jmp_true case.335
 	pop_a 2
-	jmp s184.1
-case.342
+	jmp s175.1
+case.335
 	push_args 1 2 2
 	buildh _Nil 0
 	update_a 0 4
@@ -13092,7 +12657,7 @@ case.342
 	pushB_a 1
 	pop_a 1
 	notB
-	jmp_false else.343
+	jmp_false else.336
 	buildAC "failed to get symbol record fields"
 	updatepop_a 0 14
 .d 1 0
@@ -13105,7 +12670,7 @@ case.342
 	pop_a 1
 .d 2 1 b
 	rtn
-else.343
+else.336
 	push_a 4
 	jsr_eval 0
 	push_a 2
@@ -13161,11 +12726,11 @@ else.343
 	update_a 1 13
 	updatepop_a 0 12
 .d 7 0
-	jsr s157
+	jsr s148
 .o 1 1 b
 	push_b 0
 	notB
-	jmp_false else.344
+	jmp_false else.337
 	buildAC "failed to write vm code to file"
 	updatepop_a 0 3
 	pop_b 1
@@ -13179,7 +12744,7 @@ else.343
 	pop_a 1
 .d 2 1 b
 	rtn
-else.344
+else.337
 	push_a 2
 	push_a 2
 	buildh _Cons 2
@@ -13194,19 +12759,19 @@ else.344
 	updatepop_b 0 1
 .d 2 1 b
 	rtn
-s184.1
+s175.1
 	pop_a 7
 	pushD m_ParserToVM
-	pushD x_184
+	pushD x_175
 .d 0 2 ii
 	jmp _match_error
-.string x_184 "parseVarName"
+.string x_175 "parseVarName"
 .o 9 0
-s185
+s176
 	eq_desc _Cons 2 4
-	jmp_true case.345
-	jmp s185.1
-case.345
+	jmp_true case.338
+	jmp s176.1
+case.338
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
@@ -13214,25 +12779,25 @@ case.345
 	pop_a 1
 	jsr_eval 0
 	eq_desc _Cons 2 0
-	jmp_true case.346
+	jmp_true case.339
 	pop_a 1
-	jmp s185.1
-case.346
+	jmp s176.1
+case.339
 	repl_args 2 2
 	pop_a 1
 	jsr_eval 0
 	eq_desc _Cons 2 0
-	jmp_true case.347
+	jmp_true case.340
 	pop_a 1
-	jmp s185.1
-case.347
+	jmp s176.1
+case.340
 	repl_args 2 2
 	jsr_eval 1
 	eq_desc _Cons 2 1
-	jmp_true case.348
+	jmp_true case.341
 	pop_a 2
-	jmp s185.1
-case.348
+	jmp s176.1
+case.341
 	push_args 1 2 2
 	buildh _Nil 0
 	update_a 0 4
@@ -13248,7 +12813,7 @@ case.348
 	update_a 1 2
 	update_a 0 1
 	pop_a 1
-	build _ 4 n217
+	build _ 4 n200
 	build d_S.2 -1 n_S.2
 	push_a 1
 	jsr_eval 0
@@ -13277,11 +12842,11 @@ case.348
 	update_a 0 18
 	pop_a 1
 .d 8 0
-	jsr s149
+	jsr s140
 .o 3 1 b
 	push_b 0
 	notB
-	jmp_false else.349
+	jmp_false else.342
 	buildAC "failed"
 	updatepop_a 0 13
 	pop_b 1
@@ -13295,7 +12860,7 @@ case.348
 	pop_a 1
 .d 2 1 b
 	rtn
-else.349
+else.342
 	build_r e_StdFile_rFileSystem; 4 0 4 0
 	push_a 3
 	push_a 13
@@ -13310,7 +12875,7 @@ else.349
 	update_a 1 2
 	update_a 0 1
 	pop_a 1
-	build _ 6 n216
+	build _ 6 n199
 	build d_S.2 -1 n_S.2
 	push_a 2
 	pushB TRUE
@@ -13319,21 +12884,21 @@ else.349
 	updatepop_b 0 1
 .d 2 1 b
 	rtn
-s185.1
+s176.1
 	pop_a 9
 	pushD m_ParserToVM
-	pushD x_185
+	pushD x_176
 .d 0 2 ii
 	jmp _match_error
-.string x_185 "doClassObjectMethod"
-.n 4 _ ea217
+.string x_176 "doClassObjectMethod"
+.n 4 _ ea200
 .o 1 0
-n217
+n200
 	push_node _cycle_in_spine 4
 .o 5 0
-ea217
+ea200
 .o 5 0
-s217
+s200
 	push_a 3
 	jsr_eval 0
 	push_a 3
@@ -13378,14 +12943,14 @@ s217
 	pop_a 2
 .d 1 0
 	rtn
-.n 6 _ ea216
+.n 6 _ ea199
 .o 1 0
-n216
+n199
 	push_node _cycle_in_spine 6
 .o 7 0
-ea216
+ea199
 .o 7 0
-s216
+s199
 	push_a 5
 	jsr_eval 0
 	push_a 5
@@ -13461,21 +13026,21 @@ s216
 .d 1 0
 	rtn
 .o 7 0
-s186
+s177
 	eq_desc _Cons 2 4
-	jmp_true case.350
-	jmp s186.1
-case.350
+	jmp_true case.343
+	jmp s177.1
+case.343
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
 	pop_a 1
 	jsr_eval 1
 	eq_desc _Cons 2 1
-	jmp_true case.351
+	jmp_true case.344
 	pop_a 2
-	jmp s186.1
-case.351
+	jmp s177.1
+case.344
 	push_args 1 2 2
 	buildh _Nil 0
 	update_a 0 4
@@ -13483,17 +13048,17 @@ case.351
 	pop_a 1
 	jsr_eval 0
 	eq_desc _Cons 2 0
-	jmp_true case.352
+	jmp_true case.345
 	pop_a 3
-	jmp s186.1
-case.352
+	jmp s177.1
+case.345
 	repl_args 2 2
 	jsr_eval 1
 	eq_desc _Cons 2 1
-	jmp_true case.353
+	jmp_true case.346
 	pop_a 4
-	jmp s186.1
-case.353
+	jmp s177.1
+case.346
 	push_args 1 2 2
 	buildh _Nil 0
 	update_a 0 4
@@ -13528,11 +13093,11 @@ case.353
 	update_a 0 17
 	pop_a 1
 .d 8 0
-	jsr s149
+	jsr s140
 .o 3 1 b
 	push_b 0
 	notB
-	jmp_false else.354
+	jmp_false else.347
 	buildAC "failed"
 	updatepop_a 0 12
 	pop_b 1
@@ -13546,7 +13111,7 @@ case.353
 	pop_a 1
 .d 2 1 b
 	rtn
-else.354
+else.347
 	push_a 4
 	build e_ParserToVM_dgetTokenValue 1 e_ParserToVM_ngetTokenValue
 	push_a 0
@@ -13555,7 +13120,7 @@ else.354
 	build d_S.2 -1 n_S.2
 	push_a 1
 	build d_S.1 -1 n_S.1
-	build _ 2 n218
+	build _ 2 n201
 	build e_StdList_dlength;47 1 e_StdList_nlength;47
 	push_a 2
 	build e__SystemArray_dusize;23 1 e__SystemArray_nusize;23
@@ -13565,16 +13130,16 @@ else.354
 	build d_S.2 -1 n_S.2
 	push_a 1
 	build d_S.1 -1 n_S.1
-	build _ 2 n223
+	build _ 2 n206
 	push_a 3
-	build _ 2 n222
+	build _ 2 n205
 	push_a 2
 	build d_S.2 -1 n_S.2
 	push_a 3
 	build d_S.1 -1 n_S.1
-	build _ 2 n221
+	build _ 2 n204
 	push_a 4
-	build _ 2 n220
+	build _ 2 n203
 	build_r e_StdFile_rFileSystem; 4 0 12 0
 	push_a 10
 	push_a 19
@@ -13589,7 +13154,7 @@ else.354
 	update_a 3 6
 	update_a 0 3
 	pop_a 1
-	build _ 7 n219
+	build _ 7 n202
 	build d_S.2 -1 n_S.2
 	push_a 7
 	pushB TRUE
@@ -13598,21 +13163,21 @@ else.354
 	updatepop_b 0 1
 .d 2 1 b
 	rtn
-s186.1
+s177.1
 	pop_a 7
 	pushD m_ParserToVM
-	pushD x_186
+	pushD x_177
 .d 0 2 ii
 	jmp _match_error
-.string x_186 "doExternalFunction"
-.n 2 _ ea223
+.string x_177 "doExternalFunction"
+.n 2 _ ea206
 .o 1 0
-n223
+n206
 	push_node _cycle_in_spine 2
 .o 3 0
-ea223
+ea206
 .o 3 0
-s223
+s206
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -13627,15 +13192,15 @@ s223
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s101
-.n 2 _ ea222
+	jmp s96
+.n 2 _ ea205
 .o 1 0
-n222
+n205
 	push_node _cycle_in_spine 2
 .o 3 0
-ea222
+ea205
 .o 3 0
-s222
+s205
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -13650,14 +13215,14 @@ s222
 	updatepop_a 0 2
 .d 2 1 i
 	jmp e_StdList_stake
-.n 2 _ ea221
+.n 2 _ ea204
 .o 1 0
-n221
+n204
 	push_node _cycle_in_spine 2
 .o 3 0
-ea221
+ea204
 .o 3 0
-s221
+s204
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -13672,15 +13237,15 @@ s221
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s99
-.n 2 _ ea220
+	jmp s94
+.n 2 _ ea203
 .o 1 0
-n220
+n203
 	push_node _cycle_in_spine 2
 .o 3 0
-ea220
+ea203
 .o 3 0
-s220
+s203
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -13695,14 +13260,14 @@ s220
 	updatepop_a 0 2
 .d 2 1 i
 	jmp e_StdList_stake
-.n 7 _ ea219
+.n 7 _ ea202
 .o 1 0
-n219
+n202
 	push_node _cycle_in_spine 7
 .o 8 0
-ea219
+ea202
 .o 8 0
-s219
+s202
 	push_a 6
 	jsr_eval 0
 	push_a 6
@@ -13756,7 +13321,7 @@ s219
 	update_a 0 8
 	pop_a 1
 .d 1 1 i
-	jsr s104
+	jsr s98
 .o 0 1 i
 	create_array_ CHAR 0 1
 	buildI 0
@@ -13765,7 +13330,7 @@ s219
 	update_a 0 1
 	pop_a 1
 .d 3 0
-	jsr s102
+	jsr s97
 .o 1 0
 .d 2 0
 	jsr catAC
@@ -13791,14 +13356,14 @@ s219
 	pop_a 2
 .d 1 0
 	rtn
-.n 2 _ ea218
+.n 2 _ ea201
 .o 1 0
-n218
+n201
 	push_node _cycle_in_spine 2
 .o 3 0
-ea218
+ea201
 .o 3 0
-s218
+s201
 	push_a 0
 	jsr_eval 0
 	pushI_a 1
@@ -13813,13 +13378,13 @@ s218
 	pushI 0
 	updatepop_a 0 2
 .d 2 2 ii
-	jmp s98
+	jmp s93
 .o 8 0
-s187
+s178
 	eq_desc _Cons 2 4
-	jmp_true case.355
-	jmp s187.1
-case.355
+	jmp_true case.348
+	jmp s178.1
+case.348
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
@@ -13848,11 +13413,11 @@ case.355
 	update_a 0 17
 	pop_a 1
 .d 7 0
-	jsr s157
+	jsr s148
 .o 1 1 b
 	push_b 0
 	notB
-	jmp_false else.356
+	jmp_false else.349
 	buildAC "failed in parseIfStatement 1"
 	updatepop_a 0 11
 	pop_b 1
@@ -13866,7 +13431,7 @@ case.355
 	pop_a 1
 .d 2 1 b
 	rtn
-else.356
+else.349
 	push_a 2
 	push_a 2
 	buildh _Cons 2
@@ -13891,11 +13456,11 @@ else.356
 	update_a 1 4
 	updatepop_a 0 3
 .d 7 0
-	jsr s159
+	jsr s150
 .o 2 1 b
 	push_b 0
 	notB
-	jmp_false else.357
+	jmp_false else.350
 	buildAC "failed in parseIfStatement 2"
 	updatepop_a 0 10
 	pop_b 1
@@ -13909,7 +13474,7 @@ else.356
 	pop_a 1
 .d 2 1 b
 	rtn
-else.357
+else.350
 	build_r e_StdFile_rFileSystem; 4 0 2 0
 	push_a 2
 	push_a 10
@@ -13920,7 +13485,7 @@ else.357
 	update_a 1 2
 	update_a 0 1
 	pop_a 1
-	build _ 4 n253
+	build _ 4 n232
 	build d_S.2 -1 n_S.2
 	push_a 1
 	jsr_eval 0
@@ -13958,11 +13523,11 @@ else.357
 	update_a 1 3
 	updatepop_a 0 2
 .d 7 0
-	jsr s159
+	jsr s150
 .o 2 1 b
 	push_b 0
 	notB
-	jmp_false else.358
+	jmp_false else.351
 	buildAC "failed in parseIfStatement 2"
 	updatepop_a 0 10
 	pop_b 1
@@ -13976,7 +13541,7 @@ else.357
 	pop_a 1
 .d 2 1 b
 	rtn
-else.358
+else.351
 	build_r e_StdFile_rFileSystem; 4 0 2 0
 	push_a 2
 	push_a 10
@@ -13987,10 +13552,10 @@ else.358
 	update_a 1 2
 	update_a 0 1
 	pop_a 1
-	build _ 4 n254
+	build _ 4 n233
 	build d_S.2 -1 n_S.2
 	push_a 1
-	build _ 1 n275
+	build _ 1 n254
 	build d_S.2 -1 n_S.2
 	pushB TRUE
 	update_a 1 11
@@ -13998,47 +13563,47 @@ else.358
 	updatepop_b 0 1
 .d 2 1 b
 	rtn
-s187.1
+s178.1
 	pop_a 8
 	pushD m_ParserToVM
-	pushD x_187
+	pushD x_178
 .d 0 2 ii
 	jmp _match_error
-.string x_187 "parseElseStatement"
-.n 1 _ ea275
+.string x_178 "parseElseStatement"
+.n 1 _ ea254
 .o 1 0
-n275
+n254
 	push_node _cycle_in_spine 1
 .o 2 0
-ea275
+ea254
 	jsr_eval 0
 .o 2 0
-s275
+s254
 	eq_desc _Cons 2 0
-	jmp_true case.359
-	jmp s275.1
-case.359
+	jmp_true case.352
+	jmp s254.1
+case.352
 	push_args 0 2 2
 	pop_a 2
 	fill_a 0 1
 	pop_a 1
 .d 1 0
 	rtn
-s275.1
+s254.1
 	pop_a 2
 	pushD m_ParserToVM
-	pushD x_275
+	pushD x_254
 .d 0 2 ii
 	jmp _match_error
-.string x_275 "_match10"
-.n 4 _ ea254
+.string x_254 "_match10"
+.n 4 _ ea233
 .o 1 0
-n254
+n233
 	push_node _cycle_in_spine 4
 .o 5 0
-ea254
+ea233
 .o 5 0
-s254
+s233
 	push_a 3
 	jsr_eval 0
 	buildAC "\n"
@@ -14080,14 +13645,14 @@ s254
 	pop_a 2
 .d 1 0
 	rtn
-.n 4 _ ea253
+.n 4 _ ea232
 .o 1 0
-n253
+n232
 	push_node _cycle_in_spine 4
 .o 5 0
-ea253
+ea232
 .o 5 0
-s253
+s232
 	push_a 3
 	jsr_eval 0
 	buildAC "\n"
@@ -14140,21 +13705,21 @@ s253
 .d 1 0
 	rtn
 .o 7 0
-s188
+s179
 	eq_desc _Cons 2 4
-	jmp_true case.360
-	jmp s188.1
-case.360
+	jmp_true case.353
+	jmp s179.1
+case.353
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
 	pop_a 1
 	jsr_eval 1
 	eq_desc _Cons 2 1
-	jmp_true case.361
+	jmp_true case.354
 	pop_a 2
-	jmp s188.1
-case.361
+	jmp s179.1
+case.354
 	push_args 1 2 2
 	buildh _Nil 0
 	update_a 0 4
@@ -14172,7 +13737,7 @@ case.361
 	jsr eqAC
 .o 0 1 b	
 	notB
-	jmp_false else.362
+	jmp_false else.355
 	push_a 1
 	push_a 1
 	buildh _Cons 2
@@ -14197,8 +13762,8 @@ case.361
 	update_a 1 12
 	updatepop_a 0 11
 .d 7 0
-	jmp s189
-else.362
+	jmp s180
+else.355
 	push_a 10
 	jsr_eval 0
 	push_a 8
@@ -14215,7 +13780,7 @@ else.362
 	update_a 0 13
 	pop_a 1
 .d 5 0
-	jsr s155
+	jsr s146
 .o 2 1 i
 	push_a 8
 	jsr_eval 0
@@ -14256,18 +13821,18 @@ else.362
 	update_a 1 2
 	updatepop_a 0 1
 .d 7 0
-	jsr s157
+	jsr s148
 .o 1 1 b
 	push_b 0
 	notB
-	jmp_true then.363
+	jmp_true then.356
 	push_a 1
 	jsr_eval 0
 	pushB_a 2
 	pop_a 1
 	notB
-	jmp_false else.363
-then.363
+	jmp_false else.356
+then.356
 	buildAC "failed in parseWhileStatement 1"
 	updatepop_a 0 10
 	pop_b 2
@@ -14281,7 +13846,7 @@ then.363
 	pop_a 1
 .d 2 1 b
 	rtn
-else.363
+else.356
 	push_a 2
 	jsr_eval 0
 	push_a 1
@@ -14304,11 +13869,11 @@ else.363
 	update_a 1 4
 	updatepop_a 0 3
 .d 7 0
-	jsr s156
+	jsr s147
 .o 2 1 b
 	push_b 0
 	notB
-	jmp_false else.365
+	jmp_false else.358
 	buildAC "failed in parseWhileStatement 2"
 	updatepop_a 0 9
 	pop_b 2
@@ -14322,7 +13887,7 @@ else.363
 	pop_a 1
 .d 2 1 b
 	rtn
-else.365
+else.358
 	push_a 1
 	jsr_eval 0
 	push_b 1
@@ -14363,11 +13928,11 @@ else.365
 	update_a 1 2
 	updatepop_a 0 1
 .d 7 0
-	jsr s157
+	jsr s148
 .o 1 1 b
 	push_b 0
 	notB
-	jmp_false else.366
+	jmp_false else.359
 	buildAC "failed in parseWhileStatement 3"
 	updatepop_a 0 9
 	pop_b 2
@@ -14381,7 +13946,7 @@ else.365
 	pop_a 1
 .d 2 1 b
 	rtn
-else.366
+else.359
 	push_a 1
 	jsr_eval 0
 	eq_desc _Cons 2 0
@@ -14413,11 +13978,11 @@ else.366
 	update_a 1 3
 	updatepop_a 0 2
 .d 7 0
-	jsr s159
+	jsr s150
 .o 2 1 b
 	push_b 0
 	notB
-	jmp_false else.367
+	jmp_false else.360
 	buildAC "failed in parseWhileStatement 4"
 	updatepop_a 0 9
 	pop_b 3
@@ -14431,10 +13996,10 @@ else.366
 	pop_a 1
 .d 2 1 b
 	rtn
-else.367
+else.360
 	push_b 1
 	notB
-	jmp_false else.368
+	jmp_false else.361
 	buildAC "failed in parseWhileStatement 5"
 	updatepop_a 0 9
 	pop_b 3
@@ -14448,7 +14013,7 @@ else.367
 	pop_a 1
 .d 2 1 b
 	rtn
-else.368
+else.361
 	build_r e_StdFile_rFileSystem; 4 0 2 0
 	push_a 2
 	push_a 9
@@ -14458,10 +14023,10 @@ else.368
 	update_a 1 2
 	update_a 0 1
 	pop_a 1
-	build_u _ 3 1 n255
+	build_u _ 3 1 n234
 	build d_S.2 -1 n_S.2
 	push_a 1
-	build _ 1 n276
+	build _ 1 n255
 	build d_S.2 -1 n_S.2
 	pushB TRUE
 	update_a 1 10
@@ -14469,47 +14034,47 @@ else.368
 	updatepop_b 0 3
 .d 2 1 b
 	rtn
-s188.1
+s179.1
 	pop_a 7
 	pushD m_ParserToVM
-	pushD x_188
+	pushD x_179
 .d 0 2 ii
 	jmp _match_error
-.string x_188 "parseWhileStatement"
-.n 1 _ ea276
+.string x_179 "parseWhileStatement"
+.n 1 _ ea255
 .o 1 0
-n276
+n255
 	push_node _cycle_in_spine 1
 .o 2 0
-ea276
+ea255
 	jsr_eval 0
 .o 2 0
-s276
+s255
 	eq_desc _Cons 2 0
-	jmp_true case.369
-	jmp s276.1
-case.369
+	jmp_true case.362
+	jmp s255.1
+case.362
 	push_args 0 2 2
 	pop_a 2
 	fill_a 0 1
 	pop_a 1
 .d 1 0
 	rtn
-s276.1
+s255.1
 	pop_a 2
 	pushD m_ParserToVM
-	pushD x_276
+	pushD x_255
 .d 0 2 ii
 	jmp _match_error
-.string x_276 "_match11"
+.string x_255 "_match11"
 .nu 3 1 _ _
 .o 1 0
-n255
+n234
 	push_node_u _cycle_in_spine 3 1
 .o 4 1 i
-ea255
+ea234
 .o 4 1 i
-s255
+s234
 	push_a 2
 	jsr_eval 0
 	push_a 2
@@ -14566,31 +14131,31 @@ s255
 .d 1 0
 	rtn
 .o 7 0
-s189
+s180
 	eq_desc _Cons 2 4
-	jmp_true case.370
-	jmp s189.1
-case.370
+	jmp_true case.363
+	jmp s180.1
+case.363
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
 	pop_a 1
 	jsr_eval 1
 	eq_desc _Cons 2 1
-	jmp_true case.371
+	jmp_true case.364
 	pop_a 2
-	jmp s189.1
-case.371
+	jmp s180.1
+case.364
 	push_args 1 2 2
 	buildh _Nil 0
 	update_a 0 4
 	pop_a 1
 	jsr_eval 1
 	eq_desc _Cons 2 1
-	jmp_true case.372
+	jmp_true case.365
 	pop_a 4
-	jmp s189.1
-case.372
+	jmp s180.1
+case.365
 	push_args 1 2 2
 	buildh _Nil 0
 	update_a 0 4
@@ -14608,7 +14173,7 @@ case.372
 	jsr eqAC
 .o 0 1 b	
 	notB
-	jmp_false else.373
+	jmp_false else.366
 	push_a 1
 	push_a 1
 	buildh _Cons 2
@@ -14635,8 +14200,8 @@ case.372
 	update_a 1 14
 	updatepop_a 0 13
 .d 7 0
-	jmp s190
-else.373
+	jmp s181
+else.366
 	push_a 1
 	push_a 1
 	buildh _Cons 2
@@ -14664,11 +14229,11 @@ else.373
 	update_a 0 14
 	pop_a 1
 .d 7 0
-	jsr s151
+	jsr s142
 .o 2 1 b
 	push_b 0
 	notB
-	jmp_false else.374
+	jmp_false else.367
 	buildAC "abort in parseDoStatement"
 	updatepop_a 0 9
 	pop_b 1
@@ -14682,7 +14247,7 @@ else.373
 	pop_a 1
 .d 2 1 b
 	rtn
-else.374
+else.367
 	push_a 1
 	jsr_eval 0
 	push_a 8
@@ -14704,11 +14269,11 @@ else.374
 	update_a 1 9
 	updatepop_a 0 8
 .d 7 0
-	jsr s157
+	jsr s148
 .o 1 1 b
 	push_b 0
 	notB
-	jmp_false else.375
+	jmp_false else.368
 	buildAC "abort in parseDoStatement"
 	updatepop_a 0 2
 	pop_b 1
@@ -14722,9 +14287,9 @@ else.374
 	pop_a 1
 .d 2 1 b
 	rtn
-else.375
+else.368
 	push_a 1
-	build _ 1 n277
+	build _ 1 n256
 	build d_S.2 -1 n_S.2
 	push_a 1
 	pushB TRUE
@@ -14737,55 +14302,55 @@ else.375
 	updatepop_b 0 1
 .d 2 1 b
 	rtn
-s189.1
+s180.1
 	pop_a 7
 	pushD m_ParserToVM
-	pushD x_189
+	pushD x_180
 .d 0 2 ii
 	jmp _match_error
-.string x_189 "parseDoStatement"
-.n 1 _ ea277
+.string x_180 "parseDoStatement"
+.n 1 _ ea256
 .o 1 0
-n277
+n256
 	push_node _cycle_in_spine 1
 .o 2 0
-ea277
+ea256
 	jsr_eval 0
 .o 2 0
-s277
+s256
 	eq_desc _Cons 2 0
-	jmp_true case.376
-	jmp s277.1
-case.376
+	jmp_true case.369
+	jmp s256.1
+case.369
 	push_args 0 2 2
 	pop_a 2
 	fill_a 0 1
 	pop_a 1
 .d 1 0
 	rtn
-s277.1
+s256.1
 	pop_a 2
 	pushD m_ParserToVM
-	pushD x_277
+	pushD x_256
 .d 0 2 ii
 	jmp _match_error
-.string x_277 "_match12"
+.string x_256 "_match12"
 .o 7 0
-s190
+s181
 	eq_desc _Cons 2 4
-	jmp_true case.377
-	jmp s190.1
-case.377
+	jmp_true case.370
+	jmp s181.1
+case.370
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
 	pop_a 1
 	jsr_eval 1
 	eq_desc _Cons 2 1
-	jmp_true case.378
+	jmp_true case.371
 	pop_a 2
-	jmp s190.1
-case.378
+	jmp s181.1
+case.371
 	push_args 1 2 2
 	buildh _Nil 0
 	update_a 0 4
@@ -14802,7 +14367,7 @@ case.378
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.379
+	jmp_false else.372
 	push_a 10
 	jsr_eval 0
 	push_a 10
@@ -14826,8 +14391,8 @@ case.378
 	update_a 1 12
 	updatepop_a 0 11
 .d 7 0
-	jmp s191
-else.379
+	jmp s182
+else.372
 	push_a 1
 	push_a 1
 	buildh _Cons 2
@@ -14853,11 +14418,11 @@ else.379
 	update_a 0 14
 	pop_a 1
 .d 7 0
-	jsr s156
+	jsr s147
 .o 2 1 b
 	push_b 0
 	notB
-	jmp_false else.380
+	jmp_false else.373
 	buildAC "failed returnStatement"
 	updatepop_a 0 9
 	pop_b 1
@@ -14871,7 +14436,7 @@ else.379
 	pop_a 1
 .d 2 1 b
 	rtn
-else.380
+else.373
 	build_r e_StdFile_rFileSystem; 4 0 2 0
 	push_a 2
 	push_a 9
@@ -14886,7 +14451,7 @@ else.380
 	build _ 4 n47
 	build d_S.2 -1 n_S.2
 	push_a 1
-	build _ 1 n278
+	build _ 1 n257
 	build d_S.2 -1 n_S.2
 	pushB TRUE
 	update_a 1 10
@@ -14894,45 +14459,45 @@ else.380
 	updatepop_b 0 1
 .d 2 1 b
 	rtn
-s190.1
+s181.1
 	pop_a 7
 	pushD m_ParserToVM
-	pushD x_190
+	pushD x_181
 .d 0 2 ii
 	jmp _match_error
-.string x_190 "parseReturnStatement"
-.n 1 _ ea278
+.string x_181 "parseReturnStatement"
+.n 1 _ ea257
 .o 1 0
-n278
+n257
 	push_node _cycle_in_spine 1
 .o 2 0
-ea278
+ea257
 	jsr_eval 0
 .o 2 0
-s278
+s257
 	eq_desc _Cons 2 0
-	jmp_true case.381
-	jmp s278.1
-case.381
+	jmp_true case.374
+	jmp s257.1
+case.374
 	push_args 0 2 2
 	pop_a 2
 	fill_a 0 1
 	pop_a 1
 .d 1 0
 	rtn
-s278.1
+s257.1
 	pop_a 2
 	pushD m_ParserToVM
-	pushD x_278
+	pushD x_257
 .d 0 2 ii
 	jmp _match_error
-.string x_278 "_match13"
+.string x_257 "_match13"
 .o 7 0
-s191
+s182
 	eq_desc _Cons 2 4
-	jmp_true case.382
-	jmp s191.1
-case.382
+	jmp_true case.375
+	jmp s182.1
+case.375
 	push_args 4 2 2
 	buildh _Nil 0
 	update_a 0 7
@@ -14940,10 +14505,10 @@ case.382
 	pop_a 1
 	jsr_eval 0
 	eq_desc _Cons 2 0
-	jmp_true case.383
+	jmp_true case.376
 	pop_a 1
-	jmp s191.1
-case.383
+	jmp s182.1
+case.376
 	repl_args 2 2
 	pop_a 1
 	push_a 7
@@ -14962,11 +14527,11 @@ case.383
 	update_a 1 8
 	updatepop_a 0 7
 .d 7 0
-	jsr s157
+	jsr s148
 .o 1 1 b
 	push_b 0
 	notB
-	jmp_false else.384
+	jmp_false else.377
 	buildAC "failed return void"
 	updatepop_a 0 2
 	pop_b 1
@@ -14980,7 +14545,7 @@ case.383
 	pop_a 1
 .d 2 1 b
 	rtn
-else.384
+else.377
 	push_a 0
 	push_a 2
 	pushB TRUE
@@ -14989,13 +14554,13 @@ else.384
 	updatepop_b 0 1
 .d 2 1 b
 	rtn
-s191.1
+s182.1
 	pop_a 7
 	pushD m_ParserToVM
-	pushD x_191
+	pushD x_182
 .d 0 2 ii
 	jmp _match_error
-.string x_191 "retrunVoid"
+.string x_182 "retrunVoid"
 .impmod _system
 .implab _match_error
 .implab selector_m_error

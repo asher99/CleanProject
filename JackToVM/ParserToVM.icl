@@ -24,7 +24,7 @@ ParseMultipleFiles [x:xs] w
 // Initial the output file content:
 # outFile = "vmFiles\\" +++ filename +++ ".vm"
 # (ok_open,outFile,w) = fopen outFile FWriteText w
-| not ok_open = abort("failed to open file")
+| not ok_open = abort("failed to open vm file to writing in the first time")
 # outFile = fwrites "" outFile
 # (ok_read_close,w) = fclose outFile w
 | not ok_read_close = abort("failed to close file")
@@ -365,7 +365,7 @@ doExternalSubroutine [class_name,dot,name,sym:xs] filename w //= abort(class_nam
 | not objExist = doExternalFunction [class_name,dot,name,sym:xs] filename w
 | kind == "this" = doClassObjectMethod [class_name,dot,name,sym:xs] type index filename w
 // initial method calling by pushing 'pointer 0' into stack.
-# (okw,w) = write2file "push pointer 0\n" filename w
+# (okw,w) = write2file ("push " +++ kind +++ " " +++ index +++"\n") filename w		//# (okw,w) = write2file "push pointer 0\n" filename w
 // push arguments into stack.
 # (okp,count,tokens,w) = pushArguments xs 1 filename w
 | not okp = abort("failed")
@@ -373,7 +373,7 @@ doExternalSubroutine [class_name,dot,name,sym:xs] filename w //= abort(class_nam
 # class_list = getTokenValue class_name
 # len = length [ c \\ c <-: class_list ]
 # classname =  { c \\ c <- (take (len-1) [ c \\ c <-: class_list]) }
-# (okw2,w) = write2file ("call " +++ classname +++ "." +++ (getTokenValue name) +++ (toString count) +++ "\n") filename w
+# (okw2,w) = write2file ("call " +++ type +++ "." +++ (getTokenValue name) +++ (toString count) +++ "\n") filename w
 // return
 //= abort(tokens!!0 +++ tokens!!1 +++ tokens!!2 +++ tokens!!3 +++ tokens!!4)
 = (True,tokens,w)

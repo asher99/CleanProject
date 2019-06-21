@@ -5,6 +5,14 @@ import StdFile
 clearComments::[String] String  *f -> (Bool,*f) | FileSystem f
 clearComments input filename w
 # chars = readAllCharactersOfFile input []
+// initial the output file:
+# outFile = "NoCommentFiles\\" +++ filename +++ ".jack"
+# (ok_open,outFile,w) = fopen outFile FWriteText w
+| not ok_open = abort("failed to open file :clearComments")
+# outFile = fwrites " " outFile
+# (ok_write_close,w) = fclose outFile w
+| not ok_write_close = abort("failed to close file :clearComments")
+//
 # (finished,w) = writeCharactersToFile chars False filename w
 | finished = (True,w)
 
@@ -27,10 +35,10 @@ writeCharactersToFile [] False filename  w = (True,w)
 writeCharactersToFile [ch] False filename w
 # outFile = "NoCommentFiles\\" +++ filename +++ ".jack"
 # (ok_open,outFile,w) = fopen outFile FAppendText w
-| not ok_open = abort("failed to open file")
+| not ok_open = abort("failed to open file :writeCharactersToFile " +++filename)
 # outFile = fwritec ch outFile
 # (ok_write_close,w) = fclose outFile w
-| not ok_write_close = abort("failed to close file")
+| not ok_write_close = abort("failed to close file :writeCharactersToFile " +++filename)
 = writeCharactersToFile [] False filename w
 
 writeCharactersToFile [ch1,ch2:chars] False filename w
@@ -39,10 +47,10 @@ writeCharactersToFile [ch1,ch2:chars] False filename w
 // otherwise: write char
 # outFile = "NoCommentFiles\\" +++ filename +++ ".jack"
 # (ok_open,outFile,w) = fopen outFile FAppendText w
-| not ok_open = abort("failed to open file")
+| not ok_open = abort("failed to open file :writeCharactersToFile " +++filename)
 # outFile = fwritec ch1 outFile
 # (ok_write_close,w) = fclose outFile w
-| not ok_write_close = abort("failed to close file")
+| not ok_write_close = abort("failed to close file :writeCharactersToFile " +++filename)
 = writeCharactersToFile [ch2:chars] False filename w
 
 writeCharactersToFile [ch1,ch2:chars] True filename w
