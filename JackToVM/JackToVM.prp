@@ -15,6 +15,12 @@ OtherModules
 		Name:	ClearComments
 		Dir:	{Project}
 		DclOpen:	False
+		Icl
+			WindowPosition
+				X:	10
+				Y:	10
+				SizeX:	1368
+				SizeY:	680
 		IclOpen:	False
 	Module
 		Name:	FileManipulation
@@ -36,7 +42,7 @@ OtherModules
 				X:	10
 				Y:	10
 				SizeX:	1422
-				SizeY:	680
+				SizeY:	679
 		IclOpen:	True
 	Module
 		Name:	Tokenizer
@@ -48,15 +54,15 @@ OtherModules
 		Dir:	{Project}
 		Dcl
 			WindowPosition
-				X:	642
-				Y:	84
-				SizeX:	800
-				SizeY:	680
+				X:	0
+				Y:	713
+				SizeX:	17
+				SizeY:	0
 		DclOpen:	True
 		Icl
 			WindowPosition
-				X:	286
-				Y:	0
+				X:	324
+				Y:	-23
 				SizeX:	1233
 				SizeY:	599
 		IclOpen:	True

@@ -25,8 +25,8 @@
 .depend "StdOverloaded" "20180913124337"
 .depend "StdBool" "20180913124337"
 .depend "StdEnv" "20180913124337"
-.depend "symTable" "20190618120802"
-.module m_symTable "symTable" "20190618152357"
+.depend "symTable" "20190621162451"
+.module m_symTable "symTable" "20190621164647"
 .endinfo
 .impmod _system
 .implab _cycle_in_spine
@@ -70,7 +70,9 @@
 .impmod StdMisc
 .implab e_StdMisc_sabort
 .impmod StdList
+.impdesc e_StdList_d!!
 .implab e_StdList_s!!
+.implab e_StdList_n!! _
 .implab e_StdList_sdropWhile
 .impdesc e_StdList_dspan
 .implab e_StdList_nspan
@@ -107,13 +109,14 @@ e_symTable_lfetchVariableFromTables
 a9
 .d 3 0
 	jsr ea9
-.o 4 0
-	push_a 3
-	push_a 3
-	push_a 3
-	push_a 3
-	buildh _Tuple 4
-	updatepop_a 0 4
+.o 5 0
+	push_a 4
+	push_a 4
+	push_a 4
+	push_a 4
+	push_a 4
+	buildh _Tuple 5
+	updatepop_a 0 5
 .d 1 0
 	rtn
 .n 3 e_symTable_dfetchVariableFromTables
@@ -122,13 +125,14 @@ e_symTable_nfetchVariableFromTables
 	push_node _cycle_in_spine 3
 .d 3 0
 	jsr ea9
-.o 4 0
-	push_a 3
-	push_a 3
-	push_a 3
-	push_a 3
-	fillh _Tuple 4 8
-	pop_a 4
+.o 5 0
+	push_a 4
+	push_a 4
+	push_a 4
+	push_a 4
+	push_a 4
+	fillh _Tuple 5 10
+	pop_a 5
 .d 1 0
 	rtn
 .o 3 0
@@ -149,7 +153,7 @@ s9
 	update_a 0 12
 	pop_a 1
 .d 6 0
-	jsr s27
+	jsr s28
 .o 2 1 b
 	push_b 0
 	jmp_false else.1
@@ -185,7 +189,7 @@ else.1
 	update_a 1 3
 	updatepop_a 0 2
 .d 6 0
-	jsr s28
+	jsr s29
 .o 2 1 b
 	push_b 0
 	notB
@@ -195,13 +199,16 @@ else.1
 	buildh ARRAY 1
 	buildAC ""
 	buildh ARRAY 1
+	buildAC ""
+	buildh ARRAY 1
 	buildB FALSE
+	update_a 4 12
 	update_a 3 11
 	update_a 2 10
 	update_a 1 9
 	updatepop_a 0 8
 	pop_b 1
-.d 4 0
+.d 5 0
 	rtn
 else.2
 	push_a 1
@@ -235,16 +242,19 @@ s17
 	pop_a 1
 	build _ 3 n15
 	push_a 0
-	build d_S.3 -1 n_S.3
+	build d_S.4 -1 n_S.4
 	push_a 1
+	build d_S.3 -1 n_S.3
+	push_a 2
 	build d_S.2 -1 n_S.2
-	push_a 8
+	push_a 9
 	buildB TRUE
+	update_a 4 12
 	update_a 3 11
 	update_a 2 10
 	update_a 1 9
 	updatepop_a 0 8
-.d 4 0
+.d 5 0
 	rtn
 .n 3 _
 .o 1 0
@@ -252,12 +262,13 @@ n15
 	push_node _cycle_in_spine 3
 .d 3 0
 	jsr ea15
-.o 3 0
-	push_a 2
-	push_a 2
-	push_a 2
-	fillh _Tuple 3 6
-	pop_a 3
+.o 4 0
+	push_a 3
+	push_a 3
+	push_a 3
+	push_a 3
+	fillh _Tuple 4 8
+	pop_a 4
 .d 1 0
 	rtn
 .o 3 0
@@ -271,7 +282,7 @@ s15
 	update_a 1 2
 	update_a 0 1
 	pop_a 1
-	build _ 2 n51
+	build _ 2 n52
 	push_a 0
 	build d_S.2 -1 n_S.2
 	buildh _Nil 0
@@ -289,59 +300,63 @@ s15
 	update_a 0 9
 	pop_a 1
 .d 2 0
-	jsr s16
-.o 1 0
+	jsr s27
+.o 2 0
 	buildAC "field"
-	push_a 1
+	push_a 2
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
 	jmp_false else.3
-	push_a 2
-	build d_S.3 -1 n_S.3
-	push_a 4
 	push_a 3
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-	build _ 3 n49
-	build d_S.2 -1 n_S.2
-	buildAC "this"
-	buildh ARRAY 1
-	buildB TRUE
-	update_a 2 11
-	update_a 1 10
-	updatepop_a 0 9
-.d 3 0
-	rtn
-else.3
-	push_a 2
 	build d_S.3 -1 n_S.3
+	push_a 5
 	push_a 4
-	push_a 3
 	push_a 1
 	update_a 1 2
 	update_a 0 1
 	pop_a 1
 	build _ 3 n50
 	build d_S.2 -1 n_S.2
-	push_a 1
+	buildAC "this"
 	buildh ARRAY 1
+	push_a 2
 	buildB TRUE
-	update_a 2 11
-	update_a 1 10
-	updatepop_a 0 9
-.d 3 0
+	update_a 3 13
+	update_a 2 12
+	update_a 1 11
+	updatepop_a 0 10
+.d 4 0
 	rtn
-.n 2 _ ea51
+else.3
+	push_a 3
+	build d_S.3 -1 n_S.3
+	push_a 5
+	push_a 4
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	build _ 3 n51
+	build d_S.2 -1 n_S.2
+	push_a 2
+	buildh ARRAY 1
+	push_a 2
+	buildB TRUE
+	update_a 3 13
+	update_a 2 12
+	update_a 1 11
+	updatepop_a 0 10
+.d 4 0
+	rtn
+.n 2 _ ea52
 .o 1 0
-n51
+n52
 	push_node _cycle_in_spine 2
 .o 3 0
-ea51
+ea52
 .o 3 0
-s51
+s52
 	push_a 1
 	buildI 0
 	push_a 2
@@ -357,6 +372,30 @@ s51
 	update_a 1 3
 	updatepop_a 0 2
 	jsr_ap 3
+	fill_a 0 1
+	pop_a 1
+.d 1 0
+	rtn
+.n 3 _ ea51
+.o 1 0
+n51
+	push_node _cycle_in_spine 3
+.o 4 0
+ea51
+.o 4 0
+s51
+	push_a 2
+	push_a 1
+	jsr_eval 0
+	push_a 3
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	update_a 2 5
+	update_a 1 4
+	updatepop_a 0 3
+	jsr_ap 2
 	fill_a 0 1
 	pop_a 1
 .d 1 0
@@ -385,30 +424,6 @@ s50
 	pop_a 1
 .d 1 0
 	rtn
-.n 3 _ ea49
-.o 1 0
-n49
-	push_node _cycle_in_spine 3
-.o 4 0
-ea49
-.o 4 0
-s49
-	push_a 2
-	push_a 1
-	jsr_eval 0
-	push_a 3
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-	update_a 2 5
-	update_a 1 4
-	updatepop_a 0 3
-	jsr_ap 2
-	fill_a 0 1
-	pop_a 1
-.d 1 0
-	rtn
 .o 7 0
 s18
 	build_r e_StdFile_rFileSystem; 4 0 0 0
@@ -421,16 +436,19 @@ s18
 	pop_a 1
 	build e_symTable_dgetMethodSymbolKind 3 e_symTable_ngetMethodSymbolKind
 	push_a 0
-	build d_S.3 -1 n_S.3
+	build d_S.4 -1 n_S.4
 	push_a 1
+	build d_S.3 -1 n_S.3
+	push_a 2
 	build d_S.2 -1 n_S.2
-	push_a 8
+	push_a 9
 	buildB TRUE
+	update_a 4 12
 	update_a 3 11
 	update_a 2 10
 	update_a 1 9
 	updatepop_a 0 8
-.d 4 0
+.d 5 0
 	rtn
 .export e_symTable_sgetClassFieldTableCounter
 .descexp e_symTable_dgetClassFieldTableCounter e_symTable_ngetClassFieldTableCounter e_symTable_lgetClassFieldTableCounter 2 0 "getClassFieldTableCounter"
@@ -478,7 +496,7 @@ s8
 	update_a 1 2
 	update_a 0 1
 	pop_a 1
-	build _ 2 n29
+	build _ 2 n30
 	push_a 0
 	build d_S.2 -1 n_S.2
 	build _ 1 e_StdFile_nfreadline
@@ -487,7 +505,7 @@ s8
 	push_a 1
 	build d_S.2 -1 n_S.2
 	push_a 4
-	build _ 3 n30
+	build _ 3 n31
 	build d_S.2 -1 n_S.2
 	push_a 1
 	build d_S.1 -1 n_S.1
@@ -497,14 +515,14 @@ s8
 	updatepop_a 0 7
 .d 3 0
 	rtn
-.n 3 _ ea30
+.n 3 _ ea31
 .o 1 0
-n30
+n31
 	push_node _cycle_in_spine 3
 .o 4 0
-ea30
+ea31
 .o 4 0
-s30
+s31
 	push_a 2
 	push_a 1
 	jsr_eval 0
@@ -521,14 +539,14 @@ s30
 	pop_a 1
 .d 1 0
 	rtn
-.n 2 _ ea29
+.n 2 _ ea30
 .o 1 0
-n29
+n30
 	push_node _cycle_in_spine 2
 .o 3 0
-ea29
+ea30
 .o 3 0
-s29
+s30
 	push_a 1
 	buildI 0
 	push_a 2
@@ -594,7 +612,7 @@ s7
 	update_a 1 2
 	update_a 0 1
 	pop_a 1
-	build _ 2 n31
+	build _ 2 n32
 	push_a 0
 	build d_S.2 -1 n_S.2
 	build _ 1 e_StdFile_nfreadline
@@ -603,7 +621,7 @@ s7
 	push_a 1
 	build d_S.2 -1 n_S.2
 	push_a 4
-	build _ 3 n32
+	build _ 3 n33
 	build d_S.2 -1 n_S.2
 	push_a 1
 	build d_S.1 -1 n_S.1
@@ -613,14 +631,14 @@ s7
 	updatepop_a 0 7
 .d 3 0
 	rtn
-.n 3 _ ea32
+.n 3 _ ea33
 .o 1 0
-n32
+n33
 	push_node _cycle_in_spine 3
 .o 4 0
-ea32
+ea33
 .o 4 0
-s32
+s33
 	push_a 2
 	push_a 1
 	jsr_eval 0
@@ -637,14 +655,14 @@ s32
 	pop_a 1
 .d 1 0
 	rtn
-.n 2 _ ea31
+.n 2 _ ea32
 .o 1 0
-n31
+n32
 	push_node _cycle_in_spine 2
 .o 3 0
-ea31
+ea32
 .o 3 0
-s31
+s32
 	push_a 1
 	buildI 0
 	push_a 2
@@ -710,7 +728,7 @@ s6
 	update_a 1 2
 	update_a 0 1
 	pop_a 1
-	build _ 2 n33
+	build _ 2 n34
 	push_a 0
 	build d_S.2 -1 n_S.2
 	build _ 1 e_StdFile_nfreadline
@@ -719,7 +737,7 @@ s6
 	push_a 1
 	build d_S.2 -1 n_S.2
 	push_a 4
-	build _ 3 n34
+	build _ 3 n35
 	build d_S.2 -1 n_S.2
 	push_a 1
 	build d_S.1 -1 n_S.1
@@ -729,14 +747,14 @@ s6
 	updatepop_a 0 7
 .d 3 0
 	rtn
-.n 3 _ ea34
+.n 3 _ ea35
 .o 1 0
-n34
+n35
 	push_node _cycle_in_spine 3
 .o 4 0
-ea34
+ea35
 .o 4 0
-s34
+s35
 	push_a 2
 	push_a 1
 	jsr_eval 0
@@ -753,14 +771,14 @@ s34
 	pop_a 1
 .d 1 0
 	rtn
-.n 2 _ ea33
+.n 2 _ ea34
 .o 1 0
-n33
+n34
 	push_node _cycle_in_spine 2
 .o 3 0
-ea33
+ea34
 .o 3 0
-s33
+s34
 	push_a 1
 	buildI 0
 	push_a 2
@@ -790,12 +808,13 @@ e_symTable_lgetMethodSymbolKind
 a5
 .d 3 0
 	jsr ea5
-.o 3 0
-	push_a 2
-	push_a 2
-	push_a 2
-	buildh _Tuple 3
-	updatepop_a 0 3
+.o 4 0
+	push_a 3
+	push_a 3
+	push_a 3
+	push_a 3
+	buildh _Tuple 4
+	updatepop_a 0 4
 .d 1 0
 	rtn
 .n 3 e_symTable_dgetMethodSymbolKind
@@ -804,12 +823,13 @@ e_symTable_ngetMethodSymbolKind
 	push_node _cycle_in_spine 3
 .d 3 0
 	jsr ea5
-.o 3 0
-	push_a 2
-	push_a 2
-	push_a 2
-	fillh _Tuple 3 6
-	pop_a 3
+.o 4 0
+	push_a 3
+	push_a 3
+	push_a 3
+	push_a 3
+	fillh _Tuple 4 8
+	pop_a 4
 .d 1 0
 	rtn
 .o 3 0
@@ -826,35 +846,40 @@ s5
 	update_a 1 2
 	update_a 0 1
 	pop_a 1
-	build _ 2 n35
+	build _ 2 n36
 	push_a 0
 	build d_S.2 -1 n_S.2
 	build e_FileManipulation_dlistOfLinesInFile 1 e_FileManipulation_nlistOfLinesInFile
-	push_a 1
-	build d_S.3 -1 n_S.3
-	push_a 1
-	build d_S.2 -1 n_S.2
-	push_a 4
-	build _ 3 n36
-	build d_S.2 -1 n_S.2
-	push_a 1
+	push_a 0
 	build d_S.1 -1 n_S.1
-	push_a 8
+	push_a 7
 	build _ 2 n16
+	push_a 2
+	build d_S.3 -1 n_S.3
+	push_a 2
+	build d_S.2 -1 n_S.2
+	push_a 5
+	build _ 3 n37
+	build d_S.2 -1 n_S.2
+	push_a 1
+	build d_S.2 -1 n_S.2
+	push_a 2
+	build d_S.1 -1 n_S.1
 	buildB TRUE
-	update_a 2 10
-	update_a 1 9
-	updatepop_a 0 8
-.d 3 0
+	update_a 3 12
+	update_a 2 11
+	update_a 1 10
+	updatepop_a 0 9
+.d 4 0
 	rtn
-.n 3 _ ea36
+.n 3 _ ea37
 .o 1 0
-n36
+n37
 	push_node _cycle_in_spine 3
 .o 4 0
-ea36
+ea37
 .o 4 0
-s36
+s37
 	push_a 2
 	push_a 1
 	jsr_eval 0
@@ -871,14 +896,14 @@ s36
 	pop_a 1
 .d 1 0
 	rtn
-.n 2 _ ea35
+.n 2 _ ea36
 .o 1 0
-n35
+n36
 	push_node _cycle_in_spine 2
 .o 3 0
-ea35
+ea36
 .o 3 0
-s35
+s36
 	push_a 1
 	buildI 0
 	push_a 2
@@ -904,8 +929,11 @@ n16
 	push_node _cycle_in_spine 2
 .d 2 0
 	jsr ea16
-.o 1 0
-	fillh ARRAY 1 1
+.o 2 0
+	push_a 1
+	push_a 1
+	fillh _Tuple 2 4
+	pop_a 2
 .d 1 0
 	rtn
 .o 2 0
@@ -927,26 +955,16 @@ case.4
 	jmp case.6
 case.5
 	push_a 0
-	jsr_eval 0
-	push_array 0
-	updatepop_a 0 1
-	create
+	build _ 1 n19
+	buildI 2
 	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-	update_a 1 5
-	updatepop_a 0 4
+	build e_StdList_d!! 2 e_StdList_n!!
+	buildI 1
+	push_a 2
+	build e_StdList_d!! 2 e_StdList_n!!
+	update_a 1 6
+	updatepop_a 0 5
 .d 2 0
-	jsr s19
-.o 1 0
-	pushI 2
-.d 1 1 i
-	jsr e_StdList_s!!
-.o 1 0
-	push_array 0
-	updatepop_a 0 1
-.d 1 0
 	rtn
 case.6
 	push_a 0
@@ -986,15 +1004,15 @@ case.6
 	jsr eqAC
 .o 0 1 b	
 	jmp_false else.7
-	pushI 2
-	push_a 0
+	buildI 2
+	push_a 1
+	build e_StdList_d!! 2 e_StdList_n!!
+	buildI 1
+	push_a 2
+	build e_StdList_d!! 2 e_StdList_n!!
+	update_a 1 5
 	updatepop_a 0 4
-.d 1 1 i
-	jsr e_StdList_s!!
-.o 1 0
-	push_array 0
-	updatepop_a 0 1
-.d 1 0
+.d 2 0
 	rtn
 else.7
 	push_a 1
@@ -1056,7 +1074,7 @@ s4
 	update_a 1 2
 	update_a 0 1
 	pop_a 1
-	build _ 2 n39
+	build _ 2 n40
 	push_a 0
 	build d_S.2 -1 n_S.2
 	buildh _Nil 0
@@ -1090,7 +1108,7 @@ s4
 	update_a 1 2
 	update_a 0 1
 	pop_a 1
-	build _ 3 n37
+	build _ 3 n38
 	build d_S.2 -1 n_S.2
 	buildAC "failed"
 	buildh ARRAY 1
@@ -1109,7 +1127,7 @@ else.8
 	update_a 1 2
 	update_a 0 1
 	pop_a 1
-	build _ 3 n38
+	build _ 3 n39
 	build d_S.2 -1 n_S.2
 	push_a 1
 	buildh ARRAY 1
@@ -1119,14 +1137,14 @@ else.8
 	updatepop_a 0 9
 .d 3 0
 	rtn
-.n 2 _ ea39
+.n 2 _ ea40
 .o 1 0
-n39
+n40
 	push_node _cycle_in_spine 2
 .o 3 0
-ea39
+ea40
 .o 3 0
-s39
+s40
 	push_a 1
 	buildI 0
 	push_a 2
@@ -1146,14 +1164,14 @@ s39
 	pop_a 1
 .d 1 0
 	rtn
-.n 3 _ ea38
+.n 3 _ ea39
 .o 1 0
-n38
+n39
 	push_node _cycle_in_spine 3
 .o 4 0
-ea38
+ea39
 .o 4 0
-s38
+s39
 	push_a 2
 	push_a 1
 	jsr_eval 0
@@ -1170,14 +1188,14 @@ s38
 	pop_a 1
 .d 1 0
 	rtn
-.n 3 _ ea37
+.n 3 _ ea38
 .o 1 0
-n37
+n38
 	push_node _cycle_in_spine 3
 .o 4 0
-ea37
+ea38
 .o 4 0
-s37
+s38
 	push_a 2
 	push_a 1
 	jsr_eval 0
@@ -1240,7 +1258,7 @@ s3
 	update_a 1 2
 	update_a 0 1
 	pop_a 1
-	build _ 2 n40
+	build _ 2 n41
 	push_a 0
 	build d_S.2 -1 n_S.2
 	build e_FileManipulation_dlistOfLinesInFile 1 e_FileManipulation_nlistOfLinesInFile
@@ -1249,7 +1267,7 @@ s3
 	push_a 1
 	build d_S.2 -1 n_S.2
 	push_a 4
-	build _ 3 n41
+	build _ 3 n42
 	build d_S.2 -1 n_S.2
 	push_a 1
 	build d_S.1 -1 n_S.1
@@ -1261,14 +1279,14 @@ s3
 	updatepop_a 0 8
 .d 3 0
 	rtn
-.n 3 _ ea41
+.n 3 _ ea42
 .o 1 0
-n41
+n42
 	push_node _cycle_in_spine 3
 .o 4 0
-ea41
+ea42
 .o 4 0
-s41
+s42
 	push_a 2
 	push_a 1
 	jsr_eval 0
@@ -1285,14 +1303,14 @@ s41
 	pop_a 1
 .d 1 0
 	rtn
-.n 2 _ ea40
+.n 2 _ ea41
 .o 1 0
-n40
+n41
 	push_node _cycle_in_spine 2
 .o 3 0
-ea40
+ea41
 .o 3 0
-s40
+s41
 	push_a 1
 	buildI 0
 	push_a 2
@@ -1457,6 +1475,16 @@ else.14
 	updatepop_a 0 1
 .d 1 0
 	rtn
+.n 1 _ ea19
+.o 1 0
+n19
+	push_node _cycle_in_spine 1
+.o 2 0
+ea19
+	jsr_eval 0
+	push_array 0
+	update_a 0 1
+	pop_a 1
 .o 2 0
 s19
 	create
@@ -1659,7 +1687,7 @@ else.18
 	push_a 1
 	build d_S.2 -1 n_S.2
 	push_a 4
-	build _ 3 n42
+	build _ 3 n43
 	build d_S.2 -1 n_S.2
 	buildI 2
 	push_a 5
@@ -1702,7 +1730,7 @@ else.19
 	push_a 12
 	push_a 12
 	push_a 12
-	build _ 5 n43
+	build _ 5 n44
 	push_a 5
 	update_a 9 13
 	update_a 8 12
@@ -1758,14 +1786,14 @@ else.20
 	pop_b 1
 .d 2 0
 	rtn
-.n 5 _ ea43
+.n 5 _ ea44
 .o 1 0
-n43
+n44
 	push_node _cycle_in_spine 5
 .o 6 0
-ea43
+ea44
 .o 6 0
-s43
+s44
 	push_a 4
 	jsr_eval 0
 	pushF_a 5
@@ -1819,14 +1847,14 @@ s43
 	pop_b 2
 .d 1 0
 	rtn
-.n 3 _ ea42
+.n 3 _ ea43
 .o 1 0
-n42
+n43
 	push_node _cycle_in_spine 3
 .o 4 0
-ea42
+ea43
 .o 4 0
-s42
+s43
 	push_a 2
 	push_a 1
 	jsr_eval 0
@@ -2003,7 +2031,7 @@ else.23
 	push_a 1
 	build d_S.2 -1 n_S.2
 	push_a 4
-	build _ 3 n44
+	build _ 3 n45
 	build d_S.2 -1 n_S.2
 	buildI 2
 	push_a 5
@@ -2046,7 +2074,7 @@ else.24
 	push_a 12
 	push_a 12
 	push_a 12
-	build _ 5 n45
+	build _ 5 n46
 	push_a 5
 	update_a 9 13
 	update_a 8 12
@@ -2102,14 +2130,14 @@ else.25
 	pop_b 1
 .d 2 0
 	rtn
-.n 5 _ ea45
+.n 5 _ ea46
 .o 1 0
-n45
+n46
 	push_node _cycle_in_spine 5
 .o 6 0
-ea45
+ea46
 .o 6 0
-s45
+s46
 	push_a 4
 	jsr_eval 0
 	pushF_a 5
@@ -2163,14 +2191,14 @@ s45
 	pop_b 2
 .d 1 0
 	rtn
-.n 3 _ ea44
+.n 3 _ ea45
 .o 1 0
-n44
+n45
 	push_node _cycle_in_spine 3
 .o 4 0
-ea44
+ea45
 .o 4 0
-s44
+s45
 	push_a 2
 	push_a 1
 	jsr_eval 0
@@ -2224,7 +2252,7 @@ else.26
 	push_a 1
 	build d_S.2 -1 n_S.2
 	push_a 4
-	build _ 3 n46
+	build _ 3 n47
 	build d_S.2 -1 n_S.2
 	buildI 2
 	push_a 5
@@ -2267,7 +2295,7 @@ else.27
 	push_a 12
 	push_a 12
 	push_a 12
-	build _ 5 n47
+	build _ 5 n48
 	push_a 5
 	update_a 9 13
 	update_a 8 12
@@ -2323,14 +2351,14 @@ else.28
 	pop_b 1
 .d 2 0
 	rtn
-.n 5 _ ea47
+.n 5 _ ea48
 .o 1 0
-n47
+n48
 	push_node _cycle_in_spine 5
 .o 6 0
-ea47
+ea48
 .o 6 0
-s47
+s48
 	push_a 4
 	jsr_eval 0
 	pushF_a 5
@@ -2384,14 +2412,14 @@ s47
 	pop_b 2
 .d 1 0
 	rtn
-.n 3 _ ea46
+.n 3 _ ea47
 .o 1 0
-n46
+n47
 	push_node _cycle_in_spine 3
 .o 4 0
-ea46
+ea47
 .o 4 0
-s46
+s47
 	push_a 2
 	push_a 1
 	jsr_eval 0
@@ -2447,7 +2475,7 @@ else.29
 	push_arg 0 3 3
 	push_arg 1 3 2
 	push_b 0
-	build_u _ 1 1 n48
+	build_u _ 1 1 n49
 	push_a 3
 	pop_b 1
 	update_a 2 9
@@ -2480,12 +2508,12 @@ else.30
 	rtn
 .nu 1 1 _ _
 .o 1 0
-n48
+n49
 	push_node_u _cycle_in_spine 1 1
 .o 2 1 i
-ea48
+ea49
 .o 2 1 i
-s48
+s49
 	push_a 0
 	jsr_eval 0
 	pushF_a 1
@@ -2506,15 +2534,126 @@ s48
 	pop_b 2
 .d 1 0
 	rtn
-.o 6 0
+.o 2 0
 s27
+	eq_desc _Cons 2 1
+	jmp_true case.31
+	jmp s27.1
+case.31
+	push_args 1 2 2
+	buildh _Nil 0
+	update_a 0 4
+	pop_a 1
+	jsr_eval 1
+	eq_desc _Nil 0 1
+	jmp_true case.32
+	jmp case.33
+case.32
+	push_a 0
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	create
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	update_a 1 5
+	updatepop_a 0 4
+.d 2 0
+	jsr s19
+.o 1 0
+	pushI 2
+	push_a 0
+.d 1 1 i
+	jsr e_StdList_s!!
+.o 1 0
+	push_array 0
+	updatepop_a 0 1
+	buildI 1
+	push_a 2
+	build e_StdList_d!! 2 e_StdList_n!!
+	update_a 1 2
+	updatepop_a 0 1
+.d 2 0
+	rtn
+case.33
+	push_a 0
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	create
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	update_a 1 2
+	updatepop_a 0 1
+.d 2 0
+	jsr s19
+.o 1 0
+	push_a 2
+	jsr_eval 0
+	push_array 0
+	updatepop_a 0 1
+	pushI 0
+	push_a 1
+.d 1 1 i
+	jsr e_StdList_s!!
+.o 1 0
+	push_array 0
+	updatepop_a 0 1
+	buildAC " "
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+.d 2 0
+	jsr catAC
+.o 1 0
+.d 2 0
+	jsr eqAC
+.o 0 1 b	
+	jmp_false else.34
+	pushI 2
+	push_a 0
+	update_a 1 4
+	updatepop_a 0 3
+.d 1 1 i
+	jsr e_StdList_s!!
+.o 1 0
+	push_array 0
+	updatepop_a 0 1
+	buildI 1
+	push_a 2
+	build e_StdList_d!! 2 e_StdList_n!!
+	update_a 1 2
+	updatepop_a 0 1
+.d 2 0
+	rtn
+else.34
+	push_a 1
+	push_a 3
+	update_a 1 5
+	updatepop_a 0 4
+.d 2 0
+	jmp s27
+s27.1
+	pop_a 2
+	pushD m_symTable
+	pushD x_27
+.d 0 2 ii
+	jmp _match_error
+.string x_27 "findSymbolKind"
+.o 6 0
+s28
 	push_a 1
 	push_a 6
 	push_a 1
 	update_a 1 2
 	update_a 0 1
 	pop_a 1
-	build _ 2 n57
+	build _ 2 n58
 	push_a 0
 	build d_S.2 -1 n_S.2
 	buildh _Nil 0
@@ -2539,25 +2678,7 @@ s27
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.31
-	push_a 2
-	build d_S.3 -1 n_S.3
-	push_a 4
-	push_a 3
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-	build _ 3 n55
-	build d_S.2 -1 n_S.2
-	buildAC "failed"
-	buildh ARRAY 1
-	pushB FALSE
-	update_a 1 10
-	updatepop_a 0 9
-.d 2 1 b
-	rtn
-else.31
+	jmp_false else.35
 	push_a 2
 	build d_S.3 -1 n_S.3
 	push_a 4
@@ -2568,6 +2689,24 @@ else.31
 	pop_a 1
 	build _ 3 n56
 	build d_S.2 -1 n_S.2
+	buildAC "failed"
+	buildh ARRAY 1
+	pushB FALSE
+	update_a 1 10
+	updatepop_a 0 9
+.d 2 1 b
+	rtn
+else.35
+	push_a 2
+	build d_S.3 -1 n_S.3
+	push_a 4
+	push_a 3
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	build _ 3 n57
+	build d_S.2 -1 n_S.2
 	push_a 1
 	buildh ARRAY 1
 	pushB TRUE
@@ -2575,14 +2714,14 @@ else.31
 	updatepop_a 0 9
 .d 2 1 b
 	rtn
-.n 2 _ ea57
+.n 2 _ ea58
 .o 1 0
-n57
+n58
 	push_node _cycle_in_spine 2
 .o 3 0
-ea57
+ea58
 .o 3 0
-s57
+s58
 	push_a 1
 	buildI 0
 	push_a 2
@@ -2598,6 +2737,30 @@ s57
 	update_a 1 3
 	updatepop_a 0 2
 	jsr_ap 3
+	fill_a 0 1
+	pop_a 1
+.d 1 0
+	rtn
+.n 3 _ ea57
+.o 1 0
+n57
+	push_node _cycle_in_spine 3
+.o 4 0
+ea57
+.o 4 0
+s57
+	push_a 2
+	push_a 1
+	jsr_eval 0
+	push_a 3
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	update_a 2 5
+	update_a 1 4
+	updatepop_a 0 3
+	jsr_ap 2
 	fill_a 0 1
 	pop_a 1
 .d 1 0
@@ -2626,39 +2789,15 @@ s56
 	pop_a 1
 .d 1 0
 	rtn
-.n 3 _ ea55
-.o 1 0
-n55
-	push_node _cycle_in_spine 3
-.o 4 0
-ea55
-.o 4 0
-s55
-	push_a 2
-	push_a 1
-	jsr_eval 0
-	push_a 3
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-	update_a 2 5
-	update_a 1 4
-	updatepop_a 0 3
-	jsr_ap 2
-	fill_a 0 1
-	pop_a 1
-.d 1 0
-	rtn
 .o 6 0
-s28
+s29
 	push_a 1
 	push_a 6
 	push_a 1
 	update_a 1 2
 	update_a 0 1
 	pop_a 1
-	build _ 2 n54
+	build _ 2 n55
 	push_a 0
 	build d_S.2 -1 n_S.2
 	buildh _Nil 0
@@ -2683,25 +2822,7 @@ s28
 .d 2 0
 	jsr eqAC
 .o 0 1 b	
-	jmp_false else.32
-	push_a 2
-	build d_S.3 -1 n_S.3
-	push_a 4
-	push_a 3
-	push_a 1
-	update_a 1 2
-	update_a 0 1
-	pop_a 1
-	build _ 3 n52
-	build d_S.2 -1 n_S.2
-	buildAC "failed"
-	buildh ARRAY 1
-	pushB FALSE
-	update_a 1 10
-	updatepop_a 0 9
-.d 2 1 b
-	rtn
-else.32
+	jmp_false else.36
 	push_a 2
 	build d_S.3 -1 n_S.3
 	push_a 4
@@ -2712,6 +2833,24 @@ else.32
 	pop_a 1
 	build _ 3 n53
 	build d_S.2 -1 n_S.2
+	buildAC "failed"
+	buildh ARRAY 1
+	pushB FALSE
+	update_a 1 10
+	updatepop_a 0 9
+.d 2 1 b
+	rtn
+else.36
+	push_a 2
+	build d_S.3 -1 n_S.3
+	push_a 4
+	push_a 3
+	push_a 1
+	update_a 1 2
+	update_a 0 1
+	pop_a 1
+	build _ 3 n54
+	build d_S.2 -1 n_S.2
 	push_a 1
 	buildh ARRAY 1
 	pushB TRUE
@@ -2719,14 +2858,14 @@ else.32
 	updatepop_a 0 9
 .d 2 1 b
 	rtn
-.n 2 _ ea54
+.n 2 _ ea55
 .o 1 0
-n54
+n55
 	push_node _cycle_in_spine 2
 .o 3 0
-ea54
+ea55
 .o 3 0
-s54
+s55
 	push_a 1
 	buildI 0
 	push_a 2
@@ -2746,14 +2885,14 @@ s54
 	pop_a 1
 .d 1 0
 	rtn
-.n 3 _ ea53
+.n 3 _ ea54
 .o 1 0
-n53
+n54
 	push_node _cycle_in_spine 3
 .o 4 0
-ea53
+ea54
 .o 4 0
-s53
+s54
 	push_a 2
 	push_a 1
 	jsr_eval 0
@@ -2770,14 +2909,14 @@ s53
 	pop_a 1
 .d 1 0
 	rtn
-.n 3 _ ea52
+.n 3 _ ea53
 .o 1 0
-n52
+n53
 	push_node _cycle_in_spine 3
 .o 4 0
-ea52
+ea53
 .o 4 0
-s52
+s53
 	push_a 2
 	push_a 1
 	jsr_eval 0

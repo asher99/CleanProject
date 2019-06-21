@@ -1,0 +1,7 @@
+class test {
+
+    method test main() {        
+        return this;
+		
+	}
+}

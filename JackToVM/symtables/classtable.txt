@@ -1,1 +1,2 @@
-n  int  field  0
+square  Square  field  0
+direction  int  field  1

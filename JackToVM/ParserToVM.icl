@@ -168,6 +168,7 @@ parseSubroutineBody [sym:xs] filename methodname subroutine_kw w //= abort(sym +
 | not ok_locals = abort("failed to print 'function' instruction")
 // if the subroutine is method, write method prefix:
 # (ok_prefix,w) = parseMethodPrefix subroutine_kw filename w
+# (ok_prefix2,w) = parseConstructorPrefix subroutine_kw filename w
 // generate vm code for the function statements:
 #(ok_stmt,[sym_:xs__],w) = parseStatements xs_ filename w
 | not ok_stmt = abort("failed to parse statements")
@@ -178,6 +179,14 @@ parseMethodPrefix kw filename w
 | not (kw == "<keyword> method </keyword>\n") = (True,w)
 # (okw,w) = write2file "push argument 0\npop pointer 0\n" filename w
 | not okw = abort("failed to print method prefix")
+= (True,w)
+
+parseConstructorPrefix:: String String *f -> (Bool,*f) | FileSystem f
+parseConstructorPrefix kw filename w
+| not (kw == "<keyword> constructor </keyword>\n") = (True,w)
+# (okc,counter,w) = getClassFieldTableCounter w
+# (okw,w) = write2file ("push constant "+++counter+++"\ncall Memory.alloc 1\npop pointer 0\n") filename w
+| not okw = abort("failed to print constructor prefix")
 = (True,w)
 
 parseVarDec:: [String] String *f -> (Bool,[String],*f) | FileSystem f
@@ -224,7 +233,7 @@ parseLetStatement [first,name,sym:xs] filename w //= abort(first +++ name +++ sy
 | not ok_expr = abort("failed to gen code for expression")
 // pop the result from parseExpression into the left-side-variable
 # symbol_name = getTokenValue name
-# (ok_fetch,index,kind,w) = fetchVariableFromTables symbol_name w
+# (ok_fetch,index,type,kind,w) = fetchVariableFromTables symbol_name w
 | not ok_fetch = abort("failed to get symbol record fields")
 # (ok_right,w) = write2file ("pop " +++ kind +++ " " +++ index +++ "\n") filename w
 | not ok_right = abort("failed to write vm code to file")
@@ -239,7 +248,7 @@ parseArrayLetStatement [name,sym:xs] filename w //= abort(name +++ sym +++ xs!!0
 | not ok_exp1 = abort("abort in parseArrayLetStatement exp1")
 // parse varName,  varName+expression1
 # symbol_name = getTokenValue name
-# (ok_fetch,index,kind,w) = fetchVariableFromTables symbol_name w
+# (ok_fetch,index,type,kind,w) = fetchVariableFromTables symbol_name w
 | not ok_fetch = abort("failed to get symbol record fields")
 # (ok_write,w) = write2file ("push " +++ kind +++ " " +++ index +++ "\nadd\n") filename w
 | not ok_write = abort("abort in parseArrayLetStatement varName")
@@ -284,6 +293,7 @@ parseElseStatement [x:xs] counter filename w //= abort(opening +++ xs!!0 +++ xs!
 // parse 'if' statements.
 # (ok_st,[st_closing,else,st_open2:xs_],w) = parseStatements [x:xs] filename w
 | not ok_st = abort("failed in parseIfStatement 2")
+//= abort(st_closing+++else+++st_open2+++xs_!!0)
 // if the condition was satisfied - goto IF_END + IF_FALSE label
 # (okw2,w) = write2file ("goto IF_END"+++counter+++"\nlabel IF_FALSE"+++counter+++"\n") filename w
 // parse the 'else' statements
@@ -293,6 +303,7 @@ parseElseStatement [x:xs] counter filename w //= abort(opening +++ xs!!0 +++ xs!
 # (okw3,w) = write2file ("label IF_END"+++counter+++"\n") filename w
 // retrun:
 = (True,xs__,w)
+
 
 parseWhileStatement :: [String] String *f -> (Bool,[String],*f) | FileSystem f
 parseWhileStatement [first,opening:xs] filename w
@@ -325,6 +336,8 @@ parseDoStatement [first,name,sym:xs] filename w
 # (okw,w) = write2file "pop temp 0\n" filename w
 | not okw = abort("abort in parseDoStatement")
 = (True,xs_,w)
+//= abort(sc +++ xs_!!0 +++ xs_!!1 +++ xs_!!2)
+
 
 parseSubroutineCall:: [String] String *f -> (Bool,[String],*f) | FileSystem f
 parseSubroutineCall [name,sym:xs] filename w //= abort("H" +++ name+++sym+++xs!!0)
@@ -347,9 +360,10 @@ parseSubroutineCall [name,sym:xs] filename w //= abort("H" +++ name+++sym+++xs!!
 doExternalSubroutine :: [String] String *f -> (Bool,[String],*f) | FileSystem f
 doExternalSubroutine [class_name,dot,name,sym:xs] filename w //= abort(class_name +++ dot +++ name +++sym)
 // if 'class_name' is not in the symtables, it means the Subroutine is function and not method.
-# (objExist,s1,s2,w) = fetchVariableFromTables (getTokenValue class_name) w
+# (objExist,index,type,kind,w) = fetchVariableFromTables (getTokenValue class_name) w
 //= abort(toString objExist)
 | not objExist = doExternalFunction [class_name,dot,name,sym:xs] filename w
+| kind == "this" = doClassObjectMethod [class_name,dot,name,sym:xs] type index filename w
 // initial method calling by pushing 'pointer 0' into stack.
 # (okw,w) = write2file "push pointer 0\n" filename w
 // push arguments into stack.
@@ -364,8 +378,25 @@ doExternalSubroutine [class_name,dot,name,sym:xs] filename w //= abort(class_nam
 //= abort(tokens!!0 +++ tokens!!1 +++ tokens!!2 +++ tokens!!3 +++ tokens!!4)
 = (True,tokens,w)
 
+doClassObjectMethod:: [String] String String String *f -> (Bool,[String],*f) | FileSystem f
+doClassObjectMethod [obj_name,dot,name,sym:xs] type index filename w
+// initial method calling by pushing 'pointer 0' into stack.
+# (okw,w) = write2file ("push this " +++ index +++ "\n") filename w
+// push arguments into stack.
+# (okp,count,tokens,w) = pushArguments xs 1 filename w
+| not okp = abort("failed")
+// call method
+# class_list = getTokenValue obj_name
+# len = length [ c \\ c <-: class_list ]
+# classname =  { c \\ c <- (take (len-1) [ c \\ c <-: class_list]) }
+# (okw2,w) = write2file ("call " +++ type +++ "." +++ (getTokenValue name) +++ (toString count) +++ "\n") filename w
+// return
+//= abort(tokens!!0 +++ tokens!!1 +++ tokens!!2 +++ tokens!!3 +++ tokens!!4)
+= (True,tokens,w)
+
+
 doExternalFunction :: [String] String *f -> (Bool,[String],*f) | FileSystem f
-doExternalFunction [class_name,dot,name,sym:xs] filename w
+doExternalFunction [class_name,dot,name,sym:xs] filename w //= abort(class_name +++ dot +++ name +++ sym)
 // push arguments into stack.
 //= abort("H" +++ xs!!0 +++ xs!!1 +++ xs!!2)
 # (okp,count,tokens,w) = pushArguments xs 0 filename w
@@ -381,7 +412,7 @@ doExternalFunction [class_name,dot,name,sym:xs] filename w
 
 pushArguments:: [String] Int String *f -> (Bool,Int,[String],*f) | FileSystem f
 // if we have ')' in the begining of the input, we reach the end of the subroutine parameters.
-pushArguments ["<symbol> ) </symbol>\n":xs] count filename w = (True,count,xs,w)
+pushArguments ["<symbol> ) </symbol>\n":xs] count filename w = (True,count,xs,w)//= abort(xs!!0 +++ xs!!1 +++ xs!!2)//(True,count,xs,w)
 // otherwise, parseExpression pushs the argument into stack.
 pushArguments input count filename w //= abort(input!!0 +++ input!!1 +++ input!!2 +++ input!!3 +++ input!!4)
 # (ok_exp,[sym:input_],w) = parseExpression input filename w
@@ -451,12 +482,40 @@ parseTerm :: [String] String *f -> (Bool,[String],*f) | FileSystem f
 parseTerm [x:xs] filename w //= abort(x +++ xs!!0 +++ xs!!1 +++ xs!!2)//= (True,[x:xs],w)
 | ((getTag x 17) == "<integerConstant>") = parseIntegerConstant [x:xs] filename w
 | ((getTag x 16) == "<stringConstant>")  = parseStringConstant [x:xs] filename w
-//| ((getTag x 9) == "<keyword>")  = parseConstant [x:xs] filename w
+| ((getTag x 9) == "<keyword>")  = parseKeywordTerm [x:xs] filename w
 | xs!!0 == "<symbol> [ </symbol>\n" = parseArrayTerm [x:xs] filename w
 | ((x == "<symbol> - </symbol>\n") || (x == "<symbol> ~ </symbol>\n"))  = parseUnaryOp [x:xs] filename w
 | (x == "<symbol> ( </symbol>\n") = parseTermExpression [x:xs] filename w
 | ((getTag x 12) == "<identifier>")  = var_or_subroutine [x:xs] filename w
 = abort("ABORT\n" +++ x +++ xs!!0 +++ xs!!1)
+
+parseKeywordTerm:: [String] String *f -> (Bool,[String],*f) | FileSystem f
+parseKeywordTerm [x:xs] filename w
+| x == "<keyword> null </keyword>\n" = parseNull [x:xs] filename w
+| x == "<keyword> false </keyword>\n" = parseFalse [x:xs] filename w
+| x == "<keyword> true </keyword>\n" = parseTrue [x:xs] filename w
+| x == "<keyword> this </keyword>\n" = parseThis [x:xs] filename w
+
+parseNull:: [String] String *f -> (Bool,[String],*f) | FileSystem f
+parseNull [x:xs] filename w
+# (okw,w) = write2file "push constant 0\n" filename w //pop temp 0\npop pointer 1\npush temp 0\npop that 0\n" filename w
+= (True,xs,w)
+
+parseFalse:: [String] String *f -> (Bool,[String],*f) | FileSystem f
+parseFalse [x:xs] filename w
+# (okw,w) = write2file "push constant 0\n" filename w
+= (True,xs,w)
+
+parseTrue:: [String] String *f -> (Bool,[String],*f) | FileSystem f
+parseTrue [x:xs] filename w
+# (okw,w) = write2file "push constant 0\nnot\n" filename w
+= (True,xs,w)
+
+parseThis:: [String] String *f -> (Bool,[String],*f) | FileSystem f
+parseThis [x:xs] filename w
+# (okw,w) = write2file "push pointer 0\n" filename w
+= (True,xs,w)
+
 
 parseStringConstant:: [String] String *f -> (Bool,[String],*f) | FileSystem f
 parseStringConstant [x:xs] filename w
@@ -506,7 +565,7 @@ parseVarName [x1,x2:xs] filename w //= abort(x1 +++ x2 +++ xs!!0)
 
 // push var to stack:
 # symbol_name = getTokenValue x1
-# (ok_fetch,index,kind,w) = fetchVariableFromTables symbol_name w
+# (ok_fetch,index,type,kind,w) = fetchVariableFromTables symbol_name w
 | not ok_fetch = abort("failed to get symbol record fields")
 # (ok_right,w) = write2file ("push " +++ kind +++ " " +++ index +++ "\n") filename w
 | not ok_right = abort("failed to write vm code to file")
@@ -536,7 +595,7 @@ parseArrayTerm [varName,open:xs] filename w
 | not ok_exp = abort("failed in parseArrayTerm 2")
 // push varName, and other necessary actions
 # symbol_name = getTokenValue varName
-# (ok_fetch,index,kind,w) = fetchVariableFromTables symbol_name w
+# (ok_fetch,index,type,kind,w) = fetchVariableFromTables symbol_name w
 | not ok_fetch = abort("failed to get symbol record fields")
 # (ok_write,w) = write2file ("push " +++ kind +++ " " +++ index +++ "\nadd\npop pointer 1\npush that 0\n") filename w
 | not ok_write = abort("failed in parseArrayTerm 3")
@@ -633,7 +692,7 @@ incWhileCounter:: *f -> (Bool,Int,*f) | FileSystem f
 incWhileCounter w
 // open the file for reading, get the counter, close the file:
 # cFile = "counters\\whilecounter.txt"
-# filename = "counters\\ifcounter.txt"
+# filename = "counters\\whilecounter.txt"
 # (okopen,cFile,w) = fopen cFile FReadText w
 | not okopen = abort("")
 # (counterstr,cFile) = freadline cFile

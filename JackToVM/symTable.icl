@@ -137,7 +137,7 @@ findSymbolIndex name [x:xs]
 | not ((record!!0 +++ " ")== name) = findSymbolIndex name xs
 = record!!3
 
-getClassSymbolKind:: String *f -> (Bool,String,*f) | FileSystem f
+getClassSymbolKind:: String *f -> (Bool,String,String,*f) | FileSystem f
 getClassSymbolKind name w
 // open the file for reading, get the content as list of lines
 # tFile = "symtables\\classtable.txt"
@@ -145,12 +145,12 @@ getClassSymbolKind name w
 # (content,inputfile) = listOfLinesInFile inputfile
 # (ok_read_close,w) = fclose inputfile w
 // get the index based on the record name
-# kind = findSymbolKind name content
+# (type,kind) = findSymbolKind name content
 // return:
-| kind == "field" = (True,"this",w)
-= (True,kind,w)
+| kind == "field" = (True,type,"this",w)
+= (True,type,kind,w)
 
-getMethodSymbolKind:: String *f -> (Bool,String,*f) | FileSystem f
+getMethodSymbolKind:: String *f -> (Bool,String,String,*f) | FileSystem f
 getMethodSymbolKind name w
 // open the file for reading, get the content as list of lines
 # tFile = "symtables\\methodtable.txt"
@@ -158,18 +158,18 @@ getMethodSymbolKind name w
 # (content,inputfile) = listOfLinesInFile inputfile
 # (ok_read_close,w) = fclose inputfile w
 // get the index based on the record name
-# kind = findSymbolKind name content
+# (type,kind) = findSymbolKind name content
 // return:
-= (True,kind,w)
+= (True,type,kind,w)
 
-findSymbolKind:: String [String] -> String
+findSymbolKind:: String [String] -> (String,String)
 findSymbolKind name [x]
 # record = split x
-= record!!2
+= (record!!1,record!!2)
 
 findSymbolKind name [x:xs]
 # record = split x
-| ((record!!0 +++ " ")== name) = record!!2
+| ((record!!0 +++ " ")== name) = (record!!1,record!!2)
 = findSymbolKind name xs
 
 
@@ -198,23 +198,24 @@ getClassFieldTableCounter w
 # (ok_read_close,w) = fclose inputfile w
 = (True,counter,w) 
 
-fetchVariableFromTables:: String *f -> (Bool,String,String,*f) | FileSystem f
+fetchVariableFromTables:: String *f -> (Bool,String,String,String,*f) | FileSystem f
 fetchVariableFromTables name w
 # (inMethod,index,w) = getMethodSymbolIndex name w
 | inMethod = getMethodVariableParams name index w
 # (inClass,index,w) = getClassSymbolIndex name w
-| not inClass = (False,"","",w)
+| not inClass = (False,"","","",w)
 = getClassVariableParams name index w
 
-getClassVariableParams:: String String *f -> (Bool,String,String,*f) | FileSystem f
+getClassVariableParams:: String String *f -> (Bool,String,String,String,*f) | FileSystem f
 getClassVariableParams name index w 
-# (ok_kind,kind,w) = getClassSymbolKind name w
-= (True,index,kind,w)
+# (ok_kind,type,kind,w) = getClassSymbolKind name w
+//= abort(index +++ " " +++ type +++ " " +++ kind)
+= (True,index,type,kind,w)
 
-getMethodVariableParams:: String String *f -> (Bool,String,String,*f) | FileSystem f
+getMethodVariableParams:: String String *f -> (Bool,String,String,String,*f) | FileSystem f
 getMethodVariableParams name index w 
-# (ok_kind,kind,w) = getMethodSymbolKind name w
-= (True,index,kind,w)
+# (ok_kind,type,kind,w) = getMethodSymbolKind name w
+= (True,index,type,kind,w)
 
 /*
 *	Split

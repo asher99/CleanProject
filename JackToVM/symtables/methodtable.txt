@@ -1,4 +1,0 @@
-x  int  argument 0
-y  int  argument 1
-z  int  argument 2
-i  int  local 0

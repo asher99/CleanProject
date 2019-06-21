@@ -11,7 +11,7 @@ getIndexClassTable:: String *f -> (Bool,String,*f) | FileSystem f
 
 getMethodSymbolIndex:: String *f -> (Bool,String,*f) | FileSystem f
 
-getMethodSymbolKind:: String *f -> (Bool,String,*f) | FileSystem f
+getMethodSymbolKind:: String *f -> (Bool,String,String,*f) | FileSystem f
 
 getMethodTableCounter:: *f -> (Bool,String,*f) | FileSystem f
 
@@ -19,4 +19,5 @@ getClassStaticTableCounter:: *f -> (Bool,String,*f) | FileSystem f
 
 getClassFieldTableCounter:: *f -> (Bool,String,*f) | FileSystem f
 
-fetchVariableFromTables:: String *f -> (Bool,String,String,*f) | FileSystem f
+fetchVariableFromTables:: String *f -> (Bool,String,String,String,*f) | FileSystem f
+
