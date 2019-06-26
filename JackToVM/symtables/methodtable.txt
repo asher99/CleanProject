@@ -1,0 +1,6 @@
+this PongGame argument 0
+bouncingDirection  int  local 0
+batLeft  int  local 1
+batRight  int  local 2
+ballLeft  int  local 3
+ballRight  int  local 4

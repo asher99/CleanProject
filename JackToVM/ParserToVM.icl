@@ -89,12 +89,20 @@ parseSubroutineDec [subroutine_kw, subroutine_type ,subroutine_name, sym:xs] fil
 # (ok_init2,w) = overrideFile "0" "symtables\\methodcounter.txt" w
 | not ok_init2 = abort("failed to intialize method counter") 
 // enter arguments to the method symbol table.
+# (ok_this,w) = parseMethodThisArg subroutine_kw filename w
 # (ok_params,[sym_:xs_],w) = parseParameterList xs filename num w
 | not ok_params = abort("failed to parse params list")
 // enter locals to the method symbol table, and generate vm code.
 # (ok_body,xs__,w) = parseSubroutineBody xs_ filename (getTokenValue subroutine_name) subroutine_kw w
 | not ok_body = abort("failed to parse subroutine body")
 = parseSubroutineDec xs__ filename num w
+
+// when parsing 'method' we need to insert 'this' to the method-symbol-table
+parseMethodThisArg:: String String *f -> (Bool,*f) | FileSystem f
+parseMethodThisArg subroutine_kw filename w
+| not (subroutine_kw == "<keyword> method </keyword>\n") = (True,w)
+# (okw,w) = insertRecordMethodTable "this" filename "argument" w
+= (True,w)
 
 parseClassVarDec :: [String] String Int *f -> (Bool,[String],*f) | FileSystem f
 parseClassVarDec [kw,type,name,sym:xs] filename num w //= abort(kw +++ type +++ xs!!0 +++ xs!!1 +++ xs!!2)
@@ -135,7 +143,7 @@ parseMultipleVarsInLine [name,sc:xs] type filename w
 
 
 parseParameterList :: [String] String Int *f -> (Bool,[String],*f) | FileSystem f
-parseParameterList [type,varname,sym:xs] filename num w
+parseParameterList [type,varname,sym:xs] filename num w //= abort(type+++varname+++sym+++xs!!0)
 // end conditions -
 // the parameter list is empty:
 | type == "<symbol> ) </symbol>\n" = (True,[type,varname,sym:xs],w)
@@ -198,15 +206,13 @@ parseVarDec [var,type,name:xs] filename w
 | not ok_allvars = abort("failed vardec")
 = (True,xs_,w)
 
-
-
 /************* STATEMENTS ***************/
 
 parseStatements:: [String] String *f -> (Bool,[String],*f) | FileSystem f
 parseStatements [first:xs] filename w //= abort("hey " +++ first)
 // end condition:
 | not ((first == "<keyword> let </keyword>\n") || (first == "<keyword> if </keyword>\n") || (first == "<keyword> while </keyword>\n") || (first == "<keyword> do </keyword>\n") || (first == "<keyword> return </keyword>\n")) = (True,[first:xs],w)
-// generate vm code for singel statement:
+// generate vm code for single statement:
 # (ok_stmts,xs_,w) = parseStatement [first:xs] filename w
 | not ok_stmts = abort("failed statments")
 // not sure if needed, maybe just 'return true' was enough. But I'm not gonna mess with Targil4 structure.
@@ -273,7 +279,7 @@ parseIfStatement [first,opening:xs] filename w //= (True,[return:xs],w)
 # (okw1,w) = write2file ("if-goto IF_TRUE"+++counstr+++"\ngoto IF_FALSE"+++counstr+++"\n") filename w
 | not okw1 = abort("failed in parseIfStatement 2")
 // if we found 'else' token, switch to 'parseElseStatement'
-|  isElseStatement xs_ = parseElseStatement xs_ counstr filename w
+|  (isElseStatement xs_ 0) = parseElseStatement xs_ counstr filename w
 //IF_TRUE label
 # (okww,w) = write2file ("label IF_TRUE"+++counstr+++"\n") filename w
 // parse 'if' statements.
@@ -286,7 +292,7 @@ parseIfStatement [first,opening:xs] filename w //= (True,[return:xs],w)
 = (True,xs__,w)
 
 parseElseStatement :: [String] String String *f -> (Bool,[String],*f) | FileSystem f
-parseElseStatement [x:xs] counter filename w //= abort(opening +++ xs!!0 +++ xs!!1 +++ xs!!2)
+parseElseStatement [x:xs] counter filename w //= abort(x +++ xs!!0 +++ xs!!1 +++ xs!!2)
 //IF_TRUE label
 # (okww,w) = write2file ("label IF_TRUE"+++counter+++"\n") filename w
 | not okww = abort("failed in parseIfStatement 1")
@@ -298,12 +304,14 @@ parseElseStatement [x:xs] counter filename w //= abort(opening +++ xs!!0 +++ xs!
 # (okw2,w) = write2file ("goto IF_END"+++counter+++"\nlabel IF_FALSE"+++counter+++"\n") filename w
 // parse the 'else' statements
 # (ok_st2,[st_closing2:xs__],w) = parseStatements xs_ filename w
+//# (ok_st2,list,w) = parseStatements xs_ filename w
+//= abort(list!!0+++list!!1+++list!!2)
 | not ok_st2 = abort("failed in parseIfStatement 2")
 // IF_END label
 # (okw3,w) = write2file ("label IF_END"+++counter+++"\n") filename w
-// retrun:
+// retrun:	
 = (True,xs__,w)
-
+//= abort(st_closing2)// +++ xs__!!1 +++ xs__!!2)
 
 parseWhileStatement :: [String] String *f -> (Bool,[String],*f) | FileSystem f
 parseWhileStatement [first,opening:xs] filename w
@@ -681,12 +689,20 @@ incIfCounter w
 | not ok1 = abort("failed to increase if counter")
 = (True,counter,w)
 
-isElseStatement:: [String] -> Bool
-isElseStatement ["<symbol> } </symbol>\n",x:xs]
+/*
+	This one is a real Bugger...
+	we need to count the levels of scope, end we return finite answer only in level 0.
+*/
+isElseStatement:: [String] Int -> Bool
+isElseStatement ["<symbol> { </symbol>\n":xs] n = isElseStatement xs (n+1)
+
+isElseStatement ["<symbol> } </symbol>\n",x:xs] 0
 | x == "<keyword> else </keyword>\n" = True
 = False
 
-isElseStatement [x:xs] = isElseStatement xs
+isElseStatement ["<symbol> } </symbol>\n":xs] n = isElseStatement xs (n-1)
+
+isElseStatement [x:xs] n = isElseStatement xs n
 
 incWhileCounter:: *f -> (Bool,Int,*f) | FileSystem f
 incWhileCounter w
